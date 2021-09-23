@@ -1,0 +1,6 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+support.vungle.com	TRUE	/	FALSE	1999999999	_help_center_session	OHMrS1FnK0ozeEhDeFBKSkM4ZG5IYmNORW84bEJTMWo0RGR6czYreXRmNXZiSDFFaERPRnJzSXZiRDl5YUp2M3dwNm1IRXdIZXFxNDN4ZVJpdlZ3UjdDRktMMXN4ZUtoMk0xem9vUXhsbEtmTWFGSlhOQk1sVU1Cc1NDblk0TTctLWpsZjJEZ2R5eG5CSHB6RXZhZWo3QVE9PQ%3D%3D--193dfd25348763151b0576cdc1cff0f9d3e2e979
+.support.vungle.com	TRUE	/	FALSE	1999999999	__cfruid	5f2d48d9790009aaf6f7f951642fa073c0f376d5-1632399849
+support.vungle.com	TRUE	/	FALSE	1999999999	SameSite	None
+

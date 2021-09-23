@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ko">
+
+<!-- Mirrored from support.vungle.com/hc/ko/articles/115004827347-설치-후-이벤트-PIE-데이터 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 10:22:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <!-- v20226 -->
+
+  <title>설치 후 이벤트(PIE) 데이터 &ndash; Vungle KO</title>
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="" />
+
+  <meta name="description" content="소개 광고주가 이 엔드포인트를 사용해 각 사용자 수준 이벤트에 대한 Vungle 데이터를 즉시 보낼 수 있습니다. 이벤트 데이터 API의 목적은 어떤 사용자가 중요한지를 Vungle에게 알리는 것입니다. 앱에서 이벤트 정보를 보내면 Vungle이..." /><meta property="og:image" content="https://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Vungle KO" />
+<meta property="og:title" content="설치 후 이벤트(PIE) 데이터" />
+<meta property="og:description" content="소개
+광고주가 이 엔드포인트를 사용해 각 사용자 수준 이벤트에 대한 Vungle 데이터를 즉시 보낼 수 있습니다. 이벤트 데이터 API의 목적은 어떤 사용자가 중요한지를 Vungle에게 알리는 것입니다. 앱에서 이벤트 정보를 보내면 Vungle이 캠페인을 최적화하여 사용자에게 중요한 정보를 제공할 수 있습니다.
+목차
+
+HTTP 요청
+필수 매개 변수
+선..." />
+<meta property="og:url" content="115004827347.html" />
+<link rel="canonical" href="115004827347-%ec%84%a4%ec%b9%98-%ed%9b%84-%ec%9d%b4%eb%b2%a4%ed%8a%b8-PIE-%eb%8d%b0%ec%9d%b4%ed%84%b0.html" />
+<link rel="alternate" hreflang="de" href="../../de/articles/115004827347-Post-Install-Event-PIE-Daten.html" />
+<link rel="alternate" hreflang="en" href="../../en-us/articles/115004827347-Post-Install-Postback-API-Documentation.html" />
+<link rel="alternate" hreflang="es" href="../../es-mx/articles/115004827347-Datos-del-evento-posterior-a-la-instalaci%c3%b3n-PIE-.html" />
+<link rel="alternate" hreflang="fr" href="../../fr-fr/articles/115004827347-Donn%c3%a9es-d-%c3%a9v%c3%a9nements-post-installation-PIE-.html" />
+<link rel="alternate" hreflang="ja" href="../../ja/articles/115004827347-%e3%82%a4%e3%83%b3%e3%82%b9%e3%83%88%e3%83%bc%e3%83%ab%e5%be%8c%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88-PIE-%e3%83%87%e3%83%bc%e3%82%bf.html" />
+<link rel="alternate" hreflang="ko" href="115004827347-%ec%84%a4%ec%b9%98-%ed%9b%84-%ec%9d%b4%eb%b2%a4%ed%8a%b8-PIE-%eb%8d%b0%ec%9d%b4%ed%84%b0.html" />
+<link rel="alternate" hreflang="pt" href="../../pt-br/articles/115004827347-Dados-de-evento-de-p%c3%b3s-instala%c3%a7%c3%a3o-PIE-.html" />
+<link rel="alternate" hreflang="ru" href="../../ru/articles/115004827347-%d0%94%d0%b0%d0%bd%d0%bd%d1%8b%d0%b5-%d0%be-%d1%81%d0%be%d0%b1%d1%8b%d1%82%d0%b8%d0%b8-%d0%bf%d0%be%d1%81%d0%bb%d0%b5-%d1%83%d1%81%d1%82%d0%b0%d0%bd%d0%be%d0%b2%d0%ba%d0%b8-Post-Install-Event-PIE-.html" />
+<link rel="alternate" hreflang="zh" href="../../zh-cn/articles/115004827347-%e5%ae%89%e8%a3%85%e5%90%8e%e4%ba%8b%e4%bb%b6-PIE-%e6%95%b0%e6%8d%ae.html" />
+
+  <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/application-79172500fb4dbec2484043d570946543.css" id="stylesheet" />
+    <!-- Entypo pictograms by Daniel Bruce — www.entypo.com -->
+    <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/theming_v1_support-cf937686d5b6669242017892da7bad78.css" />
+  <link rel="stylesheet" type="text/css" href="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/stylee82d.css?digest=360570052252">
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://theme.zdassets.com/theme_assets/534077/62c5e8616cdae030ecea7cec15cf47a2b729729b.ico" />
+
+    <script src="../../../../static.zdassets.com/hc/assets/jquery-d5395f0b7ac5027403fc17855c46dbfc.js"></script>
+    
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+  analytics.load("bRqfh635lMl7qBpocue716BjaalyFtJD");
+  analytics.page();
+  }}();
+  analytics.ready(function(){
+    Appcues.anonymous();
+});
+</script>
+
+
+
+
+
+
+
+
+
+  <style type="text/css">
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/51587ff68e0ab2bf990a17d993ec1fa7a5451614.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/8677458bb131e09b83d5bf2ec1ab6d015c18fd8b.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1e02ff61edce3f256e3f8de8e6bfb11bb085905f.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/b421ade1cc04519f69e9b4ec0fee3d632f993540.woff") format("woff");
+      font-weight: bold;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1056b20fe6b0f2a56568ecdea5119e1577667803.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/0ea45f63097574b5446148c9670509ae56dc2975.woff") format("woff");
+      font-weight: 300;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/78bd021a78ca5752e43275a982a96b00bd004a54.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/115efed0d77bd96754f56a00f399a05af518a5a4.woff") format("woff");
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/e5e3d4a71bfb2d624edf48819c3dd1597c4397ff.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9f8a21f09879869f644a45d21aea06dde01f2107.woff") format("woff");
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/f4f83c57775879216d798dce95c9a83e442da6ab.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9e93f03906c0fbfd6eba0ecdfe8d739a6b38852d.woff") format("woff");
+      font-weight: bold;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk Screen";
+      src: url("http://theme.zdassets.com/theme_assets/534077/2f8d0cbc16a32df1f8b6c36f45c2b4078181ca43.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/2ab0f28c68ed406c853fec87f698618cd7ac8bc2.woff") format("woff");
+      font-weight: 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk OIL";
+      src: url("http://theme.zdassets.com/theme_assets/534077/0ce9c7bb30841f31bac192ef415fd27771c17fc9.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/422274783804fb9c3e984558285801b01b2fe117.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+
+
+<link rel="stylesheet" href="../../../../use.fontawesome.com/releases/v5.10.1/css/all.css">
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/styles/atelier-lakeside-dark.min.css" />
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" />
+<script src="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+<script src="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/highlight.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<meta property="asseturl" content="//theme.zdassets.com/theme_assets/534077/6ff6e0c84e92580e7cc6e9c77a5cc1e724f36743.gif">
+
+
+<link rel="stylesheet" href="../../../../theme.zdassets.com/theme_assets/534077/02e3878a33d61900d75eb94d43eb4d26929d6dbf.css">
+
+<script src="../../../../theme.zdassets.com/theme_assets/534077/48ea021f3fedbc024c4443d2e946e0b9b742e384.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/469d1d10574fa6f68d243916e96f61e7ce459a5a.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/9893f4b0b18dc4018d50a3716fc581152c21535e.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/ae559ee60cd2d617e942d530c1ee7ac42a973761.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/c2b4df57e1dcfcf1b5d2298b16c409c8315a177b.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/cf5c34722566da1ba5ca5d877dc187d282ca6a3f.js"></script>
+
+<!-- ...Appcues... -->
+<script type="text/javascript">
+  if (userId) {
+    Appcues.identify(userId); 
+  } else {
+    Appcues.anonymous(); 
+  }
+</script>
+
+<script src="../../../../static.zdassets.com/conditional_fields_app_hc/latest/helpcenter.js"></script>
+<script>var cfaRules = [{ "fieldType": "tagger", "field": 114099498832, "value": "user_interface", "select": [114099504272], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "amazon", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "android", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios", "select": [114099505792, 114101637652], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "multi_platforms_other_combination", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "windows", "select": [114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099505792, "value": "other_ios_sdk", "select": [114099619791], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "adincube", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "admob", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "fyber_hezap", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "ironsource_supersonic", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "multiple_mediation", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "other_mediation", "select": [114099556512, 114099619811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "upsight", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "adobe_air", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "corona", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "marmalade", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "other_plugin", "select": [114099620151, 114099620451], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "unity", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099577491, "value": "other_android_sdk", "select": [114099555992], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099619751, "value": "other_windows_sdk", "select": [114099556012], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099621511, "value": "geo_other", "select": [114099622811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_dashboard", "select": [114099498652, 114099499132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_other", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_reportingapi", "select": [114099498652, 114099621211, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_useracquisition", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_notreceivingreward", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_other", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_troublesomead", "select": [114099498672, 114099504752, 114099621511, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_unsubscribeads", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_payment", "select": [114099571371, 114099500132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_accountstatus", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_addtransferusers", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_deleteaccount", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_pwrecovery", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_registration", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_callbacks", "select": [114099498652, 114099556032, 114099556532, 114099620751, 114099621511, 114099504752], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_cocoapods", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_dashboard", "select": [114099498652, 114099498832], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_gradle", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_multidex", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621731], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_noads", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_proguard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557592], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_testmode", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_other", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_reportingapi", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_button", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_crashing", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_endcard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_freezing", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_other", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_sound", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_video", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }];</script>
+
+<style type="text/css">
+
+/* Advertiser */
+.categories__icon--200198330 {
+  background-color: #ff5a41;
+}
+
+.categories__icon--200198330:before,
+#sidenav-category-200198330 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/9f2e8cfd41383f7f21c68fd99567eb1b1a7993ac.svg");
+}
+
+/* SDK */
+.categories__icon--200269670 {
+  background-color: #3c2869;
+}
+
+.categories__icon--200269670:before,
+#sidenav-category-200269670 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/ab38e1e12c6a99fe83f4ea9c02bf87e17510558d.svg");
+}
+
+/* Publisher */
+.categories__icon--360001994512 {
+  background-color: #6e7dff;
+}
+
+.categories__icon--360001994512:before,
+#sidenav-category-360001994512 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/8a0ee6cf2a1300b8adf5a19112e81db3c070a273.svg");
+}
+
+/* FAQs */
+.categories__icon--115000802567 {
+  background-color: #ffd700;
+}
+
+.categories__icon--115000802567:before,
+#sidenav-category-115000802567 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/840643095495a2f0380fbe420efb55b7a63277fe.svg");
+}
+
+/* Creative */
+.categories__icon--360001724259 {
+  background-color: #ffd2e1;
+}
+
+.categories__icon--360001724259:before,
+#sidenav-category-360001724259 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/2bb5eeecadf61018e2bda864d22706f146b5a208.svg");
+}
+
+</style>
+  <script type="text/javascript" src="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/scripte82d.js?digest=360570052252"></script>
+<script async src='../../../cdn-cgi/bm/cv/669835187/api.js'></script></head>
+<body class="">
+  
+  
+
+  <div class="js-alert-box"></div>
+
+<div class="layout" >
+
+  <aside class="sidebar" data-sidebar>
+  <div class="sidebar__header">
+    <div class="sidebar__container sidebar__container--fixed">
+      <div class="sidebar__logo">
+        <a title="홈" href="../../ko.html">
+          <img src="http://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" alt="로고">
+        </a>
+      </div>
+      <ul class="sidebar__list">
+        <li class="sidebar__item">
+          <a class="sidebar__link sidebar__link--home" title="홈" href="../../ko.html">Home</a>
+        </li>
+      </ul>
+      <div class="sidebar__top-nav"></div>
+      <div class="sidebar__content-block" data-sidebar-content></div>
+    </div>
+  </div>
+
+  <div class="sidebar__container">
+    <div class="sidebar__bottom-nav">
+      <div class="sidebar__bottom-nav-item">
+        
+          <div class="dropdown language-selector" aria-haspopup="true">
+            <a class="dropdown-toggle btn btn--default btn--small">
+              한국어
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+              </svg>
+            </a>
+            <span class="dropdown-menu" role="menu">
+              
+                <a href="../../de/articles/115004827347-Post-Install-Event-PIE-Daten.html?return_to=%2Fhc%2Fde%2Farticles%2F115004827347-Post-Install-Event-PIE-Daten" dir="ltr" rel="nofollow" role="menuitem">
+                  Deutsch
+                </a>
+              
+                <a href="../../en-us/articles/115004827347-Post-Install-Postback-API-Documentation.html?return_to=%2Fhc%2Fen-us%2Farticles%2F115004827347-Post-Install-Postback-API-Documentation" dir="ltr" rel="nofollow" role="menuitem">
+                  English (US)
+                </a>
+              
+                <a href="../../es-mx/articles/115004827347-Datos-del-evento-posterior-a-la-instalaci%c3%b3n-PIE-3.html?return_to=%2Fhc%2Fes-mx%2Farticles%2F115004827347-Datos-del-evento-posterior-a-la-instalaci%25C3%25B3n-PIE-" dir="ltr" rel="nofollow" role="menuitem">
+                  Español (México)
+                </a>
+              
+                <a href="../../fr-fr/articles/115004827347-Donn%c3%a9es-d-%c3%a9v%c3%a9nements-post-installation-PIE-3.html?return_to=%2Fhc%2Ffr-fr%2Farticles%2F115004827347-Donn%25C3%25A9es-d-%25C3%25A9v%25C3%25A9nements-post-installation-PIE-" dir="ltr" rel="nofollow" role="menuitem">
+                  Français (France)
+                </a>
+              
+                <a href="../../ja/articles/115004827347-%e3%82%a4%e3%83%b3%e3%82%b9%e3%83%88%e3%83%bc%e3%83%ab%e5%be%8c%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88-PIE-%e3%83%87%e3%83%bc%e3%82%bf-2.html?return_to=%2Fhc%2Fja%2Farticles%2F115004827347-%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E5%25BE%258C%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588-PIE-%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF" dir="ltr" rel="nofollow" role="menuitem">
+                  日本語
+                </a>
+              
+                <a href="../../pt-br/articles/115004827347-Dados-de-evento-de-p%c3%b3s-instala%c3%a7%c3%a3o-PIE-3.html?return_to=%2Fhc%2Fpt-br%2Farticles%2F115004827347-Dados-de-evento-de-p%25C3%25B3s-instala%25C3%25A7%25C3%25A3o-PIE-" dir="ltr" rel="nofollow" role="menuitem">
+                  Português do Brasil
+                </a>
+              
+                <a href="../../ru/articles/115004827347-%d0%94%d0%b0%d0%bd%d0%bd%d1%8b%d0%b5-%d0%be-%d1%81%d0%be%d0%b1%d1%8b%d1%82%d0%b8%d0%b8-%d0%bf%d0%be%d1%81%d0%bb%d0%b5-%d1%83%d1%81%d1%82%d0%b0%d0%bd%d0%be%d0%b2%d0%ba%d0%b8-Post-Install-Event-PIE-3.html?return_to=%2Fhc%2Fru%2Farticles%2F115004827347-%25D0%2594%25D0%25B0%25D0%25BD%25D0%25BD%25D1%258B%25D0%25B5-%25D0%25BE-%25D1%2581%25D0%25BE%25D0%25B1%25D1%258B%25D1%2582%25D0%25B8%25D0%25B8-%25D0%25BF%25D0%25BE%25D1%2581%25D0%25BB%25D0%25B5-%25D1%2583%25D1%2581%25D1%2582%25D0%25B0%25D0%25BD%25D0%25BE%25D0%25B2%25D0%25BA%25D0%25B8-Post-Install-Event-PIE-" dir="ltr" rel="nofollow" role="menuitem">
+                  Русский
+                </a>
+              
+                <a href="../../zh-cn/articles/115004827347-%e5%ae%89%e8%a3%85%e5%90%8e%e4%ba%8b%e4%bb%b6-PIE-%e6%95%b0%e6%8d%ae-2.html?return_to=%2Fhc%2Fzh-cn%2Farticles%2F115004827347-%25E5%25AE%2589%25E8%25A3%2585%25E5%2590%258E%25E4%25BA%258B%25E4%25BB%25B6-PIE-%25E6%2595%25B0%25E6%258D%25AE" dir="ltr" rel="nofollow" role="menuitem">
+                  简体中文
+                </a>
+              
+            </span>
+          </div>
+        
+      </div>
+      <div class="sidebar__bottom-nav-item">  
+        <a href="https://vungle.com/login/" target="_blank" class="">
+          Platform
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="a" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#AAB2BA" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#a"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="sidebar__overlay"></div>
+
+  <div class="main">
+
+    <div class="main__header">
+
+      <a href="#" class="sidebar-toggle__link" data-toggle-menu role="button">
+        <span class="sidebar-toggle__burger"><span></span></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--menu"></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--close"></span>
+      </a>
+
+      <div class="main__search">
+        <form role="search" class="search" data-search="" data-instant="true" autocomplete="off" action="https://support.vungle.com/hc/ko/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" /><input type="search" name="query" id="query" placeholder="Search..." autocomplete="off" aria-label="Search..." />
+<input type="submit" name="commit" value="검색" /></form>
+      </div>
+      <div class="main__nav">
+        <a href="../../en-us/sections/360004473112.html" class="btn btn--topbar hidden-mobile">
+          Early Access SDK
+        </a>
+        <a href="https://vungle.com/signup/" target="_blank" class="btn btn--topbar">
+          Platform
+          <svg width="24" height="24" viewBox="0 0 24 24"><defs><path id="b" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#0ccec9" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#b"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="main__container">
+
+  <main role="main">
+    <div class="article-page" data-article-page>
+
+  <div class="row">
+    <div class="article-column article-column--left">
+      <div class="box">
+        <div class="article-page__wrap" data-article-wrap>
+          <article class="article js-active-article" itemscope itemtype="http://schema.org/Article" data-article="115004827347">
+            <header class="article-header">
+              <ol class="breadcrumbs">
+  
+    <li title="Vungle KO">
+      
+        <a href="../../ko.html">Vungle KO</a>
+      
+    </li>
+  
+    <li title="Advertising">
+      
+        <a href="../categories/200198330-Advertising.html">Advertising</a>
+      
+    </li>
+  
+    <li title="Ad Tracking">
+      
+        <a href="../sections/115001351468-Ad-Tracking.html">Ad Tracking</a>
+      
+    </li>
+  
+</ol>
+
+              <h1 class="h2 article-title" itemprop="name">
+                
+                설치 후 이벤트(PIE) 데이터
+              </h1>
+
+              <div class="article-meta">
+                <div class="entry-info">
+                  <div class="entry-info__avatar">
+                    <div class="avatar ">
+                      <img class="user-avatar user-avatar--default" src="../../../system/photos/465254208/profile_image_13504831267_534077.jpg" alt="Avatar">
+                    </div>
+                  </div>
+                  <div class="entry-info__content">
+                    <b class="author">
+                      Julia Randall
+                    </b>
+                    <div class="meta"><time datetime="2021-07-16T15:22:21Z" title="2021-07-16T15:22:21Z" data-datetime="calendar">2021년 07월 16일 15:22</time></div>
+                  </div>
+                </div>
+                <a class="article-subscribe" title="로그인 대화 상자 열기" rel="nofollow" role="button" data-auth-action="signin" aria-selected="false" href="115004827347-%ec%84%a4%ec%b9%98-%ed%9b%84-%ec%9d%b4%eb%b2%a4%ed%8a%b8-PIE-%eb%8d%b0%ec%9d%b4%ed%84%b0/subscription.html">팔로우</a>
+              </div>
+            </header>
+
+            <div class="article__body markdown" itemprop="articleBody">
+
+              <div class="article-main">
+                <h1>소개</h1>
+<p>광고주가 이 엔드포인트를 사용해 각 사용자 수준 이벤트에 대한 Vungle 데이터를 즉시 보낼 수 있습니다. 이벤트 데이터 API의 목적은 어떤 사용자가 중요한지를 Vungle에게 알리는 것입니다. 앱에서 이벤트 정보를 보내면 Vungle이 캠페인을 최적화하여 사용자에게 중요한 정보를 제공할 수 있습니다.</p>
+<h2>목차</h2>
+<ul>
+<li><a href="#HTTPRequest">HTTP 요청</a></li>
+<li><a href="#RequiredParameters">필수 매개 변수</a></li>
+<li><a href="#OptionalParameters">선택 매개 변수</a></li>
+<li><a href="#ErrorCodes">오류 코드</a></li>
+</ul>
+<h1>
+<a name="HTTPRequest"></a>HTTP 요청</h1>
+<p><code>http://ingest.vungle.com/eventData</code></p>
+<h2>POST</h2>
+<p>다음과 같은 본문 콘텐츠 유형에서 <code>POST</code> 요청이 지원됩니다.</p>
+<ul>
+<li>
+<code>application/x-www-form-urlencoded </code><span style="font-size: 1em;">&nbsp;</span>
+</li>
+<li>
+<code>application/json </code><span style="font-size: 1em;">&nbsp;</span>
+</li>
+</ul>
+<p><strong>참고:</strong> Vungle은 JSON 본문에 <code>POST</code> 메서드를 사용할 것을 권장합니다.</p>
+<pre class="wysiwyg-indent2"><code>curl -H "Content-Type: application/json" -d '{"data": "myData"}' "http://ingest.vungle.com/eventData"</code></pre>
+<h2>GET</h2>
+<p>또한, 쿼리 매개 변수를 사용하여 <code>GET</code>요청을 지원합니다.</p>
+<pre class="wysiwyg-indent2"><code>curl "http://ingest.vungle.com/eventData?data=myData"</code></pre>
+<h1>
+<a name="RequiredParameters"></a>필수 매개 변수</h1>
+<p>전송하신 각 이벤트에는 필수 매개 변수와 선택 매개 변수가 모두 있습니다. 필요한 매개 변수가 없는 요청을 거부하고 누락된 내용을 알려드립니다. 더 자세한 내용은 <a href="#ErrorCodes">오류 섹션</a>을 참조합니다.</p>
+<h2>기종 식별자</h2>
+<p>이벤트 당 하나 이상의 기종 식별자가 필요하므로 모두 전달할 필요가 없습니다.</p>
+<table><tbody>
+<tr>
+<td><strong>매개 변수</strong></td>
+<td><strong>설명</strong></td>
+</tr>
+<tr>
+<td><code>device_idfa </code></td>
+<td>Apple IDFA 또는 Google Play Services 광고 ID</td>
+</tr>
+<tr>
+<td><code>device_mac </code></td>
+<td>정식 포멧의 Mac 주소(하이픈 또는 콜론으로 구분)</td>
+</tr>
+<tr>
+<td><code>device_other_id </code></td>
+<td>기타 고유 식별자, e.g. Android ID, 해시된 식별자 등</td>
+</tr>
+</tbody></table>
+<p><strong>참고:</strong> Vungle은 device_idfa를 사용을 권장합니다.(가능한 경우)</p>
+<h2>기타 필수 매개 변수</h2>
+<p>이벤트를 수락하려면 나머지 필요 매개 변수를 모두 전달해야 합니다.</p>
+<table><tbody>
+<tr style="height: 16px;">
+<td style="height: 16px;"><strong>매개 변수</strong></td>
+<td style="height: 16px;"><strong>설명</strong></td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>vungle_app_id</code></td>
+<td style="height: 17px;">Vungle 대시보드에 지정된 앱 ID</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px;"><code>trk </code></td>
+<td style="height: 32px;">들어오는 이벤트 소스 서버 통합에 대한 직접 서버의 경우 자체 식별자가 있어야 하며, 그렇지 않으면 추적 공급자(e.g. ‘tune’, 'kochava’,'adjust’,'appsflyer’ 등)을 식별해야 합니다.</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>event_trk_id&nbsp;</code></td>
+<td style="height: 17px;">이 ID는 해당 이벤트에 대한 고유 ID여야 합니다. 중복 제거에 사용.</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>event_id </code></td>
+<td style="height: 17px;">Vungle 이벤트 식별자. Vungle 캠페인에서 앱을 구동한 사용자가 이 이벤트를 수행하는 경우, 이벤트 식별자는 보기 또는 클릭 추적 광고에서 전달됩니다.</td>
+</tr>
+<tr style="height: 32.625px;">
+<td style="height: 32.625px;"><code>event_name </code></td>
+<td style="height: 32.625px;">이 값은 전체 사용자에 대해 일관성 있는 이벤트를 식별하는 문자열이어야 합니다(e.g. 'tutorial-complete’, 'level-3’, 'purchase' 등)</td>
+</tr>
+</tbody></table>
+<h2>예</h2>
+<p><code>POST</code> 본문 예시:</p>
+<pre class="wysiwyg-indent2"><code>{
+  "device_idfa"   : "236A005B-700F-4889-B9CE-99",
+  "vungle_app_id" : "myVungleApp",
+  "trk"           : "tune",
+  "event_trk_id"  : "uniqueID1234",
+  "event_name"    : "tutorial-complete"
+}</code></pre>
+<p><code>GET</code> 본문 요청:</p>
+<pre class="wysiwyg-indent1"><code>curl "http://ingest.vungle.com/eventData?device_idfa=236A005B-700F-4889-B9CE-999EAB2B605D&amp;vungle_app_id=myVungleApp&amp;trk=tune&amp;event_trk_id=uniqueID1234&amp;event_name=tutorial-complete"</code></pre>
+<p>위의 페이로드는 '200 OK' 응답을 반환하며 Vungle에 전송할 수 있는 최소 요청의 예입니다.</p>
+<h1>
+<a name="OptionalParameters"></a>선택 매개 변수</h1>
+<p>이 매개 변수는 선택 사항이지만, Vungle이 이를 이용해 가치 있는 사용자를 구분하므로 가능한 많은 매개 변수를 전달해야 합니다.</p>
+<table><tbody>
+<tr style="height: 21px;">
+<td style="height: 21px;"><strong>매개 변수</strong></td>
+<td style="height: 21px;"><strong>기본값</strong></td>
+<td style="height: 21px;"><strong>설명</strong></td>
+</tr>
+<tr>
+<td>event_value</td>
+<td>None</td>
+<td>이벤트와 관련된 수치. Vungle에 보내는 다른 이벤트와 관련이 있어야 합니다. 예를 들어, $4.99 IAP는 4.99.여야 합니다.</td>
+</tr>
+<tr style="height: 43px;">
+<td style="height: 43px;"><code>event_currency</code></td>
+<td style="height: 43px;"><code>'usd'&nbsp;</code></td>
+<td style="height: 43px;">
+<code>event_value</code>가 금전적으로 명시적 가치를 갖는 경우, 여기에서 통화를 정의합니다.</td>
+</tr>
+<tr style="height: 42px;">
+<td style="height: 42px;"><code>event_iap_event</code></td>
+<td style="height: 42px;"><code>false</code></td>
+<td style="height: 42px;">이벤트가 인앱 구매인지를 나타내는 플래그를 설정합니다.</td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px;"><code>device_limit_track</code></td>
+<td style="height: 22px;"><code>false</code></td>
+<td style="height: 22px;">기종의 '광고 추적 제한' 설정 여부에 대한 부울.</td>
+</tr>
+<tr style="height: 63px;">
+<td style="height: 63px;"><code>event_datetime </code></td>
+<td style="height: 63px;">이벤트 수신 타임 스탬프</td>
+<td style="height: 63px;">이벤트 발생 타임 스탬프 시간대를 지정하지 않으면 UTC가 사용됩니다. 타임 스탬프는 ISO 8601 포멧이어야 합니다.</td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px;"><code>device_ip</code></td>
+<td style="height: 22px;">None</td>
+<td style="height: 22px;">장치의 IP 주소.</td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px;"><code>device_make </code></td>
+<td style="height: 22px;">None</td>
+<td style="height: 22px;">장치 제조사.</td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px;"><code> device_model</code></td>
+<td style="height: 22px;">None</td>
+<td style="height: 22px;">장치 모델.</td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px;"><code>device_carrier</code></td>
+<td style="height: 22px;">None</td>
+<td style="height: 22px;">장치 이동 통신사.</td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px;"><code>device_language</code></td>
+<td style="height: 22px;">None</td>
+<td style="height: 22px;">장치의 ISO 639-1 언어 코드(2자리).</td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px;"><code>device_country </code></td>
+<td style="height: 22px;">None</td>
+<td style="height: 22px;">소스 IP의 ISO 3166 국가 코드(2자리).</td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px;"><code>device_user_agent&nbsp;</code></td>
+<td style="height: 22px;">None</td>
+<td style="height: 22px;">장치의 브라우저 사용자 에이전트.</td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px;"><code>device_os </code></td>
+<td style="height: 22px;">None</td>
+<td style="height: 22px;">운영 체제 버전 번호.</td>
+</tr>
+</tbody></table>
+<p><strong>참고:</strong> <code>event_value</code> 매개 변수를 기록하고 각 이벤트의 값을 고려합니다. Vungle은 사용된 실제 숫자에 상관없이 사용 가능하지만, 이벤트는 서로 상대값을 갖는 값을 가져야 합니다. Vungle은 사용자 유형의 전반적인 가치를 극대화하기 위해 노력할 것입니다.</p>
+<h2>선택 매개 변수 예시</h2>
+<pre><code>{
+  "event_currency"      : "usd",
+  "event_iap_event"     : true,
+  "device_limit_track"  : false,
+  "event_datetime"      : "2015-03-15T13:27:36Z",
+  "device_ip"           : "201.15.25.11",
+  "device_make"         : "samsung",
+  "device_model"        : "sm-g900v",
+  "device_carrier"      : "verizon",
+  "device_language"     : "es",
+  "device_country"      : "us",
+  "device_user_agent"   : "Mozilla/5.0 (Linux; U; Android 2.2.1; fr-fr; HTC_DesireZ_A7272 Build/FRG83D) AppleWebKit/533.1 (KHTML, like Gecko), Version/4.0 Mobile Safari/533.1",
+  "device_os"           : "4.3.2",
+  "event_value"         : 1.99
+}&nbsp;</code></pre>
+<h1>
+<a name="ErrorCodes"></a>오류 코드</h1>
+<p>Vungle은 다음 코드를 반환합니다.</p>
+<table><tbody>
+<tr>
+<td><strong>오류 코드</strong></td>
+<td><strong>의미</strong></td>
+</tr>
+<tr>
+<td><code>200&nbsp;</code></td>
+<td>확인 – 감사합니다!</td>
+</tr>
+<tr>
+<td><code>400 </code></td>
+<td>잘못된 요청 – 잘못된 요청입니다. 대부분의 경우, 필수 매개 변수 중 하나가 누락되었을 가능성이 큽니다. 응답 본문에서 원인을 확인합니다.</td>
+</tr>
+<tr>
+<td><code>500 </code></td>
+<td>내부 서버 오류 – 서버에 문제가 있습니다. 잠시 후에 다시 시도합니다.</td>
+</tr>
+<tr>
+<td><code>503 </code></td>
+<td>서비스를 사용할 수 없음 - 유지 관리를 위해 일시적으로 오프라인 상태입니다. 잠시 후에 다시 시도합니다.</td>
+</tr>
+</tbody></table>
+<p>'400 잘못된 요청' 메시지가 표시되면 응답 본문을 확인합니다. Vungle은 오류 진단을 위해 최선을 다할 것입니다. 대부분의 경우 입력란 한 두 개가 누락되었을 가능성이 가장 높습니다. 예를 들어,</p>
+<pre class="wysiwyg-indent2"><code>curl "http://ingest.vungle.com/eventData?trk=tune&amp;event_trk_id=uniqueID1234"</code></pre>
+<p>다음과 같은 응답을 반환합니다.</p>
+<pre class="wysiwyg-indent2"><code>{
+  "missing_fields":
+  [
+    "vungle_app_id",
+    "trk",
+    "event_trk_id",
+    "event_name",
+    "device_idfa | device_mac | device_other_id"
+  ]
+}
+</code></pre>
+<p>&nbsp;</p>
+<h3>&nbsp;</h3>
+              </div>     
+
+            </div>
+
+            <div class="article__attachments">
+              
+            </div>
+
+          </article>
+        </div>
+
+        <div class="article-loader fa fa-spinner fa-spin fa-3x fa-fw" id="article-loader"></div>
+
+        
+          <a class="article-banner" href="https://vungle.com/signup" target="_blank">
+            <span class="article-banner__title">
+              <span>Powered by Creativity</span>
+              <span>Driven by Performance</span>
+            </span>
+            <span class="article-banner__cta">Sign Up Here</span>
+          </a>
+        
+
+        <div data-prevnext='{"showArticleTitle": true, "classNameBtn": ""}'></div>
+
+        <section class="submit-ticket submit-ticket--article">
+          <div class="submit-ticket-col submit-ticket-col--left">
+            <h2 class="submit-ticket-title">Questions?</h2>
+            <p>Need further assistance, feel free to reach out to us, we’re here to help!</p>
+          </div>
+          <div class="submit-ticket-col submit-ticket-col--right">
+            <a class="btn btn--default" href="../requests/new.html">문의 등록</a>
+          </div>
+        </section>
+
+        <footer class="article-footer">
+          
+          <div class="article-vote">
+            <span class="article-vote-question">도움이 되었습니까?</span>
+            <div class="article-vote-controls">
+              <a class="btn btn--default fa fa-thumbs-up article-vote-controls__item article-vote-controls__item--up" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="예" href="../signin9044.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fko%2Farticles%2F115004827347-%25EC%2584%25A4%25EC%25B9%2598-%25ED%259B%2584-%25EC%259D%25B4%25EB%25B2%25A4%25ED%258A%25B8-PIE-%25EB%258D%25B0%25EC%259D%25B4%25ED%2584%25B0"></a>
+              <a class="btn btn--default fa fa-thumbs-down article-vote-controls__item article-vote-controls__item--down" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="아니요" href="../signin9044.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fko%2Farticles%2F115004827347-%25EC%2584%25A4%25EC%25B9%2598-%25ED%259B%2584-%25EC%259D%25B4%25EB%25B2%25A4%25ED%258A%25B8-PIE-%25EB%258D%25B0%25EC%259D%25B4%25ED%2584%25B0"></a>
+            </div>
+          </div>
+          
+        </footer>
+
+      </div>
+    </div>
+    <div class="article-column article-column--right">
+      <div data-toc='{"headers": "h2,h3,h4", "title": "Contents", "offsetTop": 80, "mobileBreakpoint": 1024}'></div>
+    </div>
+  </div>
+
+</div>
+  </main>
+
+        <footer class="footer" id="footer">
+        <div class="footer-inner">
+          <div class="copyright">
+            <div class="copyright__content">
+              <span class="copyright__copy">&copy; 2020 Vungle. All rights reserved.</span>
+            </div>
+          </div>
+          <nav class="footer-menu">
+            <ul class="list-unstyled">
+              <li><a href="https://vungle.com/about-us/">About</a></li>
+              <li><a href="https://vungle.com/login/">Products</a></li>
+              <li><a href="https://vungle.com/contact-us/">Contact us</a></li>
+            </ul>
+          </nav>
+          <ul class="footer-socials list-unstyled">
+            
+              <li><a href="https://www.facebook.com/vungle/" target="_blank" class="fab fa-facebook"></a></li>
+            
+            
+              <li><a href="https://twitter.com/vungle" target="_blank" class="fab fa-twitter"></a></li>
+            
+            
+            
+              <li><a href="https://www.linkedin.com/company/vungle" target="_blank" class="fab fa-linkedin"></a></li>
+            
+            
+            
+            
+              <li><a href="https://www.instagram.com/vungle/" target="_blank" class="fab fa-instagram"></a></li>
+            
+          </ul>
+        </div>
+      </footer>
+          
+    </div>
+    <!-- /.main__container -->
+
+  </div>  
+  <!-- /.main -->
+  
+</div>
+<!-- /.layout -->
+
+
+
+  <!-- / -->
+
+  
+  <script src="../../../../static.zdassets.com/hc/assets/ko.a157d41ecdebc07e58a9.js"></script>
+  <script src="../../../../vungle.zendesk.com/auth/v2/host.js" data-brand-id="60720" data-return-to="https://support.vungle.com/hc/ko/articles/115004827347-%EC%84%A4%EC%B9%98-%ED%9B%84-%EC%9D%B4%EB%B2%A4%ED%8A%B8-PIE-%EB%8D%B0%EC%9D%B4%ED%84%B0" data-theme="hc" data-locale="ko" data-auth-origin="60720,true,true"></script>
+
+  <script type="text/javascript">
+  /*
+
+    Greetings sourcecode lurker!
+
+    This is for internal Zendesk and legacy usage,
+    we don't support or guarantee any of these values
+    so please don't build stuff on top of them.
+
+  */
+
+  HelpCenter = {};
+  HelpCenter.account = {"subdomain":"vungle","environment":"production","name":"Vungle"};
+  HelpCenter.user = {"identifier":"da39a3ee5e6b4b0d3255bfef95601890afd80709","email":null,"name":null,"role":"anonymous","avatar_url":"https://assets.zendesk.com/hc/assets/default_avatar.png","is_admin":false,"organizations":[],"groups":[]};
+  HelpCenter.internal = {"asset_url":"//static.zdassets.com/hc/assets/","web_widget_asset_composer_url":"https://static.zdassets.com/ekr/snippet.js","current_session":{"locale":"ko","csrf_token":null,"shared_csrf_token":null},"settings":{},"usage_tracking":{"event":"article_viewed","data":"BAh7CDoLbG9jYWxlSSIHa28GOgZFVDoPYXJ0aWNsZV9pZGwrCNNm0sYaADoKX21ldGF7CzoPYWNjb3VudF9pZGkDPSYIOhNoZWxwX2NlbnRlcl9pZGkENsfsCzoNYnJhbmRfaWRpAjDtOgx1c2VyX2lkMDoTdXNlcl9yb2xlX25hbWVJIg5BTk9OWU1PVVMGOwZUOwBJIgdrbwY7BlQ=--ab88f144081e4e47b50af23df4480e7c83729ef2","url":"https://support.vungle.com/hc/activity"},"current_record_id":"115004827347","current_record_url":"/hc/ko/articles/115004827347-%EC%84%A4%EC%B9%98-%ED%9B%84-%EC%9D%B4%EB%B2%A4%ED%8A%B8-PIE-%EB%8D%B0%EC%9D%B4%ED%84%B0","current_record_title":"설치 후 이벤트(PIE) 데이터","search_results_count":null,"current_text_direction":"ltr","current_brand":{"id":60720,"account_id":534077,"name":"Vungle","active":true,"deleted_at":null,"created_at":"2014-05-29T20:19:19Z","updated_at":"2021-05-13T16:25:53Z","route_id":429018,"signature_template":"{{agent.signature}}"},"current_brand_url":"https://vungle.zendesk.com","current_host_mapping":"support.vungle.com","current_path":"/hc/ko/articles/115004827347-%EC%84%A4%EC%B9%98-%ED%9B%84-%EC%9D%B4%EB%B2%A4%ED%8A%B8-PIE-%EB%8D%B0%EC%9D%B4%ED%84%B0","authentication_domain":"https://vungle.zendesk.com","show_autocomplete_breadcrumbs":true,"rollbar_config":{"enabled":true,"endpoint":"https://rollbar-us.zendesk.com/api/1/item/","accessToken":"731a5a953e9a4b7ab6cac9623f50c732","captureUncaught":true,"captureUnhandledRejections":true,"payload":{"environment":"production","client":{"javascript":{"source_map_enabled":true,"code_version":"8e508d702ea3bb44fb7e90308d7e394bc580895e","guess_uncaught_frames":true}}}},"user_info_changing_enabled":false,"has_user_profiles_enabled":false,"has_end_user_attachments":true,"user_aliases_enabled":false,"has_anonymous_kb_voting":false,"has_multi_language_help_center":true,"mobile_device":false,"mobile_site_enabled":false,"show_at_mentions":false,"embeddables_config":{"embeddables_web_widget":true,"embeddables_connect_ipms":false},"base_domain":"zendesk.com","answer_bot_subdomain":"static","manage_content_url":"https://support.vungle.com/hc/ko","arrange_content_url":"https://support.vungle.com/hc/admin/arrange_contents?locale=ko","general_settings_url":"https://support.vungle.com/hc/admin/general_settings?locale=ko","user_segments_url":"https://vungle.zendesk.com/knowledge/user_segments?brand_id=60720","has_gather":true,"has_community_enabled":false,"has_community_badges":false,"has_user_segments":true,"has_answer_bot_web_form_enabled":false,"has_answer_bot_web_form_modal_v2":false,"has_edit_user_profile_v2":false,"billing_url":"/access/return_to?return_to=https://vungle.zendesk.com/admin/billing/subscription","is_account_owner":false,"theming_cookie_key":"hc-da39a3ee5e6b4b0d3255bfef95601890afd807091-preview","is_preview":false,"has_guide_user_segments_search":true,"has_alternate_templates":false,"arrange_articles_url":"https://vungle.zendesk.com/knowledge/arrange?brand_id=60720","article_verification_url":"https://vungle.zendesk.com/knowledge/verification?brand_id=60720","has_article_verification":false,"guide_language_settings_url":"https://support.vungle.com/hc/admin/language_settings?locale=ko","docs_importer_url":"https://vungle.zendesk.com/knowledge/import_articles?brand_id=60720","community_badges_url":"https://vungle.zendesk.com/knowledge/community_badges?brand_id=60720","community_settings_url":"https://vungle.zendesk.com/knowledge/community_settings?brand_id=60720","gather_plan_state":"subscribed","search_settings_url":"https://vungle.zendesk.com/knowledge/search_settings?brand_id=60720","has_multibrand_search_in_plan":false,"theming_api_version":1,"has_pci_credit_card_custom_field":false,"current_brand_id":60720,"help_center_restricted":false,"current_brand_active":true,"is_assuming_someone_else":false,"flash_messages":[],"user_photo_editing_enabled":true,"has_end_user_apps":false,"has_docs_importer":true,"has_sunco_widget":false,"gather_user_image_upload_via_aus":false,"user_preferred_locale":"en-us"};
+</script>
+
+  <script src="../../../../static.zdassets.com/hc/assets/moment-f6f8513da6ab17eadada59a1a4edb536.js"></script>
+  <script src="../../../../static.zdassets.com/hc/assets/hc_enduser-9fa4fabcc25ad7ce2141d33e2370693a.js"></script>
+  
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6932e4038f100fc3',m:'rhqpvu0GAutE6j.z2TMQHcejA6pm9IsvPmt5AufWGI4-1632390856-0-AWhilthQpFRnjGtzQTIWx68tkjaXcbB6hADZHYW1Y3xRvslUahL5JES/wS9fRJG9npWmBlpme6Z3uKq2wYaTNDUSvWm7YlqAP37zcpMn4XHx2Vc8HQOdUHscnz5BT7SbpQQHKXIb1wv+YOYHhMVYW21Qb6sRav6BCshlEVAOF35ZA8IrQu1c1DU2GcxGGgWS3Xvqmb+Ki2x/F3rVZj71QbOeueGcswvx2xGc+dBfzdKZTZx1TjYrw+Gv3Acsgobzcw/2Yp/Y+V4JHOEHZMBr3oU=',s:[0x14bd624ec1,0xff82067278],}})();</script></body>
+
+<!-- Mirrored from support.vungle.com/hc/ko/articles/115004827347-설치-후-이벤트-PIE-데이터 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 10:22:09 GMT -->
+</html>

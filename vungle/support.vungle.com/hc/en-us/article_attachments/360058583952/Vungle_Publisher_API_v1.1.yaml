@@ -1,0 +1,1087 @@
+swagger: '2.0'
+info:
+  description: This is a Publisher Manage API
+  version: 1.0.0
+  title: Manage API
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - name: applications
+    description: Application associated operations
+  - name: placements
+    description: Placement associated opertations
+  - name: accounts
+    description: Account associated opertations
+  - name: users
+    description: User associated opertations
+paths:
+  /errors:
+    get:
+      tags:
+        - responders
+      operationId: error
+      responses:
+        default:
+          description: got error. This is the sample of the error message, all the endponits will return the same structure if there is an error triggered.
+          schema:
+            $ref: '#/definitions/Error'
+  /accounts/me:
+    get:
+      tags:
+        - accounts
+      summary: get the account information.
+      operationId: getAccountByID
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: Get the account information
+          schema:
+            $ref: '#/definitions/Account'
+        default:
+          description: got error
+          schema:
+            $ref: '#/definitions/Error'
+    patch:
+      tags:
+        - accounts
+      summary: edit the account by Id
+      operationId: editAccountByID
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: account
+          required: true
+          schema:
+            $ref: '#/definitions/AccountEdit'
+      responses:
+        200:
+          description: Account match the ID.
+          schema:
+            $ref: '#/definitions/Account'
+        default:
+          description: got error
+          schema:
+            $ref: '#/definitions/Error'
+  /applications:
+    get:
+      tags:
+        - applications
+      summary: get a lis of applications
+      operationId: getApplications
+      security:
+        - Bearer: []
+      parameters:
+        - in: query
+          name: id
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            pattern: ^[0-9|a-f]{24}$
+        - in: query
+          name: per_page
+          type: integer
+        - in: query
+          name: page
+          type: integer
+        - in: query
+          name: search
+          type: string
+        - in: query
+          name: platform
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            minLength: 1
+            enum: [ios, android, windows, amazon]
+        - in: query
+          name: noPlacementCount
+          type: boolean
+      responses:
+        200:
+          description: Application is correctly created.
+          headers:
+            Access-Control-Expose-Headers:
+              type: string
+              default: Link,Vungle-Auth-Token,Vungle-Pagination-Page,Vungle-Pagination-Pages,Vungle-Pagination-Per-Page,Vungle-Pagination-Total,Vungle-Request-ID
+            Vungle-Pagination-Page:
+              type: integer
+            Vungle-Pagination-Pages:
+              type: integer
+            Vungle-Pagination-Per-Page:
+              type: integer
+            Vungle-Pagination-Total:
+              type: integer
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApplicationCompact'
+        default:
+          description: bad input parameter
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - applications
+      summary: create a new application
+      operationId: createApplication
+      description: |
+        By passing the application store info, and platform info, create a new Application, and the whole Application structure will be returned
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: application
+          required: true
+          schema:
+            $ref: '#/definitions/ApplicationCreate'
+      responses:
+        200:
+          description: Application is correctly created.
+          schema:
+            $ref: '#/definitions/Application'
+        default:
+          description: got error
+          schema:
+            $ref: '#/definitions/Error'
+  /applications/{id}:
+    get:
+      tags:
+        - applications
+      summary: get an existing application by ID.
+      operationId: getApplicationByID
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          pattern: ^[0-9|a-f]{24}$
+          required: true
+          type: string
+      responses:
+        200:
+          description: Application is correctly returned.
+          schema:
+            $ref: '#/definitions/Application'
+        default:
+          description: bad input parameter
+          schema:
+            $ref: '#/definitions/Error'
+    patch:
+      tags:
+        - applications
+      summary: edit an existing application
+      operationId: editApplicationByID
+      description: |
+        By passing the application store info, and platform info, create a new Application, and the whole Application structure will be returned
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          pattern: ^[0-9|a-f]{24}$
+          required: true
+          type: string
+        - in: body
+          name: application
+          required: true
+          schema:
+            $ref: '#/definitions/ApplicationEdit'
+      responses:
+        200:
+          description: Application is correctly created.
+          schema:
+            $ref: '#/definitions/Application'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/Error'
+  /applications/s2secret:
+    get:
+      tags:
+        - applications
+      summary: generate a new s2secret
+      operationId: generateSecret
+      responses:
+        200:
+          description: Application is correctly returned.
+          schema:
+            type: object
+            properties:
+              s2sSecret:
+                type: string
+        default:
+          description: bad input parameter
+          schema:
+            $ref: '#/definitions/Error'
+  /users:
+    get:
+      tags:
+        - users
+      summary: get a list of users
+      operationId: getUsers
+      security:
+        - Bearer: []
+      parameters:
+        - in: query
+          name: search
+          type: string
+        - in: query
+          name: per_page
+          type: integer
+        - in: query
+          name: id
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            pattern: ^[0-9|a-f]{24}$
+        - in: query
+          name: page
+          type: integer
+      responses:
+        200:
+          description: Users match the search key word.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        default:
+          description: got error
+          schema:
+            $ref: '#/definitions/Error'
+  /users/{id}:
+    get:
+      tags:
+        - users
+      summary: get the user by ID
+      operationId: getUserByID
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          type: string
+          pattern: ^[0-9|a-f]{24}$
+          required: true
+      responses:
+        200:
+          description: User match the ID.
+          schema:
+            $ref: '#/definitions/User'
+        default:
+          description: got error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - users
+      summary: edit the user by ID
+      operationId: editUserByID
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          pattern: ^[0-9|a-f]{24}$
+          type: string
+          required: true
+        - in: body
+          name: user
+          required: true
+          schema:
+            $ref: '#/definitions/UserEdit'
+      responses:
+        200:
+          description: User match the ID.
+          schema:
+            $ref: '#/definitions/User'
+        default:
+          description: got error
+          schema:
+            $ref: '#/definitions/Error'
+  /users/invite:
+    post:
+      tags:
+        - users
+      summary: create a user
+      operationId: inviteUser
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+                format: email
+              role:
+                type: string
+                enum: [write,read,vungler]
+      responses:
+        200:
+          description: User invited.
+          schema:
+            $ref: '#/definitions/User'
+        default:
+          description: got error
+          schema:
+            $ref: '#/definitions/Error'
+  /users/{id}/secret:
+    get:
+      tags:
+        - users
+      summary: update the API token for given user.
+      operationId: updateSecret
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          type: string
+          pattern: ^[0-9|a-f]{24}$
+          required: true
+      responses:
+        200:
+          description: User match the ID.
+          schema:
+            $ref: '#/definitions/User'
+        default:
+          description: got error
+          schema:
+            $ref: '#/definitions/Error'
+  /placements:
+    get:
+      tags:
+        - placements
+      summary: get a lis of placements
+      operationId: getPlacements
+      security:
+        - Bearer: []
+      parameters:
+        - in: query
+          name: id
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            pattern: ^[0-9|a-f]{24}$
+        - in: query
+          name: application
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            pattern: ^[0-9|a-f]{24}$
+        - in: query
+          name: search
+          type: string
+        - in: query
+          name: per_page
+          type: integer
+        - in: query
+          name: page
+          type: integer
+      responses:
+        200:
+          description: Placement is correctly created.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PlacementCompact'
+        default:
+          description: bad input parameter
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - placements
+      summary: create a new placement
+      operationId: createPlacement
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: placement
+          required: true
+          schema:
+            $ref: '#/definitions/PlacementCreate'
+      responses:
+        200:
+          description: Application is correctly created.
+          schema:
+            $ref: '#/definitions/Placement'
+        default:
+          description: bad input parameter
+          schema:
+            $ref: '#/definitions/Error'
+  /placements/{id}:
+    get:
+      tags:
+        - placements
+      summary: get an existing placement by ID.
+      operationId: getPlacementByID
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          pattern: ^[0-9|a-f]{24}$
+          required: true
+          type: string
+      responses:
+        200:
+          description: Placement is correctly returned.
+          schema:
+            $ref: '#/definitions/Placement'
+    patch:
+      tags:
+        - placements
+      summary: edit an existing placement
+      operationId: editPlacementByID
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          pattern: ^[0-9|a-f]{24}$
+          required: true
+          type: string
+        - in: body
+          name: placement
+          required: true
+          schema:
+            $ref: '#/definitions/PlacementEdit'
+      responses:
+        200:
+          description: Placement is correctly created.
+          schema:
+            $ref: '#/definitions/Placement'
+    post:
+      tags:
+        - placements
+      summary: initialize default placement
+      operationId: recreatePlacementByID
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          pattern: ^[0-9|a-f]{24}$
+          required: true
+          type: string
+        - in: body
+          name: placement
+          required: true
+          schema:
+            $ref: '#/definitions/PlacementCreate'
+      responses:
+        200:
+          description: Placement is correctly recreated.
+          schema:
+            $ref: '#/definitions/Placement'
+definitions:
+  Account:
+    type: object
+    properties:
+      id:
+        type: string
+        pattern: ^[0-9|a-f]{24}$
+      name:
+        type: string
+        pattern: ^(\S.*\S|\S)*$
+      type:
+        type: string
+      contact:
+        $ref: '#/definitions/AccountContact'
+      address:
+        $ref: '#/definitions/AccountAddress'
+      sdkTermsAgreement:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/definitions/SDKTermsAgreement'
+      billingEntity:
+        type: string
+        x-nullable: true
+      accountAppBlacklist:
+        type: array
+        uniqueItems: true
+        items:
+          type: string
+      legitimateInterest:
+        type: boolean
+        x-omitempty: false
+  AccountEdit:
+    type: object
+    properties:
+      name:
+        type: string
+        pattern: ^(\S.*\S|\S)*$
+      contact:
+        $ref: '#/definitions/AccountContact'
+      address:
+        $ref: '#/definitions/AccountAddress'
+      billingEntity:
+        type: string
+        x-nullable: true
+      legitimateInterest:
+        type: boolean
+        x-omitempty: false
+  AccountAddress:
+    type: object
+    properties:
+      city:
+        type: string
+      country:
+        type: string
+      postal:
+        type: string
+      line1:
+        type: string
+      line2:
+        type: string
+      state:
+        type: string
+  AccountContact:
+    type: object
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+  Filters:
+    type: object
+    properties:
+      whitelist:
+        type: array
+        uniqueItems: true
+        items:
+          type: string
+      blacklist:
+        type: array
+        uniqueItems: true
+        items:
+          type: string
+  Platform:
+    type: string
+    minLength: 1
+    enum: [ios, android, windows, amazon]
+    example: ios
+  StoreInfo:
+    type: object
+    required:
+      - id
+      - category
+    properties:
+      id:
+        type: string
+        minLength: 1
+      category:
+        type: string
+        minLength: 1
+        enum: ['Battle Royale',
+               'Bingo',
+               'Books & Reference',
+               'Brick Breaker',
+               'Bubble Shooter',
+               'Builder',
+               'Business',
+               'Card',
+               'Casino: Blackjack',
+               'Casino: Poker',
+               'Casino: Slots',
+               'Casino: Social Casino',
+               'Catalogs',
+               'Coloring',
+               'Comics',
+               'Communication',
+               'Cooking',
+               'Coupon',
+               'Dating',
+               'Education',
+               'Entertainment',
+               'Finance',
+               'Food & Drink',
+               'Games',
+               'Health & Fitness',
+               'Hidden Object',
+               'Hypercasual: Ball',
+               'Hypercasual: Io',
+               'Hypercasual: Music',
+               'Hypercasual: Other',
+               'Hypercasual: Puzzle',
+               'Hypercasual: Racing',
+               'Hypercasual: Shooter',
+               'Hypercasual: Sports',
+               'Idle',
+               'Jigsaw',
+               'Lifestyle',
+               'Live Wallpaper',
+               'Match3',
+               'Medical',
+               'Music',
+               'Navigation',
+               'News',
+               'Non-Gaming',
+               'Other',
+               'Personalization',
+               'Photo & Video',
+               'Productivity',
+               'Puzzle: Board',
+               'Puzzle: Number',
+               'Puzzle: Other',
+               'PvP',
+               'RPG',
+               'Racing',
+               'Runner',
+               'Scratcher & Sweepstakes',
+               'Shooter',
+               'Shopping',
+               'Simulation',
+               'Social',
+               'Social Networking',
+               'Solitaire',
+               'Sports',
+               'Story Based Apps',
+               'Tower Defense',
+               'Travel',
+               'Trivia',
+               'Utilities',
+               'Weather',
+               'Widgets',
+               'Word']
+      isPaid:
+        type: boolean
+        x-omitempty: false
+      isManual:
+        type: boolean
+        x-nullable: true
+      url:
+        type: string
+        pattern: ^(http|https|market|itms|amzn|ms-windows-store):\/\/
+      thumbnail:
+        type: string
+        format: url
+  ApplicationCreate:
+    type: object
+    required:
+      - name
+      - platform
+      - isCoppa
+    properties:
+      platform:
+        $ref: '#/definitions/Platform'
+      name:
+        type: string
+        minLength: 1
+        pattern: ^(\S.*\S|\S)*$
+      store:
+        $ref: '#/definitions/StoreInfo'
+      isCoppa:
+        type: boolean
+        x-omitempty: false
+  ApplicationCompact:
+    allOf:
+      - $ref: '#/definitions/ApplicationCreate'
+      - type: object
+        required:
+          - id
+          - name
+        properties:
+          id:
+            type: string
+            pattern: ^[0-9|a-f]{24}$
+            example: 520d751489e451af34000028
+            description: a bson ID.
+          vungleAppId:
+            type: string
+            description: store ID.
+          owner:
+            type: string
+          placement_count:
+            type: integer
+          status:
+            type: string
+            minLength: 1
+            enum: [active,inactive,test]
+  Application:
+    allOf:
+      - $ref: '#/definitions/ApplicationCompact'
+      - type: object
+        required:
+          - tagFilters
+          - appFilters
+          - name
+        properties:
+          orientation:
+            type: string
+            minLength: 1
+            enum: [landscape, portrait, both]
+          forceView:
+            type: object
+            properties:
+              rewarded:
+                type: boolean
+                x-omitempty: false
+              nonRewarded:
+                type: boolean
+                x-omitempty: false
+          minOs:
+            type: number
+          maxVideoLength:
+            type: integer
+            minimum: 15
+            maximum: 60
+            x-nullable: true
+          connection:
+            type: string
+            minLength: 1
+            enum: ['wifi', 'all']
+          callbackURL:
+            type: string
+          tagFilters:
+            type: object
+            properties:
+              blacklist:
+                type: array
+                uniqueItems: true
+                items:
+                  type: string
+            x-nullale: true
+          s2sSecret:
+            type: string
+          testDevices:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+          defaultPlacement:
+            type: string
+            pattern: ^[0-9|a-f]{24}$
+            description: default placement bson ID.
+          flatCPMCap:
+            $ref: '#/definitions/FlatCPMCap'
+  ApplicationEdit:
+    type: object
+    required:
+      - tagFilters
+      - name
+      - isCoppa
+    properties:
+      name:
+        type: string
+        minLength: 1
+        pattern: ^(\S.*\S|\S)*$
+      store:
+        $ref: '#/definitions/StoreInfo'
+      isCoppa:
+        type: boolean
+        x-omitempty: false
+      orientation:
+        type: string
+        minLength: 1
+        enum: [landscape, portrait, both]
+      forceView:
+        type: object
+        properties:
+          rewarded:
+            type: boolean
+            x-omitempty: false
+          nonRewarded:
+            type: boolean
+            x-omitempty: false
+      minOs:
+        type: number
+      maxVideoLength:
+        type: integer
+        minimum: 15
+        maximum: 60
+        x-nullable: true
+      connection:
+        type: string
+        minLength: 1
+        enum: ['wifi', 'all']
+      callbackURL:
+        type: string
+      tagFilters:
+        type: object
+        properties:
+          blacklist:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+        x-nullale: true
+      s2sSecret:
+        type: string
+      status:
+        type: string
+        minLength: 1
+        enum: [active,inactive,test]
+      testDevices:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+      flatCPMCap:
+        $ref: '#/definitions/FlatCPMCap'
+  PlacementCompact:
+    type: object
+    required:
+      - name
+      - type
+    properties:
+      application:
+        $ref: '#/definitions/ApplicationCompact'
+      name:
+        type: string
+        minLength: 1
+        pattern: ^(\S.*\S|\S)*$
+      type:
+        type: string
+        minLength: 1
+        enum: [interstitial,flexfeed,flexview,mrec,rewarded,banner]
+      allowEndCards:
+        type: boolean
+        x-omitempty: false
+      isSkippable:
+        type: boolean
+        x-nullable: true
+      referenceID:
+        type: string
+      id:
+        type: string
+        pattern: ^[0-9|a-f]{24}$
+        example: 520d751489e451af34000028
+        description: a bson ID.
+      status:
+        type: string
+        minLength: 1
+        enum: [active,inactive]
+  Placement:
+    allOf:
+      - $ref: '#/definitions/PlacementCompact'
+      - type: object
+        properties:
+          videoOrientationOverride:
+            type: string
+            minLength: 1
+            enum: [none, portrait, landscape, both]
+          cpmFloor:
+            $ref: '#/definitions/CPMFloor'
+            x-nullable: true
+          flatCPM:
+            $ref: '#/definitions/FlatCPM'
+            x-nullable: true
+          isFlatCPMEnabled:
+            type: boolean
+            x-omitempty: true
+            x-nullable: true
+          flatCPMCap:
+            $ref: '#/definitions/FlatCPMCap'
+            x-nullable: true
+          banner:
+            x-nullable: true
+            $ref: '#/definitions/Banner'
+  FlatCPM:
+    type: object
+    properties:
+      default:
+        type: number
+        minimum: 0
+        x-nullable: true
+      geo:
+        type: object
+        additionalProperties:
+          type: number
+          minimum: 0
+  CPMFloor:
+    type: object
+    properties:
+      default:
+        type: number
+        minimum: 0
+        x-nullable: true
+      geo:
+        type: object
+        additionalProperties:
+          type: number
+          minimum: 0
+  FlatCPMCap:
+    type: object
+    properties:
+      default:
+        type: number
+        x-nullable: true
+      geo:
+        type: object
+        additionalProperties:
+          type: number
+  Banner:
+    type: object
+    properties:
+      adRefreshDuration:
+        type: number
+        minimum: 10
+        maximum: 240
+        x-nullable: true
+      isRefreshEnabled:
+        type: boolean
+        x-nullable: true
+  PlacementCreate:
+    type: object
+    required:
+      - name
+    properties:
+      application:
+        type: string
+      name:
+        type: string
+      type:
+        type: string
+        minLength: 1
+        enum: [interstitial,flexfeed,flexview,mrec,rewarded,banner]
+      allowEndCards:
+        type: boolean
+      isSkippable:
+        type: boolean
+        x-nullable: true
+      cpmFloor:
+        $ref: '#/definitions/CPMFloor'
+        x-nullable: true
+      flatCPM:
+        $ref: '#/definitions/FlatCPM'
+        x-nullable: true
+      isFlatCPMEnabled:
+        type: boolean
+        x-omitempty: true
+        x-nullable: true
+      banner:
+        x-nullable: true
+        $ref: '#/definitions/Banner'
+  PlacementEdit:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        minLength: 1
+        pattern: ^(\S.*\S|\S)*$
+      allowEndCards:
+        type: boolean
+        x-omitempty: false
+      isSkippable:
+        type: boolean
+        x-nullable: true
+      _isSkippable:
+        type: boolean
+        x-nullable: true
+        x-go-name: DeleteIsSkippable
+      videoOrientationOverride:
+        type: string
+        minLength: 1
+        enum: [none, portrait, landscape, both]
+      status:
+        type: string
+        minLength: 1
+        enum: [active,inactive]
+      cpmFloor:
+        $ref: '#/definitions/CPMFloor'
+        x-nullable: true
+      flatCPM:
+        $ref: '#/definitions/FlatCPM'
+        x-nullable: true
+        description: FlatCPM cannot be set if isFlatCPMEnabled equals to false
+      isFlatCPMEnabled:
+        type: boolean
+        x-omitempty: true
+        x-nullable: true
+      banner:
+        x-nullable: true
+        $ref: '#/definitions/Banner'
+  SDKTermsAgreement:
+    type: object
+    properties:
+      email:
+        type: string
+      version:
+        type: string
+      acceptedDate:
+        type: string
+  UserEdit:
+    type: object
+    properties:
+      avatar:
+        type: string
+      role:
+        type: string
+        enum: [read,write,vungler]
+      name:
+        type: string
+      secret_key:
+        type: string
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+        pattern: ^[0-9|a-f]{24}$
+      account:
+        type: string
+        pattern: ^[0-9|a-f]{24}$
+      role:
+        type: string
+        minLength: 1
+        enum: [write, read, vungler]
+      name:
+        type: string
+        pattern: ^(\S.*\S|\S)*$
+      email:
+        type: string
+      status:
+        type: string
+        minLength: 1
+        enum: [active, disabled, pending]
+      secret_key:
+        type: string
+      avatar:
+        type: string
+  Error:
+    type: object
+    properties:
+      message:
+        type: string
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: >-
+      You can get token as apiKey from "https://auth-api.vungle.com/login"
+      then set Authorization value as "Bearer {{{token}}}"
+schemes:
+  - https
+host: publisher-api.vungle.com
+basePath: /api/v1

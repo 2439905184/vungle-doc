@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+
+<!-- Mirrored from support.vungle.com/hc/en-us/articles/360045170672-Enable-MoPub-Mediation-on-Android-v6-5-3-and-Lower by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 11:03:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <!-- v20226 -->
+
+  <title>Enable MoPub Mediation on Android v6.5.3 and Lower &ndash; Help Center</title>
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="" />
+
+  <meta name="description" content="Use this guide to add Vungle Android SDK into your app, using MoPub as your main advertising mediation layer. MoPub Android adapter..." /><meta property="og:image" content="https://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Help Center" />
+<meta property="og:title" content="Enable MoPub Mediation on Android v6.5.3 and Lower" />
+<meta property="og:description" content="Use this guide to add Vungle Android SDK into your app, using MoPub as your main advertising mediation layer. MoPub Android adapter 6.5.3.0 is compatible with Vungle Android SDK 6.5.3.
+Contents:
+
+B..." />
+<meta property="og:url" content="360045170672-Enable-MoPub-Mediation-on-Android-v6-5-3-and-Lower.html" />
+<link rel="canonical" href="360045170672-Enable-MoPub-Mediation-on-Android-v6-5-3-and-Lower.html" />
+<link rel="alternate" hreflang="de" href="../../de/signined71.html" />
+<link rel="alternate" hreflang="en" href="360045170672-Enable-MoPub-Mediation-on-Android-v6-5-3-and-Lower.html" />
+<link rel="alternate" hreflang="es" href="../../es-mx/signin997e.html" />
+<link rel="alternate" hreflang="fr" href="../../fr-fr/signin2a96.html" />
+<link rel="alternate" hreflang="ja" href="../../ja/signinae82.html" />
+<link rel="alternate" hreflang="ko" href="../../ko/signinb215.html" />
+<link rel="alternate" hreflang="pt" href="../../pt-br/signin0528.html" />
+<link rel="alternate" hreflang="ru" href="../../ru/signinc8a6.html" />
+
+  <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/application-79172500fb4dbec2484043d570946543.css" id="stylesheet" />
+    <!-- Entypo pictograms by Daniel Bruce — www.entypo.com -->
+    <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/theming_v1_support-cf937686d5b6669242017892da7bad78.css" />
+  <link rel="stylesheet" type="text/css" href="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/stylee82d.css?digest=360570052252">
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://theme.zdassets.com/theme_assets/534077/62c5e8616cdae030ecea7cec15cf47a2b729729b.ico" />
+
+    <script src="../../../../static.zdassets.com/hc/assets/jquery-d5395f0b7ac5027403fc17855c46dbfc.js"></script>
+    
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+  analytics.load("bRqfh635lMl7qBpocue716BjaalyFtJD");
+  analytics.page();
+  }}();
+  analytics.ready(function(){
+    Appcues.anonymous();
+});
+</script>
+
+
+
+
+
+
+
+
+
+  <style type="text/css">
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/51587ff68e0ab2bf990a17d993ec1fa7a5451614.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/8677458bb131e09b83d5bf2ec1ab6d015c18fd8b.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1e02ff61edce3f256e3f8de8e6bfb11bb085905f.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/b421ade1cc04519f69e9b4ec0fee3d632f993540.woff") format("woff");
+      font-weight: bold;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1056b20fe6b0f2a56568ecdea5119e1577667803.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/0ea45f63097574b5446148c9670509ae56dc2975.woff") format("woff");
+      font-weight: 300;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/78bd021a78ca5752e43275a982a96b00bd004a54.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/115efed0d77bd96754f56a00f399a05af518a5a4.woff") format("woff");
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/e5e3d4a71bfb2d624edf48819c3dd1597c4397ff.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9f8a21f09879869f644a45d21aea06dde01f2107.woff") format("woff");
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/f4f83c57775879216d798dce95c9a83e442da6ab.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9e93f03906c0fbfd6eba0ecdfe8d739a6b38852d.woff") format("woff");
+      font-weight: bold;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk Screen";
+      src: url("http://theme.zdassets.com/theme_assets/534077/2f8d0cbc16a32df1f8b6c36f45c2b4078181ca43.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/2ab0f28c68ed406c853fec87f698618cd7ac8bc2.woff") format("woff");
+      font-weight: 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk OIL";
+      src: url("http://theme.zdassets.com/theme_assets/534077/0ce9c7bb30841f31bac192ef415fd27771c17fc9.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/422274783804fb9c3e984558285801b01b2fe117.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+
+
+<link rel="stylesheet" href="../../../../use.fontawesome.com/releases/v5.10.1/css/all.css">
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/styles/atelier-lakeside-dark.min.css" />
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" />
+<script src="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+<script src="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/highlight.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<meta property="asseturl" content="//theme.zdassets.com/theme_assets/534077/6ff6e0c84e92580e7cc6e9c77a5cc1e724f36743.gif">
+
+
+<link rel="stylesheet" href="../../../../theme.zdassets.com/theme_assets/534077/02e3878a33d61900d75eb94d43eb4d26929d6dbf.css">
+
+<script src="../../../../theme.zdassets.com/theme_assets/534077/48ea021f3fedbc024c4443d2e946e0b9b742e384.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/469d1d10574fa6f68d243916e96f61e7ce459a5a.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/9893f4b0b18dc4018d50a3716fc581152c21535e.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/ae559ee60cd2d617e942d530c1ee7ac42a973761.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/c2b4df57e1dcfcf1b5d2298b16c409c8315a177b.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/cf5c34722566da1ba5ca5d877dc187d282ca6a3f.js"></script>
+
+<!-- ...Appcues... -->
+<script type="text/javascript">
+  if (userId) {
+    Appcues.identify(userId); 
+  } else {
+    Appcues.anonymous(); 
+  }
+</script>
+
+<script src="../../../../static.zdassets.com/conditional_fields_app_hc/latest/helpcenter.js"></script>
+<script>var cfaRules = [{ "fieldType": "tagger", "field": 114099498832, "value": "user_interface", "select": [114099504272], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "amazon", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "android", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios", "select": [114099505792, 114101637652], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "multi_platforms_other_combination", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "windows", "select": [114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099505792, "value": "other_ios_sdk", "select": [114099619791], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "adincube", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "admob", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "fyber_hezap", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "ironsource_supersonic", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "multiple_mediation", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "other_mediation", "select": [114099556512, 114099619811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "upsight", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "adobe_air", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "corona", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "marmalade", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "other_plugin", "select": [114099620151, 114099620451], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "unity", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099577491, "value": "other_android_sdk", "select": [114099555992], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099619751, "value": "other_windows_sdk", "select": [114099556012], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099621511, "value": "geo_other", "select": [114099622811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_dashboard", "select": [114099498652, 114099499132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_other", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_reportingapi", "select": [114099498652, 114099621211, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_useracquisition", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_notreceivingreward", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_other", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_troublesomead", "select": [114099498672, 114099504752, 114099621511, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_unsubscribeads", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_payment", "select": [114099571371, 114099500132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_accountstatus", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_addtransferusers", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_deleteaccount", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_pwrecovery", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_registration", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_callbacks", "select": [114099498652, 114099556032, 114099556532, 114099620751, 114099621511, 114099504752], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_cocoapods", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_dashboard", "select": [114099498652, 114099498832], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_gradle", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_multidex", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621731], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_noads", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_proguard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557592], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_testmode", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_other", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_reportingapi", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_button", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_crashing", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_endcard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_freezing", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_other", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_sound", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_video", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }];</script>
+
+<style type="text/css">
+
+/* Advertiser */
+.categories__icon--200198330 {
+  background-color: #ff5a41;
+}
+
+.categories__icon--200198330:before,
+#sidenav-category-200198330 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/9f2e8cfd41383f7f21c68fd99567eb1b1a7993ac.svg");
+}
+
+/* SDK */
+.categories__icon--200269670 {
+  background-color: #3c2869;
+}
+
+.categories__icon--200269670:before,
+#sidenav-category-200269670 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/ab38e1e12c6a99fe83f4ea9c02bf87e17510558d.svg");
+}
+
+/* Publisher */
+.categories__icon--360001994512 {
+  background-color: #6e7dff;
+}
+
+.categories__icon--360001994512:before,
+#sidenav-category-360001994512 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/8a0ee6cf2a1300b8adf5a19112e81db3c070a273.svg");
+}
+
+/* FAQs */
+.categories__icon--115000802567 {
+  background-color: #ffd700;
+}
+
+.categories__icon--115000802567:before,
+#sidenav-category-115000802567 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/840643095495a2f0380fbe420efb55b7a63277fe.svg");
+}
+
+/* Creative */
+.categories__icon--360001724259 {
+  background-color: #ffd2e1;
+}
+
+.categories__icon--360001724259:before,
+#sidenav-category-360001724259 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/2bb5eeecadf61018e2bda864d22706f146b5a208.svg");
+}
+
+</style>
+  <script type="text/javascript" src="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/scripte82d.js?digest=360570052252"></script>
+<script async src='../../../cdn-cgi/bm/cv/669835187/api.js'></script></head>
+<body class="">
+  
+  
+
+  <div class="js-alert-box"></div>
+
+<div class="layout" >
+
+  <aside class="sidebar" data-sidebar>
+  <div class="sidebar__header">
+    <div class="sidebar__container sidebar__container--fixed">
+      <div class="sidebar__logo">
+        <a title="Home" href="../../en-us.html">
+          <img src="http://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" alt="Logo">
+        </a>
+      </div>
+      <ul class="sidebar__list">
+        <li class="sidebar__item">
+          <a class="sidebar__link sidebar__link--home" title="Home" href="../../en-us.html">Home</a>
+        </li>
+      </ul>
+      <div class="sidebar__top-nav"></div>
+      <div class="sidebar__content-block" data-sidebar-content></div>
+    </div>
+  </div>
+
+  <div class="sidebar__container">
+    <div class="sidebar__bottom-nav">
+      <div class="sidebar__bottom-nav-item">
+        
+          <div class="dropdown language-selector" aria-haspopup="true">
+            <a class="dropdown-toggle btn btn--default btn--small">
+              English (US)
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+              </svg>
+            </a>
+            <span class="dropdown-menu" role="menu">
+              
+                <a href="../../de/signined71.html?return_to=%2Fhc%2Fde%2Farticles%2F360045170672-Aktivieren-Sie-MoPub-Mediation-unter-Android-v6-5-3-und-fr%25C3%25BChere-Versionen" dir="ltr" rel="nofollow" role="menuitem">
+                  Deutsch
+                </a>
+              
+                <a href="../../es-mx/signin997e.html?return_to=%2Fhc%2Fes-mx%2Farticles%2F360045170672-Habilite-MoPub-Mediation-en-Android-v6-5-3-y-versiones-anteriores" dir="ltr" rel="nofollow" role="menuitem">
+                  Español (México)
+                </a>
+              
+                <a href="../../fr-fr/signin2a96.html?return_to=%2Fhc%2Ffr-fr%2Farticles%2F360045170672-Activer-MoPub-Mediation-sur-Android-v6-5-3-et-les-versions-ant%25C3%25A9rieures" dir="ltr" rel="nofollow" role="menuitem">
+                  Français (France)
+                </a>
+              
+                <a href="../../ja/signinae82.html?return_to=%2Fhc%2Fja%2Farticles%2F360045170672-Android-v6-5-3-%25E4%25BB%25A5%25E5%2589%258D%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A7-MoPub-%25E3%2583%25A1%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E6%259C%2589%25E5%258A%25B9%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B" dir="ltr" rel="nofollow" role="menuitem">
+                  日本語
+                </a>
+              
+                <a href="../../ko/signinb215.html?return_to=%2Fhc%2Fko%2Farticles%2F360045170672-Android-v6-5-3-%25EC%259D%25B4%25ED%2595%2598%25EC%2597%2590%25EC%2584%259C-MoPub-%25EB%25AF%25B8%25EB%2594%2594%25EC%2597%2590%25EC%259D%25B4%25EC%2585%2598-%25ED%2599%259C%25EC%2584%25B1%25ED%2599%2594" dir="ltr" rel="nofollow" role="menuitem">
+                  한국어
+                </a>
+              
+                <a href="../../pt-br/signin0528.html?return_to=%2Fhc%2Fpt-br%2Farticles%2F360045170672-Ativar-a-media%25C3%25A7%25C3%25A3o-MoPub-no-Android-v6-5-3-e-vers%25C3%25B5es-anteriores" dir="ltr" rel="nofollow" role="menuitem">
+                  Português do Brasil
+                </a>
+              
+                <a href="../../ru/signinc8a6.html?return_to=%2Fhc%2Fru%2Farticles%2F360045170672-%25D0%2590%25D0%25BA%25D1%2582%25D0%25B8%25D0%25B2%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-MoPub-Mediation-%25D0%25BD%25D0%25B0-Android-%25D0%25B2%25D0%25B5%25D1%2580%25D1%2581%25D0%25B8%25D0%25B8-6-5-3-%25D0%25B8-%25D0%25BD%25D0%25B8%25D0%25B6%25D0%25B5" dir="ltr" rel="nofollow" role="menuitem">
+                  Русский
+                </a>
+              
+                <a href="../../zh-cn.html?return_to=%2Fhc%2Fzh-cn" dir="ltr" rel="nofollow" role="menuitem">
+                  简体中文
+                </a>
+              
+            </span>
+          </div>
+        
+      </div>
+      <div class="sidebar__bottom-nav-item">  
+        <a href="https://vungle.com/login/" target="_blank" class="">
+          Platform
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="a" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#AAB2BA" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#a"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="sidebar__overlay"></div>
+
+  <div class="main">
+
+    <div class="main__header">
+
+      <a href="#" class="sidebar-toggle__link" data-toggle-menu role="button">
+        <span class="sidebar-toggle__burger"><span></span></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--menu"></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--close"></span>
+      </a>
+
+      <div class="main__search">
+        <form role="search" class="search" data-search="" data-instant="true" autocomplete="off" action="https://support.vungle.com/hc/en-us/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" /><input type="search" name="query" id="query" placeholder="Search..." autocomplete="off" aria-label="Search..." />
+<input type="submit" name="commit" value="Search" /></form>
+      </div>
+      <div class="main__nav">
+        <a href="../sections/360004473112.html" class="btn btn--topbar hidden-mobile">
+          Early Access SDK
+        </a>
+        <a href="https://vungle.com/signup/" target="_blank" class="btn btn--topbar">
+          Platform
+          <svg width="24" height="24" viewBox="0 0 24 24"><defs><path id="b" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#0ccec9" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#b"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="main__container">
+
+  <main role="main">
+    <div class="article-page" data-article-page>
+
+  <div class="row">
+    <div class="article-column article-column--left">
+      <div class="box">
+        <div class="article-page__wrap" data-article-wrap>
+          <article class="article js-active-article" itemscope itemtype="http://schema.org/Article" data-article="360045170672">
+            <header class="article-header">
+              <ol class="breadcrumbs">
+  
+    <li title="Help Center">
+      
+        <a href="../../en-us.html">Help Center</a>
+      
+    </li>
+  
+    <li title="SDK">
+      
+        <a href="../categories/200269670-SDK.html">SDK</a>
+      
+    </li>
+  
+    <li title="Mediation">
+      
+        <a href="../sections/360006072451-Mediation.html">Mediation</a>
+      
+    </li>
+  
+</ol>
+
+              <h1 class="h2 article-title" itemprop="name">
+                
+                Enable MoPub Mediation on Android v6.5.3 and Lower
+              </h1>
+
+              <div class="article-meta">
+                <div class="entry-info">
+                  <div class="entry-info__avatar">
+                    <div class="avatar avatar--agent">
+                      <img class="user-avatar user-avatar--default" src="../../../system/photos/360479472411/Me.jpg" alt="Avatar">
+                    </div>
+                  </div>
+                  <div class="entry-info__content">
+                    <b class="author">
+                      John Mai
+                    </b>
+                    <div class="meta"><time datetime="2020-12-14T17:55:10Z" title="2020-12-14T17:55:10Z" data-datetime="calendar">December 14, 2020 17:55</time></div>
+                  </div>
+                </div>
+                <a class="article-subscribe" title="Opens a sign-in dialog" rel="nofollow" role="button" data-auth-action="signin" aria-selected="false" href="360045170672-Enable-MoPub-Mediation-on-Android-v6-5-3-and-Lower/subscription.html">Follow</a>
+              </div>
+            </header>
+
+            <div class="article__body markdown" itemprop="articleBody">
+
+              <div class="article-main">
+                <p>Use this guide to add Vungle&nbsp;Android SDK into your&nbsp;app, using&nbsp;MoPub as your&nbsp;main advertising mediation layer. MoPub Android adapter 6.5.3.0 is compatible with Vungle Android SDK 6.5.3.</p>
+<p>Contents:</p>
+<ul>
+<li><a href="https://support.vungle.com/knowledge/revisions/QnJhbmQ6NjA3MjA=/QXJ0aWNsZTozNjAwMDM0OTExOTI6Nzk=/en-us?showDiff=true#BeforeYouBegin" target="_blank" rel="noopener">Before You Begin</a></li>
+<li><a href="https://support.vungle.com/knowledge/revisions/QnJhbmQ6NjA3MjA=/QXJ0aWNsZTozNjAwMDM0OTExOTI6Nzk=/en-us?showDiff=true#Step1SetUpVungleAsNetwork" target="_blank" rel="noopener">Step 1. Set Up Vungle as a Network</a>
+<ul>
+<li><a href="https://support.vungle.com/knowledge/revisions/QnJhbmQ6NjA3MjA=/QXJ0aWNsZTozNjAwMDM0OTExOTI6Nzk=/en-us?showDiff=true#SetUpVungleAsSDKNetwork" target="_blank" rel="noopener">Set Up Vungle as an SDK Network</a></li>
+<li><a href="https://support.vungle.com/knowledge/revisions/QnJhbmQ6NjA3MjA=/QXJ0aWNsZTozNjAwMDM0OTExOTI6Nzk=/en-us?showDiff=true#SetUpVungleAsCustomNativeNetwork" target="_blank" rel="noopener">Set Up Vungle as a Custom Native Network</a></li>
+</ul>
+</li>
+<li><a href="https://support.vungle.com/knowledge/revisions/QnJhbmQ6NjA3MjA=/QXJ0aWNsZTozNjAwMDM0OTExOTI6Nzk=/en-us?showDiff=true#Step2AddVungleAs3rdParty" target="_blank" rel="noopener">Step 2. Add Vungle as a Third-Party Ad Network</a></li>
+<li><a href="https://support.vungle.com/knowledge/revisions/QnJhbmQ6NjA3MjA=/QXJ0aWNsZTozNjAwMDM0OTExOTI6Nzk=/en-us?showDiff=true#BannerAdSize" target="_blank" rel="noopener">Banner Ad Size</a></li>
+<li><a href="https://support.vungle.com/knowledge/revisions/QnJhbmQ6NjA3MjA=/QXJ0aWNsZTozNjAwMDM0OTExOTI6Nzk=/en-us?showDiff=true#OptionalAdvancedSettings" target="_blank" rel="noopener">Optional Advanced Settings</a>
+<ul>
+<li><a href="https://support.vungle.com/knowledge/revisions/QnJhbmQ6NjA3MjA=/QXJ0aWNsZTozNjAwMDM0OTExOTI6Nzk=/en-us?showDiff=true#EarlySDKInitialization" target="_blank" rel="noopener">Early SDK Initialization</a></li>
+<li><a href="https://support.vungle.com/knowledge/revisions/QnJhbmQ6NjA3MjA=/QXJ0aWNsZTozNjAwMDM0OTExOTI6Nzk=/en-us?showDiff=true#MemorySettings" target="_blank" rel="noopener">Memory Settings</a></li>
+<li><a href="https://support.vungle.com/knowledge/revisions/QnJhbmQ6NjA3MjA=/QXJ0aWNsZTozNjAwMDM0OTExOTI6Nzk=/en-us?showDiff=true#RestrictUsageOfDeviceID" target="_blank" rel="noopener">Restrict usage of device ID</a></li>
+<li><a href="https://support.vungle.com/knowledge/revisions/QnJhbmQ6NjA3MjA=/QXJ0aWNsZTozNjAwMDM0OTExOTI6Nzk=/en-us?showDiff=true#InterstitialAds" target="_blank" rel="noopener">Interstitial Ads</a></li>
+<li><a href="https://support.vungle.com/knowledge/revisions/QnJhbmQ6NjA3MjA=/QXJ0aWNsZTozNjAwMDM0OTExOTI6Nzk=/en-us?showDiff=true#RewardedAds" target="_blank" rel="noopener">Rewarded Ads</a></li>
+</ul>
+</li>
+<li><a href="https://support.vungle.com/knowledge/revisions/QnJhbmQ6NjA3MjA=/QXJ0aWNsZTozNjAwMDM0OTExOTI6Nzk=/en-us?showDiff=true#AdditionalNote" target="_blank" rel="noopener">Additional Note</a></li>
+</ul>
+<h2><a target="_blank" name="BeforeYouBegin"></a>Before You Begin</h2>
+<ul>
+<li>The <a href="https://vungle2-cdn-prod.s3.amazonaws.com/sdks/android/vungle-android-sdk-6.5.3.zip" target="_blank" rel="noopener">Vungle Android SDK 6.5.3</a> has been tested with MoPub Android SDK 5.11.1.</li>
+<li>The MoPub Dashboard does not yet include Vungle placements. You can check placement level performance using our&nbsp;<a href="211365828.html" target="_blank" rel="noopener">Reporting API for Publishers</a>.</li>
+<li>MoPub must be set up in your app before starting this tutorial. For a step-by-step guide, refer to<span>&nbsp;</span><a href="https://developers.mopub.com/publishers/android/get-started/" target="_blank" rel="noopener">MoPub’s Getting Started Guide for Android</a>.</li>
+<li>You will need the Vungle’s App ID and all the placement reference IDs you want to use in your app. You can find these IDs in the Vungle Dashboard (refer to<span>&nbsp;</span><a href="115000493152.html" target="_blank" rel="noopener">Setting Up and Reporting on Placements</a>).<br />
+<ul>
+<li>Interstitial:&nbsp;<a href="https://developers.mopub.com/publishers/android/interstitial/" target="_blank" rel="noopener">https://developers.mopub.com/publishers/android/interstitial/</a></li>
+<li>Rewarded Video:&nbsp;<a href="https://developers.mopub.com/publishers/android/rewarded-video/" target="_blank" rel="noopener">https://developers.mopub.com/publishers/android/rewarded-video/</a></li>
+<li>Banner:&nbsp;<a href="https://developers.mopub.com/publishers/android/banner/" target="_blank" rel="noopener">https://developers.mopub.com/publishers/android/banner/</a></li>
+</ul>
+</li>
+<li>Vungle SDK requires Android OS 4.0 (Ice Cream Sandwich - API version 14) and higher</li>
+</ul>
+<h3 id="integrate-the-vungle-ios-sdk-and-the-mopub-adapter-framework-0-2">Integrate the Vungle Android SDK and the MoPub Adapter Framework</h3>
+<ul>
+<li>Download the <a href="https://vungle2-cdn-prod.s3.amazonaws.com/sdks/android/vungle-android-sdk-6.5.3.zip" target="_blank" rel="noopener">Vungle Android SDK 6.5.3</a> and follow our <a href="360002922871.html" target="_self">integration instructions</a>.&nbsp;</li>
+<li><span>Download the</span> <a href="https://vungle2-cdn-prod.s3.amazonaws.com/sdks/ios/mopub/VungleMoPubAdapter-6.5.3.0.zip" target="_blank" rel="noopener">Integrate MoPub Android Adapter 6.5.3.0</a> and follow <a href="https://developers.mopub.com/publishers/mediation/integrate/" target="_blank" rel="noopener">MoPub's instructions</a> to integrate it. Refer to the <a href="https://github.com/Vungle/mopub-android-mediation/tree/6.5.x-release" target="_blank" rel="noopener">Vungle MoPub Android Adapter Repository</a>.</li>
+</ul>
+<h2><a target="_blank" name="Step1SetUpVungleAsNetwork"></a>Step 1. Set Up Vungle as an SDK Network or as a Custom Native Network</h2>
+<h3><a target="_blank" name="SetUpVungleAsSDKNetwork"></a>Set Up Vungle as an SDK Network</h3>
+<ol>
+<li>Log in to the MoPub dashboard and select<span>&nbsp;</span><strong>Networks</strong><span>&nbsp;</span>from the main navigation panel.</li>
+<li>Click<span>&nbsp;</span><strong>New Network</strong>.<img src="../../article_attachments/360044087472/1-2-new-network.png" alt="1-2-new-network.png" /><br />and select<span>&nbsp;</span><strong>Vungle</strong>.<br /><img src="../../article_attachments/360044154671/1-2-vungle.png" alt="1-2-vungle.png" /></li>
+<li>In the<span>&nbsp;</span><strong>Network Settings</strong><span>&nbsp;</span>section, if you<span>&nbsp;</span><strong>Enable reporting access</strong>, enter your<span>&nbsp;</span><strong>Reporting API Key</strong><span>&nbsp;</span>from the Vungle Dashboard.<br /><img src="../../article_attachments/360044087692/1-3-network.png" alt="1-3-network.png" /></li>
+<li>In<span>&nbsp;</span><strong>App &amp; Ad Unit Setup</strong>, enter the Vungle Application ID and Placement Reference IDs.<br /><img src="../../article_attachments/360044087632/1-4-app.png" alt="1-4-app.png" /></li>
+</ol>
+<h3><a target="_blank" name="SetUpVungleAsCustomNativeNetwork"></a>Set Up Vungle as a Custom Native Network</h3>
+<p>To ensure that the MoPub servers recognize the integrated Vungle Adapters, set up Vungle as a Custom Native Network in the MoPub dashboard.</p>
+<ol>
+<li>Log into the MoPub dashboard, and select<span>&nbsp;</span><strong>Networks​</strong><span>&nbsp;</span>from the main navigation bar.</li>
+<li>Click<span>&nbsp;</span><strong>New network</strong><span>&nbsp;</span>button on the top right.<br /><br /><img src="../../article_attachments/360004528951/Screen%20Shot%202018-05-08%20at%202.53.52%20PM.png" alt="Screen_Shot_2018-05-08_at_2.53.52_PM.png" width="616" height="337" /><br /><br />and select<span>&nbsp;</span><strong>Vungle</strong>​ from the list.</li>
+<li>After creating Vungle as a Network, click on the name from the list of Networks. In the<span>&nbsp;</span><strong>Set Up Your Inventory</strong><span>&nbsp;</span>section, for each ad unit that will use the Vungle SDK to present video ads, ensure that the MoPub SDK can find the network adapter used to interact with the Vungle SDK:<br /><br /><img src="../../article_attachments/360004529131/Screen%20Shot%202018-05-08%20at%203.03.03%20PM.png" alt="Screen_Shot_2018-05-08_at_3.03.03_PM.png" width="751" height="580" /><br /><br />
+<ul>
+<li>If you are using<span>&nbsp;</span><strong>Rewarded Video</strong>​ for an ad unit, add<span>&nbsp;</span><code>com.mopub.mobileads.VungleRewardedVideo</code><span>&nbsp;</span>under the<span>&nbsp;</span><strong>Custom Event Class</strong>​ section.</li>
+<li>If you are using<span>&nbsp;</span><strong>Fullscreen (320 x 480)​</strong><span>&nbsp;</span>for an ad unit, add<span>&nbsp;</span><code>com.mopub.mobileads.VungleInterstitial</code><span>&nbsp;</span>under the<span>&nbsp;</span><strong>Custom Event Class​</strong><span>&nbsp;</span>section.</li>
+<li>If you are using<span>&nbsp;</span><strong>Banner (320 x 50)</strong>,<span>&nbsp;</span><strong>Leaderboard (728 x 90)</strong><span>&nbsp;</span>or&nbsp;<strong>Medium (300 x 250)​</strong><span>&nbsp;</span>for an ad unit, add<span>&nbsp;</span><code>com.mopub.mobileads.VungleBanner</code><span>&nbsp;</span>under the<span>&nbsp;</span><strong>Custom Event Class</strong><span>&nbsp;</span>section.</li>
+<li>Add your<span>&nbsp;</span><strong>Vungle App ID​</strong>,<span>&nbsp;</span><strong>placement reference ID</strong>​ of the placement to be called from the ad unit, and<span>&nbsp;</span><strong>all placement&nbsp;reference IDs​</strong>&nbsp;that will be used in the app in JSON format under the<span>&nbsp;</span><strong>Custom Event Class Data​</strong>.</li>
+<li>Set the placement Reference ID you want to link to the MoPub Ad Unit for<span>&nbsp;</span><strong>pid​</strong>.<br /><strong>Note:</strong><span>&nbsp;</span>A default placement is created for each app automatically. You must provide its placement reference ID in this initialization step whether or not you plan to take advantage of the placements' functionality. If you create multiple placements, provide all the reference IDs.</li>
+<li>Make sure to link a placement that is set to<span>&nbsp;</span><strong>rewarded type</strong><span>&nbsp;</span>at Vungle dashboard to the MoPub Ad Unit that is set to Rewarded Video​; and link a placement that is set to<span>&nbsp;</span><strong>interstitial type</strong><span>&nbsp;</span>at Vungle dashboard to the MoPub Ad Unit that is set to Fullscreen (320 x 480).
+<pre><code>{
+"appId":"5935efecc802d63d5100000f",
+"pid":"DEFAULT05223"
+}</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Note:</strong>​ The Vungle SDK will cache an ad automatically for the placement you selected to be<span>&nbsp;</span><strong>Auto Cached</strong>​ in the Vungle Dashboard. We highly recommend selecting the MoPub Ad Unit shown first or the Ad Unit shown most frequently as the<span>&nbsp;</span><strong>Auto Cached</strong>​ placement.</p>
+<h2><a target="_blank" name="Step2AddVungleAs3rdParty"></a>Step 2. Add Vungle as a Third-Party Ad Network</h2>
+<p>To add the Vungle Android SDK into your app using MoPub mediation:</p>
+<ol>
+<li>Add all the Vungle-related adapter files to the<span>&nbsp;</span><code>/src/main/java/com/mopub/mobileads/</code><span>&nbsp;</span>directory in your app’s project. This step is necessary because the MoPub SDK references these files as Custom Event Class properties in the directory.<br /><br />
+<ul>
+<li><code>VungleAdapterConfiguration.java</code></li>
+<li><code>VungleBanner.java</code><code></code></li>
+<li><code>VungleInterstitial.java</code></li>
+<li><code>VungleNetworkSettings.java</code><code></code></li>
+<li><code>VungleRewardedVideo.java</code></li>
+<li><code>VungleRouter.java</code></li>
+<li><code>VungleRouterListener.java</code></li>
+</ul>
+</li>
+<li>Follow the instructions in the “<a href="360002922871.html#IncludeVungleSDKInYourProject" target="_blank" rel="noopener">Step 1. Include the Vungle SDK in Your Project</a>“ section of&nbsp;“<a href="360002922871.html" target="_blank" rel="noopener">Get Started with Vungle - Android SDK</a>“ to add the necessary frameworks.</li>
+<li>If you need to set Multidex , Proguard and Google Play Services, follow the instructions in the “<a href="360002922871.html#AdvancedSettings" target="_blank" rel="noopener">Advanced Settings</a>“ section of&nbsp;“<a href="360002922871.html" target="_blank" rel="noopener">Get Started with Vungle - Android SDK</a>“ to&nbsp;update AndroidManifest.xml in your project.</li>
+<li>Call the<span>&nbsp;</span><strong>MoPubInterstitial’s<span>&nbsp;</span></strong><code>show</code><span>&nbsp;</span>method (or, for rewarded ads, call the<span>&nbsp;</span><strong>MoPubRewardedVideos's<span>&nbsp;</span></strong><code>showRewardedVideo</code><span>&nbsp;</span>method) when you want to present a Vungle video ad. (No need to call the Vungle Android SDK methods directly. The MoPub SDK will do it.)</li>
+</ol>
+<h2><a target="_blank" name="BannerAdSize"></a>Banner Ad Size</h2>
+<p>Vungle supports following banner ad sizes: Banner, MREC, and Leaderboard. Use an ad container that is no smaller than the specified size, and use the corresponding<span>&nbsp;</span><code>MoPubView.MoPubAdSize</code><span>&nbsp;</span>height value when loading banner ads. <span>Note that the MREC (300dp x 250dp) format must have its own, <em>separate</em> placement reference ID. An MREC format must be configured as 'MREC' in the Vungle dashboard, as opposed to the way that multiple banner sizes can all be configured under the same placement ID as 'banner'.</span></p>
+<table width="699">
+<tbody>
+<tr>
+<td><strong>MoPubAdSize</strong></td>
+<td><strong>Size</strong></td>
+</tr>
+<tr>
+<td>HEIGHT_50</td>
+<td>320dp x 50dp</td>
+</tr>
+<tr>
+<td>HEIGHT_90</td>
+<td>728dp x 90dp</td>
+</tr>
+<tr>
+<td>HEIGHT_250</td>
+<td>300dp x 250dp</td>
+</tr>
+<tr>
+<td>HEIGHT_280</td>
+<td>300dp x 250dp</td>
+</tr>
+<tr>
+<td>MATCH_VIEW</td>
+<td>Closest size that will fit in the view container</td>
+</tr>
+</tbody>
+</table>
+<p>Sample code:&nbsp;</p>
+<pre><span>@Override<br /></span><span>public </span>MoPubView.MoPubAdSize <span>getAdSize</span>() {<br /><span>return </span>MoPubView.MoPubAdSize.<span>HEIGHT_250</span><span>;<br /></span>}</pre>
+<h2><a target="_blank" name="OptionalAdvancedSettings"></a>Optional Advanced Settings</h2>
+<h3><a target="_blank" name="EarlyInitialization"></a>Early SDK Initialization (Recommended)</h3>
+<p>MoPub Android SDK 5.5.0 and higher allows you to early initialize ad network SDK when MoPub SDK completes initialization. We strongly recommend you to use this feature as it will allow additional time for Vungle SDK to pre-cache an ad and have it ready to play at display opportunity.</p>
+<p>Sample code:</p>
+<pre><code>SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+Map&lt;String, String&gt; vungleSettings = new HashMap&lt;&gt;();
+
+vungleSettings.put("appId", "YOUR_VUNGLE_APP_ID");
+
+SdkConfiguration configBuilder = new SdkConfiguration.Builder("MOPUB_AD_UNIT_WITH_VUNGLE_PLACEMENT")
+        .withMediatedNetworkConfiguration(VungleAdapterConfiguration.class.getName(), vungleSettings)
+        .build();
+
+MoPub.initializeSdk(this, configBuilder, initSdkListener());
+</code></pre>
+<h3><a target="_blank" name="MemorySettings"></a>Memory Settings</h3>
+<p><span>Starting with Vungle SDK v6.4.0, you can prevent the SDK from downloading, requesting ads, or even initializing if the storage of your Android device falls below a predefined threshold.</span></p>
+<p><span>These are the option keys available:</span></p>
+<table>
+<tbody>
+<tr>
+<td>
+<p><strong>Keys</strong></p>
+</td>
+<td>
+<p><strong>Type/Value</strong></p>
+</td>
+<td>
+<p><strong>Description</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>pre_key_min_space_for_init</p>
+</td>
+<td>
+<p><span>String, value in bytes (default 51 MB)</span></p>
+</td>
+<td>
+<p><span>Sets the required minimum available free storage space to be able to initialize the SDK</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>pre_key_min_space_for_ad</p>
+</td>
+<td>
+<p><span>String, value in bytes (default 50 MB)</span></p>
+</td>
+<td>
+<p><span>Sets the required minimum available free storage space to be able to request an ad</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p><span>Sample code:</span></p>
+<pre><code>Map&lt;String, String&gt; vungleSettings = new HashMap&lt;&gt;();
+
+vungleSettings.put("appId", "YOUR_VUNGLE_APP_ID");
+
+vungleSettings.put("VNG_MIN_SPACE_INIT",
+        mPreferences.getString("pref_key_min_space_for_init", String.valueOf(20 * 1024 * 1024)));
+vungleSettings.put("VNG_MIN_SPACE_LOAD_AD",
+        mPreferences.getString("pref_key_min_space_for_ad", String.valueOf(20 * 1024 * 1024)));
+</code></pre>
+<h3><a target="_blank" name="RestrictUsageOfDeviceID"></a>Restrict Use of Device ID</h3>
+<p><span>Starting with Vungle SDK v6.4.10 and higher, you can restrict the SDK from passing the Android ID from the device to the SDK.</span></p>
+<pre><code>Map&lt;String, String&gt; vungleSettings = new HashMap&lt;&gt;();
+
+vungleSettings.put("appId", "YOUR_VUNGLE_APP_ID");
+
+vungleSettings.put("VNG_DEVICE_ID_OPT_OUT",
+        String.valueOf(mPreferences.getBoolean("pref_key_key_android_id_opted_out", true)));
+</code></pre>
+<h3><a target="_blank" name="InterstitialAds"></a>Interstitial Ads</h3>
+<p>You can pass custom ad configuration to customize your ad experience when<span>&nbsp;</span><code>load</code><span>&nbsp;</span>is issued for<span>&nbsp;</span><code>MoPubInterstitial</code>. Note that<span>&nbsp;</span><code>VungleMediationSettings</code><span>&nbsp;</span>has been deprecated as of Vungle SDK v6.5.1.0, and replaced with<span>&nbsp;</span><code>VungleMediationConfiguration</code>.</p>
+<table>
+<tbody>
+<tr>
+<td>
+<p><strong>Attribute</strong></p>
+</td>
+<td>
+<p><strong>Default Value</strong></p>
+</td>
+<td>
+<p><strong>Description</strong></p>
+</td>
+</tr>
+<tr>
+<td><code>withStartMuted</code></td>
+<td>
+<p>true</p>
+</td>
+<td>
+<p>Play ad with sound muted or unmuted. Set to 'true' to play muted. Set to 'false' to play with sound.</p>
+</td>
+</tr>
+<tr>
+<td><code>withOrdinalViewCount</code></td>
+<td>
+<p>null</p>
+</td>
+<td>
+<p>If you receive ordinal data reports from Vungle, use this field to pass the mediation ordinal. This is an integer indicating the order in which this ad was shown in the game session (for example, if two ads were already shown in this session, and this ad from Vungle was then shown third, pass in '3'). Read more about ordinal data<span>&nbsp;</span><a href="115003465152.html" target="_blank" rel="noopener">here</a>.</p>
+</td>
+</tr>
+<tr>
+<td><code>withAutoRotate</code></td>
+<td><code>AdConfig.AUTO_ROTATE</code></td>
+<td>
+<p>Available Orientation:</p>
+<ul>
+<li><code>AdConfig.AUTO_ROTATE</code></li>
+<li><code>AdConfig.PORTRAIT</code></li>
+<li><code>AdConfig.LANDSCAPE</code></li>
+<li><code>AdConfig.MATCH_VIDEO</code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code>VungleMediationConfiguration vungleMediationConfiguration = new VungleMediationConfiguration.Builder()
+    .withAutoRotate(AdConfig.LANDSCAPE) 
+    .withStartMuted(true) 
+    .withOrdinalViewCount(10)
+    .build();
+mMoPubInterstitial.setLocalExtras(vungleMediationConfiguration.getExtrasMap());
+mMoPubInterstitial.load();
+</code></pre>
+<h3><a target="_blank" name="RewardedAds"></a>Rewarded Ads</h3>
+<p>You can pass custom ad configuration to customize your ad experience when<span>&nbsp;</span><code>load</code><span>&nbsp;</span>is issued for<span>&nbsp;</span><code>MoPubRewardedVideos</code>. Please note that<span>&nbsp;</span><code>VungleMediationSettings</code><span>&nbsp;</span>has been deprecated as of v6.5.1.0 and replaced with<span>&nbsp;</span><code>VungleMediationConfiguration</code>.</p>
+<table>
+<tbody>
+<tr>
+<td>
+<p><strong>Attribute</strong></p>
+</td>
+<td>
+<p><strong>Default Value</strong></p>
+</td>
+<td>
+<p><strong>Description</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>withUserId</code></p>
+</td>
+<td>
+<p>null</p>
+</td>
+<td>
+<p>Sets the unique user ID to pass to your application to verify that this user should be rewarded for watching an incentivized ad.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>withCancelDialogBody</code></p>
+</td>
+<td>
+<p>"Closing this video early will prevent you from earning your reward. Are you sure?"</p>
+</td>
+<td>
+<p>Sets the body of the confirmation dialog when skipping an incentivized ad.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>withCancelDialogCloseButton</code></p>
+</td>
+<td>
+<p>“Close Video”</p>
+</td>
+<td>
+<p>Sets the 'cancel button' text of the confirmation dialog when skipping an incentivized ad.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>withCancelDialogKeepWatchingButton</code></p>
+</td>
+<td>
+<p>“Keep Watching”</p>
+</td>
+<td>
+<p>Sets the 'keep watching button' text of the confirmation dialog when skipping an incentivized ad.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>withCancelDialogTitle</code></p>
+</td>
+<td>
+<p>“Close Video?”</p>
+</td>
+<td>
+<p>Sets the title of the confirmation dialog when skipping an incentivized ad.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>withStartMuted</code></p>
+</td>
+<td>
+<p>false</p>
+</td>
+<td>
+<p>Sets the starting sound state for the ad. If 'false', the audio respects device volume and sound settings. If 'true', video begins muted but user may modify.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>withOrdinalViewCount</code></p>
+</td>
+<td>
+<p>null</p>
+</td>
+<td>
+<p>If you receive ordinal data reports from Vungle, use this field to pass the mediation ordinal. This is an integer indicating the order in which this ad was shown in the game session (for example, if two ads were already shown in this session, and this ad from Vungle was then shown third, pass in '3'). Read more about ordinal data<span>&nbsp;</span><a href="115003465152.html" target="_blank" rel="noopener">here</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>withAutoRotate</code></p>
+</td>
+<td>
+<p><code>AdConfig.AUTO_ROTATE</code></p>
+</td>
+<td>
+<p>Available Orientation:</p>
+<ul>
+<li><code>AdConfig.AUTO_ROTATE</code></li>
+<li><code>AdConfig.PORTRAIT</code></li>
+<li><code>AdConfig.LANDSCAPE</code></li>
+<li><code>AdConfig.MATCH_VIDEO</code><code></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code>VungleMediationConfiguration vungleMediationConfiguration = new VungleMediationConfiguration.Builder()
+        .withUserId("VUNGLE_USER_ID")
+        .withCancelDialogBody("CUSTOM_BODY")
+        .withCancelDialogCloseButton("CUSTOM_CLOSE")
+        .withCancelDialogKeepWatchingButton("CUSTOM_KEEPWATCHING")
+        .withCancelDialogTitle("CUSTOM_TITLE")
+        .withStartMuted(true)
+        .withOrdinalViewCount(10)
+        .withAutoRotate(AdConfig.AUTO_ROTATE)
+        .build();
+
+MoPubRewardedVideos.loadRewardedVideo(mAdUnitId, vungleMediationConfiguration);
+</code></pre>
+<h3><a target="_blank" name="AdditionalNote"></a>Note on Android SDK Hardware Acceleration</h3>
+<p><a href="https://support.vungle.com/knowledge/revisions/QnJhbmQ6NjA3MjA=/QXJ0aWNsZTozNjAwMDM0OTExOTI6Nzk=/Hardware Acceleration" target="_blank" rel="noopener">Hardware acceleration</a><span>&nbsp;</span>is enabled by default if your target API level is set to 14 or above. This option must be enabled for the SDK to properly show Dynamic Template ads. Please make sure your project does not have this option set to false.</p>
+<pre><code>&lt; application android:hardwareAccelerated="true" ... &gt;
+</code></pre>
+<p>&nbsp;</p>
+              </div>     
+
+            </div>
+
+            <div class="article__attachments">
+              
+            </div>
+
+          </article>
+        </div>
+
+        <div class="article-loader fa fa-spinner fa-spin fa-3x fa-fw" id="article-loader"></div>
+
+        
+          <a class="article-banner" href="https://vungle.com/signup" target="_blank">
+            <span class="article-banner__title">
+              <span>Powered by Creativity</span>
+              <span>Driven by Performance</span>
+            </span>
+            <span class="article-banner__cta">Sign Up Here</span>
+          </a>
+        
+
+        <div data-prevnext='{"showArticleTitle": true, "classNameBtn": ""}'></div>
+
+        <section class="submit-ticket submit-ticket--article">
+          <div class="submit-ticket-col submit-ticket-col--left">
+            <h2 class="submit-ticket-title">Questions?</h2>
+            <p>Need further assistance, feel free to reach out to us, we’re here to help!</p>
+          </div>
+          <div class="submit-ticket-col submit-ticket-col--right">
+            <a class="btn btn--default" href="../requests/new.html">Submit a request</a>
+          </div>
+        </section>
+
+        <footer class="article-footer">
+          
+          <div class="article-vote">
+            <span class="article-vote-question">Was this article helpful?</span>
+            <div class="article-vote-controls">
+              <a class="btn btn--default fa fa-thumbs-up article-vote-controls__item article-vote-controls__item--up" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="Yes" href="../signine549.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fen-us%2Farticles%2F360045170672-Enable-MoPub-Mediation-on-Android-v6-5-3-and-Lower"></a>
+              <a class="btn btn--default fa fa-thumbs-down article-vote-controls__item article-vote-controls__item--down" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="No" href="../signine549.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fen-us%2Farticles%2F360045170672-Enable-MoPub-Mediation-on-Android-v6-5-3-and-Lower"></a>
+            </div>
+          </div>
+          
+        </footer>
+
+      </div>
+    </div>
+    <div class="article-column article-column--right">
+      <div data-toc='{"headers": "h2,h3,h4", "title": "Contents", "offsetTop": 80, "mobileBreakpoint": 1024}'></div>
+    </div>
+  </div>
+
+</div>
+  </main>
+
+        <footer class="footer" id="footer">
+        <div class="footer-inner">
+          <div class="copyright">
+            <div class="copyright__content">
+              <span class="copyright__copy">&copy; 2020 Vungle. All rights reserved.</span>
+            </div>
+          </div>
+          <nav class="footer-menu">
+            <ul class="list-unstyled">
+              <li><a href="https://vungle.com/about-us/">About</a></li>
+              <li><a href="https://vungle.com/login/">Products</a></li>
+              <li><a href="https://vungle.com/contact-us/">Contact us</a></li>
+            </ul>
+          </nav>
+          <ul class="footer-socials list-unstyled">
+            
+              <li><a href="https://www.facebook.com/vungle/" target="_blank" class="fab fa-facebook"></a></li>
+            
+            
+              <li><a href="https://twitter.com/vungle" target="_blank" class="fab fa-twitter"></a></li>
+            
+            
+            
+              <li><a href="https://www.linkedin.com/company/vungle" target="_blank" class="fab fa-linkedin"></a></li>
+            
+            
+            
+            
+              <li><a href="https://www.instagram.com/vungle/" target="_blank" class="fab fa-instagram"></a></li>
+            
+          </ul>
+        </div>
+      </footer>
+          
+    </div>
+    <!-- /.main__container -->
+
+  </div>  
+  <!-- /.main -->
+  
+</div>
+<!-- /.layout -->
+
+
+
+  <!-- / -->
+
+  
+  <script src="../../../../static.zdassets.com/hc/assets/en-us.9c17d79fddaade65344a.js"></script>
+  <script src="../../../../vungle.zendesk.com/auth/v2/host.js" data-brand-id="60720" data-return-to="https://support.vungle.com/hc/en-us/articles/360045170672-Enable-MoPub-Mediation-on-Android-v6-5-3-and-Lower" data-theme="hc" data-locale="en-us" data-auth-origin="60720,true,true"></script>
+
+  <script type="text/javascript">
+  /*
+
+    Greetings sourcecode lurker!
+
+    This is for internal Zendesk and legacy usage,
+    we don't support or guarantee any of these values
+    so please don't build stuff on top of them.
+
+  */
+
+  HelpCenter = {};
+  HelpCenter.account = {"subdomain":"vungle","environment":"production","name":"Vungle"};
+  HelpCenter.user = {"identifier":"da39a3ee5e6b4b0d3255bfef95601890afd80709","email":null,"name":null,"role":"anonymous","avatar_url":"https://assets.zendesk.com/hc/assets/default_avatar.png","is_admin":false,"organizations":[],"groups":[]};
+  HelpCenter.internal = {"asset_url":"//static.zdassets.com/hc/assets/","web_widget_asset_composer_url":"https://static.zdassets.com/ekr/snippet.js","current_session":{"locale":"en-us","csrf_token":null,"shared_csrf_token":null},"settings":{},"usage_tracking":{"event":"article_viewed","data":"BAh7CDoLbG9jYWxlSSIKZW4tdXMGOgZFVDoPYXJ0aWNsZV9pZGwrCPBPXdRTADoKX21ldGF7CzoPYWNjb3VudF9pZGkDPSYIOhNoZWxwX2NlbnRlcl9pZGkENsfsCzoNYnJhbmRfaWRpAjDtOgx1c2VyX2lkMDoTdXNlcl9yb2xlX25hbWVJIg5BTk9OWU1PVVMGOwZUOwBJIgplbi11cwY7BlQ=--294d2cb7f6a3f1cc8696c220a84dfddeb1127faf","url":"https://support.vungle.com/hc/activity"},"current_record_id":"360045170672","current_record_url":"/hc/en-us/articles/360045170672-Enable-MoPub-Mediation-on-Android-v6-5-3-and-Lower","current_record_title":"Enable MoPub Mediation on Android v6.5.3 and Lower","search_results_count":null,"current_text_direction":"ltr","current_brand":{"id":60720,"account_id":534077,"name":"Vungle","active":true,"deleted_at":null,"created_at":"2014-05-29T20:19:19Z","updated_at":"2021-05-13T16:25:53Z","route_id":429018,"signature_template":"{{agent.signature}}"},"current_brand_url":"https://vungle.zendesk.com","current_host_mapping":"support.vungle.com","current_path":"/hc/en-us/articles/360045170672-Enable-MoPub-Mediation-on-Android-v6-5-3-and-Lower","authentication_domain":"https://vungle.zendesk.com","show_autocomplete_breadcrumbs":true,"rollbar_config":{"enabled":true,"endpoint":"https://rollbar-us.zendesk.com/api/1/item/","accessToken":"731a5a953e9a4b7ab6cac9623f50c732","captureUncaught":true,"captureUnhandledRejections":true,"payload":{"environment":"production","client":{"javascript":{"source_map_enabled":true,"code_version":"8e508d702ea3bb44fb7e90308d7e394bc580895e","guess_uncaught_frames":true}}}},"user_info_changing_enabled":false,"has_user_profiles_enabled":false,"has_end_user_attachments":true,"user_aliases_enabled":false,"has_anonymous_kb_voting":false,"has_multi_language_help_center":true,"mobile_device":false,"mobile_site_enabled":false,"show_at_mentions":false,"embeddables_config":{"embeddables_web_widget":true,"embeddables_connect_ipms":false},"base_domain":"zendesk.com","answer_bot_subdomain":"static","manage_content_url":"https://support.vungle.com/hc/en-us","arrange_content_url":"https://support.vungle.com/hc/admin/arrange_contents?locale=en-us","general_settings_url":"https://support.vungle.com/hc/admin/general_settings?locale=en-us","user_segments_url":"https://vungle.zendesk.com/knowledge/user_segments?brand_id=60720","has_gather":true,"has_community_enabled":false,"has_community_badges":false,"has_user_segments":true,"has_answer_bot_web_form_enabled":false,"has_answer_bot_web_form_modal_v2":false,"has_edit_user_profile_v2":false,"billing_url":"/access/return_to?return_to=https://vungle.zendesk.com/admin/billing/subscription","is_account_owner":false,"theming_cookie_key":"hc-da39a3ee5e6b4b0d3255bfef95601890afd807091-preview","is_preview":false,"has_guide_user_segments_search":true,"has_alternate_templates":false,"arrange_articles_url":"https://vungle.zendesk.com/knowledge/arrange?brand_id=60720","article_verification_url":"https://vungle.zendesk.com/knowledge/verification?brand_id=60720","has_article_verification":false,"guide_language_settings_url":"https://support.vungle.com/hc/admin/language_settings?locale=en-us","docs_importer_url":"https://vungle.zendesk.com/knowledge/import_articles?brand_id=60720","community_badges_url":"https://vungle.zendesk.com/knowledge/community_badges?brand_id=60720","community_settings_url":"https://vungle.zendesk.com/knowledge/community_settings?brand_id=60720","gather_plan_state":"subscribed","search_settings_url":"https://vungle.zendesk.com/knowledge/search_settings?brand_id=60720","has_multibrand_search_in_plan":false,"theming_api_version":1,"has_pci_credit_card_custom_field":false,"current_brand_id":60720,"help_center_restricted":false,"current_brand_active":true,"is_assuming_someone_else":false,"flash_messages":[],"user_photo_editing_enabled":true,"has_end_user_apps":false,"has_docs_importer":true,"has_sunco_widget":false,"gather_user_image_upload_via_aus":false,"user_preferred_locale":"en-us"};
+</script>
+
+  <script src="../../../../static.zdassets.com/hc/assets/moment-f6f8513da6ab17eadada59a1a4edb536.js"></script>
+  <script src="../../../../static.zdassets.com/hc/assets/hc_enduser-9fa4fabcc25ad7ce2141d33e2370693a.js"></script>
+  
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6932fd32ddf32121',m:'5AMhvSUXmuV5HcQnYV7DHZdrZCGR1z4t4Ir_4F19fHA-1632391888-0-AQfh79xwSD57rc5i0d/AfXVsukpfcaLPxtygnnTK3vnw3SuBwj82KG+X1U0DG1DLtzMDodL2YHYh/K0NS99DHL7DLyb+x4tea/xY63TDhwoBeqISbRwLrUOv97zwU0NZFuSh3/JqDOVvZXxAy4XD8m83ERunMNF3NlVRHdyYl0A3XqR5Ts6bZgtDbK8O/5+6CIRiIQ3FxH2+/jKX8Id3Hg+3SNqgFYcbgiB/YicaNPe9',s:[0x4c1462ab5e,0x83700bbb6e],}})();</script></body>
+
+<!-- Mirrored from support.vungle.com/hc/en-us/articles/360045170672-Enable-MoPub-Mediation-on-Android-v6-5-3-and-Lower by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 11:03:36 GMT -->
+</html>

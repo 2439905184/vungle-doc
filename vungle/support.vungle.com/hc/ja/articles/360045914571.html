@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+
+<!-- Mirrored from support.vungle.com/hc/ja/articles/360045914571 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 11:21:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <!-- v20226 -->
+
+  <title>Vungle OpenRTB 2.5 エンド カードの統合 &ndash; Vungle JP</title>
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="" />
+
+  <meta name="description" content="これらの手順を使用して、Vungle でエンド カードを実行します。この記事では、以下の項目について説明します。  概要 エンド カード を実装する AdParameters StaticResource HTMLResource   概要   エンド カードのサイズ:..." /><meta property="og:image" content="https://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Vungle JP" />
+<meta property="og:title" content="Vungle OpenRTB 2.5 エンド カードの統合" />
+<meta property="og:description" content="これらの手順を使用して、Vungle でエンド カードを実行します。この記事では、以下の項目について説明します。
+
+概要
+エンド カード を実装する
+AdParameters
+StaticResource
+HTMLResource
+
+
+概要
+
+
+エンド カードのサイズ: Vungle は、ビッドレスポンスでデバイスの高さと幅を提供します。エンド カードのサイズ制限はありませんが、RTB の購..." />
+<meta property="og:url" content="360045914571.html" />
+<link rel="canonical" href="360045914571-Vungle-OpenRTB-2-5-%e3%82%a8%e3%83%b3%e3%83%89-%e3%82%ab%e3%83%bc%e3%83%89%e3%81%ae%e7%b5%b1%e5%90%88.html" />
+<link rel="alternate" hreflang="de" href="../../de/articles/360045914571-Vungle-OpenRTB-2-5-EndCard-Integration.html" />
+<link rel="alternate" hreflang="en" href="../../en-us/articles/360045914571-Vungle-OpenRTB-2-5-EndCard-Integration.html" />
+<link rel="alternate" hreflang="es" href="../../es-mx/articles/360045914571-Integraci%c3%b3n-de-la-tarjeta-de-cierre-Vungle-OpenRTB-2-5.html" />
+<link rel="alternate" hreflang="fr" href="../../fr-fr/articles/360045914571-Vungle-OpenRTB-2-5-EndCard-Integration.html" />
+<link rel="alternate" hreflang="ja" href="360045914571-Vungle-OpenRTB-2-5-%e3%82%a8%e3%83%b3%e3%83%89-%e3%82%ab%e3%83%bc%e3%83%89%e3%81%ae%e7%b5%b1%e5%90%88.html" />
+<link rel="alternate" hreflang="ko" href="../../ko/articles/360045914571-Vungle-OpenRTB-2-5-%ec%97%94%eb%93%9c%ec%b9%b4%eb%93%9c-%ed%86%b5%ed%95%a9.html" />
+<link rel="alternate" hreflang="pt" href="../../pt-br/articles/360045914571-Integra%c3%a7%c3%a3o-do-Vungle-OpenRTB-2-5-EndCard.html" />
+<link rel="alternate" hreflang="ru" href="../../ru/articles/360045914571-%d0%98%d0%bd%d1%82%d0%b5%d0%b3%d1%80%d0%b0%d1%86%d0%b8%d1%8f-%d1%84%d0%b8%d0%bd%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d0%b9-%d0%ba%d0%b0%d1%80%d1%82%d1%8b-Vungle-OpenRTB-2-5.html" />
+<link rel="alternate" hreflang="zh" href="../../zh-cn/articles/360045914571-Vungle-OpenRTB-2-5-EndCard-%e9%9b%86%e6%88%90.html" />
+
+  <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/application-79172500fb4dbec2484043d570946543.css" id="stylesheet" />
+    <!-- Entypo pictograms by Daniel Bruce — www.entypo.com -->
+    <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/theming_v1_support-cf937686d5b6669242017892da7bad78.css" />
+  <link rel="stylesheet" type="text/css" href="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/stylee82d.css?digest=360570052252">
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://theme.zdassets.com/theme_assets/534077/62c5e8616cdae030ecea7cec15cf47a2b729729b.ico" />
+
+    <script src="../../../../static.zdassets.com/hc/assets/jquery-d5395f0b7ac5027403fc17855c46dbfc.js"></script>
+    
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+  analytics.load("bRqfh635lMl7qBpocue716BjaalyFtJD");
+  analytics.page();
+  }}();
+  analytics.ready(function(){
+    Appcues.anonymous();
+});
+</script>
+
+
+
+
+
+
+
+
+
+  <style type="text/css">
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/51587ff68e0ab2bf990a17d993ec1fa7a5451614.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/8677458bb131e09b83d5bf2ec1ab6d015c18fd8b.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1e02ff61edce3f256e3f8de8e6bfb11bb085905f.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/b421ade1cc04519f69e9b4ec0fee3d632f993540.woff") format("woff");
+      font-weight: bold;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1056b20fe6b0f2a56568ecdea5119e1577667803.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/0ea45f63097574b5446148c9670509ae56dc2975.woff") format("woff");
+      font-weight: 300;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/78bd021a78ca5752e43275a982a96b00bd004a54.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/115efed0d77bd96754f56a00f399a05af518a5a4.woff") format("woff");
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/e5e3d4a71bfb2d624edf48819c3dd1597c4397ff.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9f8a21f09879869f644a45d21aea06dde01f2107.woff") format("woff");
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/f4f83c57775879216d798dce95c9a83e442da6ab.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9e93f03906c0fbfd6eba0ecdfe8d739a6b38852d.woff") format("woff");
+      font-weight: bold;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk Screen";
+      src: url("http://theme.zdassets.com/theme_assets/534077/2f8d0cbc16a32df1f8b6c36f45c2b4078181ca43.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/2ab0f28c68ed406c853fec87f698618cd7ac8bc2.woff") format("woff");
+      font-weight: 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk OIL";
+      src: url("http://theme.zdassets.com/theme_assets/534077/0ce9c7bb30841f31bac192ef415fd27771c17fc9.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/422274783804fb9c3e984558285801b01b2fe117.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+
+
+<link rel="stylesheet" href="../../../../use.fontawesome.com/releases/v5.10.1/css/all.css">
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/styles/atelier-lakeside-dark.min.css" />
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" />
+<script src="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+<script src="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/highlight.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<meta property="asseturl" content="//theme.zdassets.com/theme_assets/534077/6ff6e0c84e92580e7cc6e9c77a5cc1e724f36743.gif">
+
+
+<link rel="stylesheet" href="../../../../theme.zdassets.com/theme_assets/534077/02e3878a33d61900d75eb94d43eb4d26929d6dbf.css">
+
+<script src="../../../../theme.zdassets.com/theme_assets/534077/48ea021f3fedbc024c4443d2e946e0b9b742e384.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/469d1d10574fa6f68d243916e96f61e7ce459a5a.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/9893f4b0b18dc4018d50a3716fc581152c21535e.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/ae559ee60cd2d617e942d530c1ee7ac42a973761.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/c2b4df57e1dcfcf1b5d2298b16c409c8315a177b.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/cf5c34722566da1ba5ca5d877dc187d282ca6a3f.js"></script>
+
+<!-- ...Appcues... -->
+<script type="text/javascript">
+  if (userId) {
+    Appcues.identify(userId); 
+  } else {
+    Appcues.anonymous(); 
+  }
+</script>
+
+<script src="../../../../static.zdassets.com/conditional_fields_app_hc/latest/helpcenter.js"></script>
+<script>var cfaRules = [{ "fieldType": "tagger", "field": 114099498832, "value": "user_interface", "select": [114099504272], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "amazon", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "android", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios", "select": [114099505792, 114101637652], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "multi_platforms_other_combination", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "windows", "select": [114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099505792, "value": "other_ios_sdk", "select": [114099619791], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "adincube", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "admob", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "fyber_hezap", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "ironsource_supersonic", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "multiple_mediation", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "other_mediation", "select": [114099556512, 114099619811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "upsight", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "adobe_air", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "corona", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "marmalade", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "other_plugin", "select": [114099620151, 114099620451], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "unity", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099577491, "value": "other_android_sdk", "select": [114099555992], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099619751, "value": "other_windows_sdk", "select": [114099556012], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099621511, "value": "geo_other", "select": [114099622811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_dashboard", "select": [114099498652, 114099499132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_other", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_reportingapi", "select": [114099498652, 114099621211, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_useracquisition", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_notreceivingreward", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_other", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_troublesomead", "select": [114099498672, 114099504752, 114099621511, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_unsubscribeads", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_payment", "select": [114099571371, 114099500132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_accountstatus", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_addtransferusers", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_deleteaccount", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_pwrecovery", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_registration", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_callbacks", "select": [114099498652, 114099556032, 114099556532, 114099620751, 114099621511, 114099504752], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_cocoapods", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_dashboard", "select": [114099498652, 114099498832], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_gradle", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_multidex", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621731], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_noads", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_proguard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557592], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_testmode", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_other", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_reportingapi", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_button", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_crashing", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_endcard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_freezing", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_other", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_sound", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_video", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }];</script>
+
+<style type="text/css">
+
+/* Advertiser */
+.categories__icon--200198330 {
+  background-color: #ff5a41;
+}
+
+.categories__icon--200198330:before,
+#sidenav-category-200198330 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/9f2e8cfd41383f7f21c68fd99567eb1b1a7993ac.svg");
+}
+
+/* SDK */
+.categories__icon--200269670 {
+  background-color: #3c2869;
+}
+
+.categories__icon--200269670:before,
+#sidenav-category-200269670 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/ab38e1e12c6a99fe83f4ea9c02bf87e17510558d.svg");
+}
+
+/* Publisher */
+.categories__icon--360001994512 {
+  background-color: #6e7dff;
+}
+
+.categories__icon--360001994512:before,
+#sidenav-category-360001994512 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/8a0ee6cf2a1300b8adf5a19112e81db3c070a273.svg");
+}
+
+/* FAQs */
+.categories__icon--115000802567 {
+  background-color: #ffd700;
+}
+
+.categories__icon--115000802567:before,
+#sidenav-category-115000802567 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/840643095495a2f0380fbe420efb55b7a63277fe.svg");
+}
+
+/* Creative */
+.categories__icon--360001724259 {
+  background-color: #ffd2e1;
+}
+
+.categories__icon--360001724259:before,
+#sidenav-category-360001724259 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/2bb5eeecadf61018e2bda864d22706f146b5a208.svg");
+}
+
+</style>
+  <script type="text/javascript" src="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/scripte82d.js?digest=360570052252"></script>
+<script async src='../../../cdn-cgi/bm/cv/669835187/api.js'></script></head>
+<body class="">
+  
+  
+
+  <div class="js-alert-box"></div>
+
+<div class="layout" >
+
+  <aside class="sidebar" data-sidebar>
+  <div class="sidebar__header">
+    <div class="sidebar__container sidebar__container--fixed">
+      <div class="sidebar__logo">
+        <a title="ホーム" href="../../ja.html">
+          <img src="http://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" alt="ロゴ">
+        </a>
+      </div>
+      <ul class="sidebar__list">
+        <li class="sidebar__item">
+          <a class="sidebar__link sidebar__link--home" title="ホーム" href="../../ja.html">Home</a>
+        </li>
+      </ul>
+      <div class="sidebar__top-nav"></div>
+      <div class="sidebar__content-block" data-sidebar-content></div>
+    </div>
+  </div>
+
+  <div class="sidebar__container">
+    <div class="sidebar__bottom-nav">
+      <div class="sidebar__bottom-nav-item">
+        
+          <div class="dropdown language-selector" aria-haspopup="true">
+            <a class="dropdown-toggle btn btn--default btn--small">
+              日本語
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+              </svg>
+            </a>
+            <span class="dropdown-menu" role="menu">
+              
+                <a href="../../de/articles/360045914571-Vungle-OpenRTB-2-5-EndCard-Integration.html?return_to=%2Fhc%2Fde%2Farticles%2F360045914571-Vungle-OpenRTB-2-5-EndCard-Integration" dir="ltr" rel="nofollow" role="menuitem">
+                  Deutsch
+                </a>
+              
+                <a href="../../en-us/articles/360045914571-Vungle-OpenRTB-2-5-EndCard-Integration.html?return_to=%2Fhc%2Fen-us%2Farticles%2F360045914571-Vungle-OpenRTB-2-5-EndCard-Integration" dir="ltr" rel="nofollow" role="menuitem">
+                  English (US)
+                </a>
+              
+                <a href="../../es-mx/articles/360045914571-Integraci%c3%b3n-de-la-tarjeta-de-cierre-Vungle-OpenRTB-2-6.html?return_to=%2Fhc%2Fes-mx%2Farticles%2F360045914571-Integraci%25C3%25B3n-de-la-tarjeta-de-cierre-Vungle-OpenRTB-2-5" dir="ltr" rel="nofollow" role="menuitem">
+                  Español (México)
+                </a>
+              
+                <a href="../../fr-fr/articles/360045914571-Vungle-OpenRTB-2-5-EndCard-Integration.html?return_to=%2Fhc%2Ffr-fr%2Farticles%2F360045914571-Vungle-OpenRTB-2-5-EndCard-Integration" dir="ltr" rel="nofollow" role="menuitem">
+                  Français (France)
+                </a>
+              
+                <a href="../../ko/articles/360045914571-Vungle-OpenRTB-2-5-%ec%97%94%eb%93%9c%ec%b9%b4%eb%93%9c-%ed%86%b5%ed%95%a9-2.html?return_to=%2Fhc%2Fko%2Farticles%2F360045914571-Vungle-OpenRTB-2-5-%25EC%2597%2594%25EB%2593%259C%25EC%25B9%25B4%25EB%2593%259C-%25ED%2586%25B5%25ED%2595%25A9" dir="ltr" rel="nofollow" role="menuitem">
+                  한국어
+                </a>
+              
+                <a href="../../pt-br/articles/360045914571-Integra%c3%a7%c3%a3o-do-Vungle-OpenRTB-2-5-EndCard-2.html?return_to=%2Fhc%2Fpt-br%2Farticles%2F360045914571-Integra%25C3%25A7%25C3%25A3o-do-Vungle-OpenRTB-2-5-EndCard" dir="ltr" rel="nofollow" role="menuitem">
+                  Português do Brasil
+                </a>
+              
+                <a href="../../ru/articles/360045914571-%d0%98%d0%bd%d1%82%d0%b5%d0%b3%d1%80%d0%b0%d1%86%d0%b8%d1%8f-%d1%84%d0%b8%d0%bd%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d0%b9-%d0%ba%d0%b0%d1%80%d1%82%d1%8b-Vungle-OpenRTB-2-6.html?return_to=%2Fhc%2Fru%2Farticles%2F360045914571-%25D0%2598%25D0%25BD%25D1%2582%25D0%25B5%25D0%25B3%25D1%2580%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-%25D1%2584%25D0%25B8%25D0%25BD%25D0%25B0%25D0%25BB%25D1%258C%25D0%25BD%25D0%25BE%25D0%25B9-%25D0%25BA%25D0%25B0%25D1%2580%25D1%2582%25D1%258B-Vungle-OpenRTB-2-5" dir="ltr" rel="nofollow" role="menuitem">
+                  Русский
+                </a>
+              
+                <a href="../../zh-cn/articles/360045914571-Vungle-OpenRTB-2-5-EndCard-%e9%9b%86%e6%88%90-2.html?return_to=%2Fhc%2Fzh-cn%2Farticles%2F360045914571-Vungle-OpenRTB-2-5-EndCard-%25E9%259B%2586%25E6%2588%2590" dir="ltr" rel="nofollow" role="menuitem">
+                  简体中文
+                </a>
+              
+            </span>
+          </div>
+        
+      </div>
+      <div class="sidebar__bottom-nav-item">  
+        <a href="https://vungle.com/login/" target="_blank" class="">
+          Platform
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="a" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#AAB2BA" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#a"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="sidebar__overlay"></div>
+
+  <div class="main">
+
+    <div class="main__header">
+
+      <a href="#" class="sidebar-toggle__link" data-toggle-menu role="button">
+        <span class="sidebar-toggle__burger"><span></span></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--menu"></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--close"></span>
+      </a>
+
+      <div class="main__search">
+        <form role="search" class="search" data-search="" data-instant="true" autocomplete="off" action="https://support.vungle.com/hc/ja/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" /><input type="search" name="query" id="query" placeholder="Search..." autocomplete="off" aria-label="Search..." />
+<input type="submit" name="commit" value="検索" /></form>
+      </div>
+      <div class="main__nav">
+        <a href="../../en-us/sections/360004473112.html" class="btn btn--topbar hidden-mobile">
+          Early Access SDK
+        </a>
+        <a href="https://vungle.com/signup/" target="_blank" class="btn btn--topbar">
+          Platform
+          <svg width="24" height="24" viewBox="0 0 24 24"><defs><path id="b" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#0ccec9" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#b"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="main__container">
+
+  <main role="main">
+    <div class="article-page" data-article-page>
+
+  <div class="row">
+    <div class="article-column article-column--left">
+      <div class="box">
+        <div class="article-page__wrap" data-article-wrap>
+          <article class="article js-active-article" itemscope itemtype="http://schema.org/Article" data-article="360045914571">
+            <header class="article-header">
+              <ol class="breadcrumbs">
+  
+    <li title="Vungle JP">
+      
+        <a href="../../ja.html">Vungle JP</a>
+      
+    </li>
+  
+    <li title="Advertising">
+      
+        <a href="../categories/200198330-Advertising.html">Advertising</a>
+      
+    </li>
+  
+    <li title="Exchange Integration">
+      
+        <a href="../sections/115001349748-Exchange-Integration.html">Exchange Integration</a>
+      
+    </li>
+  
+</ol>
+
+              <h1 class="h2 article-title" itemprop="name">
+                
+                Vungle OpenRTB 2.5 エンド カードの統合
+              </h1>
+
+              <div class="article-meta">
+                <div class="entry-info">
+                  <div class="entry-info__avatar">
+                    <div class="avatar avatar--agent">
+                      <img class="user-avatar user-avatar--default" src="../../../system/photos/360308705032/V_expression_social_corporate__1_.png" alt="Avatar">
+                    </div>
+                  </div>
+                  <div class="entry-info__content">
+                    <b class="author">
+                      Vungle Agent
+                    </b>
+                    <div class="meta"><time datetime="2020-12-14T17:55:13Z" title="2020-12-14T17:55:13Z" data-datetime="calendar">2020年12月14日 17:55</time></div>
+                  </div>
+                </div>
+                <a class="article-subscribe" title="サインインのダイアログを表示" rel="nofollow" role="button" data-auth-action="signin" aria-selected="false" href="360045914571-Vungle-OpenRTB-2-5-%e3%82%a8%e3%83%b3%e3%83%89-%e3%82%ab%e3%83%bc%e3%83%89%e3%81%ae%e7%b5%b1%e5%90%88/subscription.html">フォローする</a>
+              </div>
+            </header>
+
+            <div class="article__body markdown" itemprop="articleBody">
+
+              <div class="article-main">
+                <p>これらの手順を使用して、Vungle でエンド カードを実行します。この記事では、以下の項目について説明します。</p>
+<ul>
+<li><a href="#Overview" target="_self">概要</a></li>
+<li><a href="#ImplementEndCards" target="_self">エンド カード を実装する</a></li>
+<li><a href="#AdParameters" target="_self">AdParameters</a></li>
+<li><a href="#StaticResource" target="_self">StaticResource</a></li>
+<li><a href="#HTMLResource" target="_self">HTMLResource</a></li>
+</ul>
+<h2 id="h_01ECKVGG44VNCF1EJWW3EWSZ62">
+<a name="Overview"></a>概要</h2>
+<ul>
+<li>
+<strong>エンド カードのサイズ:</strong> Vungle は、ビッドレスポンスでデバイスの高さと幅を提供します。エンド カードのサイズ制限はありませんが、RTB の購入者はデバイスの高さと幅を順守し、適切なエンド カードで対応する必要があります。</li>
+<li>
+<strong>処理の優先順位:</strong> 処理の優先順位: 次の優先順位に従って、コンパニオン広告を処理します。<br>1. 静的、2. HTML。</li>
+<li>
+<strong>URL:</strong> <code>download_url</code>（必須）: アプリのダウンロード URL。</li>
+<li>
+<strong>HTML エンド カード使用時のクリックトラッキング:</strong> Vungle は HTML エンド カードのクリックをトラッキングできないため、RTB 購入者が HTML エンド カードを使用してもクリックコールバックは発生しません。Vungle はコンテナのみを提供し、すべてのアセットは RTB 購入者から提供されます。</li>
+</ul>
+<h3>サポートされているリソースタイプ</h3>
+<p>Vungle は、次の形式のフルスクリーン エンド カードをサポートしています。</p>
+<table class="table table--bordered table table--color-header">
+<thead><tr>
+<td><strong>エンド カードのリソースタイプ</strong></td>
+<td><strong>備考</strong></td>
+</tr></thead>
+<tbody>
+<tr>
+<td>静止画像</td>
+<td>サポートされている画像形式。<br>png / jpg / bmp / gif</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td>サポートされています。</td>
+</tr>
+<tr>
+<td>再生可能</td>
+<td>サポートされていません。</td>
+</tr>
+<tr>
+<td>動画</td>
+<td>サポートされていません。</td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td>サポートされていません。</td>
+</tr>
+<tr>
+<td>MRAID</td>
+<td>サポートされていません。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="h_01ECKVGTY6ZW8SJVNXYDRA4B66">
+<a name="ImplementEndCards"></a>エンド カード を実装する</h2>
+<p>VAST 応答では、<code>&lt;CompanionAds&gt;</code> 要素内で、エンド カードに必要なリソース ファイル情報を使用して少なくとも 1 つの <code>&lt;Companion&gt;</code> ノードを定義します。リソース ファイルのタイプは、 <a href="#AdParameters"><code>&lt;AdParameters&gt;</code></a>、<a href="#StaticResource"><code>&lt;StaticResource&gt;</code></a>、または <a href="#HTMLResource"><code>&lt;HTMLResource&gt;</code></a> です。</p>
+<h3 id="h_01ECKVH259D1J92WN5MEZY9BRX">
+<a name="AdParameters"></a>AdParameters</h3>
+<p>このタグは Vungle によって定義されています。<code>AdParameters</code> を使用すると、Vungle は <code>&lt;CompanionAds&gt;</code> ノード内のサードパーティの入札者から提供された要素を解析し、内部テンプレートを使用してエンド カードを組み立てます。次の例を参照してください。</p>
+<p><strong>重要:</strong> <code>AdParameters</code> を使用する場合、パートナーは <code>&lt;CompanionAds&gt;</code> ノードで <code>&lt;Companion id = "vungle_endcard_v1"&gt;</code> を宣言し、エンド カードを実行する意図を指定する必要があります。</p>
+<h4>サンプルコード</h4>
+<pre><code><span style="font-weight: 400;">&lt;CompanionAds&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;Companion id = </span><span style="font-weight: 400;">"vungle_endcard_v1"</span><span style="font-weight: 400;">&gt;</span><span style="font-weight: 400;"> &nbsp; // must specify ID = "vungle_endcard_v1" Required</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;AdParameters xmlEncoded=</span><span style="font-weight: 400;">"true"</span><span style="font-weight: 400;">&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;![CDATA[</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&lt;EndCardAdParameters&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &lt;cover_url&gt;https://your-app-cover-url&lt;/cover_url&gt; // Required</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &lt;icon&gt;https://your-app-icon-url&lt;/icon&gt;&nbsp; // Required</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &lt;app_name&gt;Your app Name&lt;/app_name&gt;&nbsp; // Required</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &lt;description&gt;Your app description&lt;/description&gt;&nbsp; // Optional</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &lt;app_stars&gt;4.5&lt;/app_stars&gt;&nbsp; // Required</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &lt;button_text&gt;Download button text&lt;/button_text&gt;&nbsp; // Required</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &lt;download_url&gt;https://your-app-download-url&lt;/download_url&gt;&nbsp; // Required</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&lt;/EndCardAdParameters&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; ]]&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;/AdParameters&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;TrackingEvents&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;Tracking event=</span><span style="font-weight: 400;">'creativeView'</span><span style="font-weight: 400;">&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt; ![CDATA[https://endcard_tracking]]&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;/Tracking&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;/TrackingEvents&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;CompanionClickTracking&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt; ![CDATA[https://endcard_click_tracking]]&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;/CompanionClickTracking&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;/Companion&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&lt;/CompanionAds&gt;</span>
+</code></pre>
+<h4>サンプルレイアウト</h4>
+<p><img src="../../article_attachments/360061213572/image1.png" alt="image1.png"></p>
+<h4>フィールドの説明</h4>
+<table class="table table--bordered table table--color-header">
+<thead><tr>
+<td><strong>フィールド</strong></td>
+<td> <strong>タイプ</strong> </td>
+<td><strong>必須 ?</strong></td>
+<td><strong>説明</strong></td>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>cover_url</code></td>
+<td>文字列</td>
+<td>必須</td>
+<td>アプリカバー用 URL</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>文字列</td>
+<td>必須</td>
+<td>アプリアイコン用 URL</td>
+</tr>
+<tr>
+<td><code>app name</code></td>
+<td>文字列</td>
+<td>必須</td>
+<td>アプリ名</td>
+</tr>
+<tr>
+<td><code>app stars</code></td>
+<td>
+<p>number&lt;=5</p>
+<p>1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5</p>
+</td>
+<td>必須</td>
+<td>App Store または Google Play でのアプリの星評価</td>
+</tr>
+<tr>
+<td><code>button text</code></td>
+<td>文字列</td>
+<td>必須</td>
+<td>ダウンロードボタンのテキスト</td>
+</tr>
+<tr>
+<td><code>download_url</code></td>
+<td>文字列</td>
+<td>必須</td>
+<td>アプリのダウンロード URL </td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>文字列</td>
+<td>オプション</td>
+<td>アプリの説明</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h_01ECKVJ90X1AS7YJ0EK0W8M968">
+<a name="StaticResource"></a>StaticResource</h3>
+<p>以下は、静止画像のエンド カードの例です。</p>
+<h4>サンプルコード</h4>
+<pre><code><span style="font-weight: 400;">&lt;CompanionAds&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;Companion&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;StaticResource creativeType=</span><span style="font-weight: 400;">"image/jpeg"</span><span style="font-weight: 400;">&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt; [CDATA[https://Your_endcard_image_url]]&gt;</span><span style="font-weight: 400;">&nbsp; // Required</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;/StaticResource&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;TrackingEvents&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;Tracking event=</span><span style="font-weight: 400;">'creativeView'</span><span style="font-weight: 400;">&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt; [CDATA[https://endcard_tracking]]&gt;</span><span style="font-weight: 400;">&nbsp; // Required</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;/Tracking&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;/TrackingEvents&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;CompanionClickThrough&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt; ![CDATA[https://endcard_click_through]]&gt;</span><span style="font-weight: 400;">&nbsp; // Required</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;/CompanionClickThrough&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;CompanionClickTracking&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt; ![CDATA[https://endcard_click_tracking]]&gt; </span><span style="font-weight: 400;">// Required</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;/CompanionClickTracking&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp; &nbsp; </span><span style="font-weight: 400;">&lt;/Companion&gt;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&lt;/CompanionAds&gt;</span>
+
+</code></pre>
+<h3 id="h_01ECKVHPT2YSQ12N1Z0DD50NRE">
+<a name="HTMLResource"></a>HTMLResource</h3>
+<p>以下は、HTML エンド カードの例です。</p>
+<h4>サンプルコード</h4>
+<pre><code>&lt;CompanionAds&gt;<br>     &lt;Companion&gt;<br>         &lt;HTMLResource&gt;<br>             &lt;![CDATA[<br>     &lt;div&gt;Your end card content&lt;/div&gt; // Content can not be empty<br>     &lt;script src=""&gt;&lt;/script&gt;<br>     ]]&gt;<br>         &lt;/HTMLResource&gt;<br>         &lt;TrackingEvents&gt;<br>             &lt;Tracking event='creativeView'&gt;<br>                 &lt; ![CDATA[https://endcard_tracking]]&gt; // Required<br>             &lt;/Tracking&gt;<br>         &lt;/TrackingEvents&gt;<br>     &lt;/Companion&gt;<br>&lt;/CompanionAds&gt;
+</code></pre>
+              </div>     
+
+            </div>
+
+            <div class="article__attachments">
+              
+            </div>
+
+          </article>
+        </div>
+
+        <div class="article-loader fa fa-spinner fa-spin fa-3x fa-fw" id="article-loader"></div>
+
+        
+          <a class="article-banner" href="https://vungle.com/signup" target="_blank">
+            <span class="article-banner__title">
+              <span>Powered by Creativity</span>
+              <span>Driven by Performance</span>
+            </span>
+            <span class="article-banner__cta">Sign Up Here</span>
+          </a>
+        
+
+        <div data-prevnext='{"showArticleTitle": true, "classNameBtn": ""}'></div>
+
+        <section class="submit-ticket submit-ticket--article">
+          <div class="submit-ticket-col submit-ticket-col--left">
+            <h2 class="submit-ticket-title">Questions?</h2>
+            <p>Need further assistance, feel free to reach out to us, we’re here to help!</p>
+          </div>
+          <div class="submit-ticket-col submit-ticket-col--right">
+            <a class="btn btn--default" href="../requests/new.html">リクエストを送信</a>
+          </div>
+        </section>
+
+        <footer class="article-footer">
+          
+          <div class="article-vote">
+            <span class="article-vote-question">この記事は役に立ちましたか？</span>
+            <div class="article-vote-controls">
+              <a class="btn btn--default fa fa-thumbs-up article-vote-controls__item article-vote-controls__item--up" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="はい" href="../signin1147.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fja%2Farticles%2F360045914571-Vungle-OpenRTB-2-5-%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589-%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E7%25B5%25B1%25E5%2590%2588"></a>
+              <a class="btn btn--default fa fa-thumbs-down article-vote-controls__item article-vote-controls__item--down" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="いいえ" href="../signin1147.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fja%2Farticles%2F360045914571-Vungle-OpenRTB-2-5-%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589-%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E7%25B5%25B1%25E5%2590%2588"></a>
+            </div>
+          </div>
+          
+        </footer>
+
+      </div>
+    </div>
+    <div class="article-column article-column--right">
+      <div data-toc='{"headers": "h2,h3,h4", "title": "Contents", "offsetTop": 80, "mobileBreakpoint": 1024}'></div>
+    </div>
+  </div>
+
+</div>
+  </main>
+
+        <footer class="footer" id="footer">
+        <div class="footer-inner">
+          <div class="copyright">
+            <div class="copyright__content">
+              <span class="copyright__copy">&copy; 2020 Vungle. All rights reserved.</span>
+            </div>
+          </div>
+          <nav class="footer-menu">
+            <ul class="list-unstyled">
+              <li><a href="https://vungle.com/about-us/">About</a></li>
+              <li><a href="https://vungle.com/login/">Products</a></li>
+              <li><a href="https://vungle.com/contact-us/">Contact us</a></li>
+            </ul>
+          </nav>
+          <ul class="footer-socials list-unstyled">
+            
+              <li><a href="https://www.facebook.com/vungle/" target="_blank" class="fab fa-facebook"></a></li>
+            
+            
+              <li><a href="https://twitter.com/vungle" target="_blank" class="fab fa-twitter"></a></li>
+            
+            
+            
+              <li><a href="https://www.linkedin.com/company/vungle" target="_blank" class="fab fa-linkedin"></a></li>
+            
+            
+            
+            
+              <li><a href="https://www.instagram.com/vungle/" target="_blank" class="fab fa-instagram"></a></li>
+            
+          </ul>
+        </div>
+      </footer>
+          
+    </div>
+    <!-- /.main__container -->
+
+  </div>  
+  <!-- /.main -->
+  
+</div>
+<!-- /.layout -->
+
+
+
+  <!-- / -->
+
+  
+  <script src="../../../../static.zdassets.com/hc/assets/ja.934faa268256d9aedce7.js"></script>
+  <script src="../../../../vungle.zendesk.com/auth/v2/host.js" data-brand-id="60720" data-return-to="https://support.vungle.com/hc/ja/articles/360045914571" data-theme="hc" data-locale="ja" data-auth-origin="60720,true,true"></script>
+
+  <script type="text/javascript">
+  /*
+
+    Greetings sourcecode lurker!
+
+    This is for internal Zendesk and legacy usage,
+    we don't support or guarantee any of these values
+    so please don't build stuff on top of them.
+
+  */
+
+  HelpCenter = {};
+  HelpCenter.account = {"subdomain":"vungle","environment":"production","name":"Vungle"};
+  HelpCenter.user = {"identifier":"da39a3ee5e6b4b0d3255bfef95601890afd80709","email":null,"name":null,"role":"anonymous","avatar_url":"https://assets.zendesk.com/hc/assets/default_avatar.png","is_admin":false,"organizations":[],"groups":[]};
+  HelpCenter.internal = {"asset_url":"//static.zdassets.com/hc/assets/","web_widget_asset_composer_url":"https://static.zdassets.com/ekr/snippet.js","current_session":{"locale":"ja","csrf_token":null,"shared_csrf_token":null},"settings":{},"usage_tracking":{"event":"article_viewed","data":"BAh7CDoLbG9jYWxlSSIHamEGOgZFVDoPYXJ0aWNsZV9pZGwrCMupaNRTADoKX21ldGF7CzoPYWNjb3VudF9pZGkDPSYIOhNoZWxwX2NlbnRlcl9pZGkENsfsCzoNYnJhbmRfaWRpAjDtOgx1c2VyX2lkMDoTdXNlcl9yb2xlX25hbWVJIg5BTk9OWU1PVVMGOwZUOwBJIgdqYQY7BlQ=--6968a8e6d5925991455b53b5feac55fdd1735fb4","url":"https://support.vungle.com/hc/activity"},"current_record_id":"360045914571","current_record_url":"/hc/ja/articles/360045914571-Vungle-OpenRTB-2-5-%E3%82%A8%E3%83%B3%E3%83%89-%E3%82%AB%E3%83%BC%E3%83%89%E3%81%AE%E7%B5%B1%E5%90%88","current_record_title":"Vungle OpenRTB 2.5 エンド カードの統合","search_results_count":null,"current_text_direction":"ltr","current_brand":{"id":60720,"account_id":534077,"name":"Vungle","active":true,"deleted_at":null,"created_at":"2014-05-29T20:19:19Z","updated_at":"2021-05-13T16:25:53Z","route_id":429018,"signature_template":"{{agent.signature}}"},"current_brand_url":"https://vungle.zendesk.com","current_host_mapping":"support.vungle.com","current_path":"/hc/ja/articles/360045914571-Vungle-OpenRTB-2-5-%E3%82%A8%E3%83%B3%E3%83%89-%E3%82%AB%E3%83%BC%E3%83%89%E3%81%AE%E7%B5%B1%E5%90%88","authentication_domain":"https://vungle.zendesk.com","show_autocomplete_breadcrumbs":true,"rollbar_config":{"enabled":true,"endpoint":"https://rollbar-us.zendesk.com/api/1/item/","accessToken":"731a5a953e9a4b7ab6cac9623f50c732","captureUncaught":true,"captureUnhandledRejections":true,"payload":{"environment":"production","client":{"javascript":{"source_map_enabled":true,"code_version":"8e508d702ea3bb44fb7e90308d7e394bc580895e","guess_uncaught_frames":true}}}},"user_info_changing_enabled":false,"has_user_profiles_enabled":false,"has_end_user_attachments":true,"user_aliases_enabled":false,"has_anonymous_kb_voting":false,"has_multi_language_help_center":true,"mobile_device":false,"mobile_site_enabled":false,"show_at_mentions":false,"embeddables_config":{"embeddables_web_widget":true,"embeddables_connect_ipms":false},"base_domain":"zendesk.com","answer_bot_subdomain":"static","manage_content_url":"https://support.vungle.com/hc/ja","arrange_content_url":"https://support.vungle.com/hc/admin/arrange_contents?locale=ja","general_settings_url":"https://support.vungle.com/hc/admin/general_settings?locale=ja","user_segments_url":"https://vungle.zendesk.com/knowledge/user_segments?brand_id=60720","has_gather":true,"has_community_enabled":false,"has_community_badges":false,"has_user_segments":true,"has_answer_bot_web_form_enabled":false,"has_answer_bot_web_form_modal_v2":false,"has_edit_user_profile_v2":false,"billing_url":"/access/return_to?return_to=https://vungle.zendesk.com/admin/billing/subscription","is_account_owner":false,"theming_cookie_key":"hc-da39a3ee5e6b4b0d3255bfef95601890afd807091-preview","is_preview":false,"has_guide_user_segments_search":true,"has_alternate_templates":false,"arrange_articles_url":"https://vungle.zendesk.com/knowledge/arrange?brand_id=60720","article_verification_url":"https://vungle.zendesk.com/knowledge/verification?brand_id=60720","has_article_verification":false,"guide_language_settings_url":"https://support.vungle.com/hc/admin/language_settings?locale=ja","docs_importer_url":"https://vungle.zendesk.com/knowledge/import_articles?brand_id=60720","community_badges_url":"https://vungle.zendesk.com/knowledge/community_badges?brand_id=60720","community_settings_url":"https://vungle.zendesk.com/knowledge/community_settings?brand_id=60720","gather_plan_state":"subscribed","search_settings_url":"https://vungle.zendesk.com/knowledge/search_settings?brand_id=60720","has_multibrand_search_in_plan":false,"theming_api_version":1,"has_pci_credit_card_custom_field":false,"current_brand_id":60720,"help_center_restricted":false,"current_brand_active":true,"is_assuming_someone_else":false,"flash_messages":[],"user_photo_editing_enabled":true,"has_end_user_apps":false,"has_docs_importer":true,"has_sunco_widget":false,"gather_user_image_upload_via_aus":false,"user_preferred_locale":"en-us"};
+</script>
+
+  <script src="../../../../static.zdassets.com/hc/assets/moment-f6f8513da6ab17eadada59a1a4edb536.js"></script>
+  <script src="../../../../static.zdassets.com/hc/assets/hc_enduser-9fa4fabcc25ad7ce2141d33e2370693a.js"></script>
+  
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'693309ea6d256434',m:'Zys7NygHKN94O08h4cgyT7XpkHtCEBmL7WckHQfcq1Q-1632392409-0-AZHjQ9TQ/6ZhKNyO5OLkEN0ybe7Ud37ojlvXRsL27s1m/xIeqVCAgYC9WxQOKakJ6OAVXnSyEGQmrblY0Ed0v6JSKKxdesXvgftbLWgFx5KGVSFPoR1FwTzbdpxfLyVT5vV5F0DV9yfJEZM14IFwStk=',s:[0x2511d3812a,0x85242786c7],}})();</script></body>
+
+<!-- Mirrored from support.vungle.com/hc/ja/articles/360045914571 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 11:21:23 GMT -->
+</html>

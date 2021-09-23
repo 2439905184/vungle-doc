@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ko">
+
+<!-- Mirrored from support.vungle.com/hc/ko/articles/115002662928-Vungle에-TPAT-통합 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 10:22:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <!-- v20226 -->
+
+  <title>Vungle에 TPAT 통합 &ndash; Vungle KO</title>
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="" />
+
+  <meta name="description" content="이 가이드를 사용하여 TPAT(Third-Party Attribution Tracking)를 Vungle SDK에 통합하십시오. 목차 TUNE  클릭 URL 설정 포스트백 URL 생성 설치 후 이벤트 포스트백 설정  조정  클릭 URL 설정 설치..." /><meta property="og:image" content="https://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Vungle KO" />
+<meta property="og:title" content="Vungle에 TPAT 통합" />
+<meta property="og:description" content="이 가이드를 사용하여 TPAT(Third-Party Attribution Tracking)를 Vungle SDK에 통합하십시오.
+목차
+TUNE
+
+클릭 URL 설정
+포스트백 URL 생성
+설치 후 이벤트 포스트백 설정
+
+조정
+
+클릭 URL 설정
+설치 후 이벤트 포스트백 설정
+
+Appsflyer
+
+Vungle을 파트너로 설정 및 클릭 URL 설정
+인앱 이벤..." />
+<meta property="og:url" content="115002662928.html" />
+<link rel="canonical" href="115002662928-Vungle%ec%97%90-TPAT-%ed%86%b5%ed%95%a9.html" />
+<link rel="alternate" hreflang="de" href="../../de/articles/115002662928-Integrieren-von-Vungle-in-TPAT.html" />
+<link rel="alternate" hreflang="en" href="../../en-us/articles/115002662928-Setting-up-Install-and-Event-Postbacks-from-your-Attribution-Partner.html" />
+<link rel="alternate" hreflang="es" href="../../es-mx/articles/115002662928-Integraci%c3%b3n-de-Vungle-con-TPAT.html" />
+<link rel="alternate" hreflang="fr" href="../../fr-fr/articles/115002662928-Int%c3%a9gration-de-Vungle-%c3%a0-TPAT.html" />
+<link rel="alternate" hreflang="ja" href="../../ja/articles/115002662928-Vungle-%e3%82%92-TPAT-%e3%81%a8%e7%b5%b1%e5%90%88%e3%81%99%e3%82%8b.html" />
+<link rel="alternate" hreflang="ko" href="115002662928-Vungle%ec%97%90-TPAT-%ed%86%b5%ed%95%a9.html" />
+<link rel="alternate" hreflang="pt" href="../../pt-br/articles/115002662928-Integra%c3%a7%c3%a3o-do-Vungle-com-o-TPAT.html" />
+<link rel="alternate" hreflang="ru" href="../../ru/articles/115002662928-%d0%98%d0%bd%d1%82%d0%b5%d0%b3%d1%80%d0%b0%d1%86%d0%b8%d1%8f-Vungle-%d1%81-%d1%80%d0%b5%d1%88%d0%b5%d0%bd%d0%b8%d0%b5%d0%bc-TPAT.html" />
+<link rel="alternate" hreflang="zh" href="../../zh-cn/articles/115002662928-%e5%b0%86-Vungle-%e4%b8%8e-TPAT-%e9%9b%86%e6%88%90.html" />
+
+  <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/application-79172500fb4dbec2484043d570946543.css" id="stylesheet" />
+    <!-- Entypo pictograms by Daniel Bruce — www.entypo.com -->
+    <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/theming_v1_support-cf937686d5b6669242017892da7bad78.css" />
+  <link rel="stylesheet" type="text/css" href="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/stylee82d.css?digest=360570052252">
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://theme.zdassets.com/theme_assets/534077/62c5e8616cdae030ecea7cec15cf47a2b729729b.ico" />
+
+    <script src="../../../../static.zdassets.com/hc/assets/jquery-d5395f0b7ac5027403fc17855c46dbfc.js"></script>
+    
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+  analytics.load("bRqfh635lMl7qBpocue716BjaalyFtJD");
+  analytics.page();
+  }}();
+  analytics.ready(function(){
+    Appcues.anonymous();
+});
+</script>
+
+
+
+
+
+
+
+
+
+  <style type="text/css">
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/51587ff68e0ab2bf990a17d993ec1fa7a5451614.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/8677458bb131e09b83d5bf2ec1ab6d015c18fd8b.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1e02ff61edce3f256e3f8de8e6bfb11bb085905f.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/b421ade1cc04519f69e9b4ec0fee3d632f993540.woff") format("woff");
+      font-weight: bold;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1056b20fe6b0f2a56568ecdea5119e1577667803.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/0ea45f63097574b5446148c9670509ae56dc2975.woff") format("woff");
+      font-weight: 300;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/78bd021a78ca5752e43275a982a96b00bd004a54.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/115efed0d77bd96754f56a00f399a05af518a5a4.woff") format("woff");
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/e5e3d4a71bfb2d624edf48819c3dd1597c4397ff.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9f8a21f09879869f644a45d21aea06dde01f2107.woff") format("woff");
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/f4f83c57775879216d798dce95c9a83e442da6ab.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9e93f03906c0fbfd6eba0ecdfe8d739a6b38852d.woff") format("woff");
+      font-weight: bold;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk Screen";
+      src: url("http://theme.zdassets.com/theme_assets/534077/2f8d0cbc16a32df1f8b6c36f45c2b4078181ca43.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/2ab0f28c68ed406c853fec87f698618cd7ac8bc2.woff") format("woff");
+      font-weight: 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk OIL";
+      src: url("http://theme.zdassets.com/theme_assets/534077/0ce9c7bb30841f31bac192ef415fd27771c17fc9.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/422274783804fb9c3e984558285801b01b2fe117.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+
+
+<link rel="stylesheet" href="../../../../use.fontawesome.com/releases/v5.10.1/css/all.css">
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/styles/atelier-lakeside-dark.min.css" />
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" />
+<script src="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+<script src="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/highlight.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<meta property="asseturl" content="//theme.zdassets.com/theme_assets/534077/6ff6e0c84e92580e7cc6e9c77a5cc1e724f36743.gif">
+
+
+<link rel="stylesheet" href="../../../../theme.zdassets.com/theme_assets/534077/02e3878a33d61900d75eb94d43eb4d26929d6dbf.css">
+
+<script src="../../../../theme.zdassets.com/theme_assets/534077/48ea021f3fedbc024c4443d2e946e0b9b742e384.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/469d1d10574fa6f68d243916e96f61e7ce459a5a.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/9893f4b0b18dc4018d50a3716fc581152c21535e.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/ae559ee60cd2d617e942d530c1ee7ac42a973761.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/c2b4df57e1dcfcf1b5d2298b16c409c8315a177b.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/cf5c34722566da1ba5ca5d877dc187d282ca6a3f.js"></script>
+
+<!-- ...Appcues... -->
+<script type="text/javascript">
+  if (userId) {
+    Appcues.identify(userId); 
+  } else {
+    Appcues.anonymous(); 
+  }
+</script>
+
+<script src="../../../../static.zdassets.com/conditional_fields_app_hc/latest/helpcenter.js"></script>
+<script>var cfaRules = [{ "fieldType": "tagger", "field": 114099498832, "value": "user_interface", "select": [114099504272], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "amazon", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "android", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios", "select": [114099505792, 114101637652], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "multi_platforms_other_combination", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "windows", "select": [114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099505792, "value": "other_ios_sdk", "select": [114099619791], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "adincube", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "admob", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "fyber_hezap", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "ironsource_supersonic", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "multiple_mediation", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "other_mediation", "select": [114099556512, 114099619811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "upsight", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "adobe_air", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "corona", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "marmalade", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "other_plugin", "select": [114099620151, 114099620451], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "unity", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099577491, "value": "other_android_sdk", "select": [114099555992], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099619751, "value": "other_windows_sdk", "select": [114099556012], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099621511, "value": "geo_other", "select": [114099622811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_dashboard", "select": [114099498652, 114099499132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_other", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_reportingapi", "select": [114099498652, 114099621211, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_useracquisition", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_notreceivingreward", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_other", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_troublesomead", "select": [114099498672, 114099504752, 114099621511, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_unsubscribeads", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_payment", "select": [114099571371, 114099500132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_accountstatus", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_addtransferusers", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_deleteaccount", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_pwrecovery", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_registration", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_callbacks", "select": [114099498652, 114099556032, 114099556532, 114099620751, 114099621511, 114099504752], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_cocoapods", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_dashboard", "select": [114099498652, 114099498832], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_gradle", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_multidex", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621731], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_noads", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_proguard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557592], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_testmode", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_other", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_reportingapi", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_button", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_crashing", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_endcard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_freezing", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_other", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_sound", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_video", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }];</script>
+
+<style type="text/css">
+
+/* Advertiser */
+.categories__icon--200198330 {
+  background-color: #ff5a41;
+}
+
+.categories__icon--200198330:before,
+#sidenav-category-200198330 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/9f2e8cfd41383f7f21c68fd99567eb1b1a7993ac.svg");
+}
+
+/* SDK */
+.categories__icon--200269670 {
+  background-color: #3c2869;
+}
+
+.categories__icon--200269670:before,
+#sidenav-category-200269670 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/ab38e1e12c6a99fe83f4ea9c02bf87e17510558d.svg");
+}
+
+/* Publisher */
+.categories__icon--360001994512 {
+  background-color: #6e7dff;
+}
+
+.categories__icon--360001994512:before,
+#sidenav-category-360001994512 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/8a0ee6cf2a1300b8adf5a19112e81db3c070a273.svg");
+}
+
+/* FAQs */
+.categories__icon--115000802567 {
+  background-color: #ffd700;
+}
+
+.categories__icon--115000802567:before,
+#sidenav-category-115000802567 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/840643095495a2f0380fbe420efb55b7a63277fe.svg");
+}
+
+/* Creative */
+.categories__icon--360001724259 {
+  background-color: #ffd2e1;
+}
+
+.categories__icon--360001724259:before,
+#sidenav-category-360001724259 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/2bb5eeecadf61018e2bda864d22706f146b5a208.svg");
+}
+
+</style>
+  <script type="text/javascript" src="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/scripte82d.js?digest=360570052252"></script>
+<script async src='../../../cdn-cgi/bm/cv/669835187/api.js'></script></head>
+<body class="">
+  
+  
+
+  <div class="js-alert-box"></div>
+
+<div class="layout" >
+
+  <aside class="sidebar" data-sidebar>
+  <div class="sidebar__header">
+    <div class="sidebar__container sidebar__container--fixed">
+      <div class="sidebar__logo">
+        <a title="홈" href="../../ko.html">
+          <img src="http://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" alt="로고">
+        </a>
+      </div>
+      <ul class="sidebar__list">
+        <li class="sidebar__item">
+          <a class="sidebar__link sidebar__link--home" title="홈" href="../../ko.html">Home</a>
+        </li>
+      </ul>
+      <div class="sidebar__top-nav"></div>
+      <div class="sidebar__content-block" data-sidebar-content></div>
+    </div>
+  </div>
+
+  <div class="sidebar__container">
+    <div class="sidebar__bottom-nav">
+      <div class="sidebar__bottom-nav-item">
+        
+          <div class="dropdown language-selector" aria-haspopup="true">
+            <a class="dropdown-toggle btn btn--default btn--small">
+              한국어
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+              </svg>
+            </a>
+            <span class="dropdown-menu" role="menu">
+              
+                <a href="../../de/articles/115002662928-Integrieren-von-Vungle-in-TPAT.html?return_to=%2Fhc%2Fde%2Farticles%2F115002662928-Integrieren-von-Vungle-in-TPAT" dir="ltr" rel="nofollow" role="menuitem">
+                  Deutsch
+                </a>
+              
+                <a href="../../en-us/articles/115002662928-Setting-up-Install-and-Event-Postbacks-from-your-Attribution-Partner.html?return_to=%2Fhc%2Fen-us%2Farticles%2F115002662928-Setting-up-Install-and-Event-Postbacks-from-your-Attribution-Partner" dir="ltr" rel="nofollow" role="menuitem">
+                  English (US)
+                </a>
+              
+                <a href="../../es-mx/articles/115002662928-Integraci%c3%b3n-de-Vungle-con-TPAT-2.html?return_to=%2Fhc%2Fes-mx%2Farticles%2F115002662928-Integraci%25C3%25B3n-de-Vungle-con-TPAT" dir="ltr" rel="nofollow" role="menuitem">
+                  Español (México)
+                </a>
+              
+                <a href="../../fr-fr/articles/115002662928-Int%c3%a9gration-de-Vungle-%c3%a0-TPAT-2.html?return_to=%2Fhc%2Ffr-fr%2Farticles%2F115002662928-Int%25C3%25A9gration-de-Vungle-%25C3%25A0-TPAT" dir="ltr" rel="nofollow" role="menuitem">
+                  Français (France)
+                </a>
+              
+                <a href="../../ja/articles/115002662928-Vungle-%e3%82%92-TPAT-%e3%81%a8%e7%b5%b1%e5%90%88%e3%81%99%e3%82%8b-2.html?return_to=%2Fhc%2Fja%2Farticles%2F115002662928-Vungle-%25E3%2582%2592-TPAT-%25E3%2581%25A8%25E7%25B5%25B1%25E5%2590%2588%25E3%2581%2599%25E3%2582%258B" dir="ltr" rel="nofollow" role="menuitem">
+                  日本語
+                </a>
+              
+                <a href="../../pt-br/articles/115002662928-Integra%c3%a7%c3%a3o-do-Vungle-com-o-TPAT-2.html?return_to=%2Fhc%2Fpt-br%2Farticles%2F115002662928-Integra%25C3%25A7%25C3%25A3o-do-Vungle-com-o-TPAT" dir="ltr" rel="nofollow" role="menuitem">
+                  Português do Brasil
+                </a>
+              
+                <a href="../../ru/articles/115002662928-%d0%98%d0%bd%d1%82%d0%b5%d0%b3%d1%80%d0%b0%d1%86%d0%b8%d1%8f-Vungle-%d1%81-%d1%80%d0%b5%d1%88%d0%b5%d0%bd%d0%b8%d0%b5%d0%bc-TPAT-2.html?return_to=%2Fhc%2Fru%2Farticles%2F115002662928-%25D0%2598%25D0%25BD%25D1%2582%25D0%25B5%25D0%25B3%25D1%2580%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-Vungle-%25D1%2581-%25D1%2580%25D0%25B5%25D1%2588%25D0%25B5%25D0%25BD%25D0%25B8%25D0%25B5%25D0%25BC-TPAT" dir="ltr" rel="nofollow" role="menuitem">
+                  Русский
+                </a>
+              
+                <a href="../../zh-cn/articles/115002662928-%e5%b0%86-Vungle-%e4%b8%8e-TPAT-%e9%9b%86%e6%88%90-2.html?return_to=%2Fhc%2Fzh-cn%2Farticles%2F115002662928-%25E5%25B0%2586-Vungle-%25E4%25B8%258E-TPAT-%25E9%259B%2586%25E6%2588%2590" dir="ltr" rel="nofollow" role="menuitem">
+                  简体中文
+                </a>
+              
+            </span>
+          </div>
+        
+      </div>
+      <div class="sidebar__bottom-nav-item">  
+        <a href="https://vungle.com/login/" target="_blank" class="">
+          Platform
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="a" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#AAB2BA" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#a"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="sidebar__overlay"></div>
+
+  <div class="main">
+
+    <div class="main__header">
+
+      <a href="#" class="sidebar-toggle__link" data-toggle-menu role="button">
+        <span class="sidebar-toggle__burger"><span></span></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--menu"></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--close"></span>
+      </a>
+
+      <div class="main__search">
+        <form role="search" class="search" data-search="" data-instant="true" autocomplete="off" action="https://support.vungle.com/hc/ko/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" /><input type="search" name="query" id="query" placeholder="Search..." autocomplete="off" aria-label="Search..." />
+<input type="submit" name="commit" value="검색" /></form>
+      </div>
+      <div class="main__nav">
+        <a href="../../en-us/sections/360004473112.html" class="btn btn--topbar hidden-mobile">
+          Early Access SDK
+        </a>
+        <a href="https://vungle.com/signup/" target="_blank" class="btn btn--topbar">
+          Platform
+          <svg width="24" height="24" viewBox="0 0 24 24"><defs><path id="b" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#0ccec9" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#b"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="main__container">
+
+  <main role="main">
+    <div class="article-page" data-article-page>
+
+  <div class="row">
+    <div class="article-column article-column--left">
+      <div class="box">
+        <div class="article-page__wrap" data-article-wrap>
+          <article class="article js-active-article" itemscope itemtype="http://schema.org/Article" data-article="115002662928">
+            <header class="article-header">
+              <ol class="breadcrumbs">
+  
+    <li title="Vungle KO">
+      
+        <a href="../../ko.html">Vungle KO</a>
+      
+    </li>
+  
+    <li title="Advertising">
+      
+        <a href="../categories/200198330-Advertising.html">Advertising</a>
+      
+    </li>
+  
+    <li title="Ad Tracking">
+      
+        <a href="../sections/115001351468-Ad-Tracking.html">Ad Tracking</a>
+      
+    </li>
+  
+</ol>
+
+              <h1 class="h2 article-title" itemprop="name">
+                
+                Vungle에 TPAT 통합
+              </h1>
+
+              <div class="article-meta">
+                <div class="entry-info">
+                  <div class="entry-info__avatar">
+                    <div class="avatar ">
+                      <img class="user-avatar user-avatar--default" src="../../../system/photos/465254208/profile_image_13504831267_534077.jpg" alt="Avatar">
+                    </div>
+                  </div>
+                  <div class="entry-info__content">
+                    <b class="author">
+                      Julia Randall
+                    </b>
+                    <div class="meta"><time datetime="2021-07-16T15:22:21Z" title="2021-07-16T15:22:21Z" data-datetime="calendar">2021년 07월 16일 15:22</time></div>
+                  </div>
+                </div>
+                <a class="article-subscribe" title="로그인 대화 상자 열기" rel="nofollow" role="button" data-auth-action="signin" aria-selected="false" href="115002662928-Vungle%ec%97%90-TPAT-%ed%86%b5%ed%95%a9/subscription.html">팔로우</a>
+              </div>
+            </header>
+
+            <div class="article__body markdown" itemprop="articleBody">
+
+              <div class="article-main">
+                <p>이 가이드를 사용하여 TPAT(Third-Party Attribution Tracking)를 Vungle SDK에 통합하십시오.</p>
+<h1>목차</h1>
+<p><a href="#TUNE">TUNE</a></p>
+<ol>
+<li><a href="#TUNEClickURLSetup">클릭 URL 설정</a></li>
+<li><a href="#TUNECreatePostback">포스트백 URL 생성</a></li>
+<li><a href="#TUNECreatePostback">설치 후 이벤트 포스트백 설정</a></li>
+</ol>
+<p><a href="#adjust">조정</a></p>
+<ol>
+<li><a href="#adjustClickURLSetup">클릭 URL 설정</a></li>
+<li><a href="#adjustPIE">설치 후 이벤트 포스트백 설정</a></li>
+</ol>
+<p><a href="#Appsflyer">Appsflyer</a></p>
+<ol>
+<li><a href="#AppsflyerSettingUpVungle">Vungle을 파트너로 설정 및 클릭 URL 설정</a></li>
+<li><a href="#AppsflyerConfiguring">인앱 이벤트 구성</a></li>
+</ol>
+<p><a href="#Kochava">Kochava</a></p>
+<ol>
+<li><a href="#KochavaClickURLSetup">클릭 URL 설정</a></li>
+<li><a href="#KochavaPIE">포스트백 URL 설정 및 설치 후 이벤트 공유</a></li>
+</ol>
+<p><a href="#NewIntegrations">신규 통합</a></p>
+<ul>
+<li><a href="#VungleMacros">Vungle 매크로</a></li>
+</ul>
+<p><a href="#EnablingViewThrough">View-Through Attribution 사용</a></p>
+<h1>
+<a name="TUNE"></a>TUNE</h1>
+<h2>
+<a name="TUNEClickURLSetup"></a>1. 클릭 URL 설정</h2>
+<ol>
+<li>MAT 대시보드에 앱을 추가합니다.<br><br><img src="../../en-us/article_attachments/115006002908/image16.gif" alt="" width="646" height="358"><br><br>
+</li>
+<li>최상의 결과를 얻으려면 TUNE에 Vungle을 처음 통합할 때 <strong>View Through Attribution</strong>을 설정하는 것이 좋습니다. 다시 사용하려면 <strong>어트리뷰션 설정</strong> 페이지에서 수행하십시오.<br><br>
+</li>
+<li>
+<strong>Click</strong>을 선택하여 <strong>Measurement URL</strong>을 생성합니다. 같은 창에서 <strong>Click</strong> 대신 <strong>Impression</strong>을 선택하면 <strong>노출 URL</strong>을 작성할 수 있습니다.<br><br><img src="../../en-us/article_attachments/115006002948/image17.gif" alt="" width="649" height="466"><br><br>
+</li>
+</ol>
+<h2>
+<a name="TUNECreatePostback"></a>2. 포스트백 URL 생성</h2>
+<ol>
+<li>
+<strong>파트너</strong> 메뉴에서 <strong>포스트백 URL</strong>을 선택합니다.<br><br>
+</li>
+<li>원하는 포스트백 이름을 선택합니다.<br><br>
+</li>
+<li>
+<strong>포스트백 템플릿</strong> 창에서 Vungle을 검색합니다.<br><br>
+</li>
+<li>앱의 플랫폼(iOS, Android 또는 Windows)을 선택합니다.<br><br>
+</li>
+<li>TUNE의 템플릿은 모든 행에 대해 동일한 <strong>Vungle 앱 ID</strong>를 자동으로 채웁니다. 이를 무시하고 다른 플랫폼을 선택한 다음 계정 관리자로부터 받은 적절한 Vungle App ID를 입력할 수 있습니다.<br><br>
+</li>
+<li>템플릿 포스트백 URL을 확인 및 수정하려면 <strong>템플릿 수정</strong>을 클릭합니다. 매크로를 추가하거나 삭제할 수 있습니다.<br><br><img src="../../en-us/article_attachments/115005951187/image14.png" alt="" width="656" height="424"><br><br>
+</li>
+</ol>
+<h2>
+<a name="TUNEPIE"></a>3. 설치 후 이벤트 포스트백 설정</h2>
+<ol>
+<li>
+<strong>어트리뷰션 분석</strong>에 로그인합니다.<br><br><img src="../../en-us/article_attachments/115005951107/image07.png" alt="" width="207" height="40"><br><br>
+</li>
+<li>아직 수행하지 않은 경우 Vungle을 파트너로 통합하십시오.<br><br><img src="../../en-us/article_attachments/115006002848/image15.png" alt="" width="652" height="256"><br><br>
+</li>
+<li>Vungle과 공유할 데이터를 선택하십시오.<br><br><img src="../../en-us/article_attachments/115006002708/image04.png" alt="" width="653" height="418"><br><br>
+</li>
+<li>이벤트를 선택한 후 각 이벤트 및 각 플랫폼에 대한 포스트백을 생성하십시오. <br><br><img src="../../en-us/article_attachments/115006002668/image01.png" alt="" width="654" height="364"><br><br>
+</li>
+<li>
+<strong>통합 파트너</strong> 탭에서 검색하여 나중에 더 PIE 데이터를 추가 할 수 있습니다.<br><br><img src="../../en-us/article_attachments/115006002888/image18.png" alt="" width="652" height="313"><br><br>
+</li>
+</ol>
+<h1>
+<a name="adjust"></a>조정</h1>
+<h2>
+<a name="adjustClickURLSetup"></a>1. 클릭 URL 설정</h2>
+<ol>
+<li>앱의 조정 대시보드에서 All<strong> </strong>Settings<strong>를 선택합니다.<br><br><img src="../../article_attachments/115002154532/Screen%20Shot%202017-09-15%20at%2011.13.03.png" alt="Screen_Shot_2017-09-15_at_11.13.03.png" width="447" height="318"><br><br></strong>
+</li>
+<li>
+<strong>Partner Setup</strong>으로 이동합니다.<br><br><img src="../../article_attachments/115002145931/Screen%20Shot%202017-09-15%20at%2011.13.38.png" alt="Screen_Shot_2017-09-15_at_11.13.38.png" width="305" height="374"><br><br>
+</li>
+<li>Vungle을 파트너로 추가하십시오.<br><br><img src="../../article_attachments/115002154572/Screen%20Shot%202017-09-15%20at%2011.13.53.png" alt="Screen_Shot_2017-09-15_at_11.13.53.png" width="598" height="192"><br><br>
+</li>
+<li>Vungle에서 받은 Vungle 앱 ID를 입력하십시오.<br><br><img src="../../article_attachments/115002154732/Screen%20Shot%202017-09-15%20at%2014.19.34.png" alt="Screen_Shot_2017-09-15_at_14.19.34.png" width="389" height="420"><br><br>
+</li>
+<li>새 트래커를 생성하려면 <strong>Trackers</strong> -&gt;를 선택하고 Vungle을 네트워크로 선택합니다. <strong>New Tracker</strong>를 클릭하고 트래커의 <strong>이름을 지정</strong>한 다음 <strong>Customize</strong>를 클릭합니다. 이렇게 하면 <em>클릭 URL</em>과 <em>노출 URL</em>이 생성되어 계정 관리자와 공유할 수 있습니다.<br><br>
+</li>
+</ol>
+<h2>
+<a name="adjustPIE"></a>2. 설치 후 이벤트 포스트백 설정</h2>
+<ol>
+<li>
+<strong>수익 전달</strong> 및 <strong>링크 이벤트</strong>를 켭니다.<br><br><img src="../../article_attachments/115002145871/Screen%20Shot%202017-09-15%20at%2011.14.59.png" alt="Screen_Shot_2017-09-15_at_11.14.59.png" width="380" height="275"><br><br>
+</li>
+<li>이벤트 이름을 Vungle에 전송하는 방식대로 지정하십시오.<br><br><img src="../../article_attachments/115002145891/Screen%20Shot%202017-09-15%20at%2011.16.52.png" alt="Screen_Shot_2017-09-15_at_11.16.52.png" width="347" height="470"><br><br><br>
+</li>
+</ol>
+<h1>
+<a name="Appsflyer"></a>Appsflyer</h1>
+<h2>
+<a name="AppsflyerSettingUpVungle"></a>1. Vungle을 파트너로 설정 및 클릭 URL 설정</h2>
+<ol>
+<li>캠페인을 설정합니다.<br><br><img src="../../en-us/article_attachments/115006002788/image10.png" alt="" width="269" height="53"><br><br>
+</li>
+<li>Vungle을 파트너로 구성합니다.<br><br><img src="../../en-us/article_attachments/115006003008/image25.png" alt="" width="258" height="122"><br><br><img src="../../en-us/article_attachments/115006002988/image24.png" alt="" width="467" height="108"><br><br>
+</li>
+<li>추적 URL을 생성합니다. Vungle 로고를 클릭하여 <strong>Vungle 구성</strong> 창을 엽니다.<br><br><img src="../../en-us/article_attachments/115006002808/image13.png" alt="" width="291" height="408"><br><br>
+</li>
+<li>
+<strong>캠페인</strong> 텍스트 필드에 캠페인의 이름을 입력합니다(선택 사항).<br><br>
+</li>
+<li>Vungle과의 계약에 따라 <strong>클릭 어트리뷰션 룩백 창</strong>의 타임 프레임을 설정합니다.<br><br>
+</li>
+<li>Vungle 계정 관리자로부터 받은 app_id를 삽입합니다.<br><br>
+</li>
+<li>
+<strong>활성화</strong>를 선택하면 모든 설치가 Vungle에 통보됩니다. 활성화 상자를 체크하면 통합이 완료되었음을 Vungle에 알립니다.<br><br>
+</li>
+<li>추적 링크를 복사하여 Vungle 계정 관리자에게 보냅니다.<br><br>
+</li>
+<li>View-Through Attribution을 설정하려면 먼저 <strong>View-Through Attribution 사용</strong> 옵션을 선택한 다음 Vungle과의 계약에 따라 View-Through Attribution 룩백 창의 타임 프레임을 설정합니다.<br><br>
+</li>
+<li>View-Through 추적 링크를 복사하여 Vungle 계정 관리자에게 보냅니다.<br><br><img src="../../en-us/article_attachments/115006002968/image21.png" alt="" width="379" height="154"><br><br>
+</li>
+</ol>
+<h2>
+<a name="AppsflyerConfiguring"></a>인앱 이벤트 구성</h2>
+<ol>
+<li>Vungle 속성 설치 인앱 이벤트만 보낼지 또는 모든 인앱 이벤트를 보낼지 선택합니다.<br><br><img src="../../en-us/article_attachments/115006002688/image02.png" alt="" width="366" height="272"><br><br>
+</li>
+<li>
+<strong>+ 클릭하여 인앱 이벤트 매핑</strong>을 추가하고 Vungle에 보내려는 이벤트를 매핑합니다.<br><br><img src="../../en-us/article_attachments/115005951147/image08.png" alt="" width="367" height="327"><br><br>
+</li>
+<li>
+<strong>저장</strong> 및 <strong>닫기</strong>를 클릭합니다.</li>
+</ol>
+<h1>
+<a name="Kochava"></a>Kochava</h1>
+<h2>
+<a name="KochavaClickURLSetup"></a>클릭 URL 설정</h2>
+<ol>
+<li>앱을 열고 다음을 선택합니다. App Tools &gt; Campaign Manager &gt; Add a Campaign &gt; Enter Campaign Name &gt; Enter the Default Destination URL &gt; Submit<br><br><img src="../../en-us/article_attachments/115006002768/image12.gif" alt="" width="155" height="243"><br><br><img src="../../en-us/article_attachments/115006002928/image20.gif" alt="" width="277" height="127"><br><br>
+</li>
+<li>클릭/노출 URL을 설정하려면 Edit Tracker를 선택하십시오. 클릭 및 노출 URL은 템플릿에 통합된 매크로를 기반으로 제공됩니다.<br><br><img src="../../en-us/article_attachments/115005951127/image06.gif" alt="" width="436" height="112">
+</li>
+</ol>
+<h2>
+<a name="KochavaPIE"></a>포스트백 URL 설정 및 설치 후 이벤트 공유</h2>
+<p>Kochava는 설치 후 이벤트를 Vungle에 보낼 수 있습니다. Vungle과 공유할 매개변수를 선택할 수 있습니다. 포스트백 URL을 설정하려면 다음을 선택합니다. App Tools &gt; Partner Configuration &gt; Custom Postback &gt; Go &gt; Set Event Status to Active (default) &gt; Update Title &gt; Destination URL&gt; Set Delivery Delay to real time &gt; Set number of Retry Attempts (up to 10)&gt; Select Macro (s) to be passed within the Destination URL &gt; Save<br><br><img src="../../en-us/article_attachments/115005951087/image09.gif" alt="" width="174" height="273"><br><br><img src="../../en-us/article_attachments/115005951267/image27.gif" alt="" width="258" height="120"><br><br><img src="../../en-us/article_attachments/115005951167/image19.gif" alt="" width="538" height="125"></p>
+<h1>
+<a name="NewIntegrations"></a>신규 통합</h1>
+<p>Vungle에 통합해주셔서 감사합니다! <a href="../../en-us/articles/204374184-Advertiser-Postback-API-Documentation.html">여기</a>에서 Vungle의 기본 API 자료를 보실 수 있습니다. 모든 설치를 다시 게시해주시기 바랍니다. 설치 후 이벤트를 Vungle에 보내는 방법을 자세히 알아보려면 <a href="http://vungle.github.io/vungle-api-docs/#post-install-event-data">이 페이지</a>를 참조하십시오. 매크로는 다음과 같습니다.</p>
+<h2>
+<a name="VungleMacros"></a>Vungle 매크로</h2>
+<ul>
+<li>
+<code>{{{id}}}</code>: 각 광고 게재별 고유한 ID 24자리(포스트백에서 필요)</li>
+<li>
+<code>{{{app_id}}}</code>: 시스템에서 앱을 식별하는 Vungle 앱 ID(포스트백에서 필요)</li>
+<li>
+<code>{{{campaign_id}}}</code>: 시스템 내에서 캠페인을 식별하는 Vungle ID </li>
+<li>
+<code>{{{campaign_name}}}</code>: 캠페인 이름</li>
+<li>
+<code>{{{creative}}}</code>: 크리에이티브 이름</li>
+<li>
+<code>{{{ifa}}}</code>: Apple의 광고주 식별자(포스트백에서 필요)</li>
+<li>
+<code>{{{aaid}}}</code>: Google Play 서비스의 광고주 식별자(포스트백에서 필요)</li>
+<li>
+<code>{{{isu}}}</code>: 폴백 식별자, iOS용 OpenUDID와 Android용 Android ID(Apple이 OpenUDID를 더 이상 사용하지 않아 선호도 하락)(포스트백에서 필요)</li>
+<li>
+<code>{{{site_id}}}</code>: 소스를 식별하는 Vungle ID(광고가 재생된 앱)</li>
+</ul>
+<h1>
+<a name="EnablingViewThrough"></a>View-Through Attribution 사용</h1>
+<p>대부분의 광고 네트워크에서 View-Through Attribution을 사용하므로 네트워크의 실적을 정확히 비교하기 위해 Vungle에서도 동일한 작업을 수행하는 것이 좋습니다. Vungle의 속성 창은 다음과 같습니다.</p>
+<ul>
+<li>14일 동안 클릭 수</li>
+<li>24시간 동안 노출 수</li>
+</ul>
+              </div>     
+
+            </div>
+
+            <div class="article__attachments">
+              
+            </div>
+
+          </article>
+        </div>
+
+        <div class="article-loader fa fa-spinner fa-spin fa-3x fa-fw" id="article-loader"></div>
+
+        
+          <a class="article-banner" href="https://vungle.com/signup" target="_blank">
+            <span class="article-banner__title">
+              <span>Powered by Creativity</span>
+              <span>Driven by Performance</span>
+            </span>
+            <span class="article-banner__cta">Sign Up Here</span>
+          </a>
+        
+
+        <div data-prevnext='{"showArticleTitle": true, "classNameBtn": ""}'></div>
+
+        <section class="submit-ticket submit-ticket--article">
+          <div class="submit-ticket-col submit-ticket-col--left">
+            <h2 class="submit-ticket-title">Questions?</h2>
+            <p>Need further assistance, feel free to reach out to us, we’re here to help!</p>
+          </div>
+          <div class="submit-ticket-col submit-ticket-col--right">
+            <a class="btn btn--default" href="../requests/new.html">문의 등록</a>
+          </div>
+        </section>
+
+        <footer class="article-footer">
+          
+          <div class="article-vote">
+            <span class="article-vote-question">도움이 되었습니까?</span>
+            <div class="article-vote-controls">
+              <a class="btn btn--default fa fa-thumbs-up article-vote-controls__item article-vote-controls__item--up" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="예" href="../signinafab.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fko%2Farticles%2F115002662928-Vungle%25EC%2597%2590-TPAT-%25ED%2586%25B5%25ED%2595%25A9"></a>
+              <a class="btn btn--default fa fa-thumbs-down article-vote-controls__item article-vote-controls__item--down" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="아니요" href="../signinafab.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fko%2Farticles%2F115002662928-Vungle%25EC%2597%2590-TPAT-%25ED%2586%25B5%25ED%2595%25A9"></a>
+            </div>
+          </div>
+          
+        </footer>
+
+      </div>
+    </div>
+    <div class="article-column article-column--right">
+      <div data-toc='{"headers": "h2,h3,h4", "title": "Contents", "offsetTop": 80, "mobileBreakpoint": 1024}'></div>
+    </div>
+  </div>
+
+</div>
+  </main>
+
+        <footer class="footer" id="footer">
+        <div class="footer-inner">
+          <div class="copyright">
+            <div class="copyright__content">
+              <span class="copyright__copy">&copy; 2020 Vungle. All rights reserved.</span>
+            </div>
+          </div>
+          <nav class="footer-menu">
+            <ul class="list-unstyled">
+              <li><a href="https://vungle.com/about-us/">About</a></li>
+              <li><a href="https://vungle.com/login/">Products</a></li>
+              <li><a href="https://vungle.com/contact-us/">Contact us</a></li>
+            </ul>
+          </nav>
+          <ul class="footer-socials list-unstyled">
+            
+              <li><a href="https://www.facebook.com/vungle/" target="_blank" class="fab fa-facebook"></a></li>
+            
+            
+              <li><a href="https://twitter.com/vungle" target="_blank" class="fab fa-twitter"></a></li>
+            
+            
+            
+              <li><a href="https://www.linkedin.com/company/vungle" target="_blank" class="fab fa-linkedin"></a></li>
+            
+            
+            
+            
+              <li><a href="https://www.instagram.com/vungle/" target="_blank" class="fab fa-instagram"></a></li>
+            
+          </ul>
+        </div>
+      </footer>
+          
+    </div>
+    <!-- /.main__container -->
+
+  </div>  
+  <!-- /.main -->
+  
+</div>
+<!-- /.layout -->
+
+
+
+  <!-- / -->
+
+  
+  <script src="../../../../static.zdassets.com/hc/assets/ko.a157d41ecdebc07e58a9.js"></script>
+  <script src="../../../../vungle.zendesk.com/auth/v2/host.js" data-brand-id="60720" data-return-to="https://support.vungle.com/hc/ko/articles/115002662928-Vungle%EC%97%90-TPAT-%ED%86%B5%ED%95%A9" data-theme="hc" data-locale="ko" data-auth-origin="60720,true,true"></script>
+
+  <script type="text/javascript">
+  /*
+
+    Greetings sourcecode lurker!
+
+    This is for internal Zendesk and legacy usage,
+    we don't support or guarantee any of these values
+    so please don't build stuff on top of them.
+
+  */
+
+  HelpCenter = {};
+  HelpCenter.account = {"subdomain":"vungle","environment":"production","name":"Vungle"};
+  HelpCenter.user = {"identifier":"da39a3ee5e6b4b0d3255bfef95601890afd80709","email":null,"name":null,"role":"anonymous","avatar_url":"https://assets.zendesk.com/hc/assets/default_avatar.png","is_admin":false,"organizations":[],"groups":[]};
+  HelpCenter.internal = {"asset_url":"//static.zdassets.com/hc/assets/","web_widget_asset_composer_url":"https://static.zdassets.com/ekr/snippet.js","current_session":{"locale":"ko","csrf_token":null,"shared_csrf_token":null},"settings":{},"usage_tracking":{"event":"article_viewed","data":"BAh7CDoLbG9jYWxlSSIHa28GOgZFVDoPYXJ0aWNsZV9pZGwrCBBgscYaADoKX21ldGF7CzoPYWNjb3VudF9pZGkDPSYIOhNoZWxwX2NlbnRlcl9pZGkENsfsCzoNYnJhbmRfaWRpAjDtOgx1c2VyX2lkMDoTdXNlcl9yb2xlX25hbWVJIg5BTk9OWU1PVVMGOwZUOwBJIgdrbwY7BlQ=--6811cfa5f751cfbc10970eff3bc2fa685933ea28","url":"https://support.vungle.com/hc/activity"},"current_record_id":"115002662928","current_record_url":"/hc/ko/articles/115002662928-Vungle%EC%97%90-TPAT-%ED%86%B5%ED%95%A9","current_record_title":"Vungle에 TPAT 통합","search_results_count":null,"current_text_direction":"ltr","current_brand":{"id":60720,"account_id":534077,"name":"Vungle","active":true,"deleted_at":null,"created_at":"2014-05-29T20:19:19Z","updated_at":"2021-05-13T16:25:53Z","route_id":429018,"signature_template":"{{agent.signature}}"},"current_brand_url":"https://vungle.zendesk.com","current_host_mapping":"support.vungle.com","current_path":"/hc/ko/articles/115002662928-Vungle%EC%97%90-TPAT-%ED%86%B5%ED%95%A9","authentication_domain":"https://vungle.zendesk.com","show_autocomplete_breadcrumbs":true,"rollbar_config":{"enabled":true,"endpoint":"https://rollbar-us.zendesk.com/api/1/item/","accessToken":"731a5a953e9a4b7ab6cac9623f50c732","captureUncaught":true,"captureUnhandledRejections":true,"payload":{"environment":"production","client":{"javascript":{"source_map_enabled":true,"code_version":"8e508d702ea3bb44fb7e90308d7e394bc580895e","guess_uncaught_frames":true}}}},"user_info_changing_enabled":false,"has_user_profiles_enabled":false,"has_end_user_attachments":true,"user_aliases_enabled":false,"has_anonymous_kb_voting":false,"has_multi_language_help_center":true,"mobile_device":false,"mobile_site_enabled":false,"show_at_mentions":false,"embeddables_config":{"embeddables_web_widget":true,"embeddables_connect_ipms":false},"base_domain":"zendesk.com","answer_bot_subdomain":"static","manage_content_url":"https://support.vungle.com/hc/ko","arrange_content_url":"https://support.vungle.com/hc/admin/arrange_contents?locale=ko","general_settings_url":"https://support.vungle.com/hc/admin/general_settings?locale=ko","user_segments_url":"https://vungle.zendesk.com/knowledge/user_segments?brand_id=60720","has_gather":true,"has_community_enabled":false,"has_community_badges":false,"has_user_segments":true,"has_answer_bot_web_form_enabled":false,"has_answer_bot_web_form_modal_v2":false,"has_edit_user_profile_v2":false,"billing_url":"/access/return_to?return_to=https://vungle.zendesk.com/admin/billing/subscription","is_account_owner":false,"theming_cookie_key":"hc-da39a3ee5e6b4b0d3255bfef95601890afd807091-preview","is_preview":false,"has_guide_user_segments_search":true,"has_alternate_templates":false,"arrange_articles_url":"https://vungle.zendesk.com/knowledge/arrange?brand_id=60720","article_verification_url":"https://vungle.zendesk.com/knowledge/verification?brand_id=60720","has_article_verification":false,"guide_language_settings_url":"https://support.vungle.com/hc/admin/language_settings?locale=ko","docs_importer_url":"https://vungle.zendesk.com/knowledge/import_articles?brand_id=60720","community_badges_url":"https://vungle.zendesk.com/knowledge/community_badges?brand_id=60720","community_settings_url":"https://vungle.zendesk.com/knowledge/community_settings?brand_id=60720","gather_plan_state":"subscribed","search_settings_url":"https://vungle.zendesk.com/knowledge/search_settings?brand_id=60720","has_multibrand_search_in_plan":false,"theming_api_version":1,"has_pci_credit_card_custom_field":false,"current_brand_id":60720,"help_center_restricted":false,"current_brand_active":true,"is_assuming_someone_else":false,"flash_messages":[],"user_photo_editing_enabled":true,"has_end_user_apps":false,"has_docs_importer":true,"has_sunco_widget":false,"gather_user_image_upload_via_aus":false,"user_preferred_locale":"en-us"};
+</script>
+
+  <script src="../../../../static.zdassets.com/hc/assets/moment-f6f8513da6ab17eadada59a1a4edb536.js"></script>
+  <script src="../../../../static.zdassets.com/hc/assets/hc_enduser-9fa4fabcc25ad7ce2141d33e2370693a.js"></script>
+  
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6932e3fd88d10fc3',m:'AdDp4suMVTLqcryaEqUpMbNdLzPUTUEmgdjyyMzU2Fw-1632390855-0-AUUZH89OVyrKlIP91sFvdMEhVypizQJsF0y/6SCt5O1a8LunGcfn+gTJBbKafSf1JwtCKspvd4eHbu81UiP1E7HbP8Bg15Voca/yCWuzyqk6nE9+lnQdjg5Fqj55Zw9bTahEYzeF3rvyHywe/Qyd+ZiVB/3kVo3yVDDwhXNA2rUF0fFZ8xn7sljIgbnn1DJsaC/SrEI5xgg83M0ckP64eI8=',s:[0xe1d3af47cd,0xb9116cdda0],}})();</script></body>
+
+<!-- Mirrored from support.vungle.com/hc/ko/articles/115002662928-Vungle에-TPAT-통합 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 10:22:03 GMT -->
+</html>

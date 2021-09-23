@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="pt-BR">
+
+<!-- Mirrored from support.vungle.com/hc/pt-br/articles/360048256211-Integrar-an%C3%BAncios-de-banner by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 10:34:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <!-- v20226 -->
+
+  <title>Integrar anúncios de banner &ndash; Vungle BR</title>
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="" />
+
+  <meta name="description" content="Visão geral O Vungle Banner está atualmente em fase BETA. Entre em contato com seu gerente de conta diretamente para obter acesso e..." /><meta property="og:image" content="https://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Vungle BR" />
+<meta property="og:title" content="Integrar anúncios de banner" />
+<meta property="og:description" content="Visão geral
+O Vungle Banner está atualmente em fase BETA. Entre em contato com seu gerente de conta diretamente para obter acesso e garantir um lançamento bem-sucedido.
+A partir do Vungle SDK v6.5...." />
+<meta property="og:url" content="360048256211-Integrar-an%c3%bancios-de-banner.html" />
+<link rel="canonical" href="360048256211-Integrar-an%c3%bancios-de-banner.html" />
+<link rel="alternate" hreflang="de" href="../../de/articles/360048256211-Banner-Anzeigen-integrieren.html" />
+<link rel="alternate" hreflang="en" href="../../en-us/articles/360048256211-Integrate-Banner-Ads.html" />
+<link rel="alternate" hreflang="es" href="../../es-mx/articles/360048256211-Integrar-anuncios-publicitarios.html" />
+<link rel="alternate" hreflang="fr" href="../../fr-fr/articles/360048256211-Int%c3%a9grer-des-banni%c3%a8res-publicitaires.html" />
+<link rel="alternate" hreflang="ja" href="../../ja/articles/360048256211-%e3%83%90%e3%83%8a%e3%83%bc%e5%ba%83%e5%91%8a%e3%82%92%e7%b5%b1%e5%90%88%e3%81%99%e3%82%8b.html" />
+<link rel="alternate" hreflang="ko" href="../../ko/articles/360048256211-%eb%b0%b0%eb%84%88-%ea%b4%91%ea%b3%a0-%ed%86%b5%ed%95%a9.html" />
+<link rel="alternate" hreflang="pt" href="360048256211-Integrar-an%c3%bancios-de-banner.html" />
+<link rel="alternate" hreflang="ru" href="../../ru/articles/360048256211-%d0%98%d0%bd%d1%82%d0%b5%d0%b3%d1%80%d0%b0%d1%86%d0%b8%d1%8f-%d0%b1%d0%b0%d0%bd%d0%b5%d1%80%d0%bd%d0%be%d0%b9-%d1%80%d0%b5%d0%ba%d0%bb%d0%b0%d0%bc%d1%8b.html" />
+<link rel="alternate" hreflang="zh" href="../../zh-cn/articles/360048256211-Banner%e5%b9%bf%e5%91%8a.html" />
+
+  <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/application-79172500fb4dbec2484043d570946543.css" id="stylesheet" />
+    <!-- Entypo pictograms by Daniel Bruce — www.entypo.com -->
+    <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/theming_v1_support-cf937686d5b6669242017892da7bad78.css" />
+  <link rel="stylesheet" type="text/css" href="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/stylee82d.css?digest=360570052252">
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://theme.zdassets.com/theme_assets/534077/62c5e8616cdae030ecea7cec15cf47a2b729729b.ico" />
+
+    <script src="../../../../static.zdassets.com/hc/assets/jquery-d5395f0b7ac5027403fc17855c46dbfc.js"></script>
+    
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+  analytics.load("bRqfh635lMl7qBpocue716BjaalyFtJD");
+  analytics.page();
+  }}();
+  analytics.ready(function(){
+    Appcues.anonymous();
+});
+</script>
+
+
+
+
+
+
+
+
+
+  <style type="text/css">
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/51587ff68e0ab2bf990a17d993ec1fa7a5451614.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/8677458bb131e09b83d5bf2ec1ab6d015c18fd8b.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1e02ff61edce3f256e3f8de8e6bfb11bb085905f.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/b421ade1cc04519f69e9b4ec0fee3d632f993540.woff") format("woff");
+      font-weight: bold;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1056b20fe6b0f2a56568ecdea5119e1577667803.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/0ea45f63097574b5446148c9670509ae56dc2975.woff") format("woff");
+      font-weight: 300;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/78bd021a78ca5752e43275a982a96b00bd004a54.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/115efed0d77bd96754f56a00f399a05af518a5a4.woff") format("woff");
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/e5e3d4a71bfb2d624edf48819c3dd1597c4397ff.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9f8a21f09879869f644a45d21aea06dde01f2107.woff") format("woff");
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/f4f83c57775879216d798dce95c9a83e442da6ab.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9e93f03906c0fbfd6eba0ecdfe8d739a6b38852d.woff") format("woff");
+      font-weight: bold;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk Screen";
+      src: url("http://theme.zdassets.com/theme_assets/534077/2f8d0cbc16a32df1f8b6c36f45c2b4078181ca43.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/2ab0f28c68ed406c853fec87f698618cd7ac8bc2.woff") format("woff");
+      font-weight: 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk OIL";
+      src: url("http://theme.zdassets.com/theme_assets/534077/0ce9c7bb30841f31bac192ef415fd27771c17fc9.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/422274783804fb9c3e984558285801b01b2fe117.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+
+
+<link rel="stylesheet" href="../../../../use.fontawesome.com/releases/v5.10.1/css/all.css">
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/styles/atelier-lakeside-dark.min.css" />
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" />
+<script src="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+<script src="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/highlight.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<meta property="asseturl" content="//theme.zdassets.com/theme_assets/534077/6ff6e0c84e92580e7cc6e9c77a5cc1e724f36743.gif">
+
+
+<link rel="stylesheet" href="../../../../theme.zdassets.com/theme_assets/534077/02e3878a33d61900d75eb94d43eb4d26929d6dbf.css">
+
+<script src="../../../../theme.zdassets.com/theme_assets/534077/48ea021f3fedbc024c4443d2e946e0b9b742e384.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/469d1d10574fa6f68d243916e96f61e7ce459a5a.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/9893f4b0b18dc4018d50a3716fc581152c21535e.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/ae559ee60cd2d617e942d530c1ee7ac42a973761.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/c2b4df57e1dcfcf1b5d2298b16c409c8315a177b.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/cf5c34722566da1ba5ca5d877dc187d282ca6a3f.js"></script>
+
+<!-- ...Appcues... -->
+<script type="text/javascript">
+  if (userId) {
+    Appcues.identify(userId); 
+  } else {
+    Appcues.anonymous(); 
+  }
+</script>
+
+<script src="../../../../static.zdassets.com/conditional_fields_app_hc/latest/helpcenter.js"></script>
+<script>var cfaRules = [{ "fieldType": "tagger", "field": 114099498832, "value": "user_interface", "select": [114099504272], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "amazon", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "android", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios", "select": [114099505792, 114101637652], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "multi_platforms_other_combination", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "windows", "select": [114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099505792, "value": "other_ios_sdk", "select": [114099619791], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "adincube", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "admob", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "fyber_hezap", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "ironsource_supersonic", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "multiple_mediation", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "other_mediation", "select": [114099556512, 114099619811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "upsight", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "adobe_air", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "corona", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "marmalade", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "other_plugin", "select": [114099620151, 114099620451], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "unity", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099577491, "value": "other_android_sdk", "select": [114099555992], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099619751, "value": "other_windows_sdk", "select": [114099556012], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099621511, "value": "geo_other", "select": [114099622811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_dashboard", "select": [114099498652, 114099499132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_other", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_reportingapi", "select": [114099498652, 114099621211, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_useracquisition", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_notreceivingreward", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_other", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_troublesomead", "select": [114099498672, 114099504752, 114099621511, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_unsubscribeads", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_payment", "select": [114099571371, 114099500132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_accountstatus", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_addtransferusers", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_deleteaccount", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_pwrecovery", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_registration", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_callbacks", "select": [114099498652, 114099556032, 114099556532, 114099620751, 114099621511, 114099504752], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_cocoapods", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_dashboard", "select": [114099498652, 114099498832], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_gradle", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_multidex", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621731], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_noads", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_proguard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557592], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_testmode", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_other", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_reportingapi", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_button", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_crashing", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_endcard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_freezing", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_other", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_sound", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_video", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }];</script>
+
+<style type="text/css">
+
+/* Advertiser */
+.categories__icon--200198330 {
+  background-color: #ff5a41;
+}
+
+.categories__icon--200198330:before,
+#sidenav-category-200198330 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/9f2e8cfd41383f7f21c68fd99567eb1b1a7993ac.svg");
+}
+
+/* SDK */
+.categories__icon--200269670 {
+  background-color: #3c2869;
+}
+
+.categories__icon--200269670:before,
+#sidenav-category-200269670 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/ab38e1e12c6a99fe83f4ea9c02bf87e17510558d.svg");
+}
+
+/* Publisher */
+.categories__icon--360001994512 {
+  background-color: #6e7dff;
+}
+
+.categories__icon--360001994512:before,
+#sidenav-category-360001994512 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/8a0ee6cf2a1300b8adf5a19112e81db3c070a273.svg");
+}
+
+/* FAQs */
+.categories__icon--115000802567 {
+  background-color: #ffd700;
+}
+
+.categories__icon--115000802567:before,
+#sidenav-category-115000802567 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/840643095495a2f0380fbe420efb55b7a63277fe.svg");
+}
+
+/* Creative */
+.categories__icon--360001724259 {
+  background-color: #ffd2e1;
+}
+
+.categories__icon--360001724259:before,
+#sidenav-category-360001724259 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/2bb5eeecadf61018e2bda864d22706f146b5a208.svg");
+}
+
+</style>
+  <script type="text/javascript" src="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/scripte82d.js?digest=360570052252"></script>
+<script async src='../../../cdn-cgi/bm/cv/669835187/api.js'></script></head>
+<body class="">
+  
+  
+
+  <div class="js-alert-box"></div>
+
+<div class="layout" >
+
+  <aside class="sidebar" data-sidebar>
+  <div class="sidebar__header">
+    <div class="sidebar__container sidebar__container--fixed">
+      <div class="sidebar__logo">
+        <a title="Página inicial" href="../../pt-br.html">
+          <img src="http://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" alt="Logotipo">
+        </a>
+      </div>
+      <ul class="sidebar__list">
+        <li class="sidebar__item">
+          <a class="sidebar__link sidebar__link--home" title="Página inicial" href="../../pt-br.html">Home</a>
+        </li>
+      </ul>
+      <div class="sidebar__top-nav"></div>
+      <div class="sidebar__content-block" data-sidebar-content></div>
+    </div>
+  </div>
+
+  <div class="sidebar__container">
+    <div class="sidebar__bottom-nav">
+      <div class="sidebar__bottom-nav-item">
+        
+          <div class="dropdown language-selector" aria-haspopup="true">
+            <a class="dropdown-toggle btn btn--default btn--small">
+              Português do Brasil
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+              </svg>
+            </a>
+            <span class="dropdown-menu" role="menu">
+              
+                <a href="../../de/articles/360048256211-Banner-Anzeigen-integrieren.html?return_to=%2Fhc%2Fde%2Farticles%2F360048256211-Banner-Anzeigen-integrieren" dir="ltr" rel="nofollow" role="menuitem">
+                  Deutsch
+                </a>
+              
+                <a href="../../en-us/articles/360048256211-Integrate-Banner-Ads.html?return_to=%2Fhc%2Fen-us%2Farticles%2F360048256211-Integrate-Banner-Ads" dir="ltr" rel="nofollow" role="menuitem">
+                  English (US)
+                </a>
+              
+                <a href="../../es-mx/articles/360048256211-Integrar-anuncios-publicitarios.html?return_to=%2Fhc%2Fes-mx%2Farticles%2F360048256211-Integrar-anuncios-publicitarios" dir="ltr" rel="nofollow" role="menuitem">
+                  Español (México)
+                </a>
+              
+                <a href="../../fr-fr/articles/360048256211-Int%c3%a9grer-des-banni%c3%a8res-publicitaires-2.html?return_to=%2Fhc%2Ffr-fr%2Farticles%2F360048256211-Int%25C3%25A9grer-des-banni%25C3%25A8res-publicitaires" dir="ltr" rel="nofollow" role="menuitem">
+                  Français (France)
+                </a>
+              
+                <a href="../../ja/articles/360048256211-%e3%83%90%e3%83%8a%e3%83%bc%e5%ba%83%e5%91%8a%e3%82%92%e7%b5%b1%e5%90%88%e3%81%99%e3%82%8b-2.html?return_to=%2Fhc%2Fja%2Farticles%2F360048256211-%25E3%2583%2590%25E3%2583%258A%25E3%2583%25BC%25E5%25BA%2583%25E5%2591%258A%25E3%2582%2592%25E7%25B5%25B1%25E5%2590%2588%25E3%2581%2599%25E3%2582%258B" dir="ltr" rel="nofollow" role="menuitem">
+                  日本語
+                </a>
+              
+                <a href="../../ko/articles/360048256211-%eb%b0%b0%eb%84%88-%ea%b4%91%ea%b3%a0-%ed%86%b5%ed%95%a9-2.html?return_to=%2Fhc%2Fko%2Farticles%2F360048256211-%25EB%25B0%25B0%25EB%2584%2588-%25EA%25B4%2591%25EA%25B3%25A0-%25ED%2586%25B5%25ED%2595%25A9" dir="ltr" rel="nofollow" role="menuitem">
+                  한국어
+                </a>
+              
+                <a href="../../ru/articles/360048256211-%d0%98%d0%bd%d1%82%d0%b5%d0%b3%d1%80%d0%b0%d1%86%d0%b8%d1%8f-%d0%b1%d0%b0%d0%bd%d0%b5%d1%80%d0%bd%d0%be%d0%b9-%d1%80%d0%b5%d0%ba%d0%bb%d0%b0%d0%bc%d1%8b-2.html?return_to=%2Fhc%2Fru%2Farticles%2F360048256211-%25D0%2598%25D0%25BD%25D1%2582%25D0%25B5%25D0%25B3%25D1%2580%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-%25D0%25B1%25D0%25B0%25D0%25BD%25D0%25B5%25D1%2580%25D0%25BD%25D0%25BE%25D0%25B9-%25D1%2580%25D0%25B5%25D0%25BA%25D0%25BB%25D0%25B0%25D0%25BC%25D1%258B" dir="ltr" rel="nofollow" role="menuitem">
+                  Русский
+                </a>
+              
+                <a href="../../zh-cn/articles/360048256211-Banner%e5%b9%bf%e5%91%8a-2.html?return_to=%2Fhc%2Fzh-cn%2Farticles%2F360048256211-Banner%25E5%25B9%25BF%25E5%2591%258A" dir="ltr" rel="nofollow" role="menuitem">
+                  简体中文
+                </a>
+              
+            </span>
+          </div>
+        
+      </div>
+      <div class="sidebar__bottom-nav-item">  
+        <a href="https://vungle.com/login/" target="_blank" class="">
+          Platform
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="a" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#AAB2BA" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#a"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="sidebar__overlay"></div>
+
+  <div class="main">
+
+    <div class="main__header">
+
+      <a href="#" class="sidebar-toggle__link" data-toggle-menu role="button">
+        <span class="sidebar-toggle__burger"><span></span></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--menu"></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--close"></span>
+      </a>
+
+      <div class="main__search">
+        <form role="search" class="search" data-search="" data-instant="true" autocomplete="off" action="https://support.vungle.com/hc/pt-br/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" /><input type="search" name="query" id="query" placeholder="Search..." autocomplete="off" aria-label="Search..." />
+<input type="submit" name="commit" value="Pesquisa" /></form>
+      </div>
+      <div class="main__nav">
+        <a href="../../en-us/sections/360004473112.html" class="btn btn--topbar hidden-mobile">
+          Early Access SDK
+        </a>
+        <a href="https://vungle.com/signup/" target="_blank" class="btn btn--topbar">
+          Platform
+          <svg width="24" height="24" viewBox="0 0 24 24"><defs><path id="b" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#0ccec9" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#b"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="main__container">
+
+  <main role="main">
+    <div class="article-page" data-article-page>
+
+  <div class="row">
+    <div class="article-column article-column--left">
+      <div class="box">
+        <div class="article-page__wrap" data-article-wrap>
+          <article class="article js-active-article" itemscope itemtype="http://schema.org/Article" data-article="360048256211">
+            <header class="article-header">
+              <ol class="breadcrumbs">
+  
+    <li title="Vungle BR">
+      
+        <a href="../../pt-br.html">Vungle BR</a>
+      
+    </li>
+  
+    <li title="Monetization">
+      
+        <a href="../categories/200269670-Monetization.html">Monetization</a>
+      
+    </li>
+  
+    <li title="Guias de integração de SDK para Android">
+      
+        <a href="../sections/115000243451-Guias-de-integra%c3%a7%c3%a3o-de-SDK-para-Android.html">Guias de integração de SDK para Android</a>
+      
+    </li>
+  
+</ol>
+
+              <h1 class="h2 article-title" itemprop="name">
+                
+                Integrar anúncios de banner
+              </h1>
+
+              <div class="article-meta">
+                <div class="entry-info">
+                  <div class="entry-info__avatar">
+                    <div class="avatar avatar--agent">
+                      <img class="user-avatar user-avatar--default" src="../../../system/photos/420191068/Profile_Picture.jpg" alt="Avatar">
+                    </div>
+                  </div>
+                  <div class="entry-info__content">
+                    <b class="author">
+                      David Kim
+                    </b>
+                    <div class="meta"><time datetime="2021-09-01T22:54:02Z" title="2021-09-01T22:54:02Z" data-datetime="calendar">1 de setembro de 2021 22:54</time></div>
+                  </div>
+                </div>
+                <a class="article-subscribe" title="Abrir um diálogo de acesso" rel="nofollow" role="button" data-auth-action="signin" aria-selected="false" href="360048256211-Integrar-an%c3%bancios-de-banner/subscription.html">Seguir</a>
+              </div>
+            </header>
+
+            <div class="article__body markdown" itemprop="articleBody">
+
+              <div class="article-main">
+                <h2>Visão geral</h2>
+<p><strong>O Vungle Banner está atualmente em fase BETA. Entre em contato com seu gerente de conta diretamente para obter acesso e garantir um lançamento bem-sucedido.</strong></p>
+<p>A partir do Vungle SDK v6.5.1, o Vungle oferece suporte a anúncios de banner. Tanto o MREC quanto os anúncios de banner exigem a versão 16 da API ou superior.</p>
+<p>Semelhante aos anúncios MREC, os anúncios de banner em vídeo são anúncios retangulares que ocupam um local em qualquer lugar dentro do layout do aplicativo, normalmente exibidos na parte superior ou inferior da tela, para que o usuário possa continuar a interagir com o aplicativo enquanto o anúncio é reproduzido. O tamanho do local para renderizar anúncios de banner pode ser 320x50, 300x50 ou 728x90 (para tablets).</p>
+<table class="table table--color-header" style="width: 592px;">
+<thead><tr>
+<td style="width: 326px;"><strong>Tamanho do banner</strong></td>
+<td style="width: 243px;"><strong>Dimensões</strong></td>
+</tr></thead>
+<tbody>
+<tr>
+<td style="width: 326px;">
+<p><code>AdConfig.AdSize.BANNER</code></p>
+</td>
+<td style="width: 243px;">320x50</td>
+</tr>
+<tr>
+<td style="width: 326px;">
+<p><code>AdConfig.AdSize.BANNER_SHORT</code></p>
+</td>
+<td style="width: 243px;">300x50</td>
+</tr>
+<tr>
+<td style="width: 326px;">
+<p><code>AdConfig.AdSize.BANNER_LEADERBOARD</code></p>
+</td>
+<td style="width: 243px;">
+<p>728x90 (para tablets)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h2>Etapa 1. Integração básica completa</h2>
+<p>Para integrar anúncios de banner em seu aplicativo Android ou Amazon, siga as instruções no artigo de <a href="../../en-us/articles/360002922871.html" target="_self">integração básica</a>. Este artigo contém informações complementares e pressupõe que você tenha concluído a integração básica.</p>
+<h2>
+<a name="ImplementEventListeners"></a>Etapa 2. Implementar ouvintes de eventos</h2>
+<p>Você pode usar callbacks genéricas, implementando <code>LoadAdCallback</code> para eventos de carregamento de anúncios e <code>PlayAdCallback</code> para eventos de reprodução de anúncios, ou usar callbacks em linhas ao invocar <code>loadAd</code> e <code>playAd</code>.</p>
+<h3>
+<a name="LoadAdCallback"></a>Implementar LoadAdCallback</h3>
+<div class="tabs tabs--code">
+<div class="tabs-menu">
+<span class="tabs-link is-active">6.5.0 e acima</span> <span class="tabs-link">Legado</span>
+</div>
+<div class="tab">
+<pre><code class="java">private final LoadAdCallback vungleLoadAdCallback = new LoadAdCallback() { 
+  @Override
+  public void onAdLoad(String id) { 
+    // Ad has been successfully loaded for the placement
+  } 
+
+  @Override 
+  public void onError(String id, VungleException exception) { 
+    // Ad has failed to load for the placement
+  }
+};</code></pre>
+</div>
+<div class="tab is-hidden">
+<pre><code class="java">// 6.4.x &amp; below
+private final LoadAdCallback vungleLoadAdCallback = new LoadAdCallback() { 
+  @Override
+  public void onAdLoad(String id) { 
+    // Ad has been successfully loaded for the placement
+  } 
+
+  @Override 
+  public void onError(String id, Throwable throwable) { 
+    // Ad has failed to load for the placement
+  }
+};</code></pre>
+</div>
+</div>
+<table class="table table--color-header" style="width: 699px;">
+<thead><tr>
+<th style="width: 69px;">Métodos substituíveis</th>
+<th style="width: 304px;">Descrição</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="width: 69px;"><code>onAdLoad(String id)</code></td>
+<td style="width: 304px;">Chamado quando o anúncio é carregado com sucesso e reproduzido para a veiculação</td>
+</tr>
+<tr>
+<td style="width: 69px;"><code>onError(String id)</code></td>
+<td style="width: 304px;">Chamado quando ocorre um erro ao tentar reproduzir um anúncio. Você poderá verificar a mensagem de erro de <code>getLocalizedMessage</code> de <code>VungleException</code>e usar <a href="#ExceptionCodesForDebugging"><code>getExceptionCode</code> para depuração</a>.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a name="PlayAdCallback"></a>Implementar PlayAdCallback</h3>
+<div class="tabs tabs--code">
+<div class="tabs-menu">
+<span class="tabs-link is-active">6.6.0 e acima</span> <span class="tabs-link">Legado</span>
+</div>
+<div class="tab">
+<pre><code class="java">private final PlayAdCallback vunglePlayAdCallback = new PlayAdCallback() {
+  @Override
+  public void onAdStart(String id) { 
+    // Ad experience started
+  }
+
+  @Override
+  public void onAdEnd(String id) {
+    // Ad experience ended
+  }
+
+  @Override
+  public void onAdClick(String id) {
+    // User clicked on ad<br>  }
+
+  @Override
+  public void onAdRewarded(String id) {
+    // User earned reward for watching an ad
+  }
+
+  @Override
+  public void onAdLeftApplication(String id) {
+    // User has left app during an ad experience
+  }
+
+  @Override
+  public void onError(String id, VungleException exception) { 
+    // Ad failed to play
+  }
+};</code></pre>
+</div>
+<div class="tab is-hidden">
+<pre><code class="java">// 6.5.x &amp; below
+private final PlayAdCallback vunglePlayAdCallback = new PlayAdCallback() { 
+  @Override 
+  public void onAdStart(String placementReferenceId) {<br>    // Ad experience started<br>  } 
+
+  // Deprecated
+  @Override
+  public void onAdEnd(String placementReferenceId, boolean completed, boolean isCTAClicked) {<br>    // <span style="font-weight: 400;">Invoked when the ad experience is completed<br>    // isCTAClicked flag indicates whether CTA download button has been triggered<br>    // completed flag will indicate whether user has watched 80% of video or longer.</span><br>  }
+
+  @Override 
+  public void onError(String placementReferenceId, VungleException exception) {<br><span>// Ad failed to play</span><br>}
+};</code></pre>
+</div>
+</div>
+<table class="table table--color-header" style="width: 699px;">
+<thead><tr>
+<th style="width: 234px;">Métodos substituíveis</th>
+<th style="width: 466px;">Descrição</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="width: 234px;"><code>onAdStart(String id)</code></td>
+<td style="width: 466px;">Invocado quando o anúncio é lançado com sucesso e exibido no dispositivo.</td>
+</tr>
+<tr>
+<td style="width: 234px;"><code>onAdEnd(String id)</code></td>
+<td style="width: 466px;">Invocado quando toda a experiência do anúncio é concluída, pouco antes de o controle retornar ao aplicativo de origem.</td>
+</tr>
+<tr>
+<td style="width: 234px;"><code>onAdClick(String id)</code></td>
+<td style="width: 466px;">Invocado quando o usuário clica em um anúncio em vídeo ou botão de download.</td>
+</tr>
+<tr>
+<td style="width: 234px;"><code>onAdRewarded(String id)</code></td>
+<td style="width: 466px;">Invocado quando o usuário concluiu 80% do vídeo com recompensa e deve ser recompensado. Recompensar o usuário deve ocorrer aqui e só <span style="font-weight: 400;">será acionado para veiculações com recompensa</span>.</td>
+</tr>
+<tr>
+<td style="width: 234px;"><code>onAdLeftApplication(String id)</code></td>
+<td style="width: 466px;">Invocado quando o usuário sai do aplicativo antes que a experiência do anúncio seja concluída, como abrir a página da Loja do anúncio.</td>
+</tr>
+<tr>
+<td style="width: 234px;"><code>onAdError(String id, VungleException exception)</code></td>
+<td style="width: 466px;">Chamado quando ocorre um erro ao tentar reproduzir um anúncio. Você poderá verificar a mensagem de erro de <code>getLocalizedMessage</code> de <code>VungleException</code>e usar <a href="#ExceptionCodesForDebugging"><code>getExceptionCode</code> para depuração</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2>Etapa 3. Carregar, exibir e fechar um anúncio de banner</h2>
+<h3>
+<a name="LoadABannerAd"></a>Carregar um anúncio de banner</h3>
+<p>Carregar um anúncio de banner funciona de maneira diferente do que para outros formatos de anúncio. Existe uma API <code>Banners</code> específica que você usa para carregar, reproduzir e verificar a disponibilidade de anúncios. Você deve especificar o tamanho do banner que deseja carregar, e o SDK o atualizará automaticamente com o intervalo de tempo que você configurou no painel. Você também deve configurar o posicionamento para suportar um feed de banner, portanto, entre em contato com seu gerente de conta da Vungle para habilitar os anúncios de banner para um canal.</p>
+<ul>
+<li>Carregue um anúncio de banner, chamando o método <code>loadBanner</code>:<div class="tabs tabs--code">
+<div class="tabs-menu"></div>
+<div class="tab">
+<pre><code class="java">Banners.loadBanner("BANNER_ID", AdConfig.AdSize.BANNER, vungleLoadAdCallback);</code></pre>
+</div>
+</div>
+</li>
+<li>Verifique a disponibilidade do anúncio de banner, chamando o método <code>canPlayAd</code>:<div class="tabs tabs--code">
+<div class="tabs-menu"></div>
+<div class="tab">
+<pre><code class="java">Banners.canPlayAd(ad.placementReferenceId, AdConfig.AdSize.BANNER);</code></pre>
+</div>
+</div>
+</li>
+</ul>
+<h3>
+<a name="DisplayABannerAd"></a>Exibir um anúncio de banner</h3>
+<p>Como o tamanho da visualização é fixo, você deve especificar o local usado para exibir anúncios de banner com um dos tamanhos suportados: 320x50, 300x50 ou 728x90 (para tablets). Você pode colocar a visualização em qualquer lugar da tela. Este local é um <code>LayOut</code>. Seu tamanho deve ser igual ou maior que o tamanho do banner que você está usando. Você pode colocar esse <code>LayOut</code> em qualquer lugar da tela. Então você deve passar o tamanho do banner que você está usando via API <code>Banners</code>.</p>
+<p>Passe este objeto ao chamar <code>Banners.loadBanner</code> para especificar o tamanho que você está exibindo e use <code>Banners.getBanner</code> para obter o objeto do anúncio <code>Banners</code>. Por fim, chame o método para associar o local ao anúncio de banner.</p>
+<div class="tabs tabs--code">
+<div class="tab">
+<pre><code class="java">private RelativeLayout bannerContainer = findViewById(...);
+// Check for banner ad availability and display
+if (Banners.canPlayAd("BANNER_ID", AdConfig.AdSize.BANNER)) {
+  VungleBanner vungleBanner = Banners.getBanner("BANNER_ID", AdConfig.AdSize.BANNER, vunglePlayAdCallback);
+  bannerContainer.addView(vungleBanner);
+}</code></pre>
+</div>
+</div>
+<h3>
+<a name="CloseABannerAd"></a>Fechar um anúncio de banner</h3>
+<p>Como a visualização do anúncio de banner foi adicionada à visualização do local, ela também deve ser removida se a visualização do anúncio desaparecer da tela, se a atividade ou fragmento for destruído ou se o local de exibição principal for reciclado ou destruído. Se você tentar reproduzir outro anúncio de banner sem fechar o anúncio anterior, isso causará um comportamento inesperado no seu aplicativo.</p>
+<div class="tabs tabs--code">
+<div class="tab">
+<pre><code class="java">vungleBanner.destroyAd();</code></pre>
+</div>
+</div>
+<h2>Etapa 4. Usar nossa API <code>VungleBanner</code> para controle avançado (opcional)</h2>
+<p>Na maioria dos casos, a integração descrita acima é suficiente e o <code>VungleBanner</code> é gerenciado. Porém, se a visualização do <code>VungleBanner</code> estiver dentro de uma lista ou de um <code>RecyclerView</code>, o <code>VungleBanner</code> gerenciado não funcionará corretamente. No momento em que o usuário rolar o anúncio para fora da tela e voltar, o anúncio será concluído e não estará mais lá. Para tais casos, fornecemos uma API avançada para controle mais próximo do <code>VungleBanner</code>.</p>
+<h3 id="vunglebanner-class-api-0-5">
+<code>VungleBanner</code> API de classe</h3>
+<p>Essas APIs fornecem aos desenvolvedores um controle preciso sobre como tratar o <code>VungleBanner</code> entre os vários eventos do ciclo de vida no aplicativo do desenvolvedor. Na maioria dos casos de uso, os desenvolvedores não precisam invocar esses métodos. Basta adicionar um <code>VungleBanner</code> em uma visualização principal.</p>
+<p>Em casos raros, no entanto, uma visualização será reciclada (como um <code>RecyclerView</code>, <code>ListView</code>, etc.) ou precisaremos lidar com a visibilidade manualmente (em alguns dispositivos Android mais antigos, a <code>WebView</code> não é pausada automaticamente quando sai da tela).</p>
+<table class="table table--color-header" style="width: 699px;">
+<thead><tr>
+<td style="width: 298px;"><strong>Nome</strong></td>
+<td style="width: 347px;"><strong>Função</strong></td>
+<td style="width: 293px;"><strong>Notas</strong></td>
+</tr></thead>
+<tbody>
+<tr>
+<td style="width: 298px;"><span style="font-weight: 400;"><code>disableLifeCycleManagement(boolean disabled)</code></span></td>
+<td style="width: 347px;">Invoque para desativar o gerenciamento automático de banner</td>
+<td style="width: 293px;">Deve ser definido como ‘true’ para renderAd e setAdVisibility funcionarem</td>
+</tr>
+<tr>
+<td style="width: 298px;"><span style="font-weight: 400;"><code>renderAd*</code></span></td>
+<td style="width: 347px;"><span style="font-weight: 400;">Renderiza o anúncio se ele não estiver visível</span></td>
+<td style="width: 293px;">Também pode carregar novos anúncios</td>
+</tr>
+<tr>
+<td style="width: 298px;"><span style="font-weight: 400;"><code>setAdVisibility*</code></span></td>
+<td style="width: 347px;"><span style="font-weight: 400;">Notifica o local de visualização quando o banner está visível na tela</span></td>
+<td style="width: 293px;">Pausar e retomar banner</td>
+</tr>
+<tr>
+<td style="width: 298px;"><span style="font-weight: 400;"><code>destroyAd</code></span></td>
+<td style="width: 347px;"><span style="font-weight: 400;">Chame para destruir quando não for mais necessário, o local de visualização não poderá mais ser usado</span></td>
+<td style="width: 293px;">Libera recursos de banner</td>
+</tr>
+<tr>
+<td style="width: 298px;"><span style="font-weight: 400;"><code>finishAd*</code></span></td>
+<td style="width: 347px;">
+<span style="font-weight: 400;">Interrompe o anúncio atual, envia um relatório e permite que outro anúncio seja carregado depois (aplicável apenas para certa integração em RecyclerView ou ListView</span>)</td>
+<td style="width: 293px;">Libera recursos de banner</td>
+</tr>
+</tbody>
+</table>
+<p><span style="font-weight: 400;">*Você deve invocar <code>vungleBannerAd.disableLifeCycleManagement(true)</code> antes de usar esta API.</span></p>
+<h3>
+<a name="AboutManagedAndUnmanaged"></a>Visualizações <code>VungleBanner</code> gerenciadas e não gerenciadas</h3>
+<p>Quando você obtém um <code>VungleBanner</code>, por padrão, é uma visualização gerenciada. Isso significa que, no momento em que você adiciona essa visualização a um local principal, o Vungle controla quando exibir um anúncio, quando destruir um anúncio e quando enviar o relatório. Os eventos de visibilidade também são atendidos e os desenvolvedores não precisam notificar o SDK quando um objeto de exibição de banner está na tela ou não. Nos casos em que um desenvolvedor não tem uma visualização do <code>VungleBanner</code> dentro de uma visualização reciclável ou padrão <code>ViewHolder</code>, esta é a forma preferida de usar o <code>VungleBanner</code>.</p>
+<p>Nos casos em que uma visualização <code>VungleBanner</code> está dentro de um <code>ListView</code> ou <code>RecyclerView</code>, o <code>VungleBanner</code> gerenciado não funcionará corretamente. No momento em que o usuário rolar o anúncio para fora da tela e voltar, o anúncio será concluído e não estará mais lá.</p>
+<p><img src="../../article_attachments/360065546312/BannerFlowChart.png" alt="BannerFlowChart.png" width="673" height="223"></p>
+<p>Para esses casos, adicionamos a API <code>disableLifeCycleManagement(boolean disable)</code> para permitir que os desenvolvedores lidem com o ciclo de vida do <code>VungleBanner</code> manualmente.</p>
+<p>Antes de adicionar o <code>VungleBanner</code> a uma visualização ou vinculá-la, ao definir:</p>
+<pre><code>vungleBannerAd.disableLifeCycleManagement(boolean disabled)</code></pre>
+<p>Você deve chamar:</p>
+<ul>
+<li>
+<code>VungleBanner.renderAd()</code> quando a visualização é limitada</li>
+<li>
+<code>VungleBanner.setAdVisibility(true|false)</code> quando o anúncio é reciclado ou não está mais visível</li>
+<li>
+<code>VungleBanner.destroyAd()</code> quando o objeto <code>VungleBanner</code> não é mais necessário</li>
+</ul>
+<h2>
+<a name="AdConfigurationOptions"></a>Etapa 5. Personalizar anúncios de banner (opcional)</h2>
+<p>Você tem a opção de personalizar anúncios individuais que reproduz, fornecendo um novo objeto <code>adConfig</code> para o <code>playAd</code>. Quando o objeto <code>AdConfig</code> é nulo, o anúncio é reproduzido com as configurações padrão; quando não é nulo, suas configurações substituem as do <code>AdConfig</code>. A seguir está um exemplo de como usar o <code>AdConfig</code>:</p>
+<div class="tabs tabs--code">
+<div class="tabs-menu"></div>
+<div class="tab">
+<pre><code class="java">Vungle.playAd(placementReferenceID, adConfig, vunglePlayAdCallback);</code></pre>
+</div>
+</div>
+<p>O exemplo acima usa o objeto <code>adConfig</code>, que contém opções de configuração personalizadas. Defina o objeto <code>AdConfig</code> como mostrado:</p>
+<div class="tabs tabs--code">
+<div class="tab">
+<pre><code class="java">AdConfig adConfig = new AdConfig();
+adConfig.setAdOrientation(AdConfig.AUTO_ROTATE);
+adConfig.setMuted(true);
+Vungle.playAd(placementReferenceID, adConfig, vunglePlayAdCallback);</code></pre>
+</div>
+</div>
+<p>A tabela a seguir lista as opções disponíveis do <code>AdConfig</code> para anúncios de banner:</p>
+<table class="table table--color-header" style="width: 569px;">
+<thead><tr>
+<td style="width: 101px;"><strong>Opção</strong></td>
+<td style="width: 445px;"><strong>Descrição</strong></td>
+</tr></thead>
+<tbody>
+<tr>
+<td style="width: 101px;">
+<p><code>setMuted</code></p>
+</td>
+<td style="width: 445px;">
+<p>‘false’ se o vídeo começar com as configurações de áudio correspondentes à do aplicativo em questão, ‘true’ se começar mudo</p>
+</td>
+</tr>
+<tr>
+<td style="width: 101px;">
+<p><code>setOrdinal</code></p>
+</td>
+<td style="width: 445px;">
+<p>tem um valor inteiro ordinal para rastrear o número de anúncios que foram reproduzidos na mesma sessão</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Observação:</strong> você pode usar o mesmo objeto <code>AdConfig</code> para vários anúncios.</p>
+<h2>
+<a name="BestPractice"></a>Práticas recomendadas</h2>
+<ol>
+<li>Antes de tentar mostrar um anúncio de banner, sempre tente verificar se a atividade principal foi concluída antes de vincular o <code>VungleBanner</code> a uma visualização.<pre><code>if (activity != null &amp;&amp; activity.isFinishing()) {
+  return;
+}</code></pre>
+</li>
+<li>Não mude o <code>LayoutParams</code> de <code>VungleBanner</code>. Isso pode afetar negativamente a forma como o banner é exibido e, possivelmente, fazer com que seu anúncio não seja visível.</li>
+<li>Não coloque o anúncio em um local de tamanho menor que o anúncio solicitado. Se você estiver solicitando um banner regular (320 x 50), certifique-se de que seu local principal seja de pelo menos 320 dp x 50 dp.</li>
+</ol>
+<h2>
+<a name="SampleCodeAdvancedIntegration"></a>Código de amostra para integração avançada</h2>
+<p><a href="https://github.com/Vungle/Android-SDK/blob/v6.5.0-banners/app/src/main/java/com/publisher/sample/VungleBannerAdAdapter.java" target="_self">VungleBannerAdAdapter.java</a></p>
+              </div>     
+
+            </div>
+
+            <div class="article__attachments">
+              
+            </div>
+
+          </article>
+        </div>
+
+        <div class="article-loader fa fa-spinner fa-spin fa-3x fa-fw" id="article-loader"></div>
+
+        
+          <a class="article-banner" href="https://vungle.com/signup" target="_blank">
+            <span class="article-banner__title">
+              <span>Powered by Creativity</span>
+              <span>Driven by Performance</span>
+            </span>
+            <span class="article-banner__cta">Sign Up Here</span>
+          </a>
+        
+
+        <div data-prevnext='{"showArticleTitle": true, "classNameBtn": ""}'></div>
+
+        <section class="submit-ticket submit-ticket--article">
+          <div class="submit-ticket-col submit-ticket-col--left">
+            <h2 class="submit-ticket-title">Questions?</h2>
+            <p>Need further assistance, feel free to reach out to us, we’re here to help!</p>
+          </div>
+          <div class="submit-ticket-col submit-ticket-col--right">
+            <a class="btn btn--default" href="../requests/new.html">Enviar uma solicitação</a>
+          </div>
+        </section>
+
+        <footer class="article-footer">
+          
+          <div class="article-vote">
+            <span class="article-vote-question">Esse artigo foi útil?</span>
+            <div class="article-vote-controls">
+              <a class="btn btn--default fa fa-thumbs-up article-vote-controls__item article-vote-controls__item--up" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="Sim" href="../signin1a87.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fpt-br%2Farticles%2F360048256211-Integrar-an%25C3%25BAncios-de-banner"></a>
+              <a class="btn btn--default fa fa-thumbs-down article-vote-controls__item article-vote-controls__item--down" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="Não" href="../signin1a87.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fpt-br%2Farticles%2F360048256211-Integrar-an%25C3%25BAncios-de-banner"></a>
+            </div>
+          </div>
+          
+        </footer>
+
+      </div>
+    </div>
+    <div class="article-column article-column--right">
+      <div data-toc='{"headers": "h2,h3,h4", "title": "Contents", "offsetTop": 80, "mobileBreakpoint": 1024}'></div>
+    </div>
+  </div>
+
+</div>
+  </main>
+
+        <footer class="footer" id="footer">
+        <div class="footer-inner">
+          <div class="copyright">
+            <div class="copyright__content">
+              <span class="copyright__copy">&copy; 2020 Vungle. All rights reserved.</span>
+            </div>
+          </div>
+          <nav class="footer-menu">
+            <ul class="list-unstyled">
+              <li><a href="https://vungle.com/about-us/">About</a></li>
+              <li><a href="https://vungle.com/login/">Products</a></li>
+              <li><a href="https://vungle.com/contact-us/">Contact us</a></li>
+            </ul>
+          </nav>
+          <ul class="footer-socials list-unstyled">
+            
+              <li><a href="https://www.facebook.com/vungle/" target="_blank" class="fab fa-facebook"></a></li>
+            
+            
+              <li><a href="https://twitter.com/vungle" target="_blank" class="fab fa-twitter"></a></li>
+            
+            
+            
+              <li><a href="https://www.linkedin.com/company/vungle" target="_blank" class="fab fa-linkedin"></a></li>
+            
+            
+            
+            
+              <li><a href="https://www.instagram.com/vungle/" target="_blank" class="fab fa-instagram"></a></li>
+            
+          </ul>
+        </div>
+      </footer>
+          
+    </div>
+    <!-- /.main__container -->
+
+  </div>  
+  <!-- /.main -->
+  
+</div>
+<!-- /.layout -->
+
+
+
+  <!-- / -->
+
+  
+  <script src="../../../../static.zdassets.com/hc/assets/pt-br.0ab8b8244a6327d7ec6b.js"></script>
+  <script src="../../../../vungle.zendesk.com/auth/v2/host.js" data-brand-id="60720" data-return-to="https://support.vungle.com/hc/pt-br/articles/360048256211-Integrar-an%C3%BAncios-de-banner" data-theme="hc" data-locale="pt-br" data-auth-origin="60720,true,true"></script>
+
+  <script type="text/javascript">
+  /*
+
+    Greetings sourcecode lurker!
+
+    This is for internal Zendesk and legacy usage,
+    we don't support or guarantee any of these values
+    so please don't build stuff on top of them.
+
+  */
+
+  HelpCenter = {};
+  HelpCenter.account = {"subdomain":"vungle","environment":"production","name":"Vungle"};
+  HelpCenter.user = {"identifier":"da39a3ee5e6b4b0d3255bfef95601890afd80709","email":null,"name":null,"role":"anonymous","avatar_url":"https://assets.zendesk.com/hc/assets/default_avatar.png","is_admin":false,"organizations":[],"groups":[]};
+  HelpCenter.internal = {"asset_url":"//static.zdassets.com/hc/assets/","web_widget_asset_composer_url":"https://static.zdassets.com/ekr/snippet.js","current_session":{"locale":"pt-br","csrf_token":null,"shared_csrf_token":null},"settings":{},"usage_tracking":{"event":"article_viewed","data":"BAh7CDoLbG9jYWxlSSIKcHQtYnIGOgZFVDoPYXJ0aWNsZV9pZGwrCNNkjNRTADoKX21ldGF7CzoPYWNjb3VudF9pZGkDPSYIOhNoZWxwX2NlbnRlcl9pZGkENsfsCzoNYnJhbmRfaWRpAjDtOgx1c2VyX2lkMDoTdXNlcl9yb2xlX25hbWVJIg5BTk9OWU1PVVMGOwZUOwBJIgpwdC1icgY7BlQ=--0ca65746f7e5a11b68a8b96f94c82b30ed3b7cc3","url":"https://support.vungle.com/hc/activity"},"current_record_id":"360048256211","current_record_url":"/hc/pt-br/articles/360048256211-Integrar-an%C3%BAncios-de-banner","current_record_title":"Integrar anúncios de banner","search_results_count":null,"current_text_direction":"ltr","current_brand":{"id":60720,"account_id":534077,"name":"Vungle","active":true,"deleted_at":null,"created_at":"2014-05-29T20:19:19Z","updated_at":"2021-05-13T16:25:53Z","route_id":429018,"signature_template":"{{agent.signature}}"},"current_brand_url":"https://vungle.zendesk.com","current_host_mapping":"support.vungle.com","current_path":"/hc/pt-br/articles/360048256211-Integrar-an%C3%BAncios-de-banner","authentication_domain":"https://vungle.zendesk.com","show_autocomplete_breadcrumbs":true,"rollbar_config":{"enabled":true,"endpoint":"https://rollbar-us.zendesk.com/api/1/item/","accessToken":"731a5a953e9a4b7ab6cac9623f50c732","captureUncaught":true,"captureUnhandledRejections":true,"payload":{"environment":"production","client":{"javascript":{"source_map_enabled":true,"code_version":"8e508d702ea3bb44fb7e90308d7e394bc580895e","guess_uncaught_frames":true}}}},"user_info_changing_enabled":false,"has_user_profiles_enabled":false,"has_end_user_attachments":true,"user_aliases_enabled":false,"has_anonymous_kb_voting":false,"has_multi_language_help_center":true,"mobile_device":false,"mobile_site_enabled":false,"show_at_mentions":false,"embeddables_config":{"embeddables_web_widget":true,"embeddables_connect_ipms":false},"base_domain":"zendesk.com","answer_bot_subdomain":"static","manage_content_url":"https://support.vungle.com/hc/pt-br","arrange_content_url":"https://support.vungle.com/hc/admin/arrange_contents?locale=pt-br","general_settings_url":"https://support.vungle.com/hc/admin/general_settings?locale=pt-br","user_segments_url":"https://vungle.zendesk.com/knowledge/user_segments?brand_id=60720","has_gather":true,"has_community_enabled":false,"has_community_badges":false,"has_user_segments":true,"has_answer_bot_web_form_enabled":false,"has_answer_bot_web_form_modal_v2":false,"has_edit_user_profile_v2":false,"billing_url":"/access/return_to?return_to=https://vungle.zendesk.com/admin/billing/subscription","is_account_owner":false,"theming_cookie_key":"hc-da39a3ee5e6b4b0d3255bfef95601890afd807091-preview","is_preview":false,"has_guide_user_segments_search":true,"has_alternate_templates":false,"arrange_articles_url":"https://vungle.zendesk.com/knowledge/arrange?brand_id=60720","article_verification_url":"https://vungle.zendesk.com/knowledge/verification?brand_id=60720","has_article_verification":false,"guide_language_settings_url":"https://support.vungle.com/hc/admin/language_settings?locale=pt-br","docs_importer_url":"https://vungle.zendesk.com/knowledge/import_articles?brand_id=60720","community_badges_url":"https://vungle.zendesk.com/knowledge/community_badges?brand_id=60720","community_settings_url":"https://vungle.zendesk.com/knowledge/community_settings?brand_id=60720","gather_plan_state":"subscribed","search_settings_url":"https://vungle.zendesk.com/knowledge/search_settings?brand_id=60720","has_multibrand_search_in_plan":false,"theming_api_version":1,"has_pci_credit_card_custom_field":false,"current_brand_id":60720,"help_center_restricted":false,"current_brand_active":true,"is_assuming_someone_else":false,"flash_messages":[],"user_photo_editing_enabled":true,"has_end_user_apps":false,"has_docs_importer":true,"has_sunco_widget":false,"gather_user_image_upload_via_aus":false,"user_preferred_locale":"en-us"};
+</script>
+
+  <script src="../../../../static.zdassets.com/hc/assets/moment-f6f8513da6ab17eadada59a1a4edb536.js"></script>
+  <script src="../../../../static.zdassets.com/hc/assets/hc_enduser-9fa4fabcc25ad7ce2141d33e2370693a.js"></script>
+  
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6932eb966809ed87',m:'rLKWr5LsI7fehi5zn7YLKqu0kbZjnsGMM1ctgw8XOaE-1632391167-0-AYJj4ipGLZZDkad1Kol8DQ6gLFB4DJVD0+UXYhcPAzEOjWBzQLw3EUOuPwQk2BFwrHTay9F+lTIPFYeFP0pHdSe4lT+XkP9IfFlemxIdzHDX0oP457ZpKW+R0gAloE3WVBrQ3S4z8nSIEwHOagLnPkUxOsDmuh/H5xr/O5iUpTuQ/1nCC9ep7veJdTVt3zUnD5I1HBwpnRAri5DAzjlRIME=',s:[0x3b83dff04f,0x8b58e3dec5],}})();</script></body>
+
+<!-- Mirrored from support.vungle.com/hc/pt-br/articles/360048256211-Integrar-an%C3%BAncios-de-banner by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 10:34:20 GMT -->
+</html>

@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="zh-CN">
+
+<!-- Mirrored from support.vungle.com/hc/zh-cn/articles/204504334-Vungle-VAST-2-0-集成指南 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 10:03:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <!-- v20226 -->
+
+  <title>Vungle VAST 2.0 集成指南 &ndash; Vungle CN</title>
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="" />
+
+  <meta name="description" content="本文介绍帮助新 VAST 合作伙伴将其技术集成到我们程序化广告平台的 Vungle 流程和规范。 目录  VAST 响应规范 Vungle 合作伙伴集成协议 VAST 请求示例 VAST 请求参数   VAST 响应规范 出价响应必须遵守以下规范：  最大视频时长为 30..." /><meta property="og:image" content="https://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Vungle CN" />
+<meta property="og:title" content="Vungle VAST 2.0 集成指南" />
+<meta property="og:description" content="本文介绍帮助新 VAST 合作伙伴将其技术集成到我们程序化广告平台的 Vungle 流程和规范。
+目录
+
+VAST 响应规范
+Vungle 合作伙伴集成协议
+VAST 请求示例
+VAST 请求参数
+
+
+VAST 响应规范
+出价响应必须遵守以下规范：
+
+最大视频时长为 30 秒
+最小比特率为 250 千位节/秒
+XML 必须包含：
+
+
+
+一个 .mp4 媒体文件
+比特率信息
+视频长度信息
+
+
+..." />
+<meta property="og:url" content="204504334.html" />
+<link rel="canonical" href="204504334-Vungle-VAST-2-0-%e9%9b%86%e6%88%90%e6%8c%87%e5%8d%97.html" />
+<link rel="alternate" hreflang="de" href="../../de/articles/204504334-Vungle-VAST-2-0-Integrationsleitfaden.html" />
+<link rel="alternate" hreflang="en" href="../../en-us/articles/204504334-Vungle-VAST-2-0-Integration-Guide.html" />
+<link rel="alternate" hreflang="es" href="../../es-mx/articles/204504334-Gu%c3%ada-de-integraci%c3%b3n-de-VAST-2-0-de-Vungle.html" />
+<link rel="alternate" hreflang="fr" href="../../fr-fr/articles/204504334-Guide-d-int%c3%a9gration-de-VAST-2-0-%c3%a0-Vungle.html" />
+<link rel="alternate" hreflang="ja" href="../../ja/articles/204504334-Vungle-VAST-2-0-%e7%b5%84%e3%81%bf%e8%be%bc%e3%81%bf%e3%82%ac%e3%82%a4%e3%83%89.html" />
+<link rel="alternate" hreflang="ko" href="../../ko/articles/204504334-Vungle-VAST-2-0-%ed%86%b5%ed%95%a9-%ec%84%a4%eb%aa%85%ec%84%9c.html" />
+<link rel="alternate" hreflang="pt" href="../../pt-br/articles/204504334-Guia-de-integra%c3%a7%c3%a3o-do-Vungle-VAST-2-0.html" />
+<link rel="alternate" hreflang="ru" href="../../ru/articles/204504334-%d0%a0%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%be-%d0%bf%d0%be-%d0%b8%d0%bd%d1%82%d0%b5%d0%b3%d1%80%d0%b0%d1%86%d0%b8%d0%b8-VAST-2-0.html" />
+<link rel="alternate" hreflang="zh" href="204504334-Vungle-VAST-2-0-%e9%9b%86%e6%88%90%e6%8c%87%e5%8d%97.html" />
+
+  <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/application-79172500fb4dbec2484043d570946543.css" id="stylesheet" />
+    <!-- Entypo pictograms by Daniel Bruce — www.entypo.com -->
+    <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/theming_v1_support-cf937686d5b6669242017892da7bad78.css" />
+  <link rel="stylesheet" type="text/css" href="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/stylee82d.css?digest=360570052252">
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://theme.zdassets.com/theme_assets/534077/62c5e8616cdae030ecea7cec15cf47a2b729729b.ico" />
+
+    <script src="../../../../static.zdassets.com/hc/assets/jquery-d5395f0b7ac5027403fc17855c46dbfc.js"></script>
+    
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+  analytics.load("bRqfh635lMl7qBpocue716BjaalyFtJD");
+  analytics.page();
+  }}();
+  analytics.ready(function(){
+    Appcues.anonymous();
+});
+</script>
+
+
+
+
+
+
+
+
+
+  <style type="text/css">
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/51587ff68e0ab2bf990a17d993ec1fa7a5451614.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/8677458bb131e09b83d5bf2ec1ab6d015c18fd8b.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1e02ff61edce3f256e3f8de8e6bfb11bb085905f.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/b421ade1cc04519f69e9b4ec0fee3d632f993540.woff") format("woff");
+      font-weight: bold;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1056b20fe6b0f2a56568ecdea5119e1577667803.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/0ea45f63097574b5446148c9670509ae56dc2975.woff") format("woff");
+      font-weight: 300;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/78bd021a78ca5752e43275a982a96b00bd004a54.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/115efed0d77bd96754f56a00f399a05af518a5a4.woff") format("woff");
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/e5e3d4a71bfb2d624edf48819c3dd1597c4397ff.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9f8a21f09879869f644a45d21aea06dde01f2107.woff") format("woff");
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/f4f83c57775879216d798dce95c9a83e442da6ab.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9e93f03906c0fbfd6eba0ecdfe8d739a6b38852d.woff") format("woff");
+      font-weight: bold;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk Screen";
+      src: url("http://theme.zdassets.com/theme_assets/534077/2f8d0cbc16a32df1f8b6c36f45c2b4078181ca43.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/2ab0f28c68ed406c853fec87f698618cd7ac8bc2.woff") format("woff");
+      font-weight: 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk OIL";
+      src: url("http://theme.zdassets.com/theme_assets/534077/0ce9c7bb30841f31bac192ef415fd27771c17fc9.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/422274783804fb9c3e984558285801b01b2fe117.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+
+
+<link rel="stylesheet" href="../../../../use.fontawesome.com/releases/v5.10.1/css/all.css">
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/styles/atelier-lakeside-dark.min.css" />
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" />
+<script src="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+<script src="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/highlight.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<meta property="asseturl" content="//theme.zdassets.com/theme_assets/534077/6ff6e0c84e92580e7cc6e9c77a5cc1e724f36743.gif">
+
+
+<link rel="stylesheet" href="../../../../theme.zdassets.com/theme_assets/534077/02e3878a33d61900d75eb94d43eb4d26929d6dbf.css">
+
+<script src="../../../../theme.zdassets.com/theme_assets/534077/48ea021f3fedbc024c4443d2e946e0b9b742e384.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/469d1d10574fa6f68d243916e96f61e7ce459a5a.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/9893f4b0b18dc4018d50a3716fc581152c21535e.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/ae559ee60cd2d617e942d530c1ee7ac42a973761.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/c2b4df57e1dcfcf1b5d2298b16c409c8315a177b.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/cf5c34722566da1ba5ca5d877dc187d282ca6a3f.js"></script>
+
+<!-- ...Appcues... -->
+<script type="text/javascript">
+  if (userId) {
+    Appcues.identify(userId); 
+  } else {
+    Appcues.anonymous(); 
+  }
+</script>
+
+<script src="../../../../static.zdassets.com/conditional_fields_app_hc/latest/helpcenter.js"></script>
+<script>var cfaRules = [{ "fieldType": "tagger", "field": 114099498832, "value": "user_interface", "select": [114099504272], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "amazon", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "android", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios", "select": [114099505792, 114101637652], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "multi_platforms_other_combination", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "windows", "select": [114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099505792, "value": "other_ios_sdk", "select": [114099619791], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "adincube", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "admob", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "fyber_hezap", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "ironsource_supersonic", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "multiple_mediation", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "other_mediation", "select": [114099556512, 114099619811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "upsight", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "adobe_air", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "corona", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "marmalade", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "other_plugin", "select": [114099620151, 114099620451], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "unity", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099577491, "value": "other_android_sdk", "select": [114099555992], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099619751, "value": "other_windows_sdk", "select": [114099556012], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099621511, "value": "geo_other", "select": [114099622811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_dashboard", "select": [114099498652, 114099499132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_other", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_reportingapi", "select": [114099498652, 114099621211, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_useracquisition", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_notreceivingreward", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_other", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_troublesomead", "select": [114099498672, 114099504752, 114099621511, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_unsubscribeads", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_payment", "select": [114099571371, 114099500132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_accountstatus", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_addtransferusers", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_deleteaccount", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_pwrecovery", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_registration", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_callbacks", "select": [114099498652, 114099556032, 114099556532, 114099620751, 114099621511, 114099504752], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_cocoapods", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_dashboard", "select": [114099498652, 114099498832], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_gradle", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_multidex", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621731], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_noads", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_proguard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557592], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_testmode", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_other", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_reportingapi", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_button", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_crashing", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_endcard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_freezing", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_other", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_sound", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_video", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }];</script>
+
+<style type="text/css">
+
+/* Advertiser */
+.categories__icon--200198330 {
+  background-color: #ff5a41;
+}
+
+.categories__icon--200198330:before,
+#sidenav-category-200198330 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/9f2e8cfd41383f7f21c68fd99567eb1b1a7993ac.svg");
+}
+
+/* SDK */
+.categories__icon--200269670 {
+  background-color: #3c2869;
+}
+
+.categories__icon--200269670:before,
+#sidenav-category-200269670 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/ab38e1e12c6a99fe83f4ea9c02bf87e17510558d.svg");
+}
+
+/* Publisher */
+.categories__icon--360001994512 {
+  background-color: #6e7dff;
+}
+
+.categories__icon--360001994512:before,
+#sidenav-category-360001994512 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/8a0ee6cf2a1300b8adf5a19112e81db3c070a273.svg");
+}
+
+/* FAQs */
+.categories__icon--115000802567 {
+  background-color: #ffd700;
+}
+
+.categories__icon--115000802567:before,
+#sidenav-category-115000802567 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/840643095495a2f0380fbe420efb55b7a63277fe.svg");
+}
+
+/* Creative */
+.categories__icon--360001724259 {
+  background-color: #ffd2e1;
+}
+
+.categories__icon--360001724259:before,
+#sidenav-category-360001724259 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/2bb5eeecadf61018e2bda864d22706f146b5a208.svg");
+}
+
+</style>
+  <script type="text/javascript" src="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/scripte82d.js?digest=360570052252"></script>
+<script async src='../../../cdn-cgi/bm/cv/669835187/api.js'></script></head>
+<body class="">
+  
+  
+
+  <div class="js-alert-box"></div>
+
+<div class="layout" >
+
+  <aside class="sidebar" data-sidebar>
+  <div class="sidebar__header">
+    <div class="sidebar__container sidebar__container--fixed">
+      <div class="sidebar__logo">
+        <a title="主页" href="../../zh-cn.html">
+          <img src="http://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" alt="徽标">
+        </a>
+      </div>
+      <ul class="sidebar__list">
+        <li class="sidebar__item">
+          <a class="sidebar__link sidebar__link--home" title="主页" href="../../zh-cn.html">Home</a>
+        </li>
+      </ul>
+      <div class="sidebar__top-nav"></div>
+      <div class="sidebar__content-block" data-sidebar-content></div>
+    </div>
+  </div>
+
+  <div class="sidebar__container">
+    <div class="sidebar__bottom-nav">
+      <div class="sidebar__bottom-nav-item">
+        
+          <div class="dropdown language-selector" aria-haspopup="true">
+            <a class="dropdown-toggle btn btn--default btn--small">
+              简体中文
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+              </svg>
+            </a>
+            <span class="dropdown-menu" role="menu">
+              
+                <a href="../../de/articles/204504334-Vungle-VAST-2-0-Integrationsleitfaden.html?return_to=%2Fhc%2Fde%2Farticles%2F204504334-Vungle-VAST-2-0-Integrationsleitfaden" dir="ltr" rel="nofollow" role="menuitem">
+                  Deutsch
+                </a>
+              
+                <a href="../../en-us/articles/204504334-Vungle-VAST-2-0-Integration-Guide.html?return_to=%2Fhc%2Fen-us%2Farticles%2F204504334-Vungle-VAST-2-0-Integration-Guide" dir="ltr" rel="nofollow" role="menuitem">
+                  English (US)
+                </a>
+              
+                <a href="../../es-mx/articles/204504334-Gu%c3%ada-de-integraci%c3%b3n-de-VAST-2-0-de-Vungle-2.html?return_to=%2Fhc%2Fes-mx%2Farticles%2F204504334-Gu%25C3%25ADa-de-integraci%25C3%25B3n-de-VAST-2-0-de-Vungle" dir="ltr" rel="nofollow" role="menuitem">
+                  Español (México)
+                </a>
+              
+                <a href="../../fr-fr/articles/204504334-Guide-d-int%c3%a9gration-de-VAST-2-0-%c3%a0-Vungle-2.html?return_to=%2Fhc%2Ffr-fr%2Farticles%2F204504334-Guide-d-int%25C3%25A9gration-de-VAST-2-0-%25C3%25A0-Vungle" dir="ltr" rel="nofollow" role="menuitem">
+                  Français (France)
+                </a>
+              
+                <a href="../../ja/articles/204504334-Vungle-VAST-2-0-%e7%b5%84%e3%81%bf%e8%be%bc%e3%81%bf%e3%82%ac%e3%82%a4%e3%83%89-2.html?return_to=%2Fhc%2Fja%2Farticles%2F204504334-Vungle-VAST-2-0-%25E7%25B5%2584%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589" dir="ltr" rel="nofollow" role="menuitem">
+                  日本語
+                </a>
+              
+                <a href="../../ko/articles/204504334-Vungle-VAST-2-0-%ed%86%b5%ed%95%a9-%ec%84%a4%eb%aa%85%ec%84%9c-2.html?return_to=%2Fhc%2Fko%2Farticles%2F204504334-Vungle-VAST-2-0-%25ED%2586%25B5%25ED%2595%25A9-%25EC%2584%25A4%25EB%25AA%2585%25EC%2584%259C" dir="ltr" rel="nofollow" role="menuitem">
+                  한국어
+                </a>
+              
+                <a href="../../pt-br/articles/204504334-Guia-de-integra%c3%a7%c3%a3o-do-Vungle-VAST-2-1.html?return_to=%2Fhc%2Fpt-br%2Farticles%2F204504334-Guia-de-integra%25C3%25A7%25C3%25A3o-do-Vungle-VAST-2-0" dir="ltr" rel="nofollow" role="menuitem">
+                  Português do Brasil
+                </a>
+              
+                <a href="../../ru/articles/204504334-%d0%a0%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%be-%d0%bf%d0%be-%d0%b8%d0%bd%d1%82%d0%b5%d0%b3%d1%80%d0%b0%d1%86%d0%b8%d0%b8-VAST-2-1.html?return_to=%2Fhc%2Fru%2Farticles%2F204504334-%25D0%25A0%25D1%2583%25D0%25BA%25D0%25BE%25D0%25B2%25D0%25BE%25D0%25B4%25D1%2581%25D1%2582%25D0%25B2%25D0%25BE-%25D0%25BF%25D0%25BE-%25D0%25B8%25D0%25BD%25D1%2582%25D0%25B5%25D0%25B3%25D1%2580%25D0%25B0%25D1%2586%25D0%25B8%25D0%25B8-VAST-2-0" dir="ltr" rel="nofollow" role="menuitem">
+                  Русский
+                </a>
+              
+            </span>
+          </div>
+        
+      </div>
+      <div class="sidebar__bottom-nav-item">  
+        <a href="https://vungle.com/login/" target="_blank" class="">
+          Platform
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="a" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#AAB2BA" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#a"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="sidebar__overlay"></div>
+
+  <div class="main">
+
+    <div class="main__header">
+
+      <a href="#" class="sidebar-toggle__link" data-toggle-menu role="button">
+        <span class="sidebar-toggle__burger"><span></span></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--menu"></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--close"></span>
+      </a>
+
+      <div class="main__search">
+        <form role="search" class="search" data-search="" data-instant="true" autocomplete="off" action="https://support.vungle.com/hc/zh-cn/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" /><input type="search" name="query" id="query" placeholder="Search..." autocomplete="off" aria-label="Search..." />
+<input type="submit" name="commit" value="搜索" /></form>
+      </div>
+      <div class="main__nav">
+        <a href="../../en-us/sections/360004473112.html" class="btn btn--topbar hidden-mobile">
+          Early Access SDK
+        </a>
+        <a href="https://vungle.com/signup/" target="_blank" class="btn btn--topbar">
+          Platform
+          <svg width="24" height="24" viewBox="0 0 24 24"><defs><path id="b" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#0ccec9" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#b"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="main__container">
+
+  <main role="main">
+    <div class="article-page" data-article-page>
+
+  <div class="row">
+    <div class="article-column article-column--left">
+      <div class="box">
+        <div class="article-page__wrap" data-article-wrap>
+          <article class="article js-active-article" itemscope itemtype="http://schema.org/Article" data-article="204504334">
+            <header class="article-header">
+              <ol class="breadcrumbs">
+  
+    <li title="Vungle CN">
+      
+        <a href="../../zh-cn.html">Vungle CN</a>
+      
+    </li>
+  
+    <li title="广告主平台">
+      
+        <a href="../categories/200198330-%e5%b9%bf%e5%91%8a%e4%b8%bb%e5%b9%b3%e5%8f%b0.html">广告主平台</a>
+      
+    </li>
+  
+    <li title="Exchange集成文档">
+      
+        <a href="../sections/115001349748-Exchange%e9%9b%86%e6%88%90%e6%96%87%e6%a1%a3.html">Exchange集成文档</a>
+      
+    </li>
+  
+</ol>
+
+              <h1 class="h2 article-title" itemprop="name">
+                
+                Vungle VAST 2.0 集成指南
+              </h1>
+
+              <div class="article-meta">
+                <div class="entry-info">
+                  <div class="entry-info__avatar">
+                    <div class="avatar avatar--agent">
+                      <img class="user-avatar user-avatar--default" src="../../../system/photos/326332607/vincentyao.jpg" alt="Avatar">
+                    </div>
+                  </div>
+                  <div class="entry-info__content">
+                    <b class="author">
+                      Vincent Yao
+                    </b>
+                    <div class="meta"><time datetime="2020-03-05T09:15:02Z" title="2020-03-05T09:15:02Z" data-datetime="calendar">2020年03月05日 09:15</time></div>
+                  </div>
+                </div>
+                <a class="article-subscribe" title="打开登录对话框" rel="nofollow" role="button" data-auth-action="signin" aria-selected="false" href="204504334-Vungle-VAST-2-0-%e9%9b%86%e6%88%90%e6%8c%87%e5%8d%97/subscription.html">关注</a>
+              </div>
+            </header>
+
+            <div class="article__body markdown" itemprop="articleBody">
+
+              <div class="article-main">
+                <p>本文介绍帮助新 VAST 合作伙伴将其技术集成到我们程序化广告平台的 Vungle 流程和规范。</p>
+<h1>目录</h1>
+<ul>
+<li><a href="#VASTResponseSpecifications">VAST 响应规范</a></li>
+<li><a href="#PartnerIntegrationProtocol">Vungle 合作伙伴集成协议</a></li>
+<li><a href="#SampleVASTRequests">VAST 请求示例</a></li>
+<li><a href="#VASTRequestParameters">VAST 请求参数</a></li>
+</ul>
+<h1><a name="VASTResponseSpecifications"></a>VAST 响应规范</h1>
+<p>出价响应必须遵守以下规范：</p>
+<ul>
+<li>最大视频时长为 30 秒</li>
+<li>最小比特率为 250 千位节/秒</li>
+<li>XML 必须包含：</li>
+<ul>
+<ul>
+<ul>
+<li>一个 .mp4 媒体文件</li>
+<li>比特率信息</li>
+<li>视频长度信息</li>
+</ul>
+</ul>
+</ul>
+<li>任何重定向最多只能重定向一次</li>
+<li>响应时间：</li>
+<ul>
+<ul>
+<ul>
+<li><strong>对于流：</strong>必须在 250 毫秒内</li>
+<li><strong>对于预先缓存：</strong>必须在 750 毫秒内</li>
+</ul>
+</ul>
+</ul>
+<li>必须点击进入登录页面</li>
+<li>必须支持 SSL 并使用安全资产响应</li>
+<li>在无广告时使用<code>‘no-ad’</code>或<code>‘403’</code>响应</li>
+<li>VAST 扩展是<em>可选</em>的，但是首选的</li>
+</ul>
+<p>如果上述要求有任何一个未达到，Vungle 将返回错误。</p>
+<h1><a name="PartnerIntegrationProtocol"></a>Vungle 合作伙伴集成协议</h1>
+<p>Vungle 将帮助新 VAST 合作伙伴将其技术集成到程序化广告平台的流程分为两个阶段。第一个阶段可以形容为常规验证：Vungle&nbsp;检测标签，确保正确触发服务器调用并正确填充值。第二个阶段涉及严格的测试，在这个阶段，我们在一组有统计意义的展示中搜索差异，以确保 Vungle 的数字与合作伙伴一致。's numbers align with the partner'</p>
+<p>阶段 1</p>
+<ol>
+<li>合作伙伴向 Vungle 发送技术文档（如果有）。</li>
+<li>合作伙伴向 Vungle 发送 VAST 测试端点。<br /> <strong>注意：</strong>在测试阶段，合作伙伴必须 100% 响应 Vungle 的出价请求，以生成重要的测试结果。</li>
+<li>Vungle 构建测试环境以根据需要调用合作伙伴的端点。<br /> 这用于验证变量值和跟踪信号。</li>
+</ol>
+<p>阶段 2</p>
+<ol>
+<li>Vungle 与合作伙伴合作设置测试活动。</li>
+</ol>
+<ul>
+<li>合作伙伴发送模拟实时需求的测试端点。</li>
+<li>Vungle 设置运行预先确定的数量的展示的测试活动。</li>
+<li>合作伙伴与 Vungle 协调交付、比较差异。</li>
+<li>如果出现任何跟踪、确定目标或不一致问题，Vungle 将与合作伙伴一道进行调试，直到解决所有问题。</li>
+</ul>
+<h1><a name="SampleVASTRequests"></a>VAST 请求示例</h1>
+<p>含有未填充参数的示例 VAST 请求 URL（VAST 标签）</p>
+<pre><code>https://partner.com/vast2/6524rgww153hifw/?duration=15&amp;app_name={{{pub_app_name}}}&amp;app_id={{{market_id}}}&amp;rtb_type=instream_mobile_vast_inter&amp;user_id={{{device_id}}}&amp;ua={{{browser_user_agent}}}&amp;random={{{timestamp}}}&amp;ip_address={{{ip}}} </code></pre>
+<p>含有已填充参数的示例 VAST 请求 URL（VAST 标签）</p>
+<pre><code>https://partner.com/vast2/124765432/?duration=15&amp;app_name=My%20Talking%20Tom%20Free%20for%20Android&amp;app_id=com.outfit7.mytalkingtomfree&amp;rtb_type=instream_mobile_vast_inter&amp;user_id=6df43c89-9e3d-43fb-a1e9-bacd51932d41&amp;ua=Mozilla%2F5.0%20(Linux%3B%20Android%204.4.2%3B%20SPH-L720%20Build%2FKOT49H)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Version%2F4.0%20Chrome%2F30.0.0.0%20Mobile%20Safari%2F537.36&amp;random=2015-01-27T21%3A30%3A34%2B00%3A00&amp;ip_address=66.87.114.254&nbsp;</code></pre>
+<h1><a name="VASTRequestParameters"></a>VAST 请求参数</h1>
+<table class="table table--bordered">
+<tbody>
+<tr style="height: 32px;">
+<td style="width: 15%;"><strong>参数名称</strong></td>
+<td style="width: 30%;"><strong>宏</strong></td>
+<td style="width: 15%;"><strong>值</strong></td>
+<td style="width: 13%;"><strong>注释</strong></td>
+<td style="width: 28%;"><strong>示例</strong></td>
+</tr>
+</tbody>
+<tbody>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">应用类别</td>
+<td style="height: 32px; width: 185px;"><code>{{{pub_app_store_category}}}</code></td>
+<td style="height: 32px; width: 55.5px;">字符串</td>
+<td style="height: 32px; width: 88.5px;">类别列表</td>
+<td style="height: 32px; width: 310px;">游戏</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">应用名称</td>
+<td style="height: 32px; width: 185px;"><code>{{{pub_app_name}}}</code></td>
+<td style="height: 32px; width: 55.5px;">字符串</td>
+<td style="height: 32px; width: 88.5px;">来自 iTunes 或 Play 商店</td>
+<td style="height: 32px; width: 310px;">家庭海滩农场</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">应用商店 URL</td>
+<td style="height: 32px; width: 185px;"><code>{{{pub_app_store_url}}}</code></td>
+<td style="height: 32px; width: 55.5px;">字符串</td>
+<td style="height: 32px; width: 88.5px;"><span class="wysiwyg-color-black">应用商店或内容 URL。已编码。</span></td>
+<td style="height: 32px; width: 310px;">https://play.google.com/store/apps/details?id=com.funplus.familyfarm&amp;hl=en</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">捆绑包 ID</td>
+<td style="height: 32px; width: 185px;"><code>{{{pub_market_app_id}}}</code></td>
+<td style="height: 32px; width: 55.5px;">字符串/整数</td>
+<td style="height: 32px; width: 88.5px;">来自 iTunes 或 Play 商店</td>
+<td style="height: 32px; width: 310px;">com.funplus.familyfarm&amp;hl=en (Android)<br /> 539920547 (iOS)</td>
+</tr>
+<tr style="height: 16px;">
+<td style="height: 16px; width: 65px;">城市</td>
+<td style="height: 16px; width: 185px;"><code>{{{city}}}</code></td>
+<td style="height: 16px; width: 55.5px;"><span class="wysiwyg-color-black">字符串</span></td>
+<td style="height: 16px; width: 88.5px;">已编码</td>
+<td style="height: 16px; width: 310px;">纽约</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">连接类型</td>
+<td style="height: 32px; width: 185px;"><code>{{{connection_type}}}</code></td>
+<td style="height: 32px; width: 55.5px;"><span class="wysiwyg-color-black">字符串</span></td>
+<td style="height: 32px; width: 88.5px;">Wifi、wwan、移动</td>
+<td style="height: 32px; width: 310px;">Wifi、wwan、移动</td>
+</tr>
+<tr style="height: 16px;">
+<td style="height: 16px; width: 65px;">国家/地区</td>
+<td style="height: 16px; width: 185px;"><code>{{{country}}}</code></td>
+<td style="height: 16px; width: 55.5px;">字符串</td>
+<td style="height: 16px; width: 88.5px;">两个字母的国家/地区代码</td>
+<td style="height: 16px; width: 310px;">US</td>
+</tr>
+<tr style="height: 16px;">
+<td style="height: 16px; width: 65px;">设备 DNT</td>
+<td style="height: 16px; width: 185px;"><code>{{{ad_tracking_disabled}}}</code></td>
+<td style="height: 16px; width: 55.5px;">字符串</td>
+<td style="height: 16px; width: 88.5px;">'True' 指示用户<strong>不</strong>允许广告跟踪</td>
+<td style="height: 16px; width: 310px;">True/False</td>
+</tr>
+<tr style="height: 16px;">
+<td style="height: 16px; width: 65px;">设备 DNT</td>
+<td style="height: 16px; width: 185px;"><code>{{{ad_tracking_enabled}}}</code></td>
+<td style="height: 16px; width: 55.5px;">字符串</td>
+<td style="height: 16px; width: 88.5px;">'True' 指示用户<strong>允许</strong>广告跟踪</td>
+<td style="height: 16px; width: 310px;">True/False</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">设备 DNT</td>
+<td style="height: 32px; width: 185px;"><code>{{{boolean_number ad_tracking_disabled}}}</code></td>
+<td style="height: 32px; width: 55.5px;">整数</td>
+<td style="height: 32px; width: 88.5px;"><strong>不</strong>跟踪，二进制形式</td>
+<td style="height: 32px; width: 310px;">0 – False<br /> 1 - True</td>
+</tr>
+<tr style="height: 16.2656px;">
+<td style="height: 16.2656px; width: 65px;">设备 ID</td>
+<td style="height: 16.2656px; width: 185px;"><code>{{{device_id}}}</code></td>
+<td style="height: 16.2656px; width: 55.5px;">字符串</td>
+<td style="height: 16.2656px; width: 88.5px;">清除或散列</td>
+<td style="height: 16.2656px; width: 310px;">ab4d6cc4-f57f-4309-9d29-b7fb5e35dd74</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">设备型号</td>
+<td style="height: 32px; width: 185px;"><code>{{{device_model}}}</code></td>
+<td style="height: 32px; width: 55.5px;">字符串</td>
+<td style="height: 32px; width: 88.5px;">已编码</td>
+<td style="height: 32px; width: 310px;">Amazon，KFFOWI<br /> samsung，SM-J700T</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">IP</td>
+<td style="height: 32px; width: 185px;"><code>{{{ip}}}</code></td>
+<td style="height: 32px; width: 55.5px;">字符串</td>
+<td style="height: 32px; width: 88.5px;">互联网协议地址</td>
+<td style="height: 32px; width: 310px;">95.118.153.77</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">语言</td>
+<td style="height: 32px; width: 185px;"><code>{{{language}}}</code></td>
+<td style="height: 32px; width: 55.5px;">字符串</td>
+<td style="height: 32px; width: 88.5px;">来自头的两个字符的语言</td>
+<td style="height: 32px; width: 310px;">10.2.1</td>
+</tr>
+<tr style="height: 16px;">
+<td style="height: 16px; width: 65px;">操作系统版本</td>
+<td style="height: 16px; width: 185px;"><code>{{{os_version}}}</code></td>
+<td style="height: 16px; width: 55.5px;">字符串</td>
+<td style="height: 16px; width: 88.5px;">操作系统版本（即 iOS 7.2）</td>
+<td style="height: 16px; width: 310px;"><span class="wysiwyg-color-black">2014-12-05T00%3A44%3A19%2B00%3A00</span></td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">平台</td>
+<td style="height: 32px; width: 185px;"><code>{{{device_platform}}}</code></td>
+<td style="height: 32px; width: 55.5px;">字符串</td>
+<td style="height: 32px; width: 88.5px;">iOS 或 Android</td>
+<td style="height: 32px; width: 310px;">iOS/Android</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">屏幕高度</td>
+<td style="height: 32px; width: 185px;"><code>{{{screen_height}}}</code></td>
+<td style="height: 32px; width: 55.5px;">整数</td>
+<td style="height: 32px; width: 88.5px;">屏幕高度（像素）</td>
+<td style="height: 32px; width: 310px;">768</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">屏幕方向</td>
+<td style="height: 32px; width: 185px;"><code>{{{screen_orientation}}}</code></td>
+<td style="height: 32px; width: 55.5px;">字符串</td>
+<td style="height: 32px; width: 88.5px;">纵向或横向</td>
+<td style="height: 32px; width: 310px;">纵向/横向</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">屏幕宽度</td>
+<td style="height: 32px; width: 185px;"><code>{{{screen_width}}}</code></td>
+<td style="height: 32px; width: 55.5px;">整数</td>
+<td style="height: 32px; width: 88.5px;">屏幕宽度（像素）</td>
+<td style="height: 32px; width: 310px;">1024</td>
+</tr>
+<tr style="height: 16px;">
+<td style="height: 16px; width: 65px;">时戳</td>
+<td style="height: 16px; width: 185px;"><code>{{{timestamp}}}</code></td>
+<td style="height: 16px; width: 55.5px;">字符串/整数</td>
+<td style="height: 16px; width: 88.5px;">已编码</td>
+<td style="height: 16px; width: 310px;">2014-12-05T00:44:19+00:00</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">用户代理</td>
+<td style="height: 32px; width: 185px;"><code>{{{browser_user_agent}}}</code></td>
+<td style="height: 32px; width: 55.5px;">字符串</td>
+<td style="height: 32px; width: 88.5px;">来自头的 UA。已编码。</td>
+<td style="height: 32px; width: 310px;">Mozilla/5.0 (Linux; Android 5.1.1; VF-1397 Build/LMY47V; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/55.0.2883.91 Safari/537.36</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 65px;">Vungle ID</td>
+<td style="height: 32px; width: 185px;"><code>{{{vungle_id}}}</code></td>
+<td style="height: 32px; width: 55.5px;">字符串</td>
+<td style="height: 32px; width: 88.5px;">与效果关联的 Vungle 发布人 ID</td>
+<td style="height: 32px; width: 310px;">5497c989a3b61ba3660001b1</td>
+</tr>
+</tbody>
+</table>
+              </div>     
+
+            </div>
+
+            <div class="article__attachments">
+              
+            </div>
+
+          </article>
+        </div>
+
+        <div class="article-loader fa fa-spinner fa-spin fa-3x fa-fw" id="article-loader"></div>
+
+        
+          <a class="article-banner" href="https://vungle.com/signup" target="_blank">
+            <span class="article-banner__title">
+              <span>Powered by Creativity</span>
+              <span>Driven by Performance</span>
+            </span>
+            <span class="article-banner__cta">Sign Up Here</span>
+          </a>
+        
+
+        <div data-prevnext='{"showArticleTitle": true, "classNameBtn": ""}'></div>
+
+        <section class="submit-ticket submit-ticket--article">
+          <div class="submit-ticket-col submit-ticket-col--left">
+            <h2 class="submit-ticket-title">Questions?</h2>
+            <p>Need further assistance, feel free to reach out to us, we’re here to help!</p>
+          </div>
+          <div class="submit-ticket-col submit-ticket-col--right">
+            <a class="btn btn--default" href="../requests/new.html">提交请求</a>
+          </div>
+        </section>
+
+        <footer class="article-footer">
+          
+          <div class="article-vote">
+            <span class="article-vote-question">这篇文章有帮助吗？</span>
+            <div class="article-vote-controls">
+              <a class="btn btn--default fa fa-thumbs-up article-vote-controls__item article-vote-controls__item--up" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="是" href="../signindef9.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fzh-cn%2Farticles%2F204504334-Vungle-VAST-2-0-%25E9%259B%2586%25E6%2588%2590%25E6%258C%2587%25E5%258D%2597"></a>
+              <a class="btn btn--default fa fa-thumbs-down article-vote-controls__item article-vote-controls__item--down" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="否" href="../signindef9.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fzh-cn%2Farticles%2F204504334-Vungle-VAST-2-0-%25E9%259B%2586%25E6%2588%2590%25E6%258C%2587%25E5%258D%2597"></a>
+            </div>
+          </div>
+          
+        </footer>
+
+      </div>
+    </div>
+    <div class="article-column article-column--right">
+      <div data-toc='{"headers": "h2,h3,h4", "title": "Contents", "offsetTop": 80, "mobileBreakpoint": 1024}'></div>
+    </div>
+  </div>
+
+</div>
+  </main>
+
+        <footer class="footer" id="footer">
+        <div class="footer-inner">
+          <div class="copyright">
+            <div class="copyright__content">
+              <span class="copyright__copy">&copy; 2020 Vungle. All rights reserved.</span>
+            </div>
+          </div>
+          <nav class="footer-menu">
+            <ul class="list-unstyled">
+              <li><a href="https://vungle.com/about-us/">About</a></li>
+              <li><a href="https://vungle.com/login/">Products</a></li>
+              <li><a href="https://vungle.com/contact-us/">Contact us</a></li>
+            </ul>
+          </nav>
+          <ul class="footer-socials list-unstyled">
+            
+              <li><a href="https://www.facebook.com/vungle/" target="_blank" class="fab fa-facebook"></a></li>
+            
+            
+              <li><a href="https://twitter.com/vungle" target="_blank" class="fab fa-twitter"></a></li>
+            
+            
+            
+              <li><a href="https://www.linkedin.com/company/vungle" target="_blank" class="fab fa-linkedin"></a></li>
+            
+            
+            
+            
+              <li><a href="https://www.instagram.com/vungle/" target="_blank" class="fab fa-instagram"></a></li>
+            
+          </ul>
+        </div>
+      </footer>
+          
+    </div>
+    <!-- /.main__container -->
+
+  </div>  
+  <!-- /.main -->
+  
+</div>
+<!-- /.layout -->
+
+
+
+  <!-- / -->
+
+  
+  <script src="../../../../static.zdassets.com/hc/assets/zh-cn.b71cebf2cff635e19e20.js"></script>
+  <script src="../../../../vungle.zendesk.com/auth/v2/host.js" data-brand-id="60720" data-return-to="https://support.vungle.com/hc/zh-cn/articles/204504334-Vungle-VAST-2-0-%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97" data-theme="hc" data-locale="zh-cn" data-auth-origin="60720,true,true"></script>
+
+  <script type="text/javascript">
+  /*
+
+    Greetings sourcecode lurker!
+
+    This is for internal Zendesk and legacy usage,
+    we don't support or guarantee any of these values
+    so please don't build stuff on top of them.
+
+  */
+
+  HelpCenter = {};
+  HelpCenter.account = {"subdomain":"vungle","environment":"production","name":"Vungle"};
+  HelpCenter.user = {"identifier":"da39a3ee5e6b4b0d3255bfef95601890afd80709","email":null,"name":null,"role":"anonymous","avatar_url":"https://assets.zendesk.com/hc/assets/default_avatar.png","is_admin":false,"organizations":[],"groups":[]};
+  HelpCenter.internal = {"asset_url":"//static.zdassets.com/hc/assets/","web_widget_asset_composer_url":"https://static.zdassets.com/ekr/snippet.js","current_session":{"locale":"zh-cn","csrf_token":null,"shared_csrf_token":null},"settings":{},"usage_tracking":{"event":"article_viewed","data":"BAh7CDoLbG9jYWxlSSIKemgtY24GOgZFVDoPYXJ0aWNsZV9pZGkEDn0wDDoKX21ldGF7CzoPYWNjb3VudF9pZGkDPSYIOhNoZWxwX2NlbnRlcl9pZGkENsfsCzoNYnJhbmRfaWRpAjDtOgx1c2VyX2lkMDoTdXNlcl9yb2xlX25hbWVJIg5BTk9OWU1PVVMGOwZUOwBJIgp6aC1jbgY7BlQ=--bfacd79dcec852319ac68d49373108e09a6d6a50","url":"https://support.vungle.com/hc/activity"},"current_record_id":"204504334","current_record_url":"/hc/zh-cn/articles/204504334-Vungle-VAST-2-0-%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97","current_record_title":"Vungle VAST 2.0 集成指南","search_results_count":null,"current_text_direction":"ltr","current_brand":{"id":60720,"account_id":534077,"name":"Vungle","active":true,"deleted_at":null,"created_at":"2014-05-29T20:19:19Z","updated_at":"2021-05-13T16:25:53Z","route_id":429018,"signature_template":"{{agent.signature}}"},"current_brand_url":"https://vungle.zendesk.com","current_host_mapping":"support.vungle.com","current_path":"/hc/zh-cn/articles/204504334-Vungle-VAST-2-0-%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97","authentication_domain":"https://vungle.zendesk.com","show_autocomplete_breadcrumbs":true,"rollbar_config":{"enabled":true,"endpoint":"https://rollbar-us.zendesk.com/api/1/item/","accessToken":"731a5a953e9a4b7ab6cac9623f50c732","captureUncaught":true,"captureUnhandledRejections":true,"payload":{"environment":"production","client":{"javascript":{"source_map_enabled":true,"code_version":"8e508d702ea3bb44fb7e90308d7e394bc580895e","guess_uncaught_frames":true}}}},"user_info_changing_enabled":false,"has_user_profiles_enabled":false,"has_end_user_attachments":true,"user_aliases_enabled":false,"has_anonymous_kb_voting":false,"has_multi_language_help_center":true,"mobile_device":false,"mobile_site_enabled":false,"show_at_mentions":false,"embeddables_config":{"embeddables_web_widget":true,"embeddables_connect_ipms":false},"base_domain":"zendesk.com","answer_bot_subdomain":"static","manage_content_url":"https://support.vungle.com/hc/zh-cn","arrange_content_url":"https://support.vungle.com/hc/admin/arrange_contents?locale=zh-cn","general_settings_url":"https://support.vungle.com/hc/admin/general_settings?locale=zh-cn","user_segments_url":"https://vungle.zendesk.com/knowledge/user_segments?brand_id=60720","has_gather":true,"has_community_enabled":false,"has_community_badges":false,"has_user_segments":true,"has_answer_bot_web_form_enabled":false,"has_answer_bot_web_form_modal_v2":false,"has_edit_user_profile_v2":false,"billing_url":"/access/return_to?return_to=https://vungle.zendesk.com/admin/billing/subscription","is_account_owner":false,"theming_cookie_key":"hc-da39a3ee5e6b4b0d3255bfef95601890afd807091-preview","is_preview":false,"has_guide_user_segments_search":true,"has_alternate_templates":false,"arrange_articles_url":"https://vungle.zendesk.com/knowledge/arrange?brand_id=60720","article_verification_url":"https://vungle.zendesk.com/knowledge/verification?brand_id=60720","has_article_verification":false,"guide_language_settings_url":"https://support.vungle.com/hc/admin/language_settings?locale=zh-cn","docs_importer_url":"https://vungle.zendesk.com/knowledge/import_articles?brand_id=60720","community_badges_url":"https://vungle.zendesk.com/knowledge/community_badges?brand_id=60720","community_settings_url":"https://vungle.zendesk.com/knowledge/community_settings?brand_id=60720","gather_plan_state":"subscribed","search_settings_url":"https://vungle.zendesk.com/knowledge/search_settings?brand_id=60720","has_multibrand_search_in_plan":false,"theming_api_version":1,"has_pci_credit_card_custom_field":false,"current_brand_id":60720,"help_center_restricted":false,"current_brand_active":true,"is_assuming_someone_else":false,"flash_messages":[],"user_photo_editing_enabled":true,"has_end_user_apps":false,"has_docs_importer":true,"has_sunco_widget":false,"gather_user_image_upload_via_aus":false,"user_preferred_locale":"en-us"};
+</script>
+
+  <script src="../../../../static.zdassets.com/hc/assets/moment-f6f8513da6ab17eadada59a1a4edb536.js"></script>
+  <script src="../../../../static.zdassets.com/hc/assets/hc_enduser-9fa4fabcc25ad7ce2141d33e2370693a.js"></script>
+  
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6932de2afc4e0fc3',m:'toK6ctgsmYbRRgnLJMYoZ4YM8_TkcMkIi_IwssW5HCI-1632390617-0-AWPH/ADKG71P3dW07cvm7sTULWhUbV0biHrKKYkD7YFr9z2JyaiOIVn2F8xjTL1Kxf4ElURdujJI39se5mEWE5tULLa5ILMnDhAegTHyBkSUia1lf3JV3mG5Un19S7id+jKzV2DIn+Ga4mKFQKiKm3+V+SBTY5cXS4uDKGNH4rk0TfCshnqHik2AL2hx5Bbf8WMWKe3nZcXTQ4PKQ7esnTiTMxM+loA+Yxa+ZLlLhdAb',s:[0xf710f4ff9e,0xe45f272728],}})();</script></body>
+
+<!-- Mirrored from support.vungle.com/hc/zh-cn/articles/204504334-Vungle-VAST-2-0-集成指南 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 10:03:26 GMT -->
+</html>

@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ko">
+
+<!-- Mirrored from support.vungle.com/hc/ko/articles/360002925791-Vungle-iOS-SDK-v-6-시작하기 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 10:20:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <!-- v20226 -->
+
+  <title>Vungle - iOS SDK v.6 시작하기 &ndash; Vungle KO</title>
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="" />
+
+  <meta name="description" content="목차  GDPR: 권장 구현 시작하기 전에 1단계. Vungle 프레임워크를 Xcode 프로젝트에 추가 2단계. iOS 상태 막대 제거 3단계. 코드 추가   GDPR: 권장 구현 5월 25일부터 GDPR(General Data..." /><meta property="og:image" content="https://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Vungle KO" />
+<meta property="og:title" content="Vungle - iOS SDK v.6 시작하기" />
+<meta property="og:description" content="목차
+
+GDPR: 권장 구현
+시작하기 전에
+1단계. Vungle 프레임워크를 Xcode 프로젝트에 추가
+2단계. iOS 상태 막대 제거
+3단계. 코드 추가
+
+
+GDPR: 권장 구현
+5월 25일부터 GDPR(General Data Protection Regulation, 일반데이터보호규정)이 유럽 연합에서 시행됩니다. 개발자에게는 GDPR 준수를 위한 ..." />
+<meta property="og:url" content="360002925791.html" />
+<link rel="canonical" href="360002925791-Vungle-iOS-SDK-v-6-%ec%8b%9c%ec%9e%91%ed%95%98%ea%b8%b0.html" />
+<link rel="alternate" hreflang="de" href="../../de/articles/360002925791-Erste-Schritte-mit-Vungle-iOS-SDK-v-6.html" />
+<link rel="alternate" hreflang="en" href="../../en-us/articles/360002925791-Integrate-Vungle-SDK-for-iOS.html" />
+<link rel="alternate" hreflang="es" href="../../es-mx/articles/360002925791-Introducci%c3%b3n-al-SDK-de-Vungle-para-iOS-v-6.html" />
+<link rel="alternate" hreflang="fr" href="../../fr-fr/articles/360002925791-D%c3%a9marrer-avec-Vungle-SDK-iOS-version-6.html" />
+<link rel="alternate" hreflang="ja" href="../../ja/articles/360002925791-Vungle-%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88-%e3%82%ac%e3%82%a4%e3%83%89-iOS-SDK-v-6.html" />
+<link rel="alternate" hreflang="ko" href="360002925791-Vungle-iOS-SDK-v-6-%ec%8b%9c%ec%9e%91%ed%95%98%ea%b8%b0.html" />
+<link rel="alternate" hreflang="pt" href="../../pt-br/articles/360002925791-Introdu%c3%a7%c3%a3o-ao-Vungle-SDK-v-6-para-iOS.html" />
+<link rel="alternate" hreflang="ru" href="../../ru/articles/360002925791-%d0%9d%d0%b0%d1%87%d0%b0%d0%bb%d0%be-%d1%80%d0%b0%d0%b1%d0%be%d1%82%d1%8b-%d1%81-Vungle-iOS-SDK-v-6.html" />
+<link rel="alternate" hreflang="zh" href="../../zh-cn/articles/360002925791-%e5%bc%80%e5%a7%8b%e9%9b%86%e6%88%90Vungle-iOS-SDK.html" />
+
+  <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/application-79172500fb4dbec2484043d570946543.css" id="stylesheet" />
+    <!-- Entypo pictograms by Daniel Bruce — www.entypo.com -->
+    <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/theming_v1_support-cf937686d5b6669242017892da7bad78.css" />
+  <link rel="stylesheet" type="text/css" href="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/stylee82d.css?digest=360570052252">
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://theme.zdassets.com/theme_assets/534077/62c5e8616cdae030ecea7cec15cf47a2b729729b.ico" />
+
+    <script src="../../../../static.zdassets.com/hc/assets/jquery-d5395f0b7ac5027403fc17855c46dbfc.js"></script>
+    
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+  analytics.load("bRqfh635lMl7qBpocue716BjaalyFtJD");
+  analytics.page();
+  }}();
+  analytics.ready(function(){
+    Appcues.anonymous();
+});
+</script>
+
+
+
+
+
+
+
+
+
+  <style type="text/css">
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/51587ff68e0ab2bf990a17d993ec1fa7a5451614.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/8677458bb131e09b83d5bf2ec1ab6d015c18fd8b.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1e02ff61edce3f256e3f8de8e6bfb11bb085905f.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/b421ade1cc04519f69e9b4ec0fee3d632f993540.woff") format("woff");
+      font-weight: bold;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1056b20fe6b0f2a56568ecdea5119e1577667803.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/0ea45f63097574b5446148c9670509ae56dc2975.woff") format("woff");
+      font-weight: 300;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/78bd021a78ca5752e43275a982a96b00bd004a54.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/115efed0d77bd96754f56a00f399a05af518a5a4.woff") format("woff");
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/e5e3d4a71bfb2d624edf48819c3dd1597c4397ff.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9f8a21f09879869f644a45d21aea06dde01f2107.woff") format("woff");
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/f4f83c57775879216d798dce95c9a83e442da6ab.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9e93f03906c0fbfd6eba0ecdfe8d739a6b38852d.woff") format("woff");
+      font-weight: bold;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk Screen";
+      src: url("http://theme.zdassets.com/theme_assets/534077/2f8d0cbc16a32df1f8b6c36f45c2b4078181ca43.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/2ab0f28c68ed406c853fec87f698618cd7ac8bc2.woff") format("woff");
+      font-weight: 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk OIL";
+      src: url("http://theme.zdassets.com/theme_assets/534077/0ce9c7bb30841f31bac192ef415fd27771c17fc9.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/422274783804fb9c3e984558285801b01b2fe117.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+
+
+<link rel="stylesheet" href="../../../../use.fontawesome.com/releases/v5.10.1/css/all.css">
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/styles/atelier-lakeside-dark.min.css" />
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" />
+<script src="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+<script src="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/highlight.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<meta property="asseturl" content="//theme.zdassets.com/theme_assets/534077/6ff6e0c84e92580e7cc6e9c77a5cc1e724f36743.gif">
+
+
+<link rel="stylesheet" href="../../../../theme.zdassets.com/theme_assets/534077/02e3878a33d61900d75eb94d43eb4d26929d6dbf.css">
+
+<script src="../../../../theme.zdassets.com/theme_assets/534077/48ea021f3fedbc024c4443d2e946e0b9b742e384.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/469d1d10574fa6f68d243916e96f61e7ce459a5a.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/9893f4b0b18dc4018d50a3716fc581152c21535e.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/ae559ee60cd2d617e942d530c1ee7ac42a973761.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/c2b4df57e1dcfcf1b5d2298b16c409c8315a177b.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/cf5c34722566da1ba5ca5d877dc187d282ca6a3f.js"></script>
+
+<!-- ...Appcues... -->
+<script type="text/javascript">
+  if (userId) {
+    Appcues.identify(userId); 
+  } else {
+    Appcues.anonymous(); 
+  }
+</script>
+
+<script src="../../../../static.zdassets.com/conditional_fields_app_hc/latest/helpcenter.js"></script>
+<script>var cfaRules = [{ "fieldType": "tagger", "field": 114099498832, "value": "user_interface", "select": [114099504272], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "amazon", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "android", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios", "select": [114099505792, 114101637652], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "multi_platforms_other_combination", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "windows", "select": [114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099505792, "value": "other_ios_sdk", "select": [114099619791], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "adincube", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "admob", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "fyber_hezap", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "ironsource_supersonic", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "multiple_mediation", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "other_mediation", "select": [114099556512, 114099619811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "upsight", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "adobe_air", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "corona", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "marmalade", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "other_plugin", "select": [114099620151, 114099620451], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "unity", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099577491, "value": "other_android_sdk", "select": [114099555992], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099619751, "value": "other_windows_sdk", "select": [114099556012], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099621511, "value": "geo_other", "select": [114099622811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_dashboard", "select": [114099498652, 114099499132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_other", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_reportingapi", "select": [114099498652, 114099621211, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_useracquisition", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_notreceivingreward", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_other", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_troublesomead", "select": [114099498672, 114099504752, 114099621511, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_unsubscribeads", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_payment", "select": [114099571371, 114099500132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_accountstatus", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_addtransferusers", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_deleteaccount", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_pwrecovery", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_registration", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_callbacks", "select": [114099498652, 114099556032, 114099556532, 114099620751, 114099621511, 114099504752], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_cocoapods", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_dashboard", "select": [114099498652, 114099498832], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_gradle", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_multidex", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621731], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_noads", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_proguard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557592], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_testmode", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_other", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_reportingapi", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_button", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_crashing", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_endcard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_freezing", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_other", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_sound", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_video", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }];</script>
+
+<style type="text/css">
+
+/* Advertiser */
+.categories__icon--200198330 {
+  background-color: #ff5a41;
+}
+
+.categories__icon--200198330:before,
+#sidenav-category-200198330 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/9f2e8cfd41383f7f21c68fd99567eb1b1a7993ac.svg");
+}
+
+/* SDK */
+.categories__icon--200269670 {
+  background-color: #3c2869;
+}
+
+.categories__icon--200269670:before,
+#sidenav-category-200269670 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/ab38e1e12c6a99fe83f4ea9c02bf87e17510558d.svg");
+}
+
+/* Publisher */
+.categories__icon--360001994512 {
+  background-color: #6e7dff;
+}
+
+.categories__icon--360001994512:before,
+#sidenav-category-360001994512 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/8a0ee6cf2a1300b8adf5a19112e81db3c070a273.svg");
+}
+
+/* FAQs */
+.categories__icon--115000802567 {
+  background-color: #ffd700;
+}
+
+.categories__icon--115000802567:before,
+#sidenav-category-115000802567 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/840643095495a2f0380fbe420efb55b7a63277fe.svg");
+}
+
+/* Creative */
+.categories__icon--360001724259 {
+  background-color: #ffd2e1;
+}
+
+.categories__icon--360001724259:before,
+#sidenav-category-360001724259 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/2bb5eeecadf61018e2bda864d22706f146b5a208.svg");
+}
+
+</style>
+  <script type="text/javascript" src="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/scripte82d.js?digest=360570052252"></script>
+<script async src='../../../cdn-cgi/bm/cv/669835187/api.js'></script></head>
+<body class="">
+  
+  
+
+  <div class="js-alert-box"></div>
+
+<div class="layout" >
+
+  <aside class="sidebar" data-sidebar>
+  <div class="sidebar__header">
+    <div class="sidebar__container sidebar__container--fixed">
+      <div class="sidebar__logo">
+        <a title="홈" href="../../ko.html">
+          <img src="http://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" alt="로고">
+        </a>
+      </div>
+      <ul class="sidebar__list">
+        <li class="sidebar__item">
+          <a class="sidebar__link sidebar__link--home" title="홈" href="../../ko.html">Home</a>
+        </li>
+      </ul>
+      <div class="sidebar__top-nav"></div>
+      <div class="sidebar__content-block" data-sidebar-content></div>
+    </div>
+  </div>
+
+  <div class="sidebar__container">
+    <div class="sidebar__bottom-nav">
+      <div class="sidebar__bottom-nav-item">
+        
+          <div class="dropdown language-selector" aria-haspopup="true">
+            <a class="dropdown-toggle btn btn--default btn--small">
+              한국어
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+              </svg>
+            </a>
+            <span class="dropdown-menu" role="menu">
+              
+                <a href="../../de/articles/360002925791-Erste-Schritte-mit-Vungle-iOS-SDK-v-6.html?return_to=%2Fhc%2Fde%2Farticles%2F360002925791-Erste-Schritte-mit-Vungle-iOS-SDK-v-6" dir="ltr" rel="nofollow" role="menuitem">
+                  Deutsch
+                </a>
+              
+                <a href="../../en-us/articles/360002925791-Integrate-Vungle-SDK-for-iOS.html?return_to=%2Fhc%2Fen-us%2Farticles%2F360002925791-Integrate-Vungle-SDK-for-iOS" dir="ltr" rel="nofollow" role="menuitem">
+                  English (US)
+                </a>
+              
+                <a href="../../es-mx/articles/360002925791-Introducci%c3%b3n-al-SDK-de-Vungle-para-iOS-v-7.html?return_to=%2Fhc%2Fes-mx%2Farticles%2F360002925791-Introducci%25C3%25B3n-al-SDK-de-Vungle-para-iOS-v-6" dir="ltr" rel="nofollow" role="menuitem">
+                  Español (México)
+                </a>
+              
+                <a href="../../fr-fr/articles/360002925791-D%c3%a9marrer-avec-Vungle-SDK-iOS-version-7.html?return_to=%2Fhc%2Ffr-fr%2Farticles%2F360002925791-D%25C3%25A9marrer-avec-Vungle-SDK-iOS-version-6" dir="ltr" rel="nofollow" role="menuitem">
+                  Français (France)
+                </a>
+              
+                <a href="../../ja/articles/360002925791-Vungle-%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88-%e3%82%ac%e3%82%a4%e3%83%89-iOS-SDK-v-7.html?return_to=%2Fhc%2Fja%2Farticles%2F360002925791-Vungle-%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2588-%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589-iOS-SDK-v-6" dir="ltr" rel="nofollow" role="menuitem">
+                  日本語
+                </a>
+              
+                <a href="../../pt-br/articles/360002925791-Introdu%c3%a7%c3%a3o-ao-Vungle-SDK-v-6-para-iOS-2.html?return_to=%2Fhc%2Fpt-br%2Farticles%2F360002925791-Introdu%25C3%25A7%25C3%25A3o-ao-Vungle-SDK-v-6-para-iOS" dir="ltr" rel="nofollow" role="menuitem">
+                  Português do Brasil
+                </a>
+              
+                <a href="../../ru/articles/360002925791-%d0%9d%d0%b0%d1%87%d0%b0%d0%bb%d0%be-%d1%80%d0%b0%d0%b1%d0%be%d1%82%d1%8b-%d1%81-Vungle-iOS-SDK-v-7.html?return_to=%2Fhc%2Fru%2Farticles%2F360002925791-%25D0%259D%25D0%25B0%25D1%2587%25D0%25B0%25D0%25BB%25D0%25BE-%25D1%2580%25D0%25B0%25D0%25B1%25D0%25BE%25D1%2582%25D1%258B-%25D1%2581-Vungle-iOS-SDK-v-6" dir="ltr" rel="nofollow" role="menuitem">
+                  Русский
+                </a>
+              
+                <a href="../../zh-cn/articles/360002925791-%e5%bc%80%e5%a7%8b%e9%9b%86%e6%88%90Vungle-iOS-SDK-2.html?return_to=%2Fhc%2Fzh-cn%2Farticles%2F360002925791-%25E5%25BC%2580%25E5%25A7%258B%25E9%259B%2586%25E6%2588%2590Vungle-iOS-SDK" dir="ltr" rel="nofollow" role="menuitem">
+                  简体中文
+                </a>
+              
+            </span>
+          </div>
+        
+      </div>
+      <div class="sidebar__bottom-nav-item">  
+        <a href="https://vungle.com/login/" target="_blank" class="">
+          Platform
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="a" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#AAB2BA" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#a"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="sidebar__overlay"></div>
+
+  <div class="main">
+
+    <div class="main__header">
+
+      <a href="#" class="sidebar-toggle__link" data-toggle-menu role="button">
+        <span class="sidebar-toggle__burger"><span></span></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--menu"></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--close"></span>
+      </a>
+
+      <div class="main__search">
+        <form role="search" class="search" data-search="" data-instant="true" autocomplete="off" action="https://support.vungle.com/hc/ko/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" /><input type="search" name="query" id="query" placeholder="Search..." autocomplete="off" aria-label="Search..." />
+<input type="submit" name="commit" value="검색" /></form>
+      </div>
+      <div class="main__nav">
+        <a href="../../en-us/sections/360004473112.html" class="btn btn--topbar hidden-mobile">
+          Early Access SDK
+        </a>
+        <a href="https://vungle.com/signup/" target="_blank" class="btn btn--topbar">
+          Platform
+          <svg width="24" height="24" viewBox="0 0 24 24"><defs><path id="b" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#0ccec9" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#b"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="main__container">
+
+  <main role="main">
+    <div class="article-page" data-article-page>
+
+  <div class="row">
+    <div class="article-column article-column--left">
+      <div class="box">
+        <div class="article-page__wrap" data-article-wrap>
+          <article class="article js-active-article" itemscope itemtype="http://schema.org/Article" data-article="360002925791">
+            <header class="article-header">
+              <ol class="breadcrumbs">
+  
+    <li title="Vungle KO">
+      
+        <a href="../../ko.html">Vungle KO</a>
+      
+    </li>
+  
+    <li title="Monetization">
+      
+        <a href="../categories/200269670-Monetization.html">Monetization</a>
+      
+    </li>
+  
+    <li title="iOS용 SDK 통합 설명서">
+      
+        <a href="../sections/115000243211-iOS%ec%9a%a9-SDK-%ed%86%b5%ed%95%a9-%ec%84%a4%eb%aa%85%ec%84%9c.html">iOS용 SDK 통합 설명서</a>
+      
+    </li>
+  
+</ol>
+
+              <h1 class="h2 article-title" itemprop="name">
+                
+                Vungle - iOS SDK v.6 시작하기
+              </h1>
+
+              <div class="article-meta">
+                <div class="entry-info">
+                  <div class="entry-info__avatar">
+                    <div class="avatar avatar--agent">
+                      <img class="user-avatar user-avatar--default" src="../../../system/photos/360479472411/Me.jpg" alt="Avatar">
+                    </div>
+                  </div>
+                  <div class="entry-info__content">
+                    <b class="author">
+                      John Mai
+                    </b>
+                    <div class="meta"><time datetime="2021-08-12T22:22:45Z" title="2021-08-12T22:22:45Z" data-datetime="calendar">2021년 08월 12일 22:22</time></div>
+                  </div>
+                </div>
+                <a class="article-subscribe" title="로그인 대화 상자 열기" rel="nofollow" role="button" data-auth-action="signin" aria-selected="false" href="360002925791-Vungle-iOS-SDK-v-6-%ec%8b%9c%ec%9e%91%ed%95%98%ea%b8%b0/subscription.html">팔로우</a>
+              </div>
+            </header>
+
+            <div class="article__body markdown" itemprop="articleBody">
+
+              <div class="article-main">
+                <h1>목차</h1>
+<ul>
+<li><a href="#GDPRRecommendedImplementation">GDPR: 권장 구현</a></li>
+<li><a href="#BeforeYouGetStarted">시작하기 전에</a></li>
+<li><a href="#Step1AddVungleFrameworkToXcode">1단계. Vungle 프레임워크를 Xcode 프로젝트에 추가</a></li>
+<li><a href="#Step2RemoveIOSStatusBar">2단계. iOS 상태 막대 제거</a></li>
+<li><a href="#Step3AddCode">3단계. 코드 추가</a></li>
+</ul>
+<h1><a name="GDPRRecommendedImplementation"></a>GDPR: 권장 구현</h1>
+<p>5월 25일부터 GDPR(General Data Protection Regulation, 일반데이터보호규정)이 유럽 연합에서 시행됩니다. 개발자에게는 GDPR 준수를 위한 2가지 옵션이 있습니다.</p>
+<ul>
+<li><strong>옵션 1(권장):</strong> 퍼블리셔는 사용자 수준에서 GDPR 동의 과정을 제어한 후 Vungle에 사용자의 선택을 전달합니다. 이를 위해 개발자는 자체 메커니즘을 사용하여 사용자의 동의를 수집한 다음 Vungle API를 사용하여 사용자의 동의 상태를 업데이트하거나 쿼리할 수​있습니다. 자세한 내용은 <a href="#GDPRRecommendedImplementationInstructions">GDPR 권장 구현 지침</a> 섹션을 참조하십시오.<br /><br /></li>
+<li><strong>옵션 2:</strong> Vungle이 요구사항을 처리하도록 허용합니다. Vungle은 유럽 사용자를 위해 광고를 재생하기 전에 동의 대화 상자를 표시하고 이후 광고에 대한 해당 사용자의 동의 여부를 기억합니다.</li>
+</ul>
+<h1><a name="BeforeYouGetStarted"></a>시작하기 전에</h1>
+<ul>
+<li>Vungle iOS SDK v.6은 iOS 8 이상을 지원합니다.</li>
+<li>Vungle iOS SDK v.6은 iOS 11 베타/GM Seed로 테스트되었습니다.</li>
+<li>Vungle iOS SDK v.6은 32비트와 64비트 앱을 모두 지원합니다.</li>
+<li>통합을 하려면 Vungle 계정이 있어야 합니다. 아직 계정이 없는 경우, 계정을 생성한 후에 계속 진행합니다.</li>
+<li>iOS SDK는 Xcode 9.0 이상을 지원합니다.</li>
+</ul>
+<h1><a name="Step1AddVungleFrameworkToXcode"></a>1단계. Vungle 프레임워크를 Xcode 프로젝트에 추가</h1>
+<h2><a name="AddVungleSDKFrameworkToProject"></a>프로젝트에 VungleSDK.framework 추가</h2>
+<p>Cocoapod 사용 또는 수동 통합으로 Vungle을 Xcode 프로젝트에 추가할 수 있습니다.</p>
+<h3><a name="Cocoapods"></a>Cocoapod</h3>
+<p>Cocoapod를 통해 Vungle SDK를 사용할 수 있습니다. 프로젝트의 podfile에 다음 줄을 추가하여 Vungle을 프로젝트에 추가합니다.</p>
+<pre><code> pod "VungleSDK-iOS", "6.2.0"</code></pre>
+<p>그런 다음 빠른 포드 설치 실행을 통해 프로젝트를 최신 버전의 iOS SDK로 업데이트합니다. 이제 "<a href="#Step2RemoveIOSStatusBar">2단계. iOS 상태 막대 제거</a>"로 이동할 수 있습니다.</p>
+<h3><a name="ManualIntegration"></a>수동 통합</h3>
+<p><a href="https://v.vungle.com/sdk">Vungle SDK v6을 다운로드</a>합니다. Vungle SDK를 이전 버전에서 업데이트하는 경우 새 SDK를 추가하기 전에 먼저 VungleSDK.framework 디렉토리를 완전히 제거하십시오.</p>
+<p>압축을 푼 파일을 찾은 다음 <code>VungleSDK.framework</code>를 <strong>프레임워크</strong>의 Xcode로 끌어다 놓습니다. <code>VungleSDK.framework</code> 폴더를 그룹(노란색 폴더)으로 추가해야 하며 참조(파란색 폴더)로서 추가하면 안 됩니다.</p>
+<h2><a name="AddOtherRequiredFrameworks"></a>기타 필요한 프레임워크 추가</h2>
+<p>Vungle SDK에서는 프로젝트와 연결될 몇 가지 다른 네이티브 프레임워크가 필요합니다. 그러므로 <strong>프로젝트 탐색기</strong>에서 프로젝트를 클릭하고 <strong>General → Linked Frameworks and Libraries</strong>로 이동합니다.</p>
+<p>다수의 이러한 프레임워크가 대부분의 Xcode 프로젝트에서 기본 설정으로 이미 포함되어 있습니다. 포함되어 있지 않은 다음의 프레임워크는 반드시 추가해야 합니다.</p>
+<ul>
+<li><code>AdSupport.framework</code></li>
+<li><code>AudioToolbox.framework</code></li>
+<li><code>AVFoundation.framework</code></li>
+<li><code>CFNetwork.framework</code></li>
+<li><code>CoreGraphics.framework</code></li>
+<li><code>CoreMedia.framework</code></li>
+<li><code>libz.dylib</code> 또는 <code>libz.tbd</code></li>
+<li><code></code><code>MediaPlayer.framework</code></li>
+<li><code>QuartzCore.framework</code></li>
+<li><code>StoreKit.framework</code></li>
+<li><code>SystemConfiguration.framework</code></li>
+</ul>
+<p><br /><strong>참고:</strong> Vungle SDK V.6은 iOS 7을 지원하지 않습니다. 배포 대상에 iOS 7이 있다면 Vungle iOS SDK v.4.1 이하 버전을 사용하고 다음 프레임워크를 포함하십시오.</p>
+<ul>
+<li><code>UIKit.framework</code></li>
+<li><code>WebKit.framework</code></li>
+<li><code>Foundation.framework</code></li>
+</ul>
+<p>VungleSDK 프레임워크가 <strong>연결된 프레임워크 및 라이브러리</strong>에 표시되는지 확인합니다.</p>
+<h2><a name="AddObjCLinkerFlag"></a>“-ObjC” 링커 플래그 추가</h2>
+<p><strong>프로젝트 탐색기</strong>에서 프로젝트를 클릭하고 <strong>Build Settings → Linking → Other Linker Flags</strong>로 이동합니다. <strong>기타 링커 플래그</strong>에 <strong>-ObjC</strong>를 추가합니다.</p>
+<h1><a name="Step2RemoveIOSStatusBar"></a>2단계. iOS 상태 막대 제거</h1>
+<p>필수 단계는 아니지만, iOS 상태 막대를 삭제하면 Vungle의 광고 상호작용 및 표시가 원활하게 작동하므로 권장되는 단계입니다. 상태 막대를 제거하려면 <code>Info.plist</code>를 열고 <strong>컨트롤러 기반 상태 표시줄 보기</strong> 키를 추가한 후 이를 <strong>아니요</strong>로 설정합니다.</p>
+<h1><a name="Step3AddCode"></a>3단계. 코드 추가</h1>
+<h2><a name="InitializeSDK"></a>SDK 초기화</h2>
+<p>자동 캐시된 플레이스먼트를 사용하는 경우 앱이 시작되자마자 SDK를 초기화하면 SDK가 자동 캐시된 플레이스먼트에 광고를 캐시할 수 있는 충분한 시간이 주어집니다. SDK를 초기화하려면 앱 ID가 필요합니다. Vungle 대시보드에서 앱 ID를 찾을 수 있습니다.</p>
+<pre><code>- (BOOL)startWithAppId:(nonnull NSString *)appID error:(NSError **)error;</code></pre>
+<p>샘플 코드:</p>
+<pre><code>#import <span class="hljs-title">&lt;VungleSDK/VungleSDK.h&gt;</span><br />...<br />NSError* error;<br />NSString* appID = @"Your_AppID_Here"; VungleSDK* sdk = [VungleSDK sharedSDK]; [sdk startWithAppId:appID error:&amp;error];<br /></code></pre>
+<p>SDK가 성공적으로 초기화되면 다음과 같은 콜백 메서드가 호출됩니다.</p>
+<pre><code>- (void)vungleSDKDidInitialize;</code></pre>
+<p>이 설명서의 "<a href="#DelegateCallbacks">델리게이트 콜백</a>" 섹션을 참조합니다.</p>
+<p>다음 속성을 사용하여 SDK 초기화의 상태를 확인할 수도 있습니다.</p>
+<pre><code>@property (atomic, readonly, getter=isInitialized) BOOL initialized;</code></pre>
+<p>SDK를 초기화된 후 Vungle 대시보드에서 <strong>자동 캐시</strong>로 플레이스먼트를 선택한 경우, SDK는 자동으로 해당 플레이스먼트에 광고를 캐시합니다. 이 기능을 사용하는 경우 조회 수가 가장 높은 플레이스먼트를 자동 캐시로 설정하는 것이 좋습니다.</p>
+<p>광고가 성공적으로 캐시되면 <strong>자동 캐시된</strong> 플레이스먼트와 일치하는 플레이스먼트 참조 ID로 <code>vungleAdPlayabilityUpdate</code> 콜백 메서드가 호출됩니다. (이 설명서에서 "<a href="#CheckAdAvailability">플레이스먼트의 광고 가용성 확인</a>" 섹션을 참조하십시오.)</p>
+<h2><a name="LoadAnAd"></a>플레이스먼트에 광고 로드</h2>
+<p>자동 캐시된 플레이스먼트 외의 다른 플레이스먼트에는 <code>loadPlacementWithID</code> 메서드를 호출하여 광고를 로드합니다.</p>
+<pre><code>- (BOOL)loadPlacementWithID:(NSString *)placementID error:(NSError **)error;</code></pre>
+<p>샘플 코드:</p>
+<pre><code>NSError* error;<br />VungleSDK* sdk = [VungleSDK sharedSDK]; [sdk loadPlacementWithID:"&lt;Your_PlacementID&gt;" error:&amp;error];</code></pre>
+<p>(이 설명서에서 "<a href="#CheckAdAvailability">플레이스먼트의 광고 가용성 확인</a>" 섹션을 참조합니다.)</p>
+<h2><a name="CheckAdAvailability"></a>플레이스먼트의 광고 가용성 확인</h2>
+<p>SDK가 플레이스먼트에 광고를 캐시하고 나면 다음과 같은 콜백 메서드가 호출됩니다.</p>
+<pre><code>- (void)vungleAdPlayabilityUpdate:(BOOL)isAdPlayable placementID:(nullable NSString *)placementID error:(nullable NSError *)error; </code></pre>
+<p>샘플 코드:</p>
+<pre><code>- (void)vungleAdPlayabilityUpdate:(BOOL)isAdPlayable placementID:(NSString *)placementID error:(nullable NSError *)error {
+    if([placementID isEqualToString:@"&lt;Your_PlacementID&gt;"]) {
+        self.playButtonPlacement1.enabled = isAdPlayable;
+    }
+}</code></pre>
+<p><strong>참고:</strong> 자동 캐시된 플레이스먼트의 경우, 광고를 사용할 수 있을 때만 이 콜백 메서드가 호출됩니다. SDK는 자동 캐시된 플레이스먼트에 대한 광고를 계속 요청합니다. 다른 플레이스먼트에서는 "로드 실패"(<code>isAdPlayable</code>가 '아니요'를 반환)의 경우 이 콜백 메서드가 호출됩니다.</p>
+<p>다음 속성을 사용하여 플레이스먼트의 광고 가용성을 확인할 수도 있습니다.</p>
+<pre><code>- (BOOL)isAdCachedForPlacementID:(nonnull NSString *)placementID;</code></pre>
+<h2><a name="PlayAnAd"></a>광고 재생</h2>
+<p>플레이스먼트에 대한 광고가 준비되면 다음과 같은 방법으로 광고를 재생할 수 있습니다.</p>
+<pre><code>- (BOOL)playAd:(UIViewController *)controller options:(nullable NSDictionary *)options placementID:(nullable NSString *)placementID error:( NSError *__autoreleasing _Nullable *_Nullable)error;</code></pre>
+<p>샘플 코드:</p>
+<pre><code>VungleSDK* sdk = [VungleSDK sharedSDK]; NSError *error; [self.sdk playAd:self options:nil placementID:@"&lt;Your_PlacementID_1&gt;" error:&amp;error]; if (error) { NSLog(@"Error encountered playing ad: %@", error); }</code></pre>
+<h2><a name="FlexFeedAds"></a>Flex Feed 광고</h2>
+<p>Vungle SDK v.5.3부터 Flex Feed 광고를 지원합니다. 이는 전체 화면이 필요 없는 최초의 광고 형식입니다. 대신, 퍼블리셔가 앱 내 광고 컨테이너의 정확한 크기와 위치를 결정합니다. 이러한 광고 컨테이너는 컬렉션 뷰 또는 테이블 뷰에 위치할 수 있습니다.</p>
+<h3>Flex Feed 광고 로드하기</h3>
+<p>Flex Feed 광고 로드 방법은 전체 화면 광고 로드와 동일하지만, 플레이스먼트가 Flex Feed를 지원하도록 구성해야 합니다. 플레이스먼트에 Flex Feed를 사용하도록 설정하려면 Vungle 계정 관리자에게 문의하십시오.</p>
+<h3>Flex Feed 광고 표시하기</h3>
+<p>Flex Feed 광고를 표시하는 방법은 전체 화면 광고 표시 방법과 다릅니다. Flex Feed 광고에서는 광고 컨테이너를 먼저 생성해야 합니다. 이 컨테이너는 <code>UIView</code>입니다. 해당 <code>UIView</code>는 화면 어느 곳에나 배치할 수 있습니다. 광고가 컨테이너의 크기에 맞게 늘어나지만 해상도가 너무 낮으면 광고의 가시성이 저하되니 참고하시기 바랍니다. 그런 다음 함수를 호출하여 <code>addAdViewToView</code> Flex Feed 광고와 컨테이너를 연결해야 합니다.</p>
+<p>함수 개요:</p>
+<pre><code>/** * Pass in an UIView which acts as a container for the ad experience. This view container may be placed in random positions. * @param publisherView container view in which an ad will be displayed * @param options A reference to an instance of NSDictionary with customized ad playback options * @param placementID The placement defined on the Vungle dashboard * @param error An optional double reference to an NSError. In case this method returns `NO` it will be non-nil * @return YES/NO in case of success/error while presenting an AdUnit */ - (BOOL)addAdViewToView:(UIView *)publisherView withOptions:(nullable NSDictionary *)options placementID:(nullable NSString *)placementID error:( NSError *__autoreleasing _Nullable *_Nullable)error; </code></pre>
+<p>샘플 코드:</p>
+<pre><code>NSError *error; NSDictionary *options = @{}; VungleSDK* sdk = [VungleSDK sharedSDK]; [sdk addAdViewToView:_FlexFeedViewArea withOptions:options placementID: error:&amp;error]; if (error) { NSLog(@"Error encountered while playing an ad: %@", error); } </code></pre>
+<h3>Flex Feed 광고 닫기</h3>
+<p>Flex Feed 광고의 특성으로 인해 사용자는 광고를 닫지 않고 동영상 보기를 중단할 수 있습니다. 그러므로 광고가 화면에 더 이상 표시되지 않는 경우 SDK에 광고를 해제하도록 지시해야 합니다. 이렇게 하려면 <code>finishedDisplayingAd</code> 함수를 호출하십시오. 이 함수는 Flex Feed 및 Flex View 광고에서만 작동합니다. 이 함수는 플레이스먼트에서 작동하지 않으며, 현재 재생 중인 네이티브 광고를 닫기만 합니다.</p>
+<p>함수 개요:</p>
+<pre><code>/** * This method must be called when the publisher is confident that they are finished displaying the ad unit. * This signals to the SDK that a new ad may be fetched or a different ad may be displayed. This will * be called in conjunction with `addViewToView:containedInViewController:withOptions:placementID:error:` */ - (void)finishedDisplayingAd; </code></pre>
+<p>샘플 코드:</p>
+<pre><code>//Ad is no longer on screen VungleSDK* sdk = [VungleSDK sharedSDK]; [sdk finishedDisplayingAd]; </code></pre>
+<h2><a name="DelegateCallbacks"></a>델리게이트 콜백</h2>
+<p><code>VungleSDKDelegate</code>를 통해 SDK에서 콜백을 받을 수 있습니다. SDK 이벤트에 대한 알림을 받는 델리게이트에는 네 가지 콜백 메서드가 있습니다.</p>
+<p>다음을 사용하여 델리게이트를 첨부 및 분리할 수 있습니다.</p>
+<pre><code>// Attach [[VungleSDK sharedSDK] setDelegate:yourDelegateInstance]; // Detach [[VungleSDK sharedSDK] setDelegate:nil]; </code></pre>
+<p><strong>참고:</strong> 메모리 누수를 피하려면, 등록된 델리게이트 중 사용하지 않는 것은 적절히 분리하는 것이 중요합니다.</p>
+<p>SDK가 동영상 광고를 재생하려고 할 때 다음 메서드가 호출됩니다. 게임 재생, 음향 효과, 애니메이션 등을 일시 중지하기에 좋은 메서드입니다.</p>
+<pre><code>- (void)vungleWillShowAdForPlacementID:(nullable NSString *)placementID; </code></pre>
+<p>SDK가 광고를 닫으려고 할 때 다음 메서드가 호출됩니다. 사용자에게 보상을 제공하고 게임 재생, 음향 효과, 애니메이션 등을 재개할 때 사용하는 메서드입니다.</p>
+<pre><code>- (void)vungleWillCloseAdWithViewInfo:(VungleViewInfo *)info placementID:(NSString *)placementID; </code></pre>
+<p>SDK가 광고를 닫을 때 다음 메서드가 호출됩니다.</p>
+<pre><code>- (void)vungleDidCloseAdWithViewInfo:(VungleViewInfo *)info placementID:(NSString *)placementID;</code></pre>
+<p><code>VungleViewInfo</code>에는 광고 재생 결과의 확인을 위한 다음 속성이 포함됩니다.</p>
+<pre><code>@interface VungleViewInfo : NSObject //Represents a BOOL whether or not the video can be considered a completed view. @property (nonatomic, readonly) NSNumber *completedView; //The time in seconds that the user watched the video. @property (nonatomic, readonly) NSNumber *playTime; //Represents a BOOL whether or not the user clicked the download button. @property (nonatomic, readonly) NSNumber *didDownload; @end </code></pre>
+<p>SDK가 광고 가용성 상태를 변경하면 다음 메서드가 호출됩니다. isAdPlayable 부울은 특정 placementID의 새로운 재생 가능성을 보여줍니다.</p>
+<pre><code>- (void)vungleAdPlayabilityUpdate:(BOOL)isAdPlayable placementID:(nullable NSString *)placementID error:(nullable NSError *)error;</code></pre>
+<p>(이 설명서에서 "<a href="#CheckAdAvailability">플레이스먼트의 광고 가용성 확인</a>" 섹션을 참조합니다.)</p>
+<p>SDK가 성공적으로 초기화되면 다음과 같은 콜백 메서드가 호출됩니다.</p>
+<pre><code>- (void)vungleSDKDidInitialize;</code></pre>
+<h2><a name="CustomizationOptions"></a>사용자 지정 옵션</h2>
+<p>이 옵션을 사용하여 재생을 위한 광고 환경을 사용자 정의할 수 있습니다.</p>
+<p><strong>참고:</strong> 경우에 따라 <em>보상형</em> 광고가 <em>인센티브화</em> 광고로 불리기도 합니다. 두 용어는 항상 같은 종류의 광고를 나타냅니다. SDK 코드와 리포팅 API에서는 '인센티브화'라는 용어를 사용합니다.</p>
+<table style="width: 815px;">
+<tbody>
+<tr>
+<td style="width: 200px;">
+<p><strong>옵션 키</strong></p>
+</td>
+<td style="width: 151px;">
+<p><strong>기본 값/유형</strong></p>
+</td>
+<td style="width: 419px;">
+<p><strong>설명</strong></p>
+</td>
+</tr>
+<tr>
+<td style="width: 200px;">
+<p><code>VunglePlayAdOptionKeyOrientations</code></p>
+</td>
+<td style="width: 151px;">
+<p>autorotate</p>
+<p><code>UIInterfaceOrientationMaskAll</code></p>
+<p>비트 마스크로 방향을 나타내는 NSNumber</p>
+</td>
+<td style="width: 419px;">
+<p>광고의 방향을 설정합니다. 앱이 세로 방향인 경우에도 광고를 자동으로 회전하도록 설정할 것을 권장합니다. 이런 방식으로 사용자가 최대 크기의 동영상을 보게끔 선택하여 더 나은 사용자 경험을 누릴 수 있습니다. 방향 전환을 프로젝트 레벨이 아닌 보기 제어 수준에서 설정하여 더 나은 사용자 경험을 구현할 수 있습니다.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 200px;">
+<p><code>VunglePlayAdOptionKeyUser</code></p>
+</td>
+<td style="width: 151px;">
+<p>nil</p>
+<p><code>NSString</code></p>
+</td>
+<td style="width: 419px;">
+<p>사용자의 ID를 설정합니다. 이 값은 Vungle 서버로 전달된 다음, 플레이스먼트가 "보상형"으로 설정된 경우 서버 간 콜백 시스템을 통해 서버로 전송됩니다.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 200px;">
+<p><code>VunglePlayAdOptionKeyIncentivizedAlertTitleText</code></p>
+</td>
+<td style="width: 151px;">
+<p>nil</p>
+<p><code>NSString</code></p>
+</td>
+<td style="width: 419px;">
+<p>사용자가 보상형 광고를 시청 도중에 닫을 때 표시되는 경고 대화 상자의 제목으로 사용되는 문자열입니다.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 200px;">
+<p><code>VunglePlayAdOptionKeyIncentivizedAlertBodyText</code></p>
+</td>
+<td style="width: 151px;">
+<p>"정말 이 광고를 건너뛰시겠습니까? 이 광고를 건너뛰면 보상을 받지 못할 수 있습니다.</p>
+<p><code>NSString</code></p>
+</td>
+<td style="width: 419px;">
+<p>사용자가 보상형 광고를 시청 도중에 닫을 때 표시되는 경고 대화 상자의 본문 텍스트로 사용되는 문자열입니다.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 200px;">
+<p><code>VunglePlayAdOptionKeyIncentivizedAlertCloseButtonText</code></p>
+</td>
+<td style="width: 151px;">
+<p>"닫기"</p>
+<p><code>NSString</code></p>
+</td>
+<td style="width: 419px;">
+<p>사용자가 보상형 광고를 시청 도중에 닫을 때 표시되는 경고 대화 상자의 닫기 버튼에 사용되는 문자열 제목입니다.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 200px;">
+<p><code>VunglePlayAdOptionKeyIncentivizedAlertContinueButtonText</code></p>
+</td>
+<td style="width: 151px;">
+<p>"계속"</p>
+<p><code>NSString</code></p>
+</td>
+<td style="width: 419px;">
+<p>사용자가 보상형 광고를 시청 도중에 닫을 때 표시되는 경고 대화 상자의 닫기 버튼에 사용되는 문자열 제목입니다.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 200px;"><code>VunglePlayAdOptionKeyFlexViewAutoDismissSeconds</code></td>
+<td style="width: 151px;">
+<p><code>Int</code></p>
+</td>
+<td style="width: 419px;">
+<p>지정된 시간(초)이 지난 후 Flex View 광고가 자동적으로 해제되게 하려면 이 옵션을 사용하십시오. <br />이 함수는 Flex View 광고에서만 작동합니다.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 200px;"><code>VunglePlayAdOptionKeyOrdinal</code></td>
+<td style="width: 151px;">
+<p><code>Int</code></p>
+</td>
+<td style="width: 419px;">
+<p>Vungle에서 서수 데이터 보고를 받는 경우 이 필드를 이용하여 미디에이션 서수를 내보내십시오. 게임 세션에서 해당 광고의 표시 순서를 나타내는 정수 값입니다(예를 들어, 이번 세션에서 이미 두 개의 광고가 표시되고 Vungle의 광고가 세 번째로 보여지는 경우, '3'을 내보냅니다). 서수 데이터에 대한 자세한 내용은 <a href="../../en-us/articles/115003465152.html">여기</a>를 참조하십시오.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<pre><code><br />NSDictionary *options = @{VunglePlayAdOptionKeyOrientations: @(UIInterfaceOrientationMaskLandscape), VunglePlayAdOptionKeyUser: @"userGameID", VunglePlayAdOptionKeyIncentivizedAlertBodyText : @"If the video isn't completed you won't get your reward! Are you sure you want to close early?", VunglePlayAdOptionKeyIncentivizedAlertCloseButtonText : @"Close", VunglePlayAdOptionKeyIncentivizedAlertContinueButtonText : @"Keep Watching", VunglePlayAdOptionKeyIncentivizedAlertTitleText : @"Careful!"}; // Pass in dict of options, play ad NSError *error; [self.sdk playAd:self options:options placementID: error:&amp;error]; if (error) { NSLog(@"Error encountered playing ad: %@", error); }</code></pre>
+<h3><a name="MuteOption"></a>음소거 옵션</h3>
+<p>Vungle SDK 인스턴스는 소리가 비활성화된 상태에서 광고를 재생할 수 있는 옵션을 제공합니다. <code>playAd()</code>를 발급하기 전에 음소거된 속성을 true로 설정할 수 있습니다.</p>
+<p>샘플 코드:</p>
+<pre><code>VungleSDK* sdk = [VungleSDK sharedSDK]; self.sdk.muted = true;</code></pre>
+<p><strong>참고:</strong> 이 옵션은 표준 광고 유형에만 적용됩니다. 다이나믹 템플릿 광고에서는 대시보드에서 음소거 옵션을 구성할 수 있습니다.</p>
+<h3><a name="GDPRRecommendedImplementationInstructions"></a>GDPR 권장 구현 지침</h3>
+<p>Vungle API를 사용하여 업데이트하거나 사용자 동의 상태를 쿼리하려면(<a href="#GDPRRecommendedImplementation">GDPR: 권장 구현</a>의 옵션 1 참조) 다음 함수를 사용하십시오.</p>
+<pre><code>// This function sets the consent status that will be recorded in Vungle SDK. Accepted values: 'VungleConsentAccepted' or 'VungleConsentDenied'.<br />// To set the use<span class="hljs-string">r's consent status to opted in:</span><br /> [[VungleSDK sharedSDK] updateConsentStatus:VungleConsentAccepted];<br /><br />// To set the use<span class="hljs-string">r's consent status to opted out:</span><br /> [[VungleSDK sharedSDK] updateConsentStatus:VungleConsentDenied];<br /><br />// To find out what the use<span class="hljs-string">r's current consent status is:</span> <br />// (Check against enum values: 'VungleConsentAccepted' or 'VungleConsentDenied'.) [[VungleSDK sharedSDK] getCurrentConsentStatus]; </code></pre>
+<p><code>VungleConsentStatus</code>는 다음과 같은 두 가지 상태를 포함하는 열거형입니다.</p>
+<ul>
+<li><code>VungleConsentAccepted</code></li>
+<li><code>VungleConsentDenied</code></li>
+</ul>
+<p>또한 SDK에는 초기 상태가 'unknown'(알 수 없음)으로 표시되어 사용자 데이터 수집을 선택 또는 선택 해제하라는 메시지가 표시됩니다. 이 메시지는 유럽에서 발생하는 IP 주소에서만 표시됩니다.</p>
+<h2><a name="Debug"></a>디버그</h2>
+<p>SDK 정보가 필요하면 다음 속성을 사용하여 가져올 수 있습니다.</p>
+<pre><code>- (NSDictionary *)debugInfo;</code></pre>
+<p>SDK에서 로그를 출력하려면 다음 방법을 사용합니다.</p>
+<pre><code>- (void)setLoggingEnabled:(BOOL)enable;</code></pre>
+<h2><a name="VungleSDKLoggerProtocol"></a>VungleSDKLogger 프로토콜</h2>
+<pre><code>@protocol VungleSDKLogger - (void)vungleSDKLog:(NSString*)message; @end</code></pre>
+<p>VungleSDK 싱글톤은 VungleSDKLogger 프로토콜에 따라 로깅 이벤트를 첨부된 클래스에 전송합니다. 로그 이벤트에는 콘솔로도 인쇄되는 NSString 값이 포함됩니다(로깅이 켜져 있는 경우). 로거를 첨부하려면, 다음을 사용합니다.</p>
+<pre><code>[sdk attachLogger:yourLoggerInstance];</code></pre>
+<p>위에서 언급한 것처럼 Vungle SDK로부터 첨부된 로거를 제거하는 것이 중요합니다. 다음의 접근 방식을 사용하여 로거를 분리할 수 있습니다.</p>
+<pre><code>[sdk detachLogger:yourLoggerInstance];</code></pre>
+<h2><a name="assetLoaderProtocol"></a>assetLoader 프로토콜</h2>
+<pre>@protocol VungleAssetLoader /** * 구체화된 경로 또는 닐에 대한 (가공되지 않은) 이미지 데이터를 포함하는 유효한 NSData를 반환해야 합니다. */ - (NSData*)vungleLoadAsset:(NSString*)path; /** * 구체화된 경로 또는 닐에 대한 유효한 UIImage를 반환해야 합니다. */ - (UIImage*)vungleLoadImage:(NSString*)path; @end<code></code></pre>
+              </div>     
+
+            </div>
+
+            <div class="article__attachments">
+              
+            </div>
+
+          </article>
+        </div>
+
+        <div class="article-loader fa fa-spinner fa-spin fa-3x fa-fw" id="article-loader"></div>
+
+        
+          <a class="article-banner" href="https://vungle.com/signup" target="_blank">
+            <span class="article-banner__title">
+              <span>Powered by Creativity</span>
+              <span>Driven by Performance</span>
+            </span>
+            <span class="article-banner__cta">Sign Up Here</span>
+          </a>
+        
+
+        <div data-prevnext='{"showArticleTitle": true, "classNameBtn": ""}'></div>
+
+        <section class="submit-ticket submit-ticket--article">
+          <div class="submit-ticket-col submit-ticket-col--left">
+            <h2 class="submit-ticket-title">Questions?</h2>
+            <p>Need further assistance, feel free to reach out to us, we’re here to help!</p>
+          </div>
+          <div class="submit-ticket-col submit-ticket-col--right">
+            <a class="btn btn--default" href="../requests/new.html">문의 등록</a>
+          </div>
+        </section>
+
+        <footer class="article-footer">
+          
+          <div class="article-vote">
+            <span class="article-vote-question">도움이 되었습니까?</span>
+            <div class="article-vote-controls">
+              <a class="btn btn--default fa fa-thumbs-up article-vote-controls__item article-vote-controls__item--up" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="예" href="../signin654b.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fko%2Farticles%2F360002925791-Vungle-iOS-SDK-v-6-%25EC%258B%259C%25EC%259E%2591%25ED%2595%2598%25EA%25B8%25B0"></a>
+              <a class="btn btn--default fa fa-thumbs-down article-vote-controls__item article-vote-controls__item--down" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="아니요" href="../signin654b.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fko%2Farticles%2F360002925791-Vungle-iOS-SDK-v-6-%25EC%258B%259C%25EC%259E%2591%25ED%2595%2598%25EA%25B8%25B0"></a>
+            </div>
+          </div>
+          
+        </footer>
+
+      </div>
+    </div>
+    <div class="article-column article-column--right">
+      <div data-toc='{"headers": "h2,h3,h4", "title": "Contents", "offsetTop": 80, "mobileBreakpoint": 1024}'></div>
+    </div>
+  </div>
+
+</div>
+  </main>
+
+        <footer class="footer" id="footer">
+        <div class="footer-inner">
+          <div class="copyright">
+            <div class="copyright__content">
+              <span class="copyright__copy">&copy; 2020 Vungle. All rights reserved.</span>
+            </div>
+          </div>
+          <nav class="footer-menu">
+            <ul class="list-unstyled">
+              <li><a href="https://vungle.com/about-us/">About</a></li>
+              <li><a href="https://vungle.com/login/">Products</a></li>
+              <li><a href="https://vungle.com/contact-us/">Contact us</a></li>
+            </ul>
+          </nav>
+          <ul class="footer-socials list-unstyled">
+            
+              <li><a href="https://www.facebook.com/vungle/" target="_blank" class="fab fa-facebook"></a></li>
+            
+            
+              <li><a href="https://twitter.com/vungle" target="_blank" class="fab fa-twitter"></a></li>
+            
+            
+            
+              <li><a href="https://www.linkedin.com/company/vungle" target="_blank" class="fab fa-linkedin"></a></li>
+            
+            
+            
+            
+              <li><a href="https://www.instagram.com/vungle/" target="_blank" class="fab fa-instagram"></a></li>
+            
+          </ul>
+        </div>
+      </footer>
+          
+    </div>
+    <!-- /.main__container -->
+
+  </div>  
+  <!-- /.main -->
+  
+</div>
+<!-- /.layout -->
+
+
+
+  <!-- / -->
+
+  
+  <script src="../../../../static.zdassets.com/hc/assets/ko.a157d41ecdebc07e58a9.js"></script>
+  <script src="../../../../vungle.zendesk.com/auth/v2/host.js" data-brand-id="60720" data-return-to="https://support.vungle.com/hc/ko/articles/360002925791-Vungle-iOS-SDK-v-6-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0" data-theme="hc" data-locale="ko" data-auth-origin="60720,true,true"></script>
+
+  <script type="text/javascript">
+  /*
+
+    Greetings sourcecode lurker!
+
+    This is for internal Zendesk and legacy usage,
+    we don't support or guarantee any of these values
+    so please don't build stuff on top of them.
+
+  */
+
+  HelpCenter = {};
+  HelpCenter.account = {"subdomain":"vungle","environment":"production","name":"Vungle"};
+  HelpCenter.user = {"identifier":"da39a3ee5e6b4b0d3255bfef95601890afd80709","email":null,"name":null,"role":"anonymous","avatar_url":"https://assets.zendesk.com/hc/assets/default_avatar.png","is_admin":false,"organizations":[],"groups":[]};
+  HelpCenter.internal = {"asset_url":"//static.zdassets.com/hc/assets/","web_widget_asset_composer_url":"https://static.zdassets.com/ekr/snippet.js","current_session":{"locale":"ko","csrf_token":null,"shared_csrf_token":null},"settings":{},"usage_tracking":{"event":"article_viewed","data":"BAh7CDoLbG9jYWxlSSIHa28GOgZFVDoPYXJ0aWNsZV9pZGwrCN+02NFTADoKX21ldGF7CzoPYWNjb3VudF9pZGkDPSYIOhNoZWxwX2NlbnRlcl9pZGkENsfsCzoNYnJhbmRfaWRpAjDtOgx1c2VyX2lkMDoTdXNlcl9yb2xlX25hbWVJIg5BTk9OWU1PVVMGOwZUOwBJIgdrbwY7BlQ=--e605bf094d6ceecabd5f07debfc270f9525d6c12","url":"https://support.vungle.com/hc/activity"},"current_record_id":"360002925791","current_record_url":"/hc/ko/articles/360002925791-Vungle-iOS-SDK-v-6-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0","current_record_title":"Vungle - iOS SDK v.6 시작하기","search_results_count":null,"current_text_direction":"ltr","current_brand":{"id":60720,"account_id":534077,"name":"Vungle","active":true,"deleted_at":null,"created_at":"2014-05-29T20:19:19Z","updated_at":"2021-05-13T16:25:53Z","route_id":429018,"signature_template":"{{agent.signature}}"},"current_brand_url":"https://vungle.zendesk.com","current_host_mapping":"support.vungle.com","current_path":"/hc/ko/articles/360002925791-Vungle-iOS-SDK-v-6-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0","authentication_domain":"https://vungle.zendesk.com","show_autocomplete_breadcrumbs":true,"rollbar_config":{"enabled":true,"endpoint":"https://rollbar-us.zendesk.com/api/1/item/","accessToken":"731a5a953e9a4b7ab6cac9623f50c732","captureUncaught":true,"captureUnhandledRejections":true,"payload":{"environment":"production","client":{"javascript":{"source_map_enabled":true,"code_version":"8e508d702ea3bb44fb7e90308d7e394bc580895e","guess_uncaught_frames":true}}}},"user_info_changing_enabled":false,"has_user_profiles_enabled":false,"has_end_user_attachments":true,"user_aliases_enabled":false,"has_anonymous_kb_voting":false,"has_multi_language_help_center":true,"mobile_device":false,"mobile_site_enabled":false,"show_at_mentions":false,"embeddables_config":{"embeddables_web_widget":true,"embeddables_connect_ipms":false},"base_domain":"zendesk.com","answer_bot_subdomain":"static","manage_content_url":"https://support.vungle.com/hc/ko","arrange_content_url":"https://support.vungle.com/hc/admin/arrange_contents?locale=ko","general_settings_url":"https://support.vungle.com/hc/admin/general_settings?locale=ko","user_segments_url":"https://vungle.zendesk.com/knowledge/user_segments?brand_id=60720","has_gather":true,"has_community_enabled":false,"has_community_badges":false,"has_user_segments":true,"has_answer_bot_web_form_enabled":false,"has_answer_bot_web_form_modal_v2":false,"has_edit_user_profile_v2":false,"billing_url":"/access/return_to?return_to=https://vungle.zendesk.com/admin/billing/subscription","is_account_owner":false,"theming_cookie_key":"hc-da39a3ee5e6b4b0d3255bfef95601890afd807091-preview","is_preview":false,"has_guide_user_segments_search":true,"has_alternate_templates":false,"arrange_articles_url":"https://vungle.zendesk.com/knowledge/arrange?brand_id=60720","article_verification_url":"https://vungle.zendesk.com/knowledge/verification?brand_id=60720","has_article_verification":false,"guide_language_settings_url":"https://support.vungle.com/hc/admin/language_settings?locale=ko","docs_importer_url":"https://vungle.zendesk.com/knowledge/import_articles?brand_id=60720","community_badges_url":"https://vungle.zendesk.com/knowledge/community_badges?brand_id=60720","community_settings_url":"https://vungle.zendesk.com/knowledge/community_settings?brand_id=60720","gather_plan_state":"subscribed","search_settings_url":"https://vungle.zendesk.com/knowledge/search_settings?brand_id=60720","has_multibrand_search_in_plan":false,"theming_api_version":1,"has_pci_credit_card_custom_field":false,"current_brand_id":60720,"help_center_restricted":false,"current_brand_active":true,"is_assuming_someone_else":false,"flash_messages":[],"user_photo_editing_enabled":true,"has_end_user_apps":false,"has_docs_importer":true,"has_sunco_widget":false,"gather_user_image_upload_via_aus":false,"user_preferred_locale":"en-us"};
+</script>
+
+  <script src="../../../../static.zdassets.com/hc/assets/moment-f6f8513da6ab17eadada59a1a4edb536.js"></script>
+  <script src="../../../../static.zdassets.com/hc/assets/hc_enduser-9fa4fabcc25ad7ce2141d33e2370693a.js"></script>
+  
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6932e3a18ab60fc3',m:'4urletngB1RpVZ.bkrRMtGbmukoy7I5ouz4kajW.57s-1632390841-0-AXTVSGcggPO4PJGGM5zjRCikTVbGBonxA6PEUsXTonJ2p1nU4QSBC15/phI3lormfBjdnZ+oIrDyToWd1CqFm0TB60BdsrF7tINctMPlHaxXgys1KCtNCUTQBR+fQe6Wgpw+mZIzj4bV4ZGCpEyt2O3OqWkH8z1uJh4/2zN+EeL2FU3YAoZOESEp9TLu5HKWc0ypzdqM6vV1WeMlmpERfmUT+apSZsDBXNp0dwSoNWTv',s:[0xbc81f8a0c9,0x991600381a],}})();</script></body>
+
+<!-- Mirrored from support.vungle.com/hc/ko/articles/360002925791-Vungle-iOS-SDK-v-6-시작하기 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 10:20:58 GMT -->
+</html>

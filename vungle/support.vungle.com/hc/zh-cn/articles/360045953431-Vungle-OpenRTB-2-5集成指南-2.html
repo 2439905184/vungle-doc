@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="zh-CN">
+
+<!-- Mirrored from support.vungle.com/hc/zh-cn/articles/360045953431-Vungle-OpenRTB-2-5%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 11:08:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <!-- v20226 -->
+
+  <title>Vungle OpenRTB 2.5集成指南 &ndash; Vungle CN</title>
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="" />
+
+  <meta name="description" content="这是Vungle OpenRTB 2.5集成指南。本文介绍使用 OpenRTB 2.5 与 Vungle Exchange 集成的详细信息。  1.请求和响应  1.1 实体 本部分介绍的所有实体均为 OpenRTB 2.5..." /><meta property="og:image" content="https://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Vungle CN" />
+<meta property="og:title" content="Vungle OpenRTB 2.5集成指南" />
+<meta property="og:description" content="这是Vungle OpenRTB 2.5集成指南。本文介绍使用 OpenRTB 2.5 与 Vungle Exchange 集成的详细信息。
+
+1.请求和响应
+
+1.1 实体
+本部分介绍的所有实体均为 OpenRTB 2.5 规范的一部分；如果缺少字段或要求，请默认为属于此规范本身的要求。
+ 
+
+1.2 版本
+随着时间的发展，有些字段已经废弃，因此，为确保兼容性最大化，Vungle Exch..." />
+<meta property="og:url" content="360045953431.html" />
+<link rel="canonical" href="360045953431-Vungle-OpenRTB-2-5%e9%9b%86%e6%88%90%e6%8c%87%e5%8d%97.html" />
+<link rel="alternate" hreflang="en" href="../../en-us/articles/360045953431-Vungle-OpenRTB-2-5-Integration-Guide.html" />
+<link rel="alternate" hreflang="zh" href="360045953431-Vungle-OpenRTB-2-5%e9%9b%86%e6%88%90%e6%8c%87%e5%8d%97.html" />
+
+  <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/application-79172500fb4dbec2484043d570946543.css" id="stylesheet" />
+    <!-- Entypo pictograms by Daniel Bruce — www.entypo.com -->
+    <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/theming_v1_support-cf937686d5b6669242017892da7bad78.css" />
+  <link rel="stylesheet" type="text/css" href="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/stylee82d.css?digest=360570052252">
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://theme.zdassets.com/theme_assets/534077/62c5e8616cdae030ecea7cec15cf47a2b729729b.ico" />
+
+    <script src="../../../../static.zdassets.com/hc/assets/jquery-d5395f0b7ac5027403fc17855c46dbfc.js"></script>
+    
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+  analytics.load("bRqfh635lMl7qBpocue716BjaalyFtJD");
+  analytics.page();
+  }}();
+  analytics.ready(function(){
+    Appcues.anonymous();
+});
+</script>
+
+
+
+
+
+
+
+
+
+  <style type="text/css">
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/51587ff68e0ab2bf990a17d993ec1fa7a5451614.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/8677458bb131e09b83d5bf2ec1ab6d015c18fd8b.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1e02ff61edce3f256e3f8de8e6bfb11bb085905f.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/b421ade1cc04519f69e9b4ec0fee3d632f993540.woff") format("woff");
+      font-weight: bold;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1056b20fe6b0f2a56568ecdea5119e1577667803.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/0ea45f63097574b5446148c9670509ae56dc2975.woff") format("woff");
+      font-weight: 300;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/78bd021a78ca5752e43275a982a96b00bd004a54.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/115efed0d77bd96754f56a00f399a05af518a5a4.woff") format("woff");
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/e5e3d4a71bfb2d624edf48819c3dd1597c4397ff.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9f8a21f09879869f644a45d21aea06dde01f2107.woff") format("woff");
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/f4f83c57775879216d798dce95c9a83e442da6ab.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9e93f03906c0fbfd6eba0ecdfe8d739a6b38852d.woff") format("woff");
+      font-weight: bold;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk Screen";
+      src: url("http://theme.zdassets.com/theme_assets/534077/2f8d0cbc16a32df1f8b6c36f45c2b4078181ca43.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/2ab0f28c68ed406c853fec87f698618cd7ac8bc2.woff") format("woff");
+      font-weight: 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk OIL";
+      src: url("http://theme.zdassets.com/theme_assets/534077/0ce9c7bb30841f31bac192ef415fd27771c17fc9.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/422274783804fb9c3e984558285801b01b2fe117.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+
+
+<link rel="stylesheet" href="../../../../use.fontawesome.com/releases/v5.10.1/css/all.css">
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/styles/atelier-lakeside-dark.min.css" />
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" />
+<script src="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+<script src="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/highlight.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<meta property="asseturl" content="//theme.zdassets.com/theme_assets/534077/6ff6e0c84e92580e7cc6e9c77a5cc1e724f36743.gif">
+
+
+<link rel="stylesheet" href="../../../../theme.zdassets.com/theme_assets/534077/02e3878a33d61900d75eb94d43eb4d26929d6dbf.css">
+
+<script src="../../../../theme.zdassets.com/theme_assets/534077/48ea021f3fedbc024c4443d2e946e0b9b742e384.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/469d1d10574fa6f68d243916e96f61e7ce459a5a.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/9893f4b0b18dc4018d50a3716fc581152c21535e.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/ae559ee60cd2d617e942d530c1ee7ac42a973761.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/c2b4df57e1dcfcf1b5d2298b16c409c8315a177b.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/cf5c34722566da1ba5ca5d877dc187d282ca6a3f.js"></script>
+
+<!-- ...Appcues... -->
+<script type="text/javascript">
+  if (userId) {
+    Appcues.identify(userId); 
+  } else {
+    Appcues.anonymous(); 
+  }
+</script>
+
+<script src="../../../../static.zdassets.com/conditional_fields_app_hc/latest/helpcenter.js"></script>
+<script>var cfaRules = [{ "fieldType": "tagger", "field": 114099498832, "value": "user_interface", "select": [114099504272], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "amazon", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "android", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios", "select": [114099505792, 114101637652], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "multi_platforms_other_combination", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "windows", "select": [114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099505792, "value": "other_ios_sdk", "select": [114099619791], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "adincube", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "admob", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "fyber_hezap", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "ironsource_supersonic", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "multiple_mediation", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "other_mediation", "select": [114099556512, 114099619811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "upsight", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "adobe_air", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "corona", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "marmalade", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "other_plugin", "select": [114099620151, 114099620451], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "unity", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099577491, "value": "other_android_sdk", "select": [114099555992], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099619751, "value": "other_windows_sdk", "select": [114099556012], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099621511, "value": "geo_other", "select": [114099622811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_dashboard", "select": [114099498652, 114099499132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_other", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_reportingapi", "select": [114099498652, 114099621211, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_useracquisition", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_notreceivingreward", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_other", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_troublesomead", "select": [114099498672, 114099504752, 114099621511, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_unsubscribeads", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_payment", "select": [114099571371, 114099500132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_accountstatus", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_addtransferusers", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_deleteaccount", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_pwrecovery", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_registration", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_callbacks", "select": [114099498652, 114099556032, 114099556532, 114099620751, 114099621511, 114099504752], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_cocoapods", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_dashboard", "select": [114099498652, 114099498832], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_gradle", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_multidex", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621731], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_noads", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_proguard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557592], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_testmode", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_other", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_reportingapi", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_button", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_crashing", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_endcard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_freezing", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_other", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_sound", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_video", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }];</script>
+
+<style type="text/css">
+
+/* Advertiser */
+.categories__icon--200198330 {
+  background-color: #ff5a41;
+}
+
+.categories__icon--200198330:before,
+#sidenav-category-200198330 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/9f2e8cfd41383f7f21c68fd99567eb1b1a7993ac.svg");
+}
+
+/* SDK */
+.categories__icon--200269670 {
+  background-color: #3c2869;
+}
+
+.categories__icon--200269670:before,
+#sidenav-category-200269670 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/ab38e1e12c6a99fe83f4ea9c02bf87e17510558d.svg");
+}
+
+/* Publisher */
+.categories__icon--360001994512 {
+  background-color: #6e7dff;
+}
+
+.categories__icon--360001994512:before,
+#sidenav-category-360001994512 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/8a0ee6cf2a1300b8adf5a19112e81db3c070a273.svg");
+}
+
+/* FAQs */
+.categories__icon--115000802567 {
+  background-color: #ffd700;
+}
+
+.categories__icon--115000802567:before,
+#sidenav-category-115000802567 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/840643095495a2f0380fbe420efb55b7a63277fe.svg");
+}
+
+/* Creative */
+.categories__icon--360001724259 {
+  background-color: #ffd2e1;
+}
+
+.categories__icon--360001724259:before,
+#sidenav-category-360001724259 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/2bb5eeecadf61018e2bda864d22706f146b5a208.svg");
+}
+
+</style>
+  <script type="text/javascript" src="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/scripte82d.js?digest=360570052252"></script>
+<script async src='../../../cdn-cgi/bm/cv/669835187/api.js'></script></head>
+<body class="">
+  
+  
+
+  <div class="js-alert-box"></div>
+
+<div class="layout" >
+
+  <aside class="sidebar" data-sidebar>
+  <div class="sidebar__header">
+    <div class="sidebar__container sidebar__container--fixed">
+      <div class="sidebar__logo">
+        <a title="主页" href="../../zh-cn.html">
+          <img src="http://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" alt="徽标">
+        </a>
+      </div>
+      <ul class="sidebar__list">
+        <li class="sidebar__item">
+          <a class="sidebar__link sidebar__link--home" title="主页" href="../../zh-cn.html">Home</a>
+        </li>
+      </ul>
+      <div class="sidebar__top-nav"></div>
+      <div class="sidebar__content-block" data-sidebar-content></div>
+    </div>
+  </div>
+
+  <div class="sidebar__container">
+    <div class="sidebar__bottom-nav">
+      <div class="sidebar__bottom-nav-item">
+        
+          <div class="dropdown language-selector" aria-haspopup="true">
+            <a class="dropdown-toggle btn btn--default btn--small">
+              简体中文
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+              </svg>
+            </a>
+            <span class="dropdown-menu" role="menu">
+              
+                <a href="../../de.html?return_to=%2Fhc%2Fde" dir="ltr" rel="nofollow" role="menuitem">
+                  Deutsch
+                </a>
+              
+                <a href="../../en-us/articles/360045953431-Vungle-OpenRTB-2-5-Integration-Guide.html?return_to=%2Fhc%2Fen-us%2Farticles%2F360045953431-Vungle-OpenRTB-2-5-Integration-Guide" dir="ltr" rel="nofollow" role="menuitem">
+                  English (US)
+                </a>
+              
+                <a href="../../es-mx.html?return_to=%2Fhc%2Fes-mx" dir="ltr" rel="nofollow" role="menuitem">
+                  Español (México)
+                </a>
+              
+                <a href="../../fr-fr.html?return_to=%2Fhc%2Ffr-fr" dir="ltr" rel="nofollow" role="menuitem">
+                  Français (France)
+                </a>
+              
+                <a href="../../ja.html?return_to=%2Fhc%2Fja" dir="ltr" rel="nofollow" role="menuitem">
+                  日本語
+                </a>
+              
+                <a href="../../ko.html?return_to=%2Fhc%2Fko" dir="ltr" rel="nofollow" role="menuitem">
+                  한국어
+                </a>
+              
+                <a href="../../pt-br.html?return_to=%2Fhc%2Fpt-br" dir="ltr" rel="nofollow" role="menuitem">
+                  Português do Brasil
+                </a>
+              
+                <a href="../../ru.html?return_to=%2Fhc%2Fru" dir="ltr" rel="nofollow" role="menuitem">
+                  Русский
+                </a>
+              
+            </span>
+          </div>
+        
+      </div>
+      <div class="sidebar__bottom-nav-item">  
+        <a href="https://vungle.com/login/" target="_blank" class="">
+          Platform
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="a" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#AAB2BA" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#a"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="sidebar__overlay"></div>
+
+  <div class="main">
+
+    <div class="main__header">
+
+      <a href="#" class="sidebar-toggle__link" data-toggle-menu role="button">
+        <span class="sidebar-toggle__burger"><span></span></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--menu"></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--close"></span>
+      </a>
+
+      <div class="main__search">
+        <form role="search" class="search" data-search="" data-instant="true" autocomplete="off" action="https://support.vungle.com/hc/zh-cn/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" /><input type="search" name="query" id="query" placeholder="Search..." autocomplete="off" aria-label="Search..." />
+<input type="submit" name="commit" value="搜索" /></form>
+      </div>
+      <div class="main__nav">
+        <a href="../../en-us/sections/360004473112.html" class="btn btn--topbar hidden-mobile">
+          Early Access SDK
+        </a>
+        <a href="https://vungle.com/signup/" target="_blank" class="btn btn--topbar">
+          Platform
+          <svg width="24" height="24" viewBox="0 0 24 24"><defs><path id="b" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#0ccec9" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#b"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="main__container">
+
+  <main role="main">
+    <div class="article-page" data-article-page>
+
+  <div class="row">
+    <div class="article-column article-column--left">
+      <div class="box">
+        <div class="article-page__wrap" data-article-wrap>
+          <article class="article js-active-article" itemscope itemtype="http://schema.org/Article" data-article="360045953431">
+            <header class="article-header">
+              <ol class="breadcrumbs">
+  
+    <li title="Vungle CN">
+      
+        <a href="../../zh-cn.html">Vungle CN</a>
+      
+    </li>
+  
+    <li title="广告主平台">
+      
+        <a href="../categories/200198330-%e5%b9%bf%e5%91%8a%e4%b8%bb%e5%b9%b3%e5%8f%b0.html">广告主平台</a>
+      
+    </li>
+  
+    <li title="Exchange集成文档">
+      
+        <a href="../sections/115001349748-Exchange%e9%9b%86%e6%88%90%e6%96%87%e6%a1%a3.html">Exchange集成文档</a>
+      
+    </li>
+  
+</ol>
+
+              <h1 class="h2 article-title" itemprop="name">
+                
+                Vungle OpenRTB 2.5集成指南
+              </h1>
+
+              <div class="article-meta">
+                <div class="entry-info">
+                  <div class="entry-info__avatar">
+                    <div class="avatar avatar--agent">
+                      <img class="user-avatar user-avatar--default" src="../../../system/photos/360308705032/V_expression_social_corporate__1_.png" alt="Avatar">
+                    </div>
+                  </div>
+                  <div class="entry-info__content">
+                    <b class="author">
+                      Vungle Agent
+                    </b>
+                    <div class="meta"><time datetime="2020-11-11T08:24:39Z" title="2020-11-11T08:24:39Z" data-datetime="calendar">2020年11月11日 08:24</time></div>
+                  </div>
+                </div>
+                <a class="article-subscribe" title="打开登录对话框" rel="nofollow" role="button" data-auth-action="signin" aria-selected="false" href="360045953431-Vungle-OpenRTB-2-5%e9%9b%86%e6%88%90%e6%8c%87%e5%8d%97/subscription.html">关注</a>
+              </div>
+            </header>
+
+            <div class="article__body markdown" itemprop="articleBody">
+
+              <div class="article-main">
+                <p><strong>这是Vungle OpenRTB 2.5集成指南。</strong>本文介绍使用 OpenRTB 2.5 与 Vungle Exchange 集成的详细信息。</p>
+<h1><a name="RequestAndResponse"></a>1.请求和响应</h1>
+<h2><a name="Entity"></a>1.1 实体</h2>
+<p>本部分介绍的所有实体均为 <a href="http://www.iab.net/media/file/OpenRTB_API_Specification_Version_2_3_1.pdf">OpenRTB 2.5</a> 规范的一部分；如果缺少字段或要求，请默认为属于此规范本身的要求。</p>
+<p>&nbsp;</p>
+<h2><a name="Versioning"></a>1.2 版本</h2>
+<p>随着时间的发展，有些字段已经废弃，因此，为确保兼容性最大化，Vungle Exchange 会谨慎处理最新的 Vungle OpenRTB 规范中指定的所有“弃用”字段。所有“弃用”字段均被安排在下一次规范更新时删除，届时，Vungle Exchange 将不再承担维护弃用字段的责任。</p>
+<p>规范中会仍然保留所有删除的字段，但会加上“已删除”标签，指示不再支持该字段。我们使用“已删除”标签来强制确定规范语义：<strong>定义之后，每一个字段在规范生命周期内所定义的范围内均是唯一的。</strong>这意味着，如果 <code>'id'</code> 字段曾被弃用并从某个规范中删除，它永远不会再以其他含义出现在未来的修订版本中。</p>
+<h3><a name="SemanticVersioning"></a>1.2.1 Semantic版本</h3>
+<p>规范的版本控制也将遵守 <a href="http://semver.org/spec/v2.0.0.html">Semver 2.0.0 指南</a>，即：</p>
+<ul>
+<li>主要版本更新可以打破向后兼容；例如，在版本 X 中“弃用”的字段在版本 X+1 中将被“删除”。</li>
+<li>次要版本更新不应打破向后兼容；例如，将正在使用的字段标记为“弃用”；或将必填字段标记为“非必填且弃用”。</li>
+<li>补丁版本更新则不能打破向后兼容；例如，更正规范描述的拼写错误。</li>
+</ul>
+<h1><a name="Request"></a>1.请求</h1>
+<h2><a name="RequiredAndOptionalFields"></a>2.1 必填字段和可选字段</h2>
+<p>对即将推出部分的<strong>必填</strong>列的注释：</p>
+<ul>
+<li><strong>是：</strong>此类字段的下游用户根据指定的类型可以始终看到格式正确的非空值。</li>
+<li><strong>否：</strong>此类字段不会为下游用户存在或显示有效值。用户必须对该值进行验证，但不必验证类型。</li>
+<li><strong>默认：</strong> OpenRTB 2.5 中所有未提及的字段均默认为 <em><strong>非必须字段</strong></em>.</li>
+</ul>
+<h2><a name="ProtocolNegotiation"></a>2.2 协议协商</h2>
+<p>Vungle Exchange 支持通过协议协商使用 HTTP/2 通信；否则默认为 HTTP/1.1。</p>
+<h2><a name="RequestHeaders"></a>2.3 请求头</h2>
+<p>每个出价请求均有 OpenRTB 协议指定的以下自定义 HTTP 头：</p>
+<pre class="wysiwyg-indent2"><code>X-OpenRTB-Version: 2.5</code></pre>
+<p>除自定义 HTTP 头外，Vungle Exchange 还附加了以下标准头：</p>
+<p class="wysiwyg-indent2"><code>Content-Type: application/json&nbsp;<br />Accept: application/json&nbsp;<br /></code></p>
+<p>最后，Vungle Exchange 将附加一个自定义头来指示 Vungle OpenRTB 规范的版本：</p>
+<pre class="wysiwyg-indent2"><code>X-Vungle-OpenRTB-Version: 2.5</code></pre>
+<h2><a name="BidRequestObject"></a>2.4 BidRequest 对象</h2>
+<table class="table table--bordered">
+<thead>
+<tr>
+<th style="width: 20%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="width: 55px;"><code>id</code></td>
+<td style="width: 50px;">字符串</td>
+<td style="width: 67.5px;">是</td>
+<td style="width: 531.5px;">
+<p>Vungle&nbsp;Exchange 生成的出价请求 ID；例如，'570b0eb14e67c98f761a0ca0'。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 55px;"><code>imp</code></td>
+<td style="width: 50px;">
+<p>对象数组</p>
+</td>
+<td style="width: 67.5px;">是</td>
+<td style="width: 531.5px;">请参阅<a href="#ImpressionObject">展示</a>对象。</td>
+</tr>
+<tr>
+<td style="width: 55px;"><code>app</code></td>
+<td style="width: 50px;">对象</td>
+<td style="width: 67.5px;">是</td>
+<td style="width: 531.5px;">请参阅<a href="#ApplicationObject">应用程序</a>对象。</td>
+</tr>
+<tr>
+<td style="width: 55px;"><code>device</code></td>
+<td style="width: 50px;">对象</td>
+<td style="width: 67.5px;">是</td>
+<td style="width: 531.5px;">请参阅<a href="#DeviceObject">设备</a>对象。</td>
+</tr>
+<tr>
+<td style="width: 55px;"><code>at</code></td>
+<td style="width: 50px;">integer</td>
+<td style="width: 67.5px;">是</td>
+<td style="width: 531.5px;">
+<p>竞拍类型；例如，'2' 代表二价拍卖。Vungle Exchange 只运行二价拍卖，因此此值始终为 '2'。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 55px;"><code>tmax</code></td>
+<td style="width: 50px;">integer</td>
+<td style="width: 67.5px;">是</td>
+<td style="width: 531.5px;">
+<p>提交完整出价响应的最长时间（以毫秒计）；此值始终为 '250'。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 55px;"><code>cur</code></td>
+<td style="width: 50px;">字符串数组</td>
+<td style="width: 67.5px;">否</td>
+<td style="width: 531.5px;">
+<p>以 ISO-4217-alpha 显示的允许的拍卖货币的列表；例如，["USD", "CNY", "EUR"]。我们目前只支持 "USD"。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 55px;"><code>bcat</code></td>
+<td style="width: 50px;">字符串数组</td>
+<td style="width: 67.5px;">否</td>
+<td style="width: 531.5px;">请参阅<a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf" target="_self">OpenRTB 2.5</a>第5.1部分</td>
+</tr>
+<tr>
+<td style="width: 55px;"><code>regs</code></td>
+<td style="width: 50px;">对象</td>
+<td style="width: 67.5px;">否</td>
+<td style="width: 531.5px;">请参阅&nbsp;<a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf" target="_self">OpenRTB 2.5</a>第 3.2.3 部分</td>
+</tr>
+<tr>
+<td style="width: 55px;"><code>test</code></td>
+<td style="width: 50px;">integer</td>
+<td style="width: 67.5px;">否</td>
+<td style="width: 531.5px;">
+<p>竞价处于测试模式 (1) 还是实况模式 (0)；测试竞价不计费。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 55px;"><code>source</code></td>
+<td style="width: 50px;">对象</td>
+<td style="width: 67.5px;">是</td>
+<td style="width: 531.5px;">
+<p>请参阅 <a href="https://github.com/InteractiveAdvertisingBureau/openrtb/blob/master/supplychainobject.md" target="_self">IAB SupplyChain Object implementation guide</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="ImpressionObject"></a>2.4.1 Imp Object</h3>
+<table class="table table--bordered">
+<thead>
+<tr style="height: 19px;">
+<th style="width: 20%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>id</code></td>
+<td style="height: 17px;">字符串</td>
+<td style="height: 17px;">是</td>
+<td style="height: 17px;">Vungle&nbsp;Exchange 生成的展示 ID；例如，'3a06eb14e67c98f761add01'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>displaymanager</code></td>
+<td style="height: 17px;">字符串</td>
+<td style="height: 17px;">是</td>
+<td style="height: 17px;">供应方显示管理器；Vungle 使用此字段来指定所使用的 SDK 技术，因为我们需要区分 SDK 移动平台；例如，'Vungle' for iOS, 'VungleDroid' for Android, and 'VungleWindows' for Windows，后跟下一个字段中的 SDK 版本。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>displaymanagerver</code></td>
+<td style="height: 17px;">字符串</td>
+<td style="height: 17px;">是</td>
+<td style="height: 17px;">供应方显示管理器版本；Vungle 使用此字段来指定 SDK 版本；例如，'3.3.1'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>bidfloor</code></td>
+<td style="height: 17px;">浮动</td>
+<td style="height: 17px;">是</td>
+<td style="height: 17px;">让出价合格的最低出价价格；例如，'8.72'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>bidfloorcur</code></td>
+<td style="height: 17px;">字符串</td>
+<td style="height: 17px;">是</td>
+<td style="height: 17px;">以 ISO-4217-alpha 显示的展示货币；例如，'USD'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>video</code></td>
+<td style="height: 17px;">对象</td>
+<td style="height: 17px;">否</td>
+<td style="height: 17px;">请参阅<a href="#VideoObject">视频</a>对象。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>tagid</code></td>
+<td style="height: 17px;">字符串</td>
+<td style="height: 17px;">否</td>
+<td style="height: 17px;">与给定展示对应的广告位置 ID；例如，'placement_name_1af44fda'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>instl</code></td>
+<td style="height: 17px;">integer</td>
+<td style="height: 17px;">否</td>
+<td style="height: 17px;">展示是否 (0) 表示全屏/插播 (1)。目前，Vungle Exchange 只支持全屏/插播 (1)。</td>
+</tr>
+<tr style="height: 17.3125px;">
+<td style="height: 17.3125px;"><code>secure</code></td>
+<td style="height: 17.3125px;">integer</td>
+<td style="height: 17.3125px;">否</td>
+<td style="height: 17.3125px;">
+<p>标记以指示展示是否需要安全的 HTTPS URL 创意资产和标记，其中，0 = 不安全，1 = 安全。</p>
+<p>Vungle 始终需要安全 (1) 的资产和标记。</p>
+</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>ext</code></td>
+<td style="height: 17px;">对象</td>
+<td style="height: 17px;">否</td>
+<td style="height: 17px;">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<h3>&nbsp;</h3>
+<h3><a name="ImpressionObject"></a>2.4.1.2 Imp Extension Object</h3>
+<table class="table table--bordered">
+<thead>
+<tr style="height: 19px;">
+<th style="width: 20%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>metric.type</code></td>
+<td style="height: 17px;">字符串</td>
+<td style="height: 17px;">否</td>
+<td style="height: 17px;">表示该app是否可见</td>
+</tr>
+<tr style="height: 17.3125px;">
+<td style="height: 17.3125px;"><code>metric.vendor</code></td>
+<td style="height: 17.3125px;">字符串</td>
+<td style="height: 17.3125px;">否</td>
+<td style="height: 17.3125px;">
+<p>表示该供应商的可见度。Vungle目前集成了Moat。</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>&nbsp;</h3>
+<h3><a name="ImpressionObject"></a>2.4.2 Video Object</h3>
+<table class="table table--bordered">
+<thead>
+<tr>
+<th style="width: 20%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mimes</code></td>
+<td>字符串数组</td>
+<td>是</td>
+<td>支持的内容 MIME 类型。Vungle Exchange 只支持 ["video/mp4"]。</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td>integer</td>
+<td>是</td>
+<td>视频高度。</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td>integer</td>
+<td>是</td>
+<td>视频宽度。</td>
+</tr>
+<tr>
+<td><code>minduration</code></td>
+<td>integer</td>
+<td>否</td>
+<td>视频必须播放的最少秒数。</td>
+</tr>
+<tr>
+<td><code>maxduration</code></td>
+<td>integer</td>
+<td>否</td>
+<td>视频可以播放的最长秒数。</td>
+</tr>
+<tr>
+<td><code>delivery</code></td>
+<td>整数数组</td>
+<td>否</td>
+<td>支持视频交付方式： (progressive or streaming). 请参阅&nbsp;<a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf" target="_self">OpenRTB 2.5</a> 第 5.15 部分</td>
+</tr>
+<tr>
+<td><code>minbitrate</code></td>
+<td>integer</td>
+<td>否</td>
+<td>以千位节/秒计的最小出价速度。Vungle Exchange 目前只支持 250。</td>
+</tr>
+<tr>
+<td><code>maxbitrate</code></td>
+<td>integer</td>
+<td>否</td>
+<td>以千位节/秒计的最大出价速度；例如，500。</td>
+</tr>
+<tr>
+<td><code>protocols</code></td>
+<td>整数数组</td>
+<td>否</td>
+<td>请参阅&nbsp;<a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf" target="_self">OpenRTB 2.5</a> 第 5.8 部分; 例如： [2, 5]。</td>
+</tr>
+<tr>
+<td><code>boxingallowed</code></td>
+<td>integer</td>
+<td>否</td>
+<td>是否 (0) 允许 (1) 将视频装入盒中。此值始终为 '1'。</td>
+</tr>
+<tr>
+<td><code>playbackmethod</code></td>
+<td>整数数组</td>
+<td>否</td>
+<td>请参阅&nbsp;<a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf" target="_self">OpenRTB 2.5</a>第 5.10 部分</td>
+</tr>
+<tr>
+<td><code>startdelay</code></td>
+<td>integer</td>
+<td>否</td>
+<td>请参阅&nbsp;<a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf" target="_self">OpenRTB 2.5</a> 第 5.12 部分。该值应一直为0。</td>
+</tr>
+</tbody>
+</table>
+<h3>&nbsp;</h3>
+<h3><a name="VideoObject"></a><span style="font-size: 1.2em; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">2.4.2.1 Video Extension Object</span></h3>
+<table class="table table--bordered">
+<thead>
+<tr style="height: 19px;">
+<th style="width: 20%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>skip</code></td>
+<td style="height: 17px;">boolean</td>
+<td style="height: 17px;">是</td>
+<td style="height: 17px;">表示是否可跳过(1)或不可跳过(0)&nbsp;</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>videotype</code></td>
+<td style="height: 17px;">字符串</td>
+<td style="height: 17px;">是</td>
+<td style="height: 17px;">用在奖励广告。如果为非奖励广告，则该字段可缺失。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>rewarded</code></td>
+<td style="height: 17px;">boolean</td>
+<td style="height: 17px;">是</td>
+<td style="height: 17px;">该字段表示奖励 (1) 或非奖励广告(0)</td>
+</tr>
+</tbody>
+</table>
+<h3>&nbsp;</h3>
+<h3><a name="ApplicationObject"></a>2.4.3 应用程序对象</h3>
+<table class="table table--bordered">
+<thead>
+<tr>
+<th style="width: 20%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>字符串</td>
+<td>是</td>
+<td>Exchange-specific ID，对于 Vungle，此为应用商店 ID；例如，'3709293'。<br />此 ID 对于 DSP 可能没有任何意义，但 DSP 可能用它来比较和调整报告争议。</td>
+</tr>
+<tr>
+<td><code>bundle</code></td>
+<td>字符串</td>
+<td>是</td>
+<td>唯一Market ID，这是苹果或谷歌商店的唯一应用ID，与Vungle Exchange无关。- 在 Android 上，这应该是捆绑包或包名称（例如，'com.supercell.hayday'）。- 在 iOS 上，这是一个数字 ID。</td>
+</tr>
+<tr>
+<td><code>publisher</code></td>
+<td>对象</td>
+<td>是</td>
+<td>请参阅<a href="#PublisherObject">发布人</a>对象。</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>字符串</td>
+<td>否</td>
+<td>应用程序名称；例如，'Hay Day'。</td>
+</tr>
+<tr>
+<td><code>storeurl</code></td>
+<td>字符串</td>
+<td>否</td>
+<td>应用商店的 URL；例如，'https://itunes.apple.com/us/app/hay-day/id506627515?mt=8#'。</td>
+</tr>
+<tr>
+<td><code>cat</code></td>
+<td>字符串数组</td>
+<td>否</td>
+<td>请参阅<a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf" target="_self">OpenRTB 2.5</a>第5.1部分</td>
+</tr>
+<tr>
+<td><code>privacypolicy</code></td>
+<td>integer</td>
+<td>否</td>
+<td>应用程序是否 (0) 具有 (1) 隐私政策。对于此字段，Vungle Exchange 只支持 '1'。</td>
+</tr>
+<tr>
+<td><code>paid</code></td>
+<td>integer</td>
+<td>否</td>
+<td>应用程序是否 (0) 已付费 (1)。</td>
+</tr>
+<tr>
+<td><code>keywords</code></td>
+<td>字符串</td>
+<td>否</td>
+<td>以逗号分隔的发布人应用程序的标签的列表。</td>
+</tr>
+<tr>
+<td><code>ext</code></td>
+<td>对象</td>
+<td>否</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="ApplicationExtension"></a>2.4.4 应用程序扩展</h3>
+<table class="table table--bordered">
+<thead>
+<tr>
+<th style="width: 20%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>altid</code></td>
+<td>字符串</td>
+<td>否</td>
+<td>用来唯一识别发布人应用程序的 Vungle Exchange 特定二级 ID；例如，'3a06eb14e67c98f761add01'。</td>
+</tr>
+<tr>
+<td><code>sdk</code></td>
+<td>对象</td>
+<td>否</td>
+<td>请参阅 <a href="#SDKExtension">SDK 扩展</a>对象。</td>
+</tr>
+<tr>
+<td><code>wtags</code></td>
+<td>字符串数组</td>
+<td>否</td>
+<td>发布人应用程序标签白名单。</td>
+</tr>
+<tr>
+<td><code>btags</code></td>
+<td>字符串数组</td>
+<td>否</td>
+<td>发布人应用程序标签黑名单。</td>
+</tr>
+<tr>
+<td><code>bundleid</code></td>
+<td>字符串</td>
+<td>否</td>
+<td>应用程序捆绑包识别码或包名称。</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>字符串数组</td>
+<td>否</td>
+<td>已弃用；请使用关键字。</td>
+</tr>
+<tr>
+<td><code>bundleid</code></td>
+<td>字符串</td>
+<td>否</td>
+<td>应用程序捆绑包识别码或包名称。</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="SDKExtension"></a>2.4.5 SDK 扩展</h3>
+<table class="table table--bordered">
+<thead>
+<tr>
+<th style="width: 20%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>字符串</td>
+<td>是</td>
+<td>标识安装在主应用程序上的 SDK 代理程序的 SDK 系列的字符串。例如，'VungleDroid', 'Vungle', or 'VungleWindows'。</td>
+</tr>
+<tr>
+<td><code>ver</code></td>
+<td>字符串</td>
+<td>是</td>
+<td>描述安装在主应用程序上的 SDK 代理程序版本的字符串。</td>
+</tr>
+<tr>
+<td><code>plugin</code></td>
+<td>字符串</td>
+<td>否</td>
+<td>使用其构建 SDK 代理程序的 SDK 插件的名称；例如，'native', 'unity'。</td>
+</tr>
+<tr>
+<td><code>pluginver</code></td>
+<td>字符串</td>
+<td>否</td>
+<td>使用其构建 SDK 代理程序的 SDK 插件的版本；例如，'1.0'。</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="PublisherObject"></a>2.4.6 发布人对象</h3>
+<table class="table table--bordered">
+<thead>
+<tr>
+<th style="width: 20%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>字符串</td>
+<td>是</td>
+<td>Vungle Exchange 生成的发布人 ID，例如，'570ffeb14e67998f761a791c'。</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>字符串</td>
+<td>否</td>
+<td>发布人名称；例如，'Supercell Oy'。</td>
+</tr>
+<tr>
+<td><code>cat</code></td>
+<td>字符串数组</td>
+<td>否</td>
+<td>请参阅<a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf" target="_self">OpenRTB 2.5</a>第5.1部分</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="DeviceObject"></a>2.4.7 设备对象</h3>
+<table class="table table--bordered">
+<thead>
+<tr style="height: 19px;">
+<th style="width: 156px; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 76px; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 76.5px; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 398.5px; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 48px;">
+<td style="height: 48px; width: 156px;"><code>ua</code></td>
+<td style="height: 48px; width: 76px;">字符串</td>
+<td style="height: 48px; width: 76.5px;">是</td>
+<td style="height: 48px; width: 398.5px;">设备浏览器用户代理字符串；例如，'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1'。</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 156px;"><code>ip</code></td>
+<td style="height: 32px; width: 76px;">字符串</td>
+<td style="height: 32px; width: 76.5px;">是</td>
+<td style="height: 32px; width: 398.5px;">
+<p><strong>当ipv6存在时，非必须</strong></p>
+<p>展示的IP地址，例如： '212.14.27.104'。</p>
+</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 156px;"><code>ipv6</code></td>
+<td style="height: 32px; width: 76px;">字符串</td>
+<td style="height: 32px; width: 76.5px;">是</td>
+<td style="height: 32px; width: 398.5px;">
+<p><strong>当IP地址存在时，该字段非必须</strong></p>
+<p>展示的IPv6地址，示例： '3ffe:1900:4545:3:200:f8ff:fe21:67cf'。</p>
+</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>h</code></td>
+<td style="height: 17px; width: 76px;">integer</td>
+<td style="height: 17px; width: 76.5px;">是</td>
+<td style="height: 17px; width: 398.5px;">以像素计的设备屏幕高度。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>w</code></td>
+<td style="height: 17px; width: 76px;">integer</td>
+<td style="height: 17px; width: 76.5px;">是</td>
+<td style="height: 17px; width: 398.5px;">以像素计的设备屏幕宽度。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>connectiontype</code></td>
+<td style="height: 17px; width: 76px;">字符串</td>
+<td style="height: 17px; width: 76.5px;">是</td>
+<td style="height: 17px; width: 398.5px;">请参阅&nbsp;<a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf" target="_self">OpenRTB 2.5</a>第 5.22 部分。</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 156px;"><code>ifa</code></td>
+<td style="height: 32px; width: 76px;">字符串</td>
+<td style="height: 32px; width: 76.5px;">是</td>
+<td style="height: 32px; width: 398.5px;">支持的供广告客户用于纯文本的 ID；例如，'e4fe9bdecaa047b6908dffba3fa184f2'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>geo</code></td>
+<td style="height: 17px; width: 76px;">对象</td>
+<td style="height: 17px; width: 76.5px;">否</td>
+<td style="height: 17px; width: 398.5px;">请参阅<a href="#GeoObject">地理</a>对象。</td>
+</tr>
+<tr style="height: 17.75px;">
+<td style="height: 17.75px; width: 156px;"><code>make</code></td>
+<td style="height: 17.75px; width: 76px;">字符串</td>
+<td style="height: 17.75px; width: 76.5px;">否</td>
+<td style="height: 17.75px; width: 398.5px;">设备制造。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>model</code></td>
+<td style="height: 17px; width: 76px;">字符串</td>
+<td style="height: 17px; width: 76.5px;">否</td>
+<td style="height: 17px; width: 398.5px;">设备型号。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>os</code></td>
+<td style="height: 17px; width: 76px;">字符串</td>
+<td style="height: 17px; width: 76.5px;">否</td>
+<td style="height: 17px; width: 398.5px;">设备操作系统；例如，'iOS', 'Android'。枚举值：<br />- 'iOS'<br />- 'Android'<br />- 'Windows'</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>osv</code></td>
+<td style="height: 17px; width: 76px;">字符串</td>
+<td style="height: 17px; width: 76.5px;">否</td>
+<td style="height: 17px; width: 398.5px;">设备操作系统的版本；例如，'9.1', '8.0'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>dnt</code></td>
+<td style="height: 17px; width: 76px;">integer</td>
+<td style="height: 17px; width: 76.5px;">否</td>
+<td style="height: 17px; width: 398.5px;">设备是否 (0) 指定 (1)“不跟踪”。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>lmt</code></td>
+<td style="height: 17px; width: 76px;">integer</td>
+<td style="height: 17px; width: 76.5px;">否</td>
+<td style="height: 17px; width: 398.5px;">设备是否 (0) 指定 (1)“有限广告跟踪”。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>devicetype</code></td>
+<td style="height: 17px; width: 76px;">字符串</td>
+<td style="height: 17px; width: 76.5px;">否</td>
+<td style="height: 17px; width: 398.5px;">请参阅<a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf" target="_self">OpenRTB 2.5</a>第5.21部分</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>language</code></td>
+<td style="height: 17px; width: 76px;">字符串</td>
+<td style="height: 17px; width: 76.5px;">否</td>
+<td style="height: 17px; width: 398.5px;">以 ISO-639-1-alpha-2 显示的设备语言；例如，'en'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>carrier</code></td>
+<td style="height: 17px; width: 76px;">字符串</td>
+<td style="height: 17px; width: 76.5px;">否</td>
+<td style="height: 17px; width: 398.5px;">运营商或 ISP；例如，'VERIZON'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>ext</code></td>
+<td style="height: 17px; width: 76px;">对象</td>
+<td style="height: 17px; width: 76.5px;">否</td>
+<td style="height: 17px; width: 398.5px;">请参阅<a href="#DeviceExtension">设备扩展</a>对象。</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="DeviceExtension"></a>2.4.8 设备扩展</h3>
+<table class="table table--bordered">
+<thead>
+<tr style="height: 19px;">
+<th style="width: 150px; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 73.5px; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 72.5px; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 382px; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 150px;"><code>tz</code></td>
+<td style="height: 17px; width: 73.5px;">字符串</td>
+<td style="height: 17px; width: 72.5px;">否</td>
+<td style="height: 17px; width: 382px;">在 IANA 时区数据库中使用时区名称作为格式的设备时区设置；例如，'America/Los_Angeles'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 150px;"><code>vungleua</code></td>
+<td style="height: 17px; width: 73.5px;">字符串</td>
+<td style="height: 17px; width: 72.5px;">否</td>
+<td style="height: 17px; width: 382px;">已弃用：请使用 Application.ext.vungle.sdk</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 150px;"><code>sdcard</code></td>
+<td style="height: 17px; width: 73.5px;">integer</td>
+<td style="height: 17px; width: 72.5px;">否</td>
+<td style="height: 17px; width: 382px;">SD 卡存储是否 (0) 可用于 (1) Android 设备。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 150px;"><code>volume</code></td>
+<td style="height: 17px; width: 73.5px;">浮动</td>
+<td style="height: 17px; width: 72.5px;">否</td>
+<td style="height: 17px; width: 382px;">指示设备体积百分比的 0 与 1 之间的值。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 150px;"><code>muted</code></td>
+<td style="height: 17px; width: 73.5px;">integer</td>
+<td style="height: 17px; width: 72.5px;">否</td>
+<td style="height: 17px; width: 382px;">0 = false 1 = true；所需枚举。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 150px;"><code>marketplace</code></td>
+<td style="height: 17px; width: 73.5px;">字符串</td>
+<td style="height: 17px; width: 72.5px;">否</td>
+<td style="height: 17px; width: 382px;">
+<p>安装在设备上的应用商店。可能值为：</p>
+<ul>
+<li>'google'</li>
+<li>'apple'</li>
+<li>'amazon'</li>
+</ul>
+</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 150px;"><code>is_sideload_enabled</code></td>
+<td style="height: 17px; width: 73.5px;">integer</td>
+<td style="height: 17px; width: 72.5px;">否</td>
+<td style="height: 17px; width: 382px;">指示设备是否允许从“未知”来源安装应用的布尔标记。如果为 '1' (true)，允许来自未知商店的应用。如果为 '0' (false)，则不允许。</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="GeoObject"></a>2.4.9 地理对象</h3>
+<table class="table table--bordered">
+<thead>
+<tr style="height: 19px;">
+<th style="width: 20%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>country</code></td>
+<td style="height: 17px;">字符串</td>
+<td style="height: 17px;">是</td>
+<td style="height: 17px;">以 ISO-3166-1-alpha-3 显示的国家/地区代码；例如，'USA'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>lat</code></td>
+<td style="height: 17px;">浮动</td>
+<td style="height: 17px;">否</td>
+<td style="height: 17px;">设备的纬度；例如，'[-90, 90]'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>long</code></td>
+<td style="height: 17px;">浮动</td>
+<td style="height: 17px;">否</td>
+<td style="height: 17px;">设备的经度；例如，'[-180, 180]'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>type</code></td>
+<td style="height: 17px;">integer</td>
+<td style="height: 17px;">否</td>
+<td style="height: 17px;">请参阅&nbsp;<a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf" target="_self">OpenRTB 2.5</a>。</td>
+</tr>
+<tr style="height: 17.5625px;">
+<td style="height: 17.5625px;"><code>region</code></td>
+<td style="height: 17.5625px;">字符串</td>
+<td style="height: 17.5625px;">否</td>
+<td style="height: 17.5625px;">以 ISO-3166-2 显示的地区代码；如果为美国，则为 2 个字母的国家代码；例如，'CA'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>city</code></td>
+<td style="height: 17px;">字符串</td>
+<td style="height: 17px;">否</td>
+<td style="height: 17px;">自由格式的城市名称。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>zip</code></td>
+<td style="height: 17px;">字符串</td>
+<td style="height: 17px;">否</td>
+<td style="height: 17px;">邮政编码。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>utcoffset</code></td>
+<td style="height: 17px;">integer</td>
+<td style="height: 17px;">否</td>
+<td style="height: 17px;">以数字 +/- UTC 分钟计算的本地时间。</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="UserObject"></a>2.4.10 User Object</h3>
+<table class="table table--bordered">
+<tbody>
+<tr style="height: 19px;">
+<th style="width: 20%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>ext</code></td>
+<td style="height: 17px; width: 76px;">对象</td>
+<td style="height: 17px; width: 76.5px;">否</td>
+<td style="height: 17px; width: 398.5px;">请查看 <a href="#UserExtension">User Extension</a>。</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="UserExtension"></a>2.4.11 User Extension</h3>
+<table class="table table--bordered">
+<tbody>
+<tr style="height: 19px;">
+<th style="width: 20%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 156px;"><code>consent</code></td>
+<td style="height: 17px; width: 76px;">integer</td>
+<td style="height: 17px; width: 76.5px;">否</td>
+<td style="height: 17px; width: 398.5px;">
+<p>User consent是选填的，但是如果请求要符合GDPR，则为必须项（Regs.ext.gdpr = 1）。默认选项为opt-out。因此，如果不使用consent string，则默认为opt-out，则无法获取用户数据信息。</p>
+<p>0 - all PII scrubbed</p>
+<p>1 - user has given consent</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="RegsObject"></a>2.4.12 Regs Object</h3>
+<table class="table table--bordered">
+<thead>
+<tr style="height: 19px;">
+<th style="width: 20%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>coppa</code></td>
+<td style="height: 17px;">integer</td>
+<td style="height: 17px;">否</td>
+<td style="height: 17px;">指示此请求是否须遵守 USA FTC 制定的 COPPA 法规的标记，其中 0 = 否，1 = 是。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>ext</code></td>
+<td style="height: 17px;">对象</td>
+<td style="height: 17px;">否</td>
+<td style="height: 17px;">Vungle Exchange-specific extensions在 OpenRTB的占位符。请查看 <a href="#RegsExtension">Regs Extension</a>.</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="RegsExtension"></a>2.4.13 Regs Extension</h3>
+<table class="table table--bordered">
+<thead>
+<tr style="height: 19px;">
+<th style="width: 20%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 17px;">
+<td style="height: 17px;"><code>gdpr</code></td>
+<td style="height: 17px;">integer</td>
+<td style="height: 17px;">否</td>
+<td style="height: 17px;">
+<p>标记该请求是否需要符合GDPR法规。</p>
+<p>0 = no</p>
+<p>1 = yes</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="PMPObject"></a>2.4.14 PMP Object</h3>
+<table class="table table--bordered">
+<thead>
+<tr>
+<th style="width: 163px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 72px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 72px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 380px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="width: 155px;"><code>private_auction</code></td>
+<td style="width: 64px;">integer</td>
+<td style="width: 64px;">否</td>
+<td style="width: 372px;">直接交易对象中指定席位的拍卖资格的指示符，其中 0 = 接受所有出价，1 = 出价被限制为指定交易及其条款。</td>
+</tr>
+<tr>
+<td style="width: 155px;"><code>deal</code></td>
+<td style="width: 64px;">对象数组</td>
+<td style="width: 64px;">否</td>
+<td style="width: 372px;">传达适用于此展示的特定交易的交易数组（第 3.2.18 部分）对象。</td>
+</tr>
+<tr>
+<td style="width: 155px;"><code>ext</code></td>
+<td style="width: 64px;">对象</td>
+<td style="width: 64px;">否</td>
+<td style="width: 372px;">OpenRTB 的 Vungle Exchange 特定扩展的占位符。</td>
+</tr>
+</tbody>
+</table>
+<h3>&nbsp;</h3>
+<h3><a name="PMPObject"></a>2.4.15 Source.ext.schain.nodes Object</h3>
+<table class="table table--bordered">
+<tbody>
+<tr>
+<th style="width: 163px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 72px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 72px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 380px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+<tr>
+<td style="width: 155px;"><code>private_auction</code></td>
+<td style="width: 64px;">integer</td>
+<td style="width: 64px;">否</td>
+<td style="width: 372px;">直接交易对象中指定席位的拍卖资格的指示符，其中 0 = 接受所有出价，1 = 出价被限制为指定交易及其条款。</td>
+</tr>
+<tr>
+<td style="width: 155px;"><code>deal</code></td>
+<td style="width: 64px;">对象数组</td>
+<td style="width: 64px;">否</td>
+<td style="width: 372px;">传达适用于此展示的特定交易的交易数组（第 3.2.18 部分）对象。</td>
+</tr>
+<tr>
+<td style="width: 155px;"><code>ext</code></td>
+<td style="width: 64px;">对象</td>
+<td style="width: 64px;">否</td>
+<td style="width: 372px;">OpenRTB 的 Vungle Exchange 特定扩展的占位符。</td>
+</tr>
+</tbody>
+</table>
+<h1><a name="Response"></a>3. Response</h1>
+<h2>3.1 必须和可选字段</h2>
+<p>有关“响应”部分<strong>必填</strong>列的注释：</p>
+<ul>
+<li><strong>是：</strong>Vungle Exchange 假设必填字段始终具有指定类型的非空格式；无效值可能导致失去拍卖资格。</li>
+<li><strong>建议：</strong>如果字段值使用指定格式，Vungle Exchange 将使用该字段协助拍卖过程；缺少字段或字段无效不会对拍卖资格造成负面影响。</li>
+<li><strong>否：</strong>Vungle Exchange 不需要这些字段。</li>
+<li><strong>默认：</strong>OpenRTB 2.5中所有未提到的字段默认要求均为 'No'。此外，所有字段均必须具有指定类型，否则可能对竞价中造成负面影响。</li>
+</ul>
+<h2><a name="ResponseHeaders"></a>3.2 响应头</h2>
+<p>响应header中必须包含"Content-Type" and "X-OpenRTB-Version" ，且具有其中一个上述请求头接受的值。例如，</p>
+<pre class="wysiwyg-indent2"><code>Content-Type: application/json 
+X-OpenRTB-Version: 2.5
+</code></pre>
+<h2><a name="ResponseStatusCode"></a>3.3 响应状态代码</h2>
+<p>所有响应均必须为 200 或 204。任何其他 HTTP 响应代码均有可能对 DSP 的竞价造成负面影响。</p>
+<h2><a name="NoBidReasonSignaling"></a>3.4 无出价原因信号</h2>
+<p>建议 DSP 在决定不出价时发送无出价原因。此信息可以帮助 Vungle Exchange 检测并修复潜在的集成问题。无出价信号应该遵循 <a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf">OpenRTB 2.5</a> 第 7.4 部分的规范。包含无出价原因的正确格式的无出价信号应看似这样：</p>
+<pre><code>{"id": "1234567890", "seatbid": [], "nbr": 2}
+</code></pre>
+<h2><a name="BidResponseObject"></a>3.5 BidResponse 对象</h2>
+<table class="table table--bordered">
+<thead>
+<tr>
+<th style="width: 20%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>字符串</td>
+<td>是</td>
+<td>BidRequest ID是由Vungle Exchange生成的，示例 '570ffeb14e67998f761a791c'。这必须与 <a href="#BidRequestObject">BidRequest object</a>的ID匹配。</td>
+</tr>
+<tr>
+<td><code>bidid</code></td>
+<td>字符串</td>
+<td>否</td>
+<td>帮助记录/跟踪的出价人生成的唯一响应 ID。</td>
+</tr>
+<tr>
+<td><code>cur</code></td>
+<td>字符串</td>
+<td>否</td>
+<td>使用 ISO-4217 alpha 代码的出价货币。Vungle Exchange 目前只支持 USD，并将任何值都视为 USD。</td>
+</tr>
+<tr>
+<td><code>seatbid</code></td>
+<td>对象数组</td>
+<td>是</td>
+<td>seatbid 对象数组；如果进行了出价则需要 1+。</td>
+</tr>
+<tr>
+<td><code>nbr</code></td>
+<td>integer</td>
+<td>否</td>
+<td>为竞价原因列在 <a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf" target="_self">OpenRTB 2.5</a>中5.24部分。</td>
+</tr>
+<tr>
+<td><code>ext</code></td>
+<td>对象</td>
+<td>否</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="SeatBidObject"></a>3.5.1 SeatBid 对象</h3>
+<table class="table table--bordered">
+<thead>
+<tr>
+<th style="width: 20%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 10%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 50%;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>seat</code></td>
+<td>字符串</td>
+<td>否</td>
+<td>Bidder seat ID是该代表该竞价请求来源。请参阅&nbsp;<a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf" target="_self">OpenRTB 2.5</a>。</td>
+</tr>
+<tr>
+<td><code>bid</code></td>
+<td>对象数组</td>
+<td>是</td>
+<td>请查看 <a href="#BidObject">Bid</a> object。 <em>至少拥有一个竞价</em></td>
+</tr>
+</tbody>
+</table>
+<h3><br /><a name="BidObject"></a>3.5.2 Bid Object</h3>
+<table class="table table--bordered">
+<thead>
+<tr style="height: 19px;">
+<th style="width: 142px; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">字段</span></strong></th>
+<th style="width: 69px; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">类型</span></strong></th>
+<th style="width: 112px; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">必填</span></strong></th>
+<th style="width: 364px; height: 19px;"><strong><span class="wysiwyg-color-black wysiwyg-font-size-medium">描述</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 134px;"><code>id</code></td>
+<td style="height: 17px; width: 61px;">字符串</td>
+<td style="height: 17px; width: 104px;">是</td>
+<td style="height: 17px; width: 356px;">各个 DSP 生成的出价 ID。</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 134px;"><code>impid</code></td>
+<td style="height: 32px; width: 61px;">字符串</td>
+<td style="height: 32px; width: 104px;">是</td>
+<td style="height: 32px; width: 356px;">与为其出价的出价请求的展示有关的展示 ID。必须与出价请求<a href="#ImpressionObject">展示</a>对象中的 ID 相同。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 134px;"><code>price</code></td>
+<td style="height: 17px; width: 61px;">浮动</td>
+<td style="height: 17px; width: 104px;">是</td>
+<td style="height: 17px; width: 356px;">以 CPM 单位表示的出价价格；例如，'10.30'。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 134px;"><code>nurl</code></td>
+<td style="height: 17px; width: 61px;">字符串</td>
+<td style="height: 17px; width: 104px;">建议</td>
+<td style="height: 17px; width: 356px;">出价胜出时 Vungle Exchange 调用的胜出通知 URL。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 134px;"><code>burl</code></td>
+<td style="height: 17px; width: 61px;">字符串</td>
+<td style="height: 17px; width: 104px;">否</td>
+<td style="height: 17px; width: 356px;">竞价胜出时 Vungle Exchange 调用的胜出通知 URL。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 134px;"><code>lurl</code></td>
+<td style="height: 17px; width: 61px;">字符串</td>
+<td style="height: 17px; width: 104px;">否</td>
+<td style="height: 17px; width: 356px;">竞价失败时，Vungle Exchange调用的通知URL。</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 134px;"><code>adm</code></td>
+<td style="height: 32px; width: 61px;">字符串</td>
+<td style="height: 32px; width: 104px;">是</td>
+<td style="height: 32px; width: 356px;">将在赢得拍卖后提供的广告标记。请参阅<a href="#AdMarkupSpecification">广告标记规范</a>部分。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 134px;"><code>cid</code></td>
+<td style="height: 17px; width: 61px;">字符串</td>
+<td style="height: 17px; width: 104px;">建议</td>
+<td style="height: 17px; width: 356px;">DSP 代理的活动 ID。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 134px;"><code>crid</code></td>
+<td style="height: 17px; width: 61px;">字符串</td>
+<td style="height: 17px; width: 104px;">建议</td>
+<td style="height: 17px; width: 356px;">DSP 代理的创意 ID。</td>
+</tr>
+<tr style="height: 32px;">
+<td style="height: 32px; width: 134px;"><code>adomain</code></td>
+<td style="height: 32px; width: 61px;">字符串数组</td>
+<td style="height: 32px; width: 104px;">是</td>
+<td style="height: 32px; width: 356px;">用于阻止列表检查的广告客户域；例如，["supercell.com"]。</td>
+</tr>
+<tr style="height: 80px;">
+<td style="height: 80px; width: 134px;"><code>bundle</code></td>
+<td style="height: 80px; width: 61px;">字符串</td>
+<td style="height: 80px; width: 104px;">建议</td>
+<td style="height: 80px; width: 356px;">唯一的市场 ID，这是平台特定的应用程序识别码，对于应用是唯一的，<em>与 Vungle Exchange 无关</em>。<br />- 在 Android 上，这应该是捆绑包或包名称（例如，'com.supercell.hayday'）。<br />- 在 iOS 上，这是一个数字 ID。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 134px;"><code>h</code></td>
+<td style="height: 17px; width: 61px;">integer</td>
+<td style="height: 17px; width: 104px;">建议</td>
+<td style="height: 17px; width: 356px;">创意的高度。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 134px;"><code>w</code></td>
+<td style="height: 17px; width: 61px;">integer</td>
+<td style="height: 17px; width: 104px;">建议</td>
+<td style="height: 17px; width: 356px;">创意的宽度。</td>
+</tr>
+<tr style="height: 17.5469px;">
+<td style="height: 17.5469px; width: 134px;"><code>cat</code></td>
+<td style="height: 17.5469px; width: 61px;">字符串数组</td>
+<td style="height: 17.5469px; width: 104px;">否</td>
+<td style="height: 17.5469px; width: 356px;">IAB content categories; 请参阅&nbsp;<a href="https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf" target="_self">OpenRTB 2.5</a>第5.1部分。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 134px;"><code>iurl</code></td>
+<td style="height: 17px; width: 61px;">字符串</td>
+<td style="height: 17px; width: 104px;">否</td>
+<td style="height: 17px; width: 356px;">丢失的通知 URL。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 134px;"><code>dealid</code></td>
+<td style="height: 17px; width: 61px;">字符串</td>
+<td style="height: 17px; width: 104px;">否</td>
+<td style="height: 17px; width: 356px;">如果此出价属于私人商店直接交易，则是对 <a href="#BidRequestObject">BidRequest</a> 对象的 deal.id 的引用。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 134px;"><code>adid</code></td>
+<td style="height: 17px; width: 61px;">字符串</td>
+<td style="height: 17px; width: 104px;">否</td>
+<td style="height: 17px; width: 356px;">将在出价胜出时提供的预加载广告的 ID。</td>
+</tr>
+<tr style="height: 17px;">
+<td style="height: 17px; width: 134px;"><code>ext</code></td>
+<td style="height: 17px; width: 61px;">对象</td>
+<td style="height: 17px; width: 104px;">否</td>
+<td style="height: 17px; width: 356px;">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<h1><a name="Examples"></a>4.示例</h1>
+<h2><a name="RequestExample"></a>4.1 请求示例</h2>
+<pre><code>{<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>"id": "5f0417f6354b680001e94518",<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>"imp": [<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>{<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"id": "1",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"video": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"mimes": [<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"video/mp4"<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>],<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"minduration": 0,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"maxduration": 46,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"protocols": [<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>2,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>5<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>],<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"w": 720,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"h": 1422,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"linearity": 1,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"minbitrate": 250,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"maxbitrate": 15000,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"boxingallowed": 1,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"playbackmethod": [<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>1,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>2,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>3,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>4<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>],<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"delivery": [<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>2,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>1<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>],<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"pos": 7,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"ext": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"skip": 0,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"videotype": "rewarded",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"rewarded": 1<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>}<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>},<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"pmp": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"private_auction": 0,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"deals": [<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>{<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"id": "5e463ac3413fc600161ca063",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"bidfloor": 2.5,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"bidfloorcur": "USD",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"at": 2<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>},<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>{<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"id": "5e539622ecaffc0016745c14",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"bidfloor": 2.5,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"bidfloorcur": "USD",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"at": 2<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>}<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>]<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>},<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"displaymanager": "VungleDroid",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"displaymanagerver": "6.4.11",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"tagid": "RW_12-7662426",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"bidfloor": 1,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"bidfloorcur": "USD",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"secure": 1,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"ext": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"openrtb25x": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"skip": 0<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>},<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"metric": [<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>{<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"type": "viewability",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"vendor": "moat"<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>}<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>]<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>}<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>}<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>],<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>"app": {<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"id": "5afa947e9c8119360fba1bea",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"name": "VungleApp123",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"bundle": "com.vungle.bundle",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"storeurl": "https:play.google.com/store/apps/details?id=com.vungle.bundle",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"cat": [<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"IAB1",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"IAB9",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"IAB25-7"<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>],<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"privacypolicy": 1,<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"publisher": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"id": "5a9f8641bacdc27c1e009703",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"cat": [<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"IAB1",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"IAB9"<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>]<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>},<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"keywords": "managed",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"sdk": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"name": "VungleDroid",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"ver": "6.4.11"<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>},<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"bundleid": "com.vungle.bundle",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"accountid": "5a9f8641bacdc27c1e005620"<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>},<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>"device": {<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"ua": "Mozilla/5.0 (Linux; Android 9; SM-A207F Build/PPR1.180610.011; wv) AppleWebKit/537.36 KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"geo": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"lat": -7.2484,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"lon": 112.7419,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"type": 2,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"ipservice": 3,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"country": "IDN",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"region": "JI",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"city": "Surabaya"<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>},<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"dnt": 0,<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"lmt": 0,<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"ip": "115.178.227.128",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"devicetype": 1,<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"make": "samsung",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"model": "SM-A207F",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"os": "android",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"osv": "9",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"h": 1422,<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"w": 720,<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"language": "id",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"carrier": "Smartfren - Stay Safe | Smartfren",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"connectiontype": 3,<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"ifa": "5ef57c14-d642-447f-ace9-543262c458bc",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"ext": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"vungle": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"isSdCardAvailable": 1,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"vungleua": "VungleDroid/6.4.11",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"timezone": "Asia/Jakarta",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"tz": "Asia/Jakarta",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"sdcard": 1,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"volume": 0.53333336,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"muted": 1,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"is_sideload_enabled": 0,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"id": "5ef57c14-d642-447f-ace9-543262c458bc",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"id_source": "IFA",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"marketplace": "google"<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>}<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>}<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>},<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>"user": {<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"ext": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"consent": 1<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>}<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>},<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>"at": 2,<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>"tmax": 1000,<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>"cur": [<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"USD"<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>],<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>"bcat": [<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB7-3",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB7-5",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB7-28",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB7-29",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB7-30",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB7-39",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB7-41",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB7-42",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB7-44",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB8-5",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB8-18",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB9-9",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB11",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB14-1",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB14-2",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB14-3",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB14-4",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB14-8",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB18-2",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB23",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB25-1",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB25-2",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB25-3",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB25-4",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB25-5",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB25-6",<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"IAB26"<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>],<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>"source": {<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"ext": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"schain": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"complete": 1,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"nodes": [<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>{<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"asi": "vungle.com",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"sid": "5a9f8641bacdc27c1e009703",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"rid": "5f0417f6354b680001e94518",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"hp": 1<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>}<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>],<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"ver": "1.0"<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>}<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>}<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>},<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>"regs": {<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"ext": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"gdpr": 0,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"us_privacy": "1---"<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>}<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>},<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>"ext": {<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"schain": {<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"complete": 1,<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"nodes": [<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>{<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"asi": "vungle.com",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"sid": "5a9f8641bacdc27c1e009703",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"rid": "5f0417f6354b680001e94518",<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>"hp": 1<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>}<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>],<br /><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp;&nbsp;</span>"ver": "1.0"<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>},<br /><span class="Apple-converted-space">&nbsp; &nbsp;&nbsp;</span>"moat_sdk": 1<br /><span class="Apple-converted-space">&nbsp;&nbsp;</span>}<br />}</code></pre>
+<h2><a name="ResponseExample"></a>4.2 响应示例</h2>
+<pre><code>{
+  "id": "58ed309efa8936087efd1349",
+  "bidid": "5508",
+  "cur": "USD",
+  "seatbid": [
+    {
+      "seat": "7735",
+      "bid": [
+        {
+          "id": "5508",
+          "impid": "58ed309efa8936087efd134a",
+          "price": 50,
+          "nurl": "http://bidder.com/won?price=${AUCTION_PRICE}",
+          "adm": "&lt;VAST version=\"2.0\"&gt;&lt;Ad&gt;&lt;InLine&gt;&lt;AdTitle&gt;YOUR_AD_NAME&lt;/AdTitle&gt;&lt;Impression&gt;&lt;![CDATA[https://YOUR_IMPRESSION_TRACKING_URL?ttdsp_price=${AUCTION_PRICE}]]&gt;&lt;/Impression&gt;&lt;Creatives&gt;&lt;Creative id=\"YOUR_CREATIVE_ID\"&gt;&lt;Linear&gt;&lt;Duration&gt;00:00:18&lt;/Duration&gt;&lt;TrackingEvents&gt;&lt;Tracking event=\"start\"&gt;&lt;![CDATA[https://YOUR_IMPRESSION_TRACKING_URL_START_PLAY]]&gt;&lt;/Tracking&gt;&lt;Tracking event=\"complete\"&gt;&lt;![CDATA[https://YOUR_IMPRESSION_TRACKING_URL_START_COMPLETE]]&gt;&lt;/Tracking&gt;&lt;/TrackingEvents&gt;&lt;VideoClicks&gt;&lt;ClickThrough&gt;&lt;![CDATA[https://YOUR_DESTINATION_URL_TO_DOWNLOAD_BY_CLICK]]&gt;&lt;/ClickThrough&gt;&lt;ClickTracking&gt;&lt;![CDATA[https://YOUR_CLICK_TRACKING_URL]]&gt;&lt;/ClickTracking&gt;&lt;/VideoClicks&gt;&lt;MediaFiles&gt;&lt;MediaFile delivery=\"progressive\" type=\"video/mp4\" width=\"1280\" height=\"720\"&gt; &lt;![CDATA[https://YOUR_AD_VIDEO.mp4]]&gt;&lt;/MediaFile&gt;&lt;/MediaFiles&gt;&lt;/Linear&gt;&lt;/Creative&gt;&lt;/Creatives&gt;&lt;Description&gt;Longer description of ad&lt;/Description&gt;&lt;/InLine&gt;&lt;/Ad&gt;&lt;/VAST&gt;",
+          "cid": "554d550b418461cc3700014d",
+          "crid": "57767c29a63510e75f000073"
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<h1><a name="AdMarkupSpecification"></a>5.广告标记规范</h1>
+<p>Vungle Exchange 主要支持三类标记：VAST、MRAID 和专有的 Vungle 广告标记。虽然每个标记有其自己的高级规范，但若要被视为能够达到预期效果的有效标记，其还必须符合下列额外要求。</p>
+<h2><a name="VAST"></a>5.1 VAST</h2>
+<p>以下标签必须出现在 <code>'adm'</code> 字段的前 100 个字节中，或 <code>'nurl'</code> 响应的负载中：</p>
+<pre class="wysiwyg-indent2"><code>&lt;VAST version="2.0"&gt;
+    &lt;Ad&gt;
+        &lt;InLine&gt;
+            &lt;AdTitle&gt;
+                YOUR_AD_NAME
+            &lt;/AdTitle&gt;
+            &lt;Impression&gt;
+                &lt;![CDATA[https://YOUR_IMPRESSION_TRACKING_URL?ttdsp_price=${AUCTION_PRICE}]]&gt;
+            &lt;/Impression&gt;
+            &lt;Creatives&gt;
+                &lt;Creative id="YOUR_CREATIVE_ID"&gt;
+                    &lt;Linear&gt;
+                        &lt;Duration&gt;00:00:18&lt;/Duration&gt;
+                        &lt;TrackingEvents&gt;
+                            &lt;Tracking event="start"&gt;
+                                &lt;![CDATA[https://YOUR_IMPRESSION_TRACKING_URL_START_PLAY]]&gt;
+                            &lt;/Tracking&gt;
+                            &lt;Tracking event="complete"&gt;
+                                &lt;![CDATA[https://YOUR_IMPRESSION_TRACKING_URL_START_COMPLETE]]&gt;
+                            &lt;/Tracking&gt;
+                        &lt;/TrackingEvents&gt;
+                        &lt;VideoClicks&gt;
+                            &lt;ClickThrough&gt;
+                                &lt;![CDATA[https://YOUR_DESTINATION_URL_TO_DOWNLOAD_BY_CLICK]]&gt;
+                            &lt;/ClickThrough&gt;
+                            &lt;ClickTracking&gt;
+                                &lt;![CDATA[https://YOUR_CLICK_TRACKING_URL]]&gt;
+                            &lt;/ClickTracking&gt;
+                        &lt;/VideoClicks&gt;
+                        &lt;MediaFiles&gt;
+                            &lt;MediaFile delivery="progressive" type="video/mp4" width="1280" height="720"&gt;
+                                &lt;![CDATA[https://YOUR_AD_VIDEO.mp4]]&gt;
+                            &lt;/MediaFile&gt;
+                        &lt;/MediaFiles&gt;
+                    &lt;/Linear&gt;
+                &lt;/Creative&gt;
+            &lt;/Creatives&gt;
+            &lt;Description&gt;Longer description of ad&lt;/Description&gt;
+        &lt;/InLine&gt;
+    &lt;/Ad&gt;
+&lt;/VAST&gt;
+</code></pre>
+<h1><a name="MacroSubstitution"></a>5.2 宏替换</h1>
+<p>Vungle Exchange 在出价响应中支持<a href="#BidObject">出价</a>对象 <code>nurl</code> 字段中的拍卖价格的宏替换。例如：</p>
+<pre class="wysiwyg-indent2"><code>"nurl": "http://bidder.com/won?price=${AUCTION_PRICE}"
+</code></pre>
+              </div>     
+
+            </div>
+
+            <div class="article__attachments">
+              
+            </div>
+
+          </article>
+        </div>
+
+        <div class="article-loader fa fa-spinner fa-spin fa-3x fa-fw" id="article-loader"></div>
+
+        
+          <a class="article-banner" href="https://vungle.com/signup" target="_blank">
+            <span class="article-banner__title">
+              <span>Powered by Creativity</span>
+              <span>Driven by Performance</span>
+            </span>
+            <span class="article-banner__cta">Sign Up Here</span>
+          </a>
+        
+
+        <div data-prevnext='{"showArticleTitle": true, "classNameBtn": ""}'></div>
+
+        <section class="submit-ticket submit-ticket--article">
+          <div class="submit-ticket-col submit-ticket-col--left">
+            <h2 class="submit-ticket-title">Questions?</h2>
+            <p>Need further assistance, feel free to reach out to us, we’re here to help!</p>
+          </div>
+          <div class="submit-ticket-col submit-ticket-col--right">
+            <a class="btn btn--default" href="../requests/new.html">提交请求</a>
+          </div>
+        </section>
+
+        <footer class="article-footer">
+          
+          <div class="article-vote">
+            <span class="article-vote-question">这篇文章有帮助吗？</span>
+            <div class="article-vote-controls">
+              <a class="btn btn--default fa fa-thumbs-up article-vote-controls__item article-vote-controls__item--up" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="是" href="../signin8b91.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fzh-cn%2Farticles%2F360045953431-Vungle-OpenRTB-2-5%25E9%259B%2586%25E6%2588%2590%25E6%258C%2587%25E5%258D%2597"></a>
+              <a class="btn btn--default fa fa-thumbs-down article-vote-controls__item article-vote-controls__item--down" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="否" href="../signin8b91.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fzh-cn%2Farticles%2F360045953431-Vungle-OpenRTB-2-5%25E9%259B%2586%25E6%2588%2590%25E6%258C%2587%25E5%258D%2597"></a>
+            </div>
+          </div>
+          
+        </footer>
+
+      </div>
+    </div>
+    <div class="article-column article-column--right">
+      <div data-toc='{"headers": "h2,h3,h4", "title": "Contents", "offsetTop": 80, "mobileBreakpoint": 1024}'></div>
+    </div>
+  </div>
+
+</div>
+  </main>
+
+        <footer class="footer" id="footer">
+        <div class="footer-inner">
+          <div class="copyright">
+            <div class="copyright__content">
+              <span class="copyright__copy">&copy; 2020 Vungle. All rights reserved.</span>
+            </div>
+          </div>
+          <nav class="footer-menu">
+            <ul class="list-unstyled">
+              <li><a href="https://vungle.com/about-us/">About</a></li>
+              <li><a href="https://vungle.com/login/">Products</a></li>
+              <li><a href="https://vungle.com/contact-us/">Contact us</a></li>
+            </ul>
+          </nav>
+          <ul class="footer-socials list-unstyled">
+            
+              <li><a href="https://www.facebook.com/vungle/" target="_blank" class="fab fa-facebook"></a></li>
+            
+            
+              <li><a href="https://twitter.com/vungle" target="_blank" class="fab fa-twitter"></a></li>
+            
+            
+            
+              <li><a href="https://www.linkedin.com/company/vungle" target="_blank" class="fab fa-linkedin"></a></li>
+            
+            
+            
+            
+              <li><a href="https://www.instagram.com/vungle/" target="_blank" class="fab fa-instagram"></a></li>
+            
+          </ul>
+        </div>
+      </footer>
+          
+    </div>
+    <!-- /.main__container -->
+
+  </div>  
+  <!-- /.main -->
+  
+</div>
+<!-- /.layout -->
+
+
+
+  <!-- / -->
+
+  
+  <script src="../../../../static.zdassets.com/hc/assets/zh-cn.b71cebf2cff635e19e20.js"></script>
+  <script src="../../../../vungle.zendesk.com/auth/v2/host.js" data-brand-id="60720" data-return-to="https://support.vungle.com/hc/zh-cn/articles/360045953431-Vungle-OpenRTB-2-5%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97" data-theme="hc" data-locale="zh-cn" data-auth-origin="60720,true,true"></script>
+
+  <script type="text/javascript">
+  /*
+
+    Greetings sourcecode lurker!
+
+    This is for internal Zendesk and legacy usage,
+    we don't support or guarantee any of these values
+    so please don't build stuff on top of them.
+
+  */
+
+  HelpCenter = {};
+  HelpCenter.account = {"subdomain":"vungle","environment":"production","name":"Vungle"};
+  HelpCenter.user = {"identifier":"da39a3ee5e6b4b0d3255bfef95601890afd80709","email":null,"name":null,"role":"anonymous","avatar_url":"https://assets.zendesk.com/hc/assets/default_avatar.png","is_admin":false,"organizations":[],"groups":[]};
+  HelpCenter.internal = {"asset_url":"//static.zdassets.com/hc/assets/","web_widget_asset_composer_url":"https://static.zdassets.com/ekr/snippet.js","current_session":{"locale":"zh-cn","csrf_token":null,"shared_csrf_token":null},"settings":{},"usage_tracking":{"event":"article_viewed","data":"BAh7CDoLbG9jYWxlSSIKemgtY24GOgZFVDoPYXJ0aWNsZV9pZGwrCJdBadRTADoKX21ldGF7CzoPYWNjb3VudF9pZGkDPSYIOhNoZWxwX2NlbnRlcl9pZGkENsfsCzoNYnJhbmRfaWRpAjDtOgx1c2VyX2lkMDoTdXNlcl9yb2xlX25hbWVJIg5BTk9OWU1PVVMGOwZUOwBJIgp6aC1jbgY7BlQ=--4276dc8772d3a5d28223279dda9471461566fee0","url":"https://support.vungle.com/hc/activity"},"current_record_id":"360045953431","current_record_url":"/hc/zh-cn/articles/360045953431-Vungle-OpenRTB-2-5%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97","current_record_title":"Vungle OpenRTB 2.5集成指南","search_results_count":null,"current_text_direction":"ltr","current_brand":{"id":60720,"account_id":534077,"name":"Vungle","active":true,"deleted_at":null,"created_at":"2014-05-29T20:19:19Z","updated_at":"2021-05-13T16:25:53Z","route_id":429018,"signature_template":"{{agent.signature}}"},"current_brand_url":"https://vungle.zendesk.com","current_host_mapping":"support.vungle.com","current_path":"/hc/zh-cn/articles/360045953431-Vungle-OpenRTB-2-5%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97","authentication_domain":"https://vungle.zendesk.com","show_autocomplete_breadcrumbs":true,"rollbar_config":{"enabled":true,"endpoint":"https://rollbar-us.zendesk.com/api/1/item/","accessToken":"731a5a953e9a4b7ab6cac9623f50c732","captureUncaught":true,"captureUnhandledRejections":true,"payload":{"environment":"production","client":{"javascript":{"source_map_enabled":true,"code_version":"8e508d702ea3bb44fb7e90308d7e394bc580895e","guess_uncaught_frames":true}}}},"user_info_changing_enabled":false,"has_user_profiles_enabled":false,"has_end_user_attachments":true,"user_aliases_enabled":false,"has_anonymous_kb_voting":false,"has_multi_language_help_center":true,"mobile_device":false,"mobile_site_enabled":false,"show_at_mentions":false,"embeddables_config":{"embeddables_web_widget":true,"embeddables_connect_ipms":false},"base_domain":"zendesk.com","answer_bot_subdomain":"static","manage_content_url":"https://support.vungle.com/hc/zh-cn","arrange_content_url":"https://support.vungle.com/hc/admin/arrange_contents?locale=zh-cn","general_settings_url":"https://support.vungle.com/hc/admin/general_settings?locale=zh-cn","user_segments_url":"https://vungle.zendesk.com/knowledge/user_segments?brand_id=60720","has_gather":true,"has_community_enabled":false,"has_community_badges":false,"has_user_segments":true,"has_answer_bot_web_form_enabled":false,"has_answer_bot_web_form_modal_v2":false,"has_edit_user_profile_v2":false,"billing_url":"/access/return_to?return_to=https://vungle.zendesk.com/admin/billing/subscription","is_account_owner":false,"theming_cookie_key":"hc-da39a3ee5e6b4b0d3255bfef95601890afd807091-preview","is_preview":false,"has_guide_user_segments_search":true,"has_alternate_templates":false,"arrange_articles_url":"https://vungle.zendesk.com/knowledge/arrange?brand_id=60720","article_verification_url":"https://vungle.zendesk.com/knowledge/verification?brand_id=60720","has_article_verification":false,"guide_language_settings_url":"https://support.vungle.com/hc/admin/language_settings?locale=zh-cn","docs_importer_url":"https://vungle.zendesk.com/knowledge/import_articles?brand_id=60720","community_badges_url":"https://vungle.zendesk.com/knowledge/community_badges?brand_id=60720","community_settings_url":"https://vungle.zendesk.com/knowledge/community_settings?brand_id=60720","gather_plan_state":"subscribed","search_settings_url":"https://vungle.zendesk.com/knowledge/search_settings?brand_id=60720","has_multibrand_search_in_plan":false,"theming_api_version":1,"has_pci_credit_card_custom_field":false,"current_brand_id":60720,"help_center_restricted":false,"current_brand_active":true,"is_assuming_someone_else":false,"flash_messages":[],"user_photo_editing_enabled":true,"has_end_user_apps":false,"has_docs_importer":true,"has_sunco_widget":false,"gather_user_image_upload_via_aus":false,"user_preferred_locale":"en-us"};
+</script>
+
+  <script src="../../../../static.zdassets.com/hc/assets/moment-f6f8513da6ab17eadada59a1a4edb536.js"></script>
+  <script src="../../../../static.zdassets.com/hc/assets/hc_enduser-9fa4fabcc25ad7ce2141d33e2370693a.js"></script>
+  
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6932ffe34f91ed0b',m:'RGKPh.bXLzONevXWLEDd2mi6REcCnkIjGG890MYm5ys-1632391998-0-ATj9qQKVnOgCZ7XnkS+tKCeolM9M/+KNREpF6FjR3rUwH06DusfIxq/HG1NilytXY/Y183mOG2ZUt9q8XN3XctgNbzIle4q/Zyzx7loOZMnezxM744ET4Ob5wiCnOXKyUJZg/kJYYd4GNNzVkyEqA7OSMeU6m6/EKoyITDZieeTdXdR1mDzggh3KORx1wyTIfy2Do98T0MSbA5Bc/PLNrLYbd+2HW8H26HhZshGdkWN0',s:[0x4bcd230ab6,0x07f34d4255],}})();</script></body>
+
+<!-- Mirrored from support.vungle.com/hc/zh-cn/articles/360045953431-Vungle-OpenRTB-2-5%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 11:08:27 GMT -->
+</html>

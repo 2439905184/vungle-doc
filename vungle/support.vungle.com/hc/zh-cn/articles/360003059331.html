@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="zh-CN">
+
+<!-- Mirrored from support.vungle.com/hc/zh-cn/articles/360003059331 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 10:34:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <!-- v20226 -->
+
+  <title>Vungle - Windows SDK v. 6 入门指南 &ndash; Vungle CN</title>
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="" />
+
+  <meta name="description" content="使用本指南，快速将 SDK 集成到您的应用中，并开始获利。 本指南中的代码示例是 C#，但我们在 GitHub 存储库中提供的示例应用文件包括 C#、C++、Visual Basic 和 DirectX+XAML。 目录  GDPR：推荐实施方法 开始之前 下载 SDK..." /><meta property="og:image" content="https://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Vungle CN" />
+<meta property="og:title" content="Vungle - Windows SDK v. 6 入门指南" />
+<meta property="og:description" content="使用本指南，快速将 SDK 集成到您的应用中，并开始获利。
+本指南中的代码示例是 C#，但我们在 GitHub 存储库中提供的示例应用文件包括 C#、C++、Visual Basic 和 DirectX+XAML。
+目录
+
+GDPR：推荐实施方法
+开始之前
+下载 SDK 并将 VungleSDK 添加到您的项目中
+导入 VungleSDK 命名空间
+获取 VungleAd 实例
+创建并注册事..." />
+<meta property="og:url" content="360003059331.html" />
+<link rel="canonical" href="360003059331-Vungle-Windows-SDK-v-6-%e5%85%a5%e9%97%a8%e6%8c%87%e5%8d%97.html" />
+<link rel="alternate" hreflang="de" href="../../de/articles/360003059331-Integrieren-des-Vungle-SDK-f%c3%bcr-Windows.html" />
+<link rel="alternate" hreflang="en" href="../../en-us/articles/360003059331-Integrate-Vungle-SDK-for-Windows.html" />
+<link rel="alternate" hreflang="es" href="../../es-mx/articles/360003059331-Integraci%c3%b3n-del-SDK-de-Vungle-para-Windows.html" />
+<link rel="alternate" hreflang="fr" href="../../fr-fr/articles/360003059331-Int%c3%a9grer-le-SDK-Vungle-pour-Windows.html" />
+<link rel="alternate" hreflang="ja" href="../../ja/articles/360003059331-Windows-%e7%94%a8-Vungle-SDK-%e3%82%92%e7%b5%b1%e5%90%88%e3%81%99%e3%82%8b.html" />
+<link rel="alternate" hreflang="ko" href="../../ko/articles/360003059331-Windows%ec%9a%a9-Vungle-SDK-%ed%86%b5%ed%95%a9.html" />
+<link rel="alternate" hreflang="pt" href="../../pt-br/articles/360003059331-Integrar-Vungle-SDK-para-Windows.html" />
+<link rel="alternate" hreflang="ru" href="../../ru/articles/360003059331-%d0%98%d0%bd%d1%82%d0%b5%d0%b3%d1%80%d0%b0%d1%86%d0%b8%d1%8f-SDK-Vungle-%d0%b4%d0%bb%d1%8f-Windows.html" />
+<link rel="alternate" hreflang="zh" href="360003059331-Vungle-Windows-SDK-v-6-%e5%85%a5%e9%97%a8%e6%8c%87%e5%8d%97.html" />
+
+  <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/application-79172500fb4dbec2484043d570946543.css" id="stylesheet" />
+    <!-- Entypo pictograms by Daniel Bruce — www.entypo.com -->
+    <link rel="stylesheet" media="all" href="../../../../static.zdassets.com/hc/assets/theming_v1_support-cf937686d5b6669242017892da7bad78.css" />
+  <link rel="stylesheet" type="text/css" href="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/stylee82d.css?digest=360570052252">
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://theme.zdassets.com/theme_assets/534077/62c5e8616cdae030ecea7cec15cf47a2b729729b.ico" />
+
+    <script src="../../../../static.zdassets.com/hc/assets/jquery-d5395f0b7ac5027403fc17855c46dbfc.js"></script>
+    
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+  analytics.load("bRqfh635lMl7qBpocue716BjaalyFtJD");
+  analytics.page();
+  }}();
+  analytics.ready(function(){
+    Appcues.anonymous();
+});
+</script>
+
+
+
+
+
+
+
+
+
+  <style type="text/css">
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/51587ff68e0ab2bf990a17d993ec1fa7a5451614.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/8677458bb131e09b83d5bf2ec1ab6d015c18fd8b.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1e02ff61edce3f256e3f8de8e6bfb11bb085905f.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/b421ade1cc04519f69e9b4ec0fee3d632f993540.woff") format("woff");
+      font-weight: bold;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/1056b20fe6b0f2a56568ecdea5119e1577667803.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/0ea45f63097574b5446148c9670509ae56dc2975.woff") format("woff");
+      font-weight: 300;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/78bd021a78ca5752e43275a982a96b00bd004a54.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/115efed0d77bd96754f56a00f399a05af518a5a4.woff") format("woff");
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/e5e3d4a71bfb2d624edf48819c3dd1597c4397ff.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9f8a21f09879869f644a45d21aea06dde01f2107.woff") format("woff");
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-family: "Px Grotesk";
+      src: url("http://theme.zdassets.com/theme_assets/534077/f4f83c57775879216d798dce95c9a83e442da6ab.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/9e93f03906c0fbfd6eba0ecdfe8d739a6b38852d.woff") format("woff");
+      font-weight: bold;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: "Px Grotesk Screen";
+      src: url("http://theme.zdassets.com/theme_assets/534077/2f8d0cbc16a32df1f8b6c36f45c2b4078181ca43.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/2ab0f28c68ed406c853fec87f698618cd7ac8bc2.woff") format("woff");
+      font-weight: 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Px Grotesk OIL";
+      src: url("http://theme.zdassets.com/theme_assets/534077/0ce9c7bb30841f31bac192ef415fd27771c17fc9.woff2") format("woff2"),
+           url("http://theme.zdassets.com/theme_assets/534077/422274783804fb9c3e984558285801b01b2fe117.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+
+
+<link rel="stylesheet" href="../../../../use.fontawesome.com/releases/v5.10.1/css/all.css">
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/styles/atelier-lakeside-dark.min.css" />
+<link rel="stylesheet" href="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" />
+<script src="../../../../cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+<script src="../../../../cdn.jsdelivr.net/gh/highlightjs/cdn-release%409.18.1/build/highlight.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+<script src="../../../../cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<meta property="asseturl" content="//theme.zdassets.com/theme_assets/534077/6ff6e0c84e92580e7cc6e9c77a5cc1e724f36743.gif">
+
+
+<link rel="stylesheet" href="../../../../theme.zdassets.com/theme_assets/534077/02e3878a33d61900d75eb94d43eb4d26929d6dbf.css">
+
+<script src="../../../../theme.zdassets.com/theme_assets/534077/48ea021f3fedbc024c4443d2e946e0b9b742e384.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/469d1d10574fa6f68d243916e96f61e7ce459a5a.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/9893f4b0b18dc4018d50a3716fc581152c21535e.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/ae559ee60cd2d617e942d530c1ee7ac42a973761.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/c2b4df57e1dcfcf1b5d2298b16c409c8315a177b.js"></script>
+<script src="../../../../theme.zdassets.com/theme_assets/534077/cf5c34722566da1ba5ca5d877dc187d282ca6a3f.js"></script>
+
+<!-- ...Appcues... -->
+<script type="text/javascript">
+  if (userId) {
+    Appcues.identify(userId); 
+  } else {
+    Appcues.anonymous(); 
+  }
+</script>
+
+<script src="../../../../static.zdassets.com/conditional_fields_app_hc/latest/helpcenter.js"></script>
+<script>var cfaRules = [{ "fieldType": "tagger", "field": 114099498832, "value": "user_interface", "select": [114099504272], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "amazon", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "android", "select": [114099577491], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios", "select": [114099505792, 114101637652], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon", "select": [114099577491, 114099505792], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_amazon_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "ios_android_windows", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "multi_platforms_other_combination", "select": [114099577491, 114099505792, 114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099504752, "value": "windows", "select": [114099619751], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099505792, "value": "other_ios_sdk", "select": [114099619791], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "adincube", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "admob", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "fyber_hezap", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "ironsource_supersonic", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "multiple_mediation", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "other_mediation", "select": [114099556512, 114099619811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556032, "value": "upsight", "select": [114099556512], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "adobe_air", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "corona", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "marmalade", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "other_plugin", "select": [114099620151, 114099620451], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099556532, "value": "unity", "select": [114099620151], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099577491, "value": "other_android_sdk", "select": [114099555992], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099619751, "value": "other_windows_sdk", "select": [114099556012], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099621511, "value": "geo_other", "select": [114099622811], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_dashboard", "select": [114099498652, 114099499132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_other", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_reportingapi", "select": [114099498652, 114099621211, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "advertiser_useracquisition", "select": [114099498652, 114099621211], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_notreceivingreward", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_other", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_troublesomead", "select": [114099498672, 114099504752, 114099621511, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "applicationuser_unsubscribeads", "select": [114099498672, 114099504752, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "billing_payment", "select": [114099571371, 114099500132], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_accountstatus", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_addtransferusers", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_deleteaccount", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_other", "select": [114099571371], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_pwrecovery", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "general_registration", "select": [114099571371, 114099621051], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_callbacks", "select": [114099498652, 114099556032, 114099556532, 114099620751, 114099621511, 114099504752], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_cocoapods", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_dashboard", "select": [114099498652, 114099498832], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_gradle", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621711], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_multidex", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621731], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_noads", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621511], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_proguard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557592], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_integration_testmode", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_other", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_reportingapi", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099621691], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_button", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_crashing", "select": [114099498652, 114099504752, 114099556032, 114099556532], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_endcard", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_freezing", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_other", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_sound", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }, { "fieldType": "tagger", "field": 114099723732, "value": "publisher_troublesomead_video", "select": [114099498652, 114099504752, 114099556032, 114099556532, 114099557612], "formId": 114093964011, "requireds": [] }];</script>
+
+<style type="text/css">
+
+/* Advertiser */
+.categories__icon--200198330 {
+  background-color: #ff5a41;
+}
+
+.categories__icon--200198330:before,
+#sidenav-category-200198330 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/9f2e8cfd41383f7f21c68fd99567eb1b1a7993ac.svg");
+}
+
+/* SDK */
+.categories__icon--200269670 {
+  background-color: #3c2869;
+}
+
+.categories__icon--200269670:before,
+#sidenav-category-200269670 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/ab38e1e12c6a99fe83f4ea9c02bf87e17510558d.svg");
+}
+
+/* Publisher */
+.categories__icon--360001994512 {
+  background-color: #6e7dff;
+}
+
+.categories__icon--360001994512:before,
+#sidenav-category-360001994512 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/8a0ee6cf2a1300b8adf5a19112e81db3c070a273.svg");
+}
+
+/* FAQs */
+.categories__icon--115000802567 {
+  background-color: #ffd700;
+}
+
+.categories__icon--115000802567:before,
+#sidenav-category-115000802567 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/840643095495a2f0380fbe420efb55b7a63277fe.svg");
+}
+
+/* Creative */
+.categories__icon--360001724259 {
+  background-color: #ffd2e1;
+}
+
+.categories__icon--360001724259:before,
+#sidenav-category-360001724259 .sidenav-category__link:before {
+  background-image: url("http://theme.zdassets.com/theme_assets/534077/2bb5eeecadf61018e2bda864d22706f146b5a208.svg");
+}
+
+</style>
+  <script type="text/javascript" src="../../../../p27.zdassets.com/hc/theming_assets/534077/60720/scripte82d.js?digest=360570052252"></script>
+<script async src='../../../cdn-cgi/bm/cv/669835187/api.js'></script></head>
+<body class="">
+  
+  
+
+  <div class="js-alert-box"></div>
+
+<div class="layout" >
+
+  <aside class="sidebar" data-sidebar>
+  <div class="sidebar__header">
+    <div class="sidebar__container sidebar__container--fixed">
+      <div class="sidebar__logo">
+        <a title="主页" href="../../zh-cn.html">
+          <img src="http://theme.zdassets.com/theme_assets/534077/4497be3388c9bd3609c33d6eaf9b0c04c5c63a53.svg" alt="徽标">
+        </a>
+      </div>
+      <ul class="sidebar__list">
+        <li class="sidebar__item">
+          <a class="sidebar__link sidebar__link--home" title="主页" href="../../zh-cn.html">Home</a>
+        </li>
+      </ul>
+      <div class="sidebar__top-nav"></div>
+      <div class="sidebar__content-block" data-sidebar-content></div>
+    </div>
+  </div>
+
+  <div class="sidebar__container">
+    <div class="sidebar__bottom-nav">
+      <div class="sidebar__bottom-nav-item">
+        
+          <div class="dropdown language-selector" aria-haspopup="true">
+            <a class="dropdown-toggle btn btn--default btn--small">
+              简体中文
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+              </svg>
+            </a>
+            <span class="dropdown-menu" role="menu">
+              
+                <a href="../../de/articles/360003059331-Integrieren-des-Vungle-SDK-f%c3%bcr-Windows-2.html?return_to=%2Fhc%2Fde%2Farticles%2F360003059331-Integrieren-des-Vungle-SDK-f%25C3%25BCr-Windows" dir="ltr" rel="nofollow" role="menuitem">
+                  Deutsch
+                </a>
+              
+                <a href="../../en-us/articles/360003059331-Integrate-Vungle-SDK-for-Windows.html?return_to=%2Fhc%2Fen-us%2Farticles%2F360003059331-Integrate-Vungle-SDK-for-Windows" dir="ltr" rel="nofollow" role="menuitem">
+                  English (US)
+                </a>
+              
+                <a href="../../es-mx/articles/360003059331-Integraci%c3%b3n-del-SDK-de-Vungle-para-Windows-2.html?return_to=%2Fhc%2Fes-mx%2Farticles%2F360003059331-Integraci%25C3%25B3n-del-SDK-de-Vungle-para-Windows" dir="ltr" rel="nofollow" role="menuitem">
+                  Español (México)
+                </a>
+              
+                <a href="../../fr-fr/articles/360003059331-Int%c3%a9grer-le-SDK-Vungle-pour-Windows-2.html?return_to=%2Fhc%2Ffr-fr%2Farticles%2F360003059331-Int%25C3%25A9grer-le-SDK-Vungle-pour-Windows" dir="ltr" rel="nofollow" role="menuitem">
+                  Français (France)
+                </a>
+              
+                <a href="../../ja/articles/360003059331-Windows-%e7%94%a8-Vungle-SDK-%e3%82%92%e7%b5%b1%e5%90%88%e3%81%99%e3%82%8b-2.html?return_to=%2Fhc%2Fja%2Farticles%2F360003059331-Windows-%25E7%2594%25A8-Vungle-SDK-%25E3%2582%2592%25E7%25B5%25B1%25E5%2590%2588%25E3%2581%2599%25E3%2582%258B" dir="ltr" rel="nofollow" role="menuitem">
+                  日本語
+                </a>
+              
+                <a href="../../ko/articles/360003059331-Windows%ec%9a%a9-Vungle-SDK-%ed%86%b5%ed%95%a9-2.html?return_to=%2Fhc%2Fko%2Farticles%2F360003059331-Windows%25EC%259A%25A9-Vungle-SDK-%25ED%2586%25B5%25ED%2595%25A9" dir="ltr" rel="nofollow" role="menuitem">
+                  한국어
+                </a>
+              
+                <a href="../../pt-br/articles/360003059331-Integrar-Vungle-SDK-para-Windows.html?return_to=%2Fhc%2Fpt-br%2Farticles%2F360003059331-Integrar-Vungle-SDK-para-Windows" dir="ltr" rel="nofollow" role="menuitem">
+                  Português do Brasil
+                </a>
+              
+                <a href="../../ru/articles/360003059331-%d0%98%d0%bd%d1%82%d0%b5%d0%b3%d1%80%d0%b0%d1%86%d0%b8%d1%8f-SDK-Vungle-%d0%b4%d0%bb%d1%8f-Windows-2.html?return_to=%2Fhc%2Fru%2Farticles%2F360003059331-%25D0%2598%25D0%25BD%25D1%2582%25D0%25B5%25D0%25B3%25D1%2580%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-SDK-Vungle-%25D0%25B4%25D0%25BB%25D1%258F-Windows" dir="ltr" rel="nofollow" role="menuitem">
+                  Русский
+                </a>
+              
+            </span>
+          </div>
+        
+      </div>
+      <div class="sidebar__bottom-nav-item">  
+        <a href="https://vungle.com/login/" target="_blank" class="">
+          Platform
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="a" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#AAB2BA" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#a"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="sidebar__overlay"></div>
+
+  <div class="main">
+
+    <div class="main__header">
+
+      <a href="#" class="sidebar-toggle__link" data-toggle-menu role="button">
+        <span class="sidebar-toggle__burger"><span></span></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--menu"></span>
+        <span class="sidebar-toggle__text sidebar-toggle__text--close"></span>
+      </a>
+
+      <div class="main__search">
+        <form role="search" class="search" data-search="" data-instant="true" autocomplete="off" action="https://support.vungle.com/hc/zh-cn/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" /><input type="search" name="query" id="query" placeholder="Search..." autocomplete="off" aria-label="Search..." />
+<input type="submit" name="commit" value="搜索" /></form>
+      </div>
+      <div class="main__nav">
+        <a href="../../en-us/sections/360004473112.html" class="btn btn--topbar hidden-mobile">
+          Early Access SDK
+        </a>
+        <a href="https://vungle.com/signup/" target="_blank" class="btn btn--topbar">
+          Platform
+          <svg width="24" height="24" viewBox="0 0 24 24"><defs><path id="b" d="M16 16H2V2h7V0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V9h-2v7zM11 0v2h3.59l-9.83 9.83 1.41 1.41L16 3.41V7h2V0h-7z"/></defs><use fill="#0ccec9" fill-rule="nonzero" transform="translate(3 3)" xlink:href="#b"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="main__container">
+
+  <main role="main">
+    <div class="article-page" data-article-page>
+
+  <div class="row">
+    <div class="article-column article-column--left">
+      <div class="box">
+        <div class="article-page__wrap" data-article-wrap>
+          <article class="article js-active-article" itemscope itemtype="http://schema.org/Article" data-article="360003059331">
+            <header class="article-header">
+              <ol class="breadcrumbs">
+  
+    <li title="Vungle CN">
+      
+        <a href="../../zh-cn.html">Vungle CN</a>
+      
+    </li>
+  
+    <li title="SDK集成文档">
+      
+        <a href="../categories/200269670-SDK%e9%9b%86%e6%88%90%e6%96%87%e6%a1%a3.html">SDK集成文档</a>
+      
+    </li>
+  
+    <li title="Windows">
+      
+        <a href="../sections/115000243471-Windows.html">Windows</a>
+      
+    </li>
+  
+</ol>
+
+              <h1 class="h2 article-title" itemprop="name">
+                
+                Vungle - Windows SDK v. 6 入门指南
+              </h1>
+
+              <div class="article-meta">
+                <div class="entry-info">
+                  <div class="entry-info__avatar">
+                    <div class="avatar avatar--agent">
+                      <img class="user-avatar user-avatar--default" src="../../../system/photos/420191068/Profile_Picture.jpg" alt="Avatar">
+                    </div>
+                  </div>
+                  <div class="entry-info__content">
+                    <b class="author">
+                      David Kim
+                    </b>
+                    <div class="meta"><time datetime="2021-08-16T17:36:48Z" title="2021-08-16T17:36:48Z" data-datetime="calendar">2021年08月16日 17:36</time></div>
+                  </div>
+                </div>
+                <a class="article-subscribe" title="打开登录对话框" rel="nofollow" role="button" data-auth-action="signin" aria-selected="false" href="360003059331-Vungle-Windows-SDK-v-6-%e5%85%a5%e9%97%a8%e6%8c%87%e5%8d%97/subscription.html">关注</a>
+              </div>
+            </header>
+
+            <div class="article__body markdown" itemprop="articleBody">
+
+              <div class="article-main">
+                <p>使用本指南，快速将 SDK 集成到您的应用中，并开始获利。</p>
+<p>本指南中的代码示例是 C#，但我们在 <a href="https://github.com/Vungle/Windows-SDK/tree/sdk2">GitHub 存储库</a>中提供的示例应用文件包括 C#、C++、Visual Basic 和 DirectX+XAML。</p>
+<h1>目录</h1>
+<ul>
+<li><a href="#GDPRRecommendedImplementation">GDPR：推荐实施方法</a></li>
+<li><a href="#BeforeYouGetStarted">开始之前</a></li>
+<li><a href="#DownloadSDK">下载 SDK 并将 VungleSDK 添加到您的项目中</a></li>
+<li><a href="#ImportTheVungleSDKNamespace">导入 VungleSDK 命名空间</a></li>
+<li><a href="#ObtainVungleAdInstance">获取 VungleAd 实例</a></li>
+<li><a href="#CreateRegisterEventHandler">创建并注册事件处理程序</a></li>
+<li><a href="#LoadAnAd">为广告位置加载广告</a></li>
+<li><a href="#PlayAnAd">为广告位置播放广告</a></li>
+<li>
+<a href="#Customization">自定义选项</a><ul>
+<li><a href="#ShowCloseButton">显示“关闭”按钮</a></li>
+</ul>
+</li>
+<li>
+<a href="#SubscribeEventHandlers">订阅事件处理程序</a><ul>
+<li><a href="#UIThreadNote">UI 线程注释</a></li>
+<li><a href="#VungleAdEventHandlers">VungleAd 事件处理程序</a></li>
+</ul>
+</li>
+<li>
+<a href="#PlayingNativeFlexAds">播放 Native Flex 广告</a><ul>
+<li><a href="#RequirementsNative">Native Flex 广告的要求</a></li>
+<li><a href="#UISetupNative">Native Flex 广告的用户界面设置 - XAML</a></li>
+<li><a href="#LoadNativeFlexAd">加载 Native Flex 广告</a></li>
+<li><a href="#PlayNativeFlexAd">播放 Native Flex 广告</a></li>
+<li><a href="#CloseNativeFlexAd">播放 Native Flex 广告</a></li>
+<li><a href="#EventHandlersNative">Native Flex 广告的事件处理程序</a></li>
+</ul>
+</li>
+</ul>
+<h1>
+<a name="GDPRRecommendedImplementation"></a>GDPR：推荐实施方法</h1>
+<p>《通用数据保护条例》(GDPR) 将于 5 月 25 日在欧盟生效。为了遵守 GDPR，开发者有以下两种选择。</p>
+<ul>
+<li>
+<strong>选项 1（推荐）：</strong>发布商从用户级别控制 GDPR 的同意流程，然后将用户的选择传达给 Vungle。为此，开发人员可以使用自己的机制来收集用户的同意信息，然后使用 Vungle API 更新或查询用户的同意状态。若需了解详细信息，请参阅<a href="#GDPRRecommendedImplementationInstructions">“GDPR 推荐实施方法说明”</a>部分。<br><br>
+</li>
+<li>
+<strong>选项 2：</strong>允许 Vungle 处理相关需求。Vungle 在向欧洲用户播放广告之前会显示征求同意的对话框，并记住用户的同意或拒绝选择，以用于后续的广告。</li>
+</ul>
+<h1>
+<a name="BeforeYouGetStarted"></a>开始之前</h1>
+<ul>
+<li>本指南适用于 Vungle Windows SDK 5.3.2 及更高版本。有关 Vungle Windows SDK 1.3.16 及更低版本的集成指南，请查阅：<a href="../../en-us/articles/211339368.html">Vungle - Windows SDK v. 1.0 - v.1.3.16 入门指南</a>。</li>
+<li>集成需要您拥有 Vungle 帐户，如果还没有，请<a href="https://v.vungle.com/dashboard/accounts/pub#newUser">创建 Vungle 帐户</a>。</li>
+<li>如果尚未执行此操作，请前往<a href="https://v.vungle.com/dashboard/login">管理面板</a>，将您的应用添加到帐户中。请查看<a href="../../en-us/articles/115000493152.html">广告位置的设置和报告</a>了解如何在 Vungle 管理面板中设置广告位置。</li>
+<li>如果针对 Windows 8.1 和 Windows Phone 8.1 进行开发，则必须使用 Visual Studio 2015，因为 Visual Studio 2017 已停止支持这些版本。</li>
+<li>移动设备支持<strong>“返回”</strong>按钮，但台式电脑（键盘）上不支持。这可能带来 UWP 版本的不同行为和用户体验。</li>
+<li>如果在“测试”模式下没有广告返回，请将您的应用程序切换到“活动”模式。</li>
+</ul>
+<h1>
+<a name="DownloadSDK"></a>下载 SDK 并将 VungleSDK 添加到您的项目中</h1>
+<p>您可以采用两种方法将 Vungle 添加到 Visual Studio 项目中：使用 NuGet 或手动集成。</p>
+<h2>选项 1：NuGet 集成</h2>
+<ol>
+<li>在 Visual Studio 中，右键单击<strong>“项目”</strong>，然后选择<strong>“管理 NuGet 程序包”</strong>。</li>
+<li>单击<strong>“浏览”</strong>，输入“Vungle”，选择<strong>“Vungle SDK”</strong>，然后单击<strong>“安装”</strong>。</li>
+</ol>
+<h2>选项 2：手动集成</h2>
+<ol>
+<li>从 Vungle 管理面板<a href="https://v.vungle.com/sdk">下载 Vungle Windows SDK</a>。</li>
+<li>解压存档文件。</li>
+<li>在 Visual Studio 中，使用适合您的应用程序和编程语言的相应模板创建新项目。</li>
+<li>将项目引用添加到已下载的 Vungle Windows SDK 文件中。</li>
+</ol>
+<p>Vungle SDK 有两个 <code>VungleSDK.windmd</code> 文件，分别用于针对 Windows 10 和 Windows 8.1 进行的开发。请从以下提取路径选择正确的 SDK 文件：<code>Win10</code> 或 <code>Win81</code>。</p>
+<h1>internetClient 功能</h1>
+<p>确保您的项目在 <code>package.appxmanifest</code> 文件中具有 <code>internetClient</code> 功能。</p>
+<h2>Visual Studio</h2>
+<ol>
+<li>双击<strong>“解决方案资源管理器”</strong>中的 <code>appxmanifest </code>。</li>
+<li>选择<strong>“功能”</strong>
+</li>
+<li>确认已勾选<strong>“Internet (客户端)”</strong>选项。</li>
+</ol>
+<h2>手动编辑</h2>
+<p>打开 <code>package.appxmanifeset</code> 文件并将 <code>internetClient</code> 添加到<strong>“功能”</strong>部分。</p>
+<pre><code>&lt;Capabilities&gt;<br> ...<br> &lt;Capability Name="internetClient" /&gt;<br> ...<br>&lt;/Capabilities&gt; </code></pre>
+<h1>
+<a name="ImportTheVungleSDKNamespace"></a>导入 VungleSDK 命名空间</h1>
+<pre><code>using VungleSDK;</code></pre>
+<h1>
+<a name="ObtainVungleAdInstance"></a>获取 VungleAd 实例</h1>
+<p><code>VungleAd</code> 实例采用两个参数：一个是您的 Vungle 应用 ID 字符串，一个是广告位置 ID 的字符串数组。您仅可使用在获取实例时已包括在内的广告位置 ID。如果未包括任何自动缓存的广告位置，SDK 会自动将一个非自动缓存广告位置分配为自动缓存。</p>
+<pre><code>VungleAd sdkInstance; string appID = “app_id”; string[] placementArray = new string[] { “placement_id_1”, “placement_id_2”, “placement_id_3” };<br> sdkInstance = AdFactory.GetInstance(appID, placementArray); </code></pre>
+<p>在上例中，将 <em><code>app_id</code></em> 替换为您的 Vungle 应用 ID，将 <em><code>placement_id_#</code></em> 替换为您项目的广告位置 ID。建议您在应用程序完成重要组件加载后立即执行这些初始化步骤，以便自动缓存更快启动。</p>
+<h1>
+<a name="CreateRegisterEventHandler"></a>创建并注册事件处理程序</h1>
+<p>创建适用于 <code>OnAdPlayableChanged</code> 事件的事件处理程序。当广告可用性状态改变时调用此事件处理程序。您可以通过检查 <code>e.Placement</code> 来确定哪个广告位置触发了事件。</p>
+<pre><code>// Event handler for OnAdPlayableChanged event private async void SdkInstance_OnAdPlayableChanged(object sender, AdPlayableEventArgs e) { // e.Placement - placement ID in string // Run asynchronously on the UI thread await CoreApplication.MainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(() =&gt; methodToRun(e.Placement))); } </code></pre>
+<p>注册该适用于 OnAdPlayableChanged 事件的事件处理程序。</p>
+<pre><code>sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged; </code></pre>
+<h1>
+<a name="LoadAnAd"></a>为广告位置加载广告</h1>
+<p>对于非自动缓存的广告位置，您必须先调用 <code>LoadAd</code>，留出足够时间下载广告资产，然后等待 <code>OnAdPlayableChanged</code> 被调用：</p>
+<pre><code>sdkInstance.LoadAd(“placement_id”); </code></pre>
+<p><strong>注意：</strong>自动缓存广告位置将尝试在调用 <code>PlayAdAsync</code> 后立即下载新的广告资产，因此无需调用 <code>LoadAd</code>。</p>
+<p>示例代码：</p>
+<pre><code>private void OnLevelStart(Object sender, RoutedEventArgs e) { sdkInstance.LoadAd(“placement_id”); } </code></pre>
+<h1>
+<a name="PlayAnAd"></a>播放广告</h1>
+<p>使用默认配置播放广告：</p>
+<pre><code>sdkInstance.PlayAdAsync(new AdConfig(), “placement_id”); </code></pre>
+<p>示例代码：</p>
+<pre><code>private async void OnLevelComplete(Object sender, RoutedEventArgs e) { await sdkInstance.PlayAdAsync(new AdConfig(), “placement_id”); } </code></pre>
+<p>（可选）您可以通过向 <code>AdConfig</code> 对象提供选项来自定义所播放的广告。</p>
+<p>示例代码：</p>
+<pre><code>private async void PlayCustomizedAd(Object sender, RoutedEventArgs e) { AdConfig adConfig = new AdConfig(); adConfig.Orientation = DisplayOrientations.Portrait; adConfig.SoundEnabled = false; await sdkInstance.PlayAdAsync(adConfig, placement2); } </code></pre>
+<h1>
+<a name="Customization"></a>自定义选项</h1>
+<p>以下是 <code>AdConfig</code> 对象实例中的可用属性：</p>
+<p><strong>注意：</strong><em>奖励式</em>广告在有些情况下又称为<em>激励式</em>广告；这两个术语实际指的是同一类广告。在 SDK 代码和报告 API 中，我们统一使用“激励式”广告这一术语。</p>
+<table style="width: 762px;"><tbody>
+<tr>
+<td style="width: 221.84375px;">
+<p><strong>选项</strong></p>
+</td>
+<td style="width: 206.15625px;">
+<p><strong>默认值/类型<br></strong></p>
+</td>
+<td style="width: 327px;">
+<p><strong>说明</strong></p>
+</td>
+</tr>
+<tr>
+<td style="width: 221.84375px;">
+<p><code>Orientation</code></p>
+</td>
+<td style="width: 206.15625px;">
+<p>AutoRotate</p>
+<p>DisplayOrientations</p>
+</td>
+<td style="width: 327px;">
+<p><code>Orientation.AutoRotate</code>（默认）可让广告随设备方向自动旋转。</p>
+<p><code>Orientation.Portrait</code> 可让广告只纵向播放。</p>
+<p><code>Orientation.Landscape</code> 可让广告只横向播放。</p>
+<p><strong>注意：</strong>此选项仅适用于移动应用程序。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 221.84375px;">
+<p><code>SoundEnabled</code></p>
+</td>
+<td style="width: 206.15625px;">
+<p>true</p>
+<p>布尔值</p>
+</td>
+<td style="width: 327px;">
+<p>设置广告开始时的声音状态。</p>
+<p>如果为 true（默认），音频将遵循设备的音量和声音设定。</p>
+<p>如果为 false，视频将静音播放，但用户可自行调节。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 221.84375px;">
+<p><code>BackButtonImmediatelyEnabled</code></p>
+</td>
+<td style="width: 206.15625px;">
+<p>false</p>
+<p>布尔值</p>
+</td>
+<td style="width: 327px;">
+<p>如果为 true，用户可以使用返回按钮立即退出广告。</p>
+<p>如果为 false（默认），用户在屏幕上显示“关闭”按钮之前无法使用“返回”按钮退出广告。</p>
+<p><strong>注意</strong>：此选项仅适用于移动应用程序。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 221.84375px;">
+<p><code>UserId</code></p>
+</td>
+<td style="width: 206.15625px;">
+<p>null</p>
+<p>字符串</p>
+</td>
+<td style="width: 327px;">
+<p>在使用服务器到服务器回调进行验证时，将唯一用户 ID 传递至您的应用程序，以验证该用户因观看激励式广告所应获得的奖励。</p>
+<p><strong>注意：</strong>此设置仅适用于有奖励的广告位置。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 221.84375px;">
+<p><code>IncentivizedDialogTitle</code></p>
+</td>
+<td style="width: 206.15625px;">
+<p>“关闭此广告？”</p>
+<p>字符串</p>
+</td>
+<td style="width: 327px;">
+<p>设置跳过激励式广告时的确认对话窗口标题。</p>
+<p><strong>注意：</strong>此设置仅适用于有奖励的广告位置。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 221.84375px;">
+<p><code>IncentivizedDialogBody</code></p>
+</td>
+<td style="width: 206.15625px;">
+<p>“确定要跳过此广告吗？您必须看完广告才能获得奖励。”</p>
+<p>字符串</p>
+</td>
+<td style="width: 327px;">
+<p>设置跳过激励式广告时的确认对话窗口正文。</p>
+<p><strong>注意：</strong>此设置仅适用于有奖励的广告位置。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 221.84375px;">
+<p><code>IncentivizedDialogCloseButton</code></p>
+</td>
+<td style="width: 206.15625px;">
+<p>“关闭”</p>
+<p>&nbsp;</p>
+<p>字符串</p>
+</td>
+<td style="width: 327px;">
+<p>设置跳过激励式广告时确认对话窗口中的“取消”按钮文字。</p>
+<p><strong>注意：</strong>此设置仅适用于有奖励的广告位置。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 221.84375px;">
+<p><code>IncentivizedDialogContinueButton</code></p>
+</td>
+<td style="width: 206.15625px;">
+<p>“继续”</p>
+<p>字符串</p>
+</td>
+<td style="width: 327px;">
+<p>设置跳过激励式广告时确认对话窗口中的“继续观看”按钮文字。</p>
+<p><strong>注意：</strong>如果不是激励式广告，则该设置不适用。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 221.84375px;">
+<p><code>Incentivized</code></p>
+</td>
+<td style="width: 206.15625px;">
+<p>-</p>
+</td>
+<td style="width: 327px;">
+<p>已弃用</p>
+<p>您可以从管理面板进行广告位置级别的奖励式配置。请参阅<a href="../../en-us/articles/115000493152-Setting-Up-and-Reporting-on-Placements.html">广告位置的设置和报告</a>。</p>
+</td>
+</tr>
+</tbody></table>
+<p><strong><br>注意：</strong>Dynamic Template 与 Flex View 广告的 <code>SoundEnabled</code> 选项和激励式对话框可在管理面板上进行配置。编程配置仅适用于原有的广告。</p>
+<h2>
+<a name="ShowCloseButton"></a>显示“关闭”按钮</h2>
+<p>若要控制用户是否有权关闭广告，请在 <a href="https://v.vungle.com/">Vungle 管理面板</a>上使用应用程序高级设置中的强制观看选项。</p>
+<h2>
+<a name="GDPRRecommendedImplementationInstructions"></a>GDPR 推荐实施方法说明</h2>
+<pre><code>// To set the user’s consent status as opted in: sdkInstance.UpdateConsentStatus(VungleConsentStatus.VungleConsentAccepted); // To set the user’s consent status as opted out: sdkInstance.UpdateConsentStatus(VungleConsentStatus.VungleConsentDenied); // To find out what the user’s current consent status is: // This will return null if the GDPR Consent status has not been set // Otherwise, it will return VungleConsentStatus.VungleConsentAccepted or // VungleConsentStatus.VungleConsentDenied UpdateConsentStatus? currentStatus = sdkInstance.GetCurrentConsentStatus(); </code></pre>
+<h1>
+<a name="SubscribeEventHandlers"></a>订阅事件处理程序</h1>
+<p>Windows SDK 提供了一些您可以编程处理的事件。您可以使用这些事件处理程序控制应用程序的某些功能，例如暂停/继续播放背景音乐。</p>
+<h2>
+<a name="UIThreadNote"></a>UI 线程注释</h2>
+<p>事件侦听器在后台线程中执行，因此任何由事件侦听器导致的 UI 交互或更新在执行之前都必须传递到主 UI 线程。以下是一种实现方法：</p>
+<pre><code>await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,<br> new DispatchedHandler(() =&gt;<br> { // This block will be executed in the UI thread<br> } ); </code></pre>
+<h2>
+<a name="VungleAdEventHandlers"></a>VungleAd 事件处理程序</h2>
+<table style="width: 768.5px;"><tbody>
+<tr>
+<td style="width: 159px;">
+<p><strong>事件处理程序</strong></p>
+</td>
+<td style="width: 603.5px;">
+<p><strong>说明</strong></p>
+</td>
+</tr>
+<tr>
+<td style="width: 159px;">
+<p><code>OnInitCompleted</code></p>
+</td>
+<td style="width: 603.5px;">
+<p>在 SDK 完成初始化后立即调用。您可以检查是否有从之前会话下载的广告或为广告位置加载广告。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 159px;">
+<p><code>OnAdPlayableChanged</code></p>
+</td>
+<td style="width: 603.5px;">
+<p>通知某一广告位置的广告可用性变化情况。在为广告位置加载广告后，等待此事件处理程序在广告可用时执行操作。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 159px;">
+<p><code>OnAdStart</code></p>
+</td>
+<td style="width: 603.5px;">
+<p>在播放广告前调用。您可以执行相关操作，例如暂停背景音乐。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 159px;">
+<p><code>OnAdEnd</code></p>
+</td>
+<td style="width: 603.5px;">
+<p>在用户关闭结束卡、控制转回至您的应用程序时调用。如果 <code>IsCompletedView</code> 或 <code>CallToActionClicked</code> 为 true，表明用户观看了广告或在广告中点击了下载按钮。这种情况下，如果是奖励式广告，用户应获得奖励。您可以执行相关操作，例如恢复应用功能。</p>
+</td>
+</tr>
+<tr>
+<td style="width: 159px;">
+<p><code>Diagnostic</code></p>
+</td>
+<td style="width: 603.5px;">
+<p>在 SDK 想要打印诊断日志时调用。</p>
+</td>
+</tr>
+</tbody></table>
+<p>示例代码：</p>
+<pre><code>//Register event handlers sdkInstance.OnInitCompleted += SdkInstance_OnInitCompleted; sdkInstance.OnAdPlayableChanged += SdkInstance_OnAdPlayableChanged; sdkInstance.OnAdStart += SdkInstance_OnAdStart; sdkInstance.OnAdEnd += SdkInstance_OnAdEnd; sdkInstance.Diagnostic += SdkInstance_Diagnostic; ... // OnInitCompleted // e.Initialized - true if initialization succeeded, false if failed // e.ErrorMessage - reason for failure when e.Initialized is false private async void SdkInstance_OnInitCompleted(object sender, ConfigEventArgs e) { var placementsInfo = "OnInitCompleted: " + e.Initialized; // Initilization was success if (e.Initialized == true) { // Print out list of placements for (var i = 0; i &lt; e.Placements.Length; i++) { placementsInfo += "\n\tPlacement" + (i + 1) + ": " + e.Placements[i].ReferenceId; if (e.Placements[i].IsAutoCached == true) placementsInfo += " (Auto-Cached)"; } } // Initilization failed else { placementsInfo += "\n\t" + e.ErrorMessage; } System.Diagnostics.Debug.WriteLine(placementsInfo); await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(() =&gt; NotifyInitialization(e.Initialized))); } // OnAdPlayableAdPlayable // e.AdPlayable - true if an ad is available to play, false otherwise // e.Placement - placement ID in string private async void SdkInstance_OnAdPlayableChanged(object sender, AdPlayableEventArgs e) { System.Diagnostics.Debug.WriteLine("OnAdPlayable(" + e.Placement + ") - " + e.AdPlayable); await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(() =&gt; NotifyWatcher(e.AdPlayable, e.Placement))); } // OnAdStart // e.Id - Vungle app ID in string // e.Placement - placement ID in string private void SdkInstance_OnAdStart(object sender, AdEventArgs e) { System.Diagnostics.Debug.WriteLine("OnAdStart(" + e.Id + "): " + e.Placement); } // OnAdEnd // e.Id - Vungle app ID in string // e.Placement - placement ID in string // e.IsCompletedView- true when 80% or more of the video was watched // e.CallToActionClicked - true when the user has clicked download button on end card // e.WatchedDuration - DEPRECATED private void SdkInstance_OnAdEnd(object sender, AdEndEventArgs e) { System.Diagnostics.Debug.WriteLine("OnVideoEnd(" + e.Id + "): " + "\n\tPlacement: " + e.Placement + "\n\tIsCompletedView: " + e.IsCompletedView + "\n\tCallToActionClicked: " + e.CallToActionClicked + "\n\tWatchedDuration: " + e.WatchedDuration); } // Event handler called when SDK wants to print diagnostic logs private void SdkInstance_Diagnostic(object sender, DiagnosticLogEvent e) { System.Diagnostics.Debug.WriteLine("Diagnostic - "<br> + e.Level + " " <br> + e.Type + " " <br> + e.Exception + " "<br> + e.Message); } // DEPRECATED - Use SdkInstance_OnAdEnd() instead private void SdkInstance_OnVideoView(object sender, AdViewEventArgs e) { } </code></pre>
+<h1>
+<a name="PlayingNativeFlexAds"></a>播放 Native Flex 广告</h1>
+<p>Vungle Windows SDK 5.1.0+ 支持我们全新的 Native Flex 广告功能。<code>VungleAdControl</code> 可通过 <code>AdConfig.AdContainer</code> 属性将自定义容器传递给 Vungle SDK，从而获得原生格式的视频广告，同时管理主应用程序的 <code>Container.Content</code> 的内容。</p>
+<h2>
+<a name="RequirementsNative"></a>Native Flex 广告的要求</h2>
+<ul>
+<li>Windows SDK 5.1.0+</li>
+<li>Windows 10 UWP</li>
+</ul>
+<p>请咨询您的客户经理或联系 <a href="mailto:tech-support@vungle.com">tech-support@vungle.com</a> 来配置 Native Flex 广告的广告位置。</p>
+<h2>
+<a name="UISetupNative"></a>Native Flex 广告的用户界面设置 - XAML</h2>
+<p>声明 <code>VungleAdControl</code> 必须包含 Vungle 应用程序 ID、该应用中所用的全部广告位置 ID、以及此特定 Native Flex View 或 Feed 广告位置的广告位置 ID。您还可在此设置用于奖励式广告位置的 <code>UserId</code>。</p>
+<p>示例代码：</p>
+<pre><code>&lt;Grid<br> &lt;UI:VungleAdControl x:Name="vungleEmbedded"<br> Height="200"<br> Width="300"<br> AppID="vungle_app_id"<br> Placements="placement_id_1,placement_id_2,native_flex_id"<br> Placement = "native_flex_id"<br> UserId="vungle_test_user"&gt;<br> &lt;TextBlock x:Name="Vungle Native Flex Ad"/&gt;<br> &lt;/UI:VungleAdControl&gt;<br>&lt;/Grid&gt;</code></pre>
+<h2>
+<a name="LoadNativeFlexAd"></a>加载 Native Flex 广告</h2>
+<p>加载 Native Flex 广告位置的广告与加载全屏广告是一样的。</p>
+<p>示例代码：</p>
+<pre><code>sdkInstance.LoadAd(“native_flex_id”); </code></pre>
+<h2>
+<a name="PlayNativeFlexAd"></a>播放 Native Flex 广告</h2>
+<p>使用 Native Flex 广告位置播放广告与播放全屏广告类似，但必须通过 .xaml 文件或管理面板配置任何自定义，包括静音播放广告。</p>
+<p>示例代码：</p>
+<pre><code>await vungleEmbedded.PlayAdAsync();</code></pre>
+<h2>
+<a name="CloseNativeFlexAd"></a>关闭 Native Flex 广告</h2>
+<p>鉴于 Native Flex 广告的性质，用户可以在不关闭广告的情况下停止观看视频。因此，必须告知 SDK 在屏幕上不再显示某广告时务必放弃该广告。为此，我们采用了两种关闭 Native Flex 广告的方法：</p>
+<ul>
+<li>使用 <code>CloseFlexViewAd(String placementId)</code> 可立即关闭指定广告位置 ID 的广告。<br><br>
+</li>
+<li>使用 <code>SetFlexViewCloseTimeInSec(String placementId, int seconds)</code> 可在经过指定秒数后关闭指定的广告位置。</li>
+</ul>
+<h2>
+<a name="EventHandlersNative"></a>Native Flex 广告的事件处理程序</h2>
+<p>考虑注册独立的事件处理程序来管理不同的全屏和原生广告行为，以获得更流畅的用户体验。</p>
+<p>示例代码：</p>
+<pre><code>vungleEmbedded.OnAdStart += (sender, arg) =&gt; { ... } vungleEmbedded.OnAdEnd += (sender, arg) =&gt; { ... } await vungleEmbedded.PlayAdAsync(); </code></pre>
+              </div>     
+
+            </div>
+
+            <div class="article__attachments">
+              
+            </div>
+
+          </article>
+        </div>
+
+        <div class="article-loader fa fa-spinner fa-spin fa-3x fa-fw" id="article-loader"></div>
+
+        
+          <a class="article-banner" href="https://vungle.com/signup" target="_blank">
+            <span class="article-banner__title">
+              <span>Powered by Creativity</span>
+              <span>Driven by Performance</span>
+            </span>
+            <span class="article-banner__cta">Sign Up Here</span>
+          </a>
+        
+
+        <div data-prevnext='{"showArticleTitle": true, "classNameBtn": ""}'></div>
+
+        <section class="submit-ticket submit-ticket--article">
+          <div class="submit-ticket-col submit-ticket-col--left">
+            <h2 class="submit-ticket-title">Questions?</h2>
+            <p>Need further assistance, feel free to reach out to us, we’re here to help!</p>
+          </div>
+          <div class="submit-ticket-col submit-ticket-col--right">
+            <a class="btn btn--default" href="../requests/new.html">提交请求</a>
+          </div>
+        </section>
+
+        <footer class="article-footer">
+          
+          <div class="article-vote">
+            <span class="article-vote-question">这篇文章有帮助吗？</span>
+            <div class="article-vote-controls">
+              <a class="btn btn--default fa fa-thumbs-up article-vote-controls__item article-vote-controls__item--up" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="是" href="../signinfd91.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fzh-cn%2Farticles%2F360003059331-Vungle-Windows-SDK-v-6-%25E5%2585%25A5%25E9%2597%25A8%25E6%258C%2587%25E5%258D%2597"></a>
+              <a class="btn btn--default fa fa-thumbs-down article-vote-controls__item article-vote-controls__item--down" data-auth-action="signin" aria-selected="false" role="button" rel="nofollow" title="否" href="../signinfd91.html?return_to=https%3A%2F%2Fsupport.vungle.com%2Fhc%2Fzh-cn%2Farticles%2F360003059331-Vungle-Windows-SDK-v-6-%25E5%2585%25A5%25E9%2597%25A8%25E6%258C%2587%25E5%258D%2597"></a>
+            </div>
+          </div>
+          
+        </footer>
+
+      </div>
+    </div>
+    <div class="article-column article-column--right">
+      <div data-toc='{"headers": "h2,h3,h4", "title": "Contents", "offsetTop": 80, "mobileBreakpoint": 1024}'></div>
+    </div>
+  </div>
+
+</div>
+  </main>
+
+        <footer class="footer" id="footer">
+        <div class="footer-inner">
+          <div class="copyright">
+            <div class="copyright__content">
+              <span class="copyright__copy">&copy; 2020 Vungle. All rights reserved.</span>
+            </div>
+          </div>
+          <nav class="footer-menu">
+            <ul class="list-unstyled">
+              <li><a href="https://vungle.com/about-us/">About</a></li>
+              <li><a href="https://vungle.com/login/">Products</a></li>
+              <li><a href="https://vungle.com/contact-us/">Contact us</a></li>
+            </ul>
+          </nav>
+          <ul class="footer-socials list-unstyled">
+            
+              <li><a href="https://www.facebook.com/vungle/" target="_blank" class="fab fa-facebook"></a></li>
+            
+            
+              <li><a href="https://twitter.com/vungle" target="_blank" class="fab fa-twitter"></a></li>
+            
+            
+            
+              <li><a href="https://www.linkedin.com/company/vungle" target="_blank" class="fab fa-linkedin"></a></li>
+            
+            
+            
+            
+              <li><a href="https://www.instagram.com/vungle/" target="_blank" class="fab fa-instagram"></a></li>
+            
+          </ul>
+        </div>
+      </footer>
+          
+    </div>
+    <!-- /.main__container -->
+
+  </div>  
+  <!-- /.main -->
+  
+</div>
+<!-- /.layout -->
+
+
+
+  <!-- / -->
+
+  
+  <script src="../../../../static.zdassets.com/hc/assets/zh-cn.b71cebf2cff635e19e20.js"></script>
+  <script src="../../../../vungle.zendesk.com/auth/v2/host.js" data-brand-id="60720" data-return-to="https://support.vungle.com/hc/zh-cn/articles/360003059331" data-theme="hc" data-locale="zh-cn" data-auth-origin="60720,true,true"></script>
+
+  <script type="text/javascript">
+  /*
+
+    Greetings sourcecode lurker!
+
+    This is for internal Zendesk and legacy usage,
+    we don't support or guarantee any of these values
+    so please don't build stuff on top of them.
+
+  */
+
+  HelpCenter = {};
+  HelpCenter.account = {"subdomain":"vungle","environment":"production","name":"Vungle"};
+  HelpCenter.user = {"identifier":"da39a3ee5e6b4b0d3255bfef95601890afd80709","email":null,"name":null,"role":"anonymous","avatar_url":"https://assets.zendesk.com/hc/assets/default_avatar.png","is_admin":false,"organizations":[],"groups":[]};
+  HelpCenter.internal = {"asset_url":"//static.zdassets.com/hc/assets/","web_widget_asset_composer_url":"https://static.zdassets.com/ekr/snippet.js","current_session":{"locale":"zh-cn","csrf_token":null,"shared_csrf_token":null},"settings":{},"usage_tracking":{"event":"article_viewed","data":"BAh7CDoLbG9jYWxlSSIKemgtY24GOgZFVDoPYXJ0aWNsZV9pZGwrCIO+2tFTADoKX21ldGF7CzoPYWNjb3VudF9pZGkDPSYIOhNoZWxwX2NlbnRlcl9pZGkENsfsCzoNYnJhbmRfaWRpAjDtOgx1c2VyX2lkMDoTdXNlcl9yb2xlX25hbWVJIg5BTk9OWU1PVVMGOwZUOwBJIgp6aC1jbgY7BlQ=--3e7bf74ae31fc367eff26c34da1c65953b6b58c6","url":"https://support.vungle.com/hc/activity"},"current_record_id":"360003059331","current_record_url":"/hc/zh-cn/articles/360003059331-Vungle-Windows-SDK-v-6-%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97","current_record_title":"Vungle - Windows SDK v. 6 入门指南","search_results_count":null,"current_text_direction":"ltr","current_brand":{"id":60720,"account_id":534077,"name":"Vungle","active":true,"deleted_at":null,"created_at":"2014-05-29T20:19:19Z","updated_at":"2021-05-13T16:25:53Z","route_id":429018,"signature_template":"{{agent.signature}}"},"current_brand_url":"https://vungle.zendesk.com","current_host_mapping":"support.vungle.com","current_path":"/hc/zh-cn/articles/360003059331-Vungle-Windows-SDK-v-6-%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97","authentication_domain":"https://vungle.zendesk.com","show_autocomplete_breadcrumbs":true,"rollbar_config":{"enabled":true,"endpoint":"https://rollbar-us.zendesk.com/api/1/item/","accessToken":"731a5a953e9a4b7ab6cac9623f50c732","captureUncaught":true,"captureUnhandledRejections":true,"payload":{"environment":"production","client":{"javascript":{"source_map_enabled":true,"code_version":"8e508d702ea3bb44fb7e90308d7e394bc580895e","guess_uncaught_frames":true}}}},"user_info_changing_enabled":false,"has_user_profiles_enabled":false,"has_end_user_attachments":true,"user_aliases_enabled":false,"has_anonymous_kb_voting":false,"has_multi_language_help_center":true,"mobile_device":false,"mobile_site_enabled":false,"show_at_mentions":false,"embeddables_config":{"embeddables_web_widget":true,"embeddables_connect_ipms":false},"base_domain":"zendesk.com","answer_bot_subdomain":"static","manage_content_url":"https://support.vungle.com/hc/zh-cn","arrange_content_url":"https://support.vungle.com/hc/admin/arrange_contents?locale=zh-cn","general_settings_url":"https://support.vungle.com/hc/admin/general_settings?locale=zh-cn","user_segments_url":"https://vungle.zendesk.com/knowledge/user_segments?brand_id=60720","has_gather":true,"has_community_enabled":false,"has_community_badges":false,"has_user_segments":true,"has_answer_bot_web_form_enabled":false,"has_answer_bot_web_form_modal_v2":false,"has_edit_user_profile_v2":false,"billing_url":"/access/return_to?return_to=https://vungle.zendesk.com/admin/billing/subscription","is_account_owner":false,"theming_cookie_key":"hc-da39a3ee5e6b4b0d3255bfef95601890afd807091-preview","is_preview":false,"has_guide_user_segments_search":true,"has_alternate_templates":false,"arrange_articles_url":"https://vungle.zendesk.com/knowledge/arrange?brand_id=60720","article_verification_url":"https://vungle.zendesk.com/knowledge/verification?brand_id=60720","has_article_verification":false,"guide_language_settings_url":"https://support.vungle.com/hc/admin/language_settings?locale=zh-cn","docs_importer_url":"https://vungle.zendesk.com/knowledge/import_articles?brand_id=60720","community_badges_url":"https://vungle.zendesk.com/knowledge/community_badges?brand_id=60720","community_settings_url":"https://vungle.zendesk.com/knowledge/community_settings?brand_id=60720","gather_plan_state":"subscribed","search_settings_url":"https://vungle.zendesk.com/knowledge/search_settings?brand_id=60720","has_multibrand_search_in_plan":false,"theming_api_version":1,"has_pci_credit_card_custom_field":false,"current_brand_id":60720,"help_center_restricted":false,"current_brand_active":true,"is_assuming_someone_else":false,"flash_messages":[],"user_photo_editing_enabled":true,"has_end_user_apps":false,"has_docs_importer":true,"has_sunco_widget":false,"gather_user_image_upload_via_aus":false,"user_preferred_locale":"en-us"};
+</script>
+
+  <script src="../../../../static.zdassets.com/hc/assets/moment-f6f8513da6ab17eadada59a1a4edb536.js"></script>
+  <script src="../../../../static.zdassets.com/hc/assets/hc_enduser-9fa4fabcc25ad7ce2141d33e2370693a.js"></script>
+  
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6932ec3aaf94ed87',m:'YQvgWF467ZjFnes_fUhr1hrUDk8YBK9syFxwsIv3u2I-1632391193-0-Ab2syVptCt3jzG8mmI8HyMUAnFDnIv+OdL4fgCJrNuOZ28qETYxeQaSNzdEH5RAsrRON0ocD/8gXgPWuQPZCLuF8Q2qDbnEEZ2Q7xqif1NT7KIRuzuCEThKfAIEe7foLh6/Tr/ZyailS6kW5WSSHLMI=',s:[0x63f25cfd14,0x7b7966601c],}})();</script></body>
+
+<!-- Mirrored from support.vungle.com/hc/zh-cn/articles/360003059331 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 10:34:54 GMT -->
+</html>
